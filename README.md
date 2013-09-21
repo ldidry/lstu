@@ -8,8 +8,9 @@ Lstu is licensed under the terms of the WTFPL. See the LICENSE file
 
 ##Dependancies
 * Carton : Perl dependancies manager, it will get what you need, so don't bother for dependancies (but you can read the cpanfile if you want)
+
 ```
-cpan Carton
+sudo cpan Carton
 ```
 
 ##Installation
