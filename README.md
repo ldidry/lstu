@@ -45,3 +45,6 @@ You can use a reverse proxy like Nginx or Varnish (or Apache with the mod\_proxy
 
 ##Others projects dependancies
 Lstu is written in Perl with the Mojolicious framework and uses the Twitter bootstrap framework to look not too ugly.
+
+##Demo
+You can see it working at http://lstu.fiat-tux.fr.
