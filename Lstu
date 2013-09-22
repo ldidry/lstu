@@ -103,7 +103,7 @@ post '/a/'       => $add => 'add' ;
 
 get '/a/*lsturl' => $add => 'addurl';
 
-app->start;
+return app->start;
 
 1;
 __DATA__
