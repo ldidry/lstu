@@ -48,7 +48,7 @@ get '/:short' => sub {
 
 my $add = sub {
     my $c   = shift;
-    my $url = $c->param('url');
+    my $url = $c->param('lsturl');
 
     my $shortener  = sub {
         my $length = shift;
@@ -63,7 +63,14 @@ my $add = sub {
 
     if (is_uri($url)) {
         my $short;
-       
+
+        my @keys   = $c->param;
+        my @params;
+        foreach my $key (sort @keys) {
+            push @params, $key.'='.$c->param($key) unless ($key eq 'lsturl');
+        }
+        $url .= '?'.join('&', @params) if (scalar(@params));
+
         my @records = Model::Lstu->select('where url = ?', $url);
 
         if (scalar(@records)) {
@@ -92,9 +99,9 @@ my $add = sub {
     $c->redirect_to('/');
 };
 
-post '/a/'    => $add => 'add' ;
+post '/a/'       => $add => 'add' ;
 
-get '/a/*url' => $add => 'addurl';
+get '/a/*lsturl' => $add => 'addurl';
 
 app->start;
 
