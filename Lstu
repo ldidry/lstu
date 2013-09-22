@@ -21,7 +21,9 @@ use Mojolicious::Lite;
 use Mojolicious::Plugin::DefaultHelpers;
 use Data::Validate::URI qw(is_uri);
 
-app->secret('fjdhsuqfbndqsufybh');
+my $config = plugin 'Config';
+
+app->secret($config->{secret});
 
 get '/'       => 'index';
 
@@ -77,7 +79,7 @@ my $add = sub {
             $short = $records[0]->short;
         } else {
             do {
-                $short= $shortener->(8);
+                $short= $shortener->($c->config->{length});
             } while (Model::Lstu->count('where short = ?', $short));
             Model::Lstu->new(
                 url       => $url,
