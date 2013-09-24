@@ -19,6 +19,7 @@ After installing Carton :
 git clone https://github.com/ldidry/lstu.git
 cd lstu
 carton install
+cp lstu.conf.template lstu.conf
 ```
 
 ##Usage
