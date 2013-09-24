@@ -8,7 +8,7 @@ use ORLite {
         $dbh->do(
             'CREATE TABLE lstu (
              short     TEXT PRIMARY KEY,
-             url       TEXT NOT NULL,
+             url       TEXT,
              counter   INTEGER,
              timestamp INTEGER)'
         );
@@ -23,26 +23,76 @@ use Data::Validate::URI qw(is_uri);
 
 my $config = plugin 'Config';
 
+$config->{provisionning} = 100           unless (defined($config->{provisionning}));
+$config->{provis_step}   = 5             unless (defined($config->{provis_step}));
+$config->{length}        = 8             unless (defined($config->{length}));
+$config->{secret}        = 'hfudsifdsih' unless (defined($config->{secret}));
+
 app->secret($config->{secret});
 
-get '/'       => 'index';
+app->helper(
+    provisionning => sub {
+        my $c = shift;
+
+        if (Model::Lstu->count('WHERE url IS NULL') < $c->config->{provisionning}) {
+            for (my $i = 0; $i < $c->config->{provis_step}; $i++) {
+                my $short;
+                do {
+                    $short= $c->shortener($c->config->{length});
+                } while (Model::Lstu->count('WHERE short = ?', $short));
+
+                Model::Lstu->create(
+                    short => $short
+                );
+            }
+        }
+    }
+);
+
+app->helper(
+    shortener => sub {
+        my $c      = shift;
+        my $length = shift;
+
+        my @chars  = ('a'..'z','A'..'Z','0'..'9');
+        my $result = '';
+        foreach (1..$length) {
+            $result .= $chars[rand scalar(@chars)];
+        }
+        return $result;
+    }
+);
+
+app->provisionning();
+
+get '/'       => sub {
+    my $c = shift;
+
+    $c->render(template => 'index');
+
+    $c->on(finish => sub {
+        shift->provisionning();
+    });
+} => 'index';
 
 get '/:short' => sub {
     my $c = shift;
     my $short = $c->param('short');
 
-    my @urls = Model::Lstu->select('where short = ?', $short);
+    my @urls = Model::Lstu->select('WHERE short = ?', $short);
     if (scalar(@urls)) {
         $c->res->code(301);
         $c->redirect_to($urls[0]->url);
+
         $c->on(finish => sub {
-          my $c       = shift;
-          my $counter = $urls[0]->counter + 1;
-          $urls[0]->update (counter => $counter);
+            my $counter = $urls[0]->counter + 1;
+            $urls[0]->update (counter => $counter);
+
+            shift->provisionning();
         });
     } else {
         $c->flash(
-            msg => url_for('/')->to_abs.flash('short').' not found.'
+            msg => $c->url_for('/')->to_abs.$short.' not found.'
         );
         $c->redirect_to('/');
     }
@@ -52,53 +102,52 @@ my $add = sub {
     my $c   = shift;
     my $url = $c->param('lsturl');
 
-    my $shortener  = sub {
-        my $length = shift;
-
-        my @chars  = ('a'..'z','A'..'Z','0'..'9');
-        my $result = '';
-        foreach (1..$length) {
-            $result .= $chars[rand scalar(@chars)];
-        }
-        return $result;
-    };
-
     if (is_uri($url)) {
         my $short;
 
-        my @keys   = $c->param;
+        my @keys = $c->param;
         my @params;
         foreach my $key (sort @keys) {
             push @params, $key.'='.$c->param($key) unless ($key eq 'lsturl');
         }
         $url .= '?'.join('&', @params) if (scalar(@params));
 
-        my @records = Model::Lstu->select('where url = ?', $url);
+        my @records = Model::Lstu->select('WHERE url = ?', $url);
 
         if (scalar(@records)) {
-            $short = $records[0]->short;
+            $c->flash(
+                short => $records[0]->short,
+                url   => $url
+            );
         } else {
-            do {
-                $short= $shortener->($c->config->{length});
-            } while (Model::Lstu->count('where short = ?', $short));
-            Model::Lstu->new(
-                url       => $url,
-                short     => $short,
-                counter   => 0,
-                timestamp => time()
-            )->insert;
-        }
+            @records = Model::Lstu->select('WHERE url IS NULL LIMIT 1');
+            if (scalar(@records)) {
+                $records[0]->update(
+                    url       => $url,
+                    counter   => 0,
+                    timestamp => time()
+                );
 
-        $c->flash(
-            short => $short,
-            url   => $url
-        );;
+                $c->flash(
+                    short => $records[0]->short,
+                    url   => $url
+                );
+            } else {
+                $c->flash(
+                    msg => 'No shortened URL available. Please retry or contact the administrator at '.$c->config->{contact}
+                );
+            }
+        }
     } else {
         $c->flash(
             msg => $url.' is not a valid URL'
         );
     }
     $c->redirect_to('/');
+
+    $c->on(finish => sub {
+        shift->provisionning();
+    });
 };
 
 post '/a/'       => $add => 'add' ;
@@ -117,15 +166,15 @@ __DATA__
 </p><small>&copy; 2013 <%= link_to 'http://www.fiat-tux.fr' => begin %>Luc Didry<% end %> — License : <%= link_to 'http://www.wtfpl.net/' => begin %>WTFPL<% end %> — <%= link_to 'https://github.com/ldidry/lstu' => begin %>About<% end %></small></p>
 <form class="form-inline" role="form" method="POST" action="<%== url_for 'add' %>">
     <div class="form-group">
-        <label class="sr-only" for="url">Url to shorten</label>
-        <input type="url" name="url" id="url" class="form-control" placeholder="Url to shorten" required></input>
+        <label class="sr-only" for="lsturl">Url to shorten</label>
+        <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="Url to shorten" required></input>
     </div>
     <%= submit_button 'Go', class => 'btn btn-default btn-primary' %>
 </form>
 
 % if (defined(flash('short')) && defined(flash('url'))) {
     <h3 class="alert alert-success">
-        <%= link_to flash('url') => begin %><%== flash('url') %><%= end %></a> =&gt; 
+        <%= link_to flash('url') => begin %><%== flash('url') %><%= end %></a> =&gt;
         <%= link_to url_for('/')->to_abs.flash('short') => begin %><%= url_for('/')->to_abs.flash('short') %><%= end %>
     </h3>
 % }
