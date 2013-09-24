@@ -4,18 +4,18 @@
 It means Let's Shorten That Url.
 
 ##License
-Lstu is licensed under the terms of the WTFPL. See the LICENSE file
+Lstu is licensed under the terms of the WTFPL. See the LICENSE file.
 
 ##Dependancies
-* Carton : Perl dependancies manager, it will get what you need, so don't bother for dependancies (but you can read the cpanfile if you want)
+* Carton : Perl dependancies manager, it will get what you need, so don't bother for dependancies (but you can read the file `cpanfile` if you want).
 
-```
+```shell
 sudo cpan Carton
 ```
 
 ##Installation
 After installing Carton :
-```
+```shell
 git clone https://github.com/ldidry/lstu.git
 cd lstu
 carton install
@@ -23,25 +23,48 @@ carton install
 
 ##Usage
 ```
-carton exec ./Lstu daemon -m production
+carton exec hypnotoad script/lstu
 ```
 
-Yup, that's all, it will listen at "http://\*:3000".
+Yup, that's all, it will listen at "http://127.0.0.1:8080".
 
-For more options (interfaces, user, etc.), run :
-```
-carton exec ./Lstu help daemon
-```
+For more options (interfaces, user, etc.), change the configuration in `lstu.conf` (have a look at http://mojolicio.us/perldoc/Mojo/Server/Hypnotoad#SETTINGS for the available options).
 
 ##How many urls can it handle ?
-Well, there is 8 361 453 672 available combinations. I think the sqlite db will explod before you reach this limit. If you want more shortened URLs than that, open the Lstu file and change
+Well, by default, there is 8 361 453 672 available combinations. I think the sqlite db will explod before you reach this limit. If you want more shortened URLs than that, open `lstu.conf` and change the `length` setting.
+
+Everytime somebody uses LSTU, it will create 'waiting' shortened URLs codes in order to be quick to shorten the URLs.
+
+Accordingly to the `lstu.conf` configuration file, it will create `provisionning` waiting URLs, adding them `provis_step` by `provis_step`.
+
+This provisionning asks to modify your database if your updating LSTU from 0.01 to 0.02:
+```shell
+sqlite3 lstu.db
 ```
-$shortener->(8)
+
+```SQL
+PRAGMA writable_schema = 1;
+UPDATE SQLITE_MASTER SET SQL = 'CREATE TABLE lstu (short TEXT PRIMARY KEY, url TEXT, counter INTEGER, timestamp INTEGER)' WHERE NAME = 'lstu';
+PRAGMA writable_schema = 0;
 ```
-with a higher number.
+
+##Other options
+Well, there is the `contact` option, where you a to put some way for the users to contact you, and the `secret` where you have to put a random string in order to protect your Mojolicious cookies (not really useful and optional).
 
 ##Reverse proxy
 You can use a reverse proxy like Nginx or Varnish (or Apache with the mod\_proxy module). The web is full of tutos.
+
+##Internationalization
+LSTU comes with english and french languages. It will choose the language to display with the browser's settings.
+
+If you want to add more languages, for example german:
+```shell
+cd lib/I18N
+cp en.pm de.pm
+vim de.pm
+```
+
+There's just a few sentences, so it will be quick to translate. Please consider to send me you language file in order to help the other users :smile:.
 
 ##Others projects dependancies
 Lstu is written in Perl with the Mojolicious framework and uses the Twitter bootstrap framework to look not too ugly.

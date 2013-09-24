@@ -1,0 +1,12 @@
+Revision history for Perl module Mojolicious::Plugin::ConfigRW
+
+0.02 Tue Sep 24 21:51:00 2013 +0200
+    - use of morbo or hypnotoad servers availables
+    - use of config file
+    - FIX #1 : GET parameters deleted when using /a/*url route
+    - FIX #2 : Can't use morbo or hypnotoad
+    - FIX #3 : Internationalization
+    - FIX #5 : Scalability issues
+
+0.01 Sat Sep 21 02:47:59 2013 +0200
+    - original version;
