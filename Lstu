@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 package Model;
+
+# Create database
 use ORLite {
     file    => 'lstu.db',
     unicode => 1,
@@ -23,6 +25,7 @@ use Data::Validate::URI qw(is_uri);
 
 my $config = plugin 'Config';
 
+# Default values
 $config->{provisionning} = 100           unless (defined($config->{provisionning}));
 $config->{provis_step}   = 5             unless (defined($config->{provis_step}));
 $config->{length}        = 8             unless (defined($config->{length}));
@@ -34,6 +37,7 @@ app->helper(
     provisionning => sub {
         my $c = shift;
 
+        # Create some short patterns for provisionning
         if (Model::Lstu->count('WHERE url IS NULL') < $c->config->{provisionning}) {
             for (my $i = 0; $i < $c->config->{provis_step}; $i++) {
                 my $short;
@@ -63,6 +67,7 @@ app->helper(
     }
 );
 
+# For the first launch (after, this isn't really useful)
 app->provisionning();
 
 get '/'       => sub {
@@ -70,6 +75,7 @@ get '/'       => sub {
 
     $c->render(template => 'index');
 
+    # Check provisionning
     $c->on(finish => sub {
         shift->provisionning();
     });
@@ -84,6 +90,7 @@ get '/:short' => sub {
         $c->res->code(301);
         $c->redirect_to($urls[0]->url);
 
+        # Update counter and check provisionning
         $c->on(finish => sub {
             my $counter = $urls[0]->counter + 1;
             $urls[0]->update (counter => $counter);
@@ -145,6 +152,7 @@ my $add = sub {
     }
     $c->redirect_to('/');
 
+    # Check provisionning
     $c->on(finish => sub {
         shift->provisionning();
     });
