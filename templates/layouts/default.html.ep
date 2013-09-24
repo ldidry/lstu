@@ -1,0 +1,26 @@
+% # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        %= stylesheet 'css/bootstrap.min.css', media => 'screen'
+        %= stylesheet begin
+            body {
+                padding-top: 40px;
+                padding-bottom: 40px;
+                background-color: #eee;
+            }
+
+            .container {
+                padding: 15px;
+                margin: 0 auto;
+            }
+        % end
+    </head>
+    <body>
+        <div class="container">
+            <%= content %>
+        </div>
+    </body>
+</html>

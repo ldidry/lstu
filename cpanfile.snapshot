@@ -264,6 +264,16 @@ DISTRIBUTIONS
       ojo undef
     requirements:
       ExtUtils::MakeMaker 0
+  Mojolicious-Plugin-I18N-1.0
+    pathname: S/SH/SHARIFULN/Mojolicious-Plugin-I18N-1.0.tar.gz
+    provides:
+      Mojolicious::Plugin::I18N 1.0
+    requirements:
+      I18N::LangTags 0.35
+      Module::Build 0.36
+      Mojolicious 3
+      Test::More 0
+      perl 5.010001
   Net-Domain-TLD-1.70
     pathname: A/AL/ALEXP/Net-Domain-TLD-1.70.tar.gz
     provides:
