@@ -26,14 +26,17 @@ sub startup {
             # Create some short patterns for provisionning
             if (LstuModel::Lstu->count('WHERE url IS NULL') < $c->config->{provisionning}) {
                 for (my $i = 0; $i < $c->config->{provis_step}; $i++) {
-                    my $short;
-                    do {
-                        $short= $c->shortener($c->config->{length});
-                    } while (LstuModel::Lstu->count('WHERE short = ?', $short));
+                    if (LstuModel->begin) {
+                        my $short;
+                        do {
+                            $short= $c->shortener($c->config->{length});
+                        } while (LstuModel::Lstu->count('WHERE short = ?', $short));
 
-                    LstuModel::Lstu->create(
-                        short => $short
-                    );
+                        LstuModel::Lstu->create(
+                            short => $short
+                        );
+                        LstuModel->commit;
+                    }
                 }
             }
         }
@@ -118,23 +121,26 @@ sub startup {
                     url   => $url
                 );
             } else {
-                @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
-                if (scalar(@records)) {
-                    $records[0]->update(
-                        url       => $url,
-                        counter   => 0,
-                        timestamp => time()
-                    );
+                if(LstuModel->begin) {
+                    @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
+                    if (scalar(@records)) {
+                        $records[0]->update(
+                            url       => $url,
+                            counter   => 0,
+                            timestamp => time()
+                        );
 
-                    $c->flash(
-                        short => $records[0]->short,
-                        url   => $url
-                    );
-                } else {
-                    # Houston, we have a problem
-                    $c->flash(
-                        msg => $c->l('no_more_short', $c->config->{contact}, $url)
-                    );
+                        $c->flash(
+                            short => $records[0]->short,
+                            url   => $url
+                        );
+                    } else {
+                        # Houston, we have a problem
+                        $c->flash(
+                            msg => $c->l('no_more_short', $c->config->{contact}, $url)
+                        );
+                    }
+                    LstuModel->commit;
                 }
             }
         } else {
@@ -151,7 +157,7 @@ sub startup {
         });
     };
 
-    $r->post('/a/' => $add)->name('add');
+    $r->post('/a/'       => $add)->name('add');
 
     $r->get('/a/*lsturl' => $add)->name('addurl');
 }
