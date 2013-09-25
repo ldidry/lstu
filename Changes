@@ -1,5 +1,8 @@
 Revision history for Perl module Mojolicious::Plugin::ConfigRW
 
+0.03 Wed Sep 25 16:18:00 2013 +0200
+    - FIX #5 again by using transactions
+
 0.02 Tue Sep 24 21:51:00 2013 +0200
     - use of morbo or hypnotoad servers availables
     - use of config file
