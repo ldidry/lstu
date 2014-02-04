@@ -3,15 +3,22 @@
 % title 'Lstu';
 <h1>Let's Shorten That Url</h1>
 <p>
+    <small><%=l 'api' %> <%= link_to url_for('add')->query(lsturl => 'http://example.com')->to_abs => begin %><%= url_for('add')->query(lsturl => 'http://example.com')->to_abs %><% end %></small>
+</p>
+<p>
     <small>&copy; 2013 <%= link_to 'http://www.fiat-tux.fr' => begin %>Luc Didry<% end %> — 
         <%=l 'license' %> <%= link_to 'http://www.wtfpl.net/' => begin %>WTFPL<% end %> — 
         <%= link_to 'https://github.com/ldidry/lstu' => begin %><%=l 'about' %><% end %>
     </small>
 </p>
-<form class="form-inline" role="form" method="POST" action="<%== url_for 'add' %>">
+<form class="form" role="form" method="POST" action="<%== url_for 'add' %>">
     <div class="form-group">
         <label class="sr-only" for="lsturl"><%=l 'url_to_shorten' %></label>
         <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%=l 'url_to_shorten' %>" required></input>
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="lsturl-custom"><%=l 'custom-url' %></label>
+        <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%=l 'custom-url' %>"></input>
     </div>
     <%= submit_button l('go'), class => 'btn btn-default btn-primary' %>
 </form>
@@ -25,4 +32,3 @@
 % if (defined(flash('msg'))) {
     <h3 class="alert alert-danger"><%== flash('msg') %><h3>
 % }
-

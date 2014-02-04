@@ -74,6 +74,85 @@ sub startup {
         });
     })->name('index');
 
+    my $add = sub {
+        my $c          = shift;
+        my $url        = $c->param('lsturl');
+        my $custom_url = $c->param('lsturl-custom');
+
+        $custom_url = undef if ($custom_url eq '');
+
+        if (defined($custom_url) && ($custom_url =~ m/^a$/ || $custom_url !~ m/^[a-zA-Z0-9_]+$/)) {
+            $c->flash(
+                msg => $c->l('no_valid_shorcut', $url)
+            );
+        } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
+            $c->flash(
+                msg => $c->l('already_taken', $custom_url)
+            );
+        } elsif (is_uri($url)) {
+            my $short;
+
+            my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
+
+            if (scalar(@records) && !defined($custom_url)) {
+                # Already got this URL
+                $c->flash(
+                    short => $records[0]->short,
+                    url   => $url
+                );
+            } else {
+                if(LstuModel->begin) {
+                    if (defined($custom_url)) {
+                        LstuModel::Lstu->create(
+                            short     => $custom_url,
+                            url       => $url,
+                            counter   => 0,
+                            timestamp => time()
+                        );
+                        $c->flash(
+                            short => $custom_url,
+                            url   => $url
+                        );
+                    } else {
+                        @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
+                        if (scalar(@records)) {
+                            $records[0]->update(
+                                url       => $url,
+                                counter   => 0,
+                                timestamp => time()
+                            );
+
+                            $c->flash(
+                                short => $records[0]->short,
+                                url   => $url
+                            );
+                        } else {
+                            # Houston, we have a problem
+                            $c->flash(
+                                msg => $c->l('no_more_short', $c->config->{contact}, $url)
+                            );
+                        }
+                    }
+                    LstuModel->commit;
+                }
+            }
+        } else {
+            $c->flash(
+                msg => $c->l('no_valid_url', $url)
+            );
+        }
+        $c->redirect_to('/');
+
+        # Check provisionning
+        $c->on(finish => sub {
+            shift->provisionning();
+        });
+    };
+
+    $r->post('/a' => $add)->name('add');
+
+    $r->get('/a'  => $add)->name('add');
+
     $r->get('/:short' => sub {
         my $c = shift;
         my $short = $c->param('short');
@@ -98,68 +177,6 @@ sub startup {
         }
     })->name('short');
 
-    my $add = sub {
-        my $c   = shift;
-        my $url = $c->param('lsturl');
-
-        if (is_uri($url)) {
-            my $short;
-
-            my @keys = $c->param;
-            my @params;
-            foreach my $key (sort @keys) {
-                push @params, $key.'='.$c->param($key) unless ($key eq 'lsturl');
-            }
-            $url .= '?'.join('&', @params) if (scalar(@params));
-
-            my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
-
-            if (scalar(@records)) {
-                # Already got this URL
-                $c->flash(
-                    short => $records[0]->short,
-                    url   => $url
-                );
-            } else {
-                if(LstuModel->begin) {
-                    @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
-                    if (scalar(@records)) {
-                        $records[0]->update(
-                            url       => $url,
-                            counter   => 0,
-                            timestamp => time()
-                        );
-
-                        $c->flash(
-                            short => $records[0]->short,
-                            url   => $url
-                        );
-                    } else {
-                        # Houston, we have a problem
-                        $c->flash(
-                            msg => $c->l('no_more_short', $c->config->{contact}, $url)
-                        );
-                    }
-                    LstuModel->commit;
-                }
-            }
-        } else {
-            $c->app->log->debug($c->l('no_valid_url', $url));
-            $c->flash(
-                msg => $c->l('no_valid_url', $url)
-            );
-        }
-        $c->redirect_to('/');
-
-        # Check provisionning
-        $c->on(finish => sub {
-            shift->provisionning();
-        });
-    };
-
-    $r->post('/a/'       => $add)->name('add');
-
-    $r->get('/a/*lsturl' => $add)->name('addurl');
 }
 
 1;
