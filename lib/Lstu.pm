@@ -79,7 +79,15 @@ sub startup {
         my $url        = $c->param('lsturl');
         my $custom_url = $c->param('lsturl-custom');
 
-        $custom_url = undef if ($custom_url eq '');
+        my @keys = $c->param;
+        my @params;
+        foreach my $key (sort @keys) {
+            push @params, $key.'='.$c->param($key) unless ($key eq 'lsturl' || $key eq 'lsturl-custom');
+        }
+
+        $url.= '&'.join('&', @params) if (scalar(@params));
+
+        $custom_url = undef if (defined($custom_url) && $custom_url eq '');
 
         if (defined($custom_url) && ($custom_url =~ m/^a$/ || $custom_url !~ m/^[a-zA-Z0-9_]+$/)) {
             $c->flash(
