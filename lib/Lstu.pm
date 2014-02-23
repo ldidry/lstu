@@ -2,6 +2,7 @@ package Lstu;
 use Mojo::Base 'Mojolicious';
 use LstuModel;
 use Data::Validate::URI qw(is_uri);
+use Mojo::JSON;
 
 # This method will run once at server start
 sub startup {
@@ -66,7 +67,24 @@ sub startup {
     $r->get('/' => sub {
         my $c = shift;
 
-        $c->render(template => 'index');
+        if (defined($c->flash('format')) && $c->flash('format') eq 'json') {
+            my %struct;
+            if (defined($c->flash('msg'))) {
+                %struct = (
+                    success => Mojo::JSON->false,
+                    msg     => $c->flash('msg')
+                );
+            } else {
+                %struct = (
+                    success => Mojo::JSON->true,
+                    short   => $c->url_for('/')->to_abs().$c->flash('short'),
+                    url     => $c->flash('url')
+                );
+            }
+            $c->render(json => \%struct);
+        } else {
+            $c->render(template => 'index');
+        }
 
         # Check provisionning
         $c->on(finish => sub {
@@ -78,12 +96,15 @@ sub startup {
         my $c          = shift;
         my $url        = $c->param('lsturl');
         my $custom_url = $c->param('lsturl-custom');
+        my $format     = $c->param('format');
 
         my @keys = $c->param;
         my @params;
         foreach my $key (sort @keys) {
-            push @params, $key.'='.$c->param($key) unless ($key eq 'lsturl' || $key eq 'lsturl-custom');
+            push @params, $key.'='.$c->param($key) unless ($key eq 'lsturl' || $key eq 'lsturl-custom' || ($key eq 'format' && $c->param('format') eq 'json'));
         }
+
+        $c->flash(format => 'json') if (defined($c->param('format')) && $c->param('format') eq 'json');
 
         $url.= '&'.join('&', @params) if (scalar(@params));
 

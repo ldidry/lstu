@@ -3,7 +3,7 @@
 % title 'Lstu';
 <h1>Let's Shorten That Url</h1>
 <p>
-    <small><%=l 'api' %> <%= link_to url_for('add')->query(lsturl => 'http://example.com')->to_abs => begin %><%= url_for('add')->query(lsturl => 'http://example.com')->to_abs %><% end %></small>
+    <small><%=l 'api' %> <%= link_to url_for('add')->query(lsturl => 'http://example.com', format => 'json')->to_abs => begin %><%= url_for('add')->query(lsturl => 'http://example.com', format => 'json')->to_abs %><% end %></small>
 </p>
 <p>
     <small>&copy; 2013 <%= link_to 'http://www.fiat-tux.fr' => begin %>Luc Didry<% end %> — 

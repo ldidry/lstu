@@ -67,8 +67,17 @@ vim de.pm
 
 There's just a few sentences, so it will be quick to translate. Please consider to send me you language file in order to help the other users :smile:.
 
+##Official instance
+You can see it working and use it at http://lstu.fr.
+
+##API
+You can shorten an URL with a GET request:
+`http://lstu.fr/a?lsturl=http://example.com&format=json`
+
+With `format=json`, you will get a json string like that:
+`{"short":"http:\/\/lstu.fr\/XuHRAT6P","success":true,"url":"http:\/\/example.com"}`
+
+If you don't use `format=json`, you will be redirected to http://lstu.fr where the shortened URL informations will be displayed.
+
 ##Others projects dependancies
 Lstu is written in Perl with the Mojolicious framework and uses the Twitter bootstrap framework to look not too ugly.
-
-##Demo
-You can see it working at http://lstu.fiat-tux.fr.
