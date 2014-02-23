@@ -89,7 +89,7 @@ sub startup {
 
         $custom_url = undef if (defined($custom_url) && $custom_url eq '');
 
-        if (defined($custom_url) && ($custom_url =~ m/^a$/ || $custom_url !~ m/^[a-zA-Z0-9_]+$/)) {
+        if (defined($custom_url) && ($custom_url =~ m/^a$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/)) {
             $c->flash(
                 msg => $c->l('no_valid_shorcut', $url)
             );
