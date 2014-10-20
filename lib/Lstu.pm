@@ -11,14 +11,14 @@ sub startup {
     my $config = $self->plugin('Config');
 
     # Default values
-    $config->{provisionning} = 100           unless (defined($config->{provisionning}));
-    $config->{provis_step}   = 5             unless (defined($config->{provis_step}));
-    $config->{length}        = 8             unless (defined($config->{length}));
-    $config->{secret}        = 'hfudsifdsih' unless (defined($config->{secret}));
+    $config->{provisionning} = 100             unless (defined($config->{provisionning}));
+    $config->{provis_step}   = 5               unless (defined($config->{provis_step}));
+    $config->{length}        = 8               unless (defined($config->{length}));
+    $config->{secret}        = ['hfudsifdsih'] unless (defined($config->{secret}));
 
     $self->plugin('I18N');
 
-    $self->secret($config->{secret});
+    $self->secrets($config->{secret});
 
     $self->helper(
         provisionning => sub {

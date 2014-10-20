@@ -4,8 +4,8 @@
         user   => 'www-data',
         group  => 'www-data'
     },
-    contact       => 'luc[at]example.com',
-    secret        => 'fdjsofjoihrei', # optional
+    contact       => 'admin[at]example.com',
+    secret        => ['fdjsofjoihrei'], # optional, but it has to be an array
     length        => 8,               # optional
     provis_step   => 5,               # optional
     provisionning => 100              # optional
