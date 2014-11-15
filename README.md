@@ -7,7 +7,7 @@ It means Let's Shorten That Url.
 Lstu is licensed under the terms of the WTFPL. See the LICENSE file.
 
 ##Dependancies
-* Carton : Perl dependancies manager, it will get what you need, so don't bother for dependancies (but you can read the file `cpanfile` if you want).
+* Carton : Perl dependancies manager, it will get what you need, so don't bother for dependencies (but you can read the file `cpanfile` if you want).
 
 ```shell
 sudo cpan Carton
@@ -32,7 +32,7 @@ Yup, that's all, it will listen at "http://127.0.0.1:8080".
 For more options (interfaces, user, etc.), change the configuration in `lstu.conf` (have a look at http://mojolicio.us/perldoc/Mojo/Server/Hypnotoad#SETTINGS for the available options).
 
 ##How many urls can it handle ?
-Well, by default, there is 8 361 453 672 available combinations. I think the sqlite db will explod before you reach this limit. If you want more shortened URLs than that, open `lstu.conf` and change the `length` setting.
+Well, by default, there are 8 361 453 672 available combinations. I think the sqlite db will explode before you reach this limit. If you want more shortened URLs than that, open `lstu.conf` and change the `length` setting.
 
 Everytime somebody uses LSTU, it will create 'waiting' shortened URLs codes in order to be quick to shorten the URLs.
 
@@ -50,22 +50,22 @@ PRAGMA writable_schema = 0;
 ```
 
 ##Other options
-Well, there is the `contact` option, where you a to put some way for the users to contact you, and the `secret` where you have to put a random string in order to protect your Mojolicious cookies (not really useful and optional).
+Well, there is the `contact` option, where you have to put some way for the users to contact you, and the `secret` where you have to put a random string in order to protect your Mojolicious cookies (not really useful and optional).
 
 ##Reverse proxy
 You can use a reverse proxy like Nginx or Varnish (or Apache with the mod\_proxy module). The web is full of tutos.
 
 ##Internationalization
-LSTU comes with english and french languages. It will choose the language to display with the browser's settings.
+LSTU comes with English and French languages. It will choose the language to display with the browser's settings.
 
-If you want to add more languages, for example german:
+If you want to add more languages, for example German:
 ```shell
 cd lib/I18N
 cp en.pm de.pm
 vim de.pm
 ```
 
-There's just a few sentences, so it will be quick to translate. Please consider to send me you language file in order to help the other users :smile:.
+There are just a few sentences, so it will be quick to translate. Please consider to send me you language file in order to help the other users :smile:.
 
 ##Official instance
 You can see it working and use it at http://lstu.fr.
@@ -77,7 +77,7 @@ You can shorten an URL with a GET request:
 With `format=json`, you will get a json string like that:
 `{"short":"http:\/\/lstu.fr\/XuHRAT6P","success":true,"url":"http:\/\/example.com"}`
 
-If you don't use `format=json`, you will be redirected to http://lstu.fr where the shortened URL informations will be displayed.
+If you don't use `format=json`, you will be redirected to http://lstu.fr where the shortened URL information will be displayed.
 
 ##Others projects dependancies
 Lstu is written in Perl with the Mojolicious framework and uses the Twitter bootstrap framework to look not too ugly.
