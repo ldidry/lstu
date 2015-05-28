@@ -1,5 +1,28 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
+  CPAN-Meta-2.150001
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.150001.tar.gz
+    provides:
+      CPAN::Meta 2.150001
+      CPAN::Meta::Converter 2.150001
+      CPAN::Meta::Feature 2.150001
+      CPAN::Meta::History 2.150001
+      CPAN::Meta::Merge 2.150001
+      CPAN::Meta::Prereqs 2.150001
+      CPAN::Meta::Spec 2.150001
+      CPAN::Meta::Validator 2.150001
+    requirements:
+      CPAN::Meta::Requirements 2.121
+      CPAN::Meta::YAML 0.008
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      JSON::PP 2.27200
+      Parse::CPAN::Meta 1.4414
+      Scalar::Util 0
+      perl 5.008
+      strict 0
+      version 0.88
+      warnings 0
   DBD-SQLite-1.40
     pathname: I/IS/ISHIGAKI/DBD-SQLite-1.40.tar.gz
     provides:
@@ -9,7 +32,7 @@ DISTRIBUTIONS
       DBD::SQLite::dr 1.40
     requirements:
       DBI 1.57
-      ExtUtils::MakeMaker 6.48
+      ExtUtils::MakeMaker 0
       File::Spec 0.82
       Test::Builder 0.86
       Test::More 0.47
@@ -156,8 +179,86 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0.31
       Time::HiRes 0
-  Mojolicious-4.39
-    pathname: S/SR/SRI/Mojolicious-4.39.tar.gz
+  Locale-Maketext-Lexicon-1.00
+    pathname: D/DR/DRTECH/Locale-Maketext-Lexicon-1.00.tar.gz
+    provides:
+      Locale::Maketext::Extract 1.00
+      Locale::Maketext::Extract::Plugin::Base 1.00
+      Locale::Maketext::Extract::Plugin::FormFu 1.00
+      Locale::Maketext::Extract::Plugin::FormFu::Extractor 1.00
+      Locale::Maketext::Extract::Plugin::Generic 1.00
+      Locale::Maketext::Extract::Plugin::Haml 1.00
+      Locale::Maketext::Extract::Plugin::Mason 1.00
+      Locale::Maketext::Extract::Plugin::PPI 1.00
+      Locale::Maketext::Extract::Plugin::Perl 1.00
+      Locale::Maketext::Extract::Plugin::TT2 1.00
+      Locale::Maketext::Extract::Plugin::TT2::Directive 1.00
+      Locale::Maketext::Extract::Plugin::TT2::Parser 1.00
+      Locale::Maketext::Extract::Plugin::TextTemplate 1.00
+      Locale::Maketext::Extract::Plugin::TextTemplate::Parser 1.00
+      Locale::Maketext::Extract::Plugin::YAML 1.00
+      Locale::Maketext::Extract::Plugin::YAML::Extractor 1.00
+      Locale::Maketext::Extract::Run 1.00
+      Locale::Maketext::Lexicon 1.00
+      Locale::Maketext::Lexicon::Auto 1.00
+      Locale::Maketext::Lexicon::Gettext 1.00
+      Locale::Maketext::Lexicon::Msgcat 1.00
+      Locale::Maketext::Lexicon::Tie 1.00
+    requirements:
+      ExtUtils::MakeMaker 6.30
+      Locale::Maketext 1.17
+  Module-Build-0.4212
+    pathname: L/LE/LEONT/Module-Build-0.4212.tar.gz
+    provides:
+      Module::Build 0.4212
+      Module::Build::Base 0.4212
+      Module::Build::Compat 0.4212
+      Module::Build::Config 0.4212
+      Module::Build::Cookbook 0.4212
+      Module::Build::Dumper 0.4212
+      Module::Build::Notes 0.4212
+      Module::Build::PPMMaker 0.4212
+      Module::Build::Platform::Default 0.4212
+      Module::Build::Platform::MacOS 0.4212
+      Module::Build::Platform::Unix 0.4212
+      Module::Build::Platform::VMS 0.4212
+      Module::Build::Platform::VOS 0.4212
+      Module::Build::Platform::Windows 0.4212
+      Module::Build::Platform::aix 0.4212
+      Module::Build::Platform::cygwin 0.4212
+      Module::Build::Platform::darwin 0.4212
+      Module::Build::Platform::os2 0.4212
+      Module::Build::PodParser 0.4212
+    requirements:
+      CPAN::Meta 2.142060
+      CPAN::Meta::YAML 0.003
+      Cwd 0
+      Data::Dumper 0
+      ExtUtils::CBuilder 0.27
+      ExtUtils::Install 0
+      ExtUtils::Manifest 0
+      ExtUtils::Mkbootstrap 0
+      ExtUtils::ParseXS 2.21
+      File::Basename 0
+      File::Compare 0
+      File::Copy 0
+      File::Find 0
+      File::Path 0
+      File::Spec 0.82
+      File::Temp 0.15
+      Getopt::Long 0
+      Module::Metadata 1.000002
+      Parse::CPAN::Meta 1.4401
+      Perl::OSType 1
+      Pod::Man 2.17
+      Test::Harness 3.16
+      Test::More 0.49
+      Text::Abbrev 0
+      Text::ParseWords 0
+      perl 5.008000
+      version 0.87
+  Mojolicious-6.11
+    pathname: S/SR/SRI/Mojolicious-6.11.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -216,9 +317,11 @@ DISTRIBUTIONS
       Mojo::Upload undef
       Mojo::UserAgent undef
       Mojo::UserAgent::CookieJar undef
+      Mojo::UserAgent::Proxy undef
+      Mojo::UserAgent::Server undef
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
-      Mojolicious 4.39
+      Mojolicious 6.11
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -228,7 +331,7 @@ DISTRIBUTIONS
       Mojolicious::Command::generate::app undef
       Mojolicious::Command::generate::lite_app undef
       Mojolicious::Command::generate::makefile undef
-      Mojolicious::Command::generate::plugin 0.01
+      Mojolicious::Command::generate::plugin undef
       Mojolicious::Command::get undef
       Mojolicious::Command::inflate undef
       Mojolicious::Command::prefork undef
@@ -260,18 +363,23 @@ DISTRIBUTIONS
       Mojolicious::Sessions undef
       Mojolicious::Static undef
       Mojolicious::Types undef
+      Mojolicious::Validator undef
+      Mojolicious::Validator::Validation undef
       Test::Mojo undef
       ojo undef
     requirements:
       ExtUtils::MakeMaker 0
-  Mojolicious-Plugin-I18N-1.0
-    pathname: S/SH/SHARIFULN/Mojolicious-Plugin-I18N-1.0.tar.gz
+      IO::Socket::IP 0.26
+      Pod::Simple 3.09
+      Time::Local 1.2
+  Mojolicious-Plugin-I18N-1.5
+    pathname: S/SH/SHARIFULN/Mojolicious-Plugin-I18N-1.5.tar.gz
     provides:
-      Mojolicious::Plugin::I18N 1.0
+      Mojolicious::Plugin::I18N 1.5
     requirements:
       I18N::LangTags 0.35
-      Module::Build 0.36
-      Mojolicious 3
+      Module::Build 0.42
+      Mojolicious 5
       Test::More 0
       perl 5.010001
   Net-Domain-TLD-1.70

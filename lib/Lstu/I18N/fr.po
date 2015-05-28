@@ -1,0 +1,149 @@
+# Lstu
+# Copyright (C) 2013 - 2015 Luc Didry
+# This file is distributed under the same license as the Lstu package.
+# Luc Didry <luc@didry.org>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Lstu - 0.04\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-05-28 23:52+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: Luc Didry <luc@didry.org>\n"
+"Language-Team: Luc Didry <admin@lstu.fr>\n"
+"Language: fr\n"
+"X-Generator: Poedit 1.7.7\n"
+
+#. ($url)
+#: lib/Lstu.pm:172
+msgid "%1 is not a valid URL."
+msgstr "%1 n’est pas une URL valide."
+
+#: templates/layouts/default.html.ep:27
+msgid "About"
+msgstr "À propos"
+
+#: templates/stats.html.ep:10 templates/stats.html.ep:9
+msgid "Admin password"
+msgstr "Mot de passe administrateur"
+
+#: lib/Lstu.pm:274
+msgid "Bad password"
+msgstr "Mot de passe incorrect"
+
+#: templates/stats.html.ep:26
+msgid "Counter"
+msgstr "Compteur"
+
+#: templates/stats.html.ep:27
+msgid "Created"
+msgstr "Créé le"
+
+#: templates/api.html.ep:15 templates/index.html.ep:10
+#: templates/index.html.ep:9
+msgid "Custom shortened text"
+msgstr "Texte du raccourci personnalisé"
+
+#: templates/api.html.ep:21 templates/api.html.ep:39
+msgid "Failure reason"
+msgstr "Raison de l’échec"
+
+#: templates/index.html.ep:12 templates/stats.html.ep:13
+msgid "Go!"
+msgstr "Allons-y !"
+
+#: templates/api.html.ep:16
+msgid "If equal to \"json\", response will be in JSON format, HTML format otherwise"
+msgstr "Si égal à \"json\", la réponse sera au format JSON, sinon ce sera une réponse en HTML"
+
+#: templates/api.html.ep:21 templates/api.html.ep:39
+msgid "JSON: failure"
+msgstr "JSON : échec"
+
+#: templates/api.html.ep:20 templates/api.html.ep:38
+msgid "JSON: success"
+msgstr "JSON : succès"
+
+#: templates/layouts/default.html.ep:26
+msgid "License:"
+msgstr "Licence :"
+
+#: templates/stats.html.ep:51
+msgid "Next"
+msgstr "Suivant"
+
+#. ($c->config('contact')
+#: lib/Lstu.pm:165
+msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
+msgstr "Il n’y a plus d’URL raccourcie disponible. Veuillez réessayer ou contactez l’administrateur sur %1. Rappel de l’URL à raccourcir : %2"
+
+#: templates/api.html.ep:12
+msgid "Parameters:"
+msgstr "Paramètres :"
+
+#: templates/stats.html.ep:50
+msgid "Previous"
+msgstr "Précédent"
+
+#: templates/api.html.ep:22
+msgid "Response for HTML format"
+msgstr "Réponse pour le format HTML"
+
+#: templates/api.html.ep:18 templates/api.html.ep:27 templates/api.html.ep:36
+msgid "Response:"
+msgstr "Réponse :"
+
+#: templates/stats.html.ep:25
+msgid "Shortened URL"
+msgstr "URL raccourcie"
+
+#: templates/layouts/default.html.ep:29 templates/stats.html.ep:4
+msgid "Statistics"
+msgstr "Statistiques"
+
+#. ($c->url_for('/')
+#: lib/Lstu.pm:300
+msgid "The shortened URL %1 doesn't exist."
+msgstr "L’URL raccourcie %1 n’existe pas"
+
+#. ($custom_url)
+#: lib/Lstu.pm:135
+msgid "The shortened text (%1) is already used. Please choose another one."
+msgstr "Le texte du raccourci (%1) est déjà utilisé. Veuillez en choisir un autre"
+
+#. ($url)
+#: lib/Lstu.pm:133
+msgid "The shortened text can contain only numbers, letters and the - and _ characters and can't be \"a\", \"api\" or \"stats\". Your URL to shorten: %1"
+msgstr "Le texte du raccourci ne doit contenir que des chiffres, des lettres et les caractères - et _ et ne peut être \"a\", \"api\" ou \"stats\". Rappel de l’URL à raccourcir : %2"
+
+#: templates/stats.html.ep:24
+msgid "URL"
+msgstr "URL"
+
+#: templates/api.html.ep:14 templates/index.html.ep:5
+#: templates/index.html.ep:6
+msgid "URL to shorten"
+msgstr "URL à raccourcir"
+
+#: templates/api.html.ep:22
+msgid "You will be redirected to the Lstu interface with a message giving the shortened URL"
+msgstr "Vous aurez l’interface normale de Lstu avec un message indiquant l’URL raccourcie"
+
+#: templates/api.html.ep:30
+msgid "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
+msgstr "Vous serez redirigé vers l’URL cible ou vers la page d’accueil de Lstu avec un message indiquant la raison de l’échec"
+
+#: templates/api.html.ep:14
+msgid "mandatory"
+msgstr "obligatoire"
+
+#: templates/api.html.ep:15 templates/api.html.ep:16
+msgid "optional"
+msgstr "facultatif"
+
+#: templates/api.html.ep:25 templates/api.html.ep:34
+msgid "shortened_url"
+msgstr "url_raccourcie"

@@ -20,6 +20,15 @@
     </head>
     <body>
         <div class="container">
+            <h1><%= link_to url_for('index') => begin %>Let's Shorten That Url<% end %></h1>
+            <p>
+                <small>&copy; 2013 — 2015 <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> — 
+                    <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> — 
+                    <%= link_to l('About') => 'https://git.framasoft.org/luc/lstu#tab-readme' %> — 
+                    <%= link_to 'API' => url_for('api') %> — 
+                    <%= link_to l('Statistics') => url_for('stats') %>
+                </small>
+            </p>
             <%= content %>
         </div>
     </body>

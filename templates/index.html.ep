@@ -1,34 +1,23 @@
 % # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
-% layout 'default';
 % title 'Lstu';
-<h1>Let's Shorten That Url</h1>
-<p>
-    <small><%=l 'api' %> <%= link_to url_for('add')->query(lsturl => 'http://example.com', format => 'json')->to_abs => begin %><%= url_for('add')->query(lsturl => 'http://example.com', format => 'json')->to_abs %><% end %></small>
-</p>
-<p>
-    <small>&copy; 2013 <%= link_to 'http://www.fiat-tux.fr' => begin %>Luc Didry<% end %> — 
-        <%=l 'license' %> <%= link_to 'http://www.wtfpl.net/' => begin %>WTFPL<% end %> — 
-        <%= link_to 'https://github.com/ldidry/lstu' => begin %><%=l 'about' %><% end %>
-    </small>
-</p>
 <form class="form" role="form" method="POST" action="<%== url_for 'add' %>">
     <div class="form-group">
-        <label class="sr-only" for="lsturl"><%=l 'url_to_shorten' %></label>
-        <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%=l 'url_to_shorten' %>" required></input>
+        <label class="sr-only" for="lsturl"><%= l('URL to shorten') %></label>
+        <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%= l('URL to shorten') %>" required></input>
     </div>
     <div class="form-group">
-        <label class="sr-only" for="lsturl-custom"><%=l 'custom-url' %></label>
-        <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%=l 'custom-url' %>"></input>
+        <label class="sr-only" for="lsturl-custom"><%= l('Custom shortened text') %></label>
+        <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%= l('Custom shortened text') %>"></input>
     </div>
-    <%= submit_button l('go'), class => 'btn btn-default btn-primary' %>
+    <%= submit_button l('Go!'), class => 'btn btn-default btn-primary' %>
 </form>
 
 % if (defined(flash('short')) && defined(flash('url'))) {
     <h3 class="alert alert-success">
-        <%= link_to flash('url') => begin %><%== flash('url') %><%= end %></a> =&gt;
-        <%= link_to url_for('/')->to_abs.flash('short') => begin %><%= url_for('/')->to_abs.flash('short') %><%= end %>
+        <%= link_to flash('url') => begin %><%= flash('url') %><%= end %></a> =&gt;
+        <%= link_to flash('short') => begin %><%= flash('short') %><%= end %>
     </h3>
 % }
 % if (defined(flash('msg'))) {
-    <h3 class="alert alert-danger"><%== flash('msg') %><h3>
+    <h3 class="alert alert-danger"><%= flash('msg') %><h3>
 % }

@@ -1,36 +1,46 @@
+# vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu;
 use Mojo::Base 'Mojolicious';
 use LstuModel;
-use Data::Validate::URI qw(is_uri);
-use Mojo::JSON;
+use Data::Validate::URI qw(is_http_uri is_https_uri);
+use Mojo::JSON qw(to_json decode_json);
+use Mojo::URL;
+
+$ENV{MOJO_REVERSE_PROXY} = 1;
 
 # This method will run once at server start
 sub startup {
     my $self = shift;
 
-    my $config = $self->plugin('Config');
+    my $config = $self->plugin('Config' => {
+        default =>  {
+            provisioning => 100,
+            provis_step   => 5,
+            length        => 8,
+            secret        => ['hfudsifdsih'],
+            page_offset   => 10,
+        }
+    });
 
-    # Default values
-    $config->{provisionning} = 100             unless (defined($config->{provisionning}));
-    $config->{provis_step}   = 5               unless (defined($config->{provis_step}));
-    $config->{length}        = 8               unless (defined($config->{length}));
-    $config->{secret}        = ['hfudsifdsih'] unless (defined($config->{secret}));
+    $config->{provisioning} = $config->{provisionning} if (defined($config->{provisionning}));
+
+    die "You need to provide a contact information in lstu.conf!" unless (defined($config->{contact}));
 
     $self->plugin('I18N');
 
     $self->secrets($config->{secret});
 
     $self->helper(
-        provisionning => sub {
+        provisioning => sub {
             my $c = shift;
 
-            # Create some short patterns for provisionning
-            if (LstuModel::Lstu->count('WHERE url IS NULL') < $c->config->{provisionning}) {
-                for (my $i = 0; $i < $c->config->{provis_step}; $i++) {
+            # Create some short patterns for provisioning
+            if (LstuModel::Lstu->count('WHERE url IS NULL') < $c->config('provisioning')) {
+                for (my $i = 0; $i < $c->config('provis_step'); $i++) {
                     if (LstuModel->begin) {
                         my $short;
                         do {
-                            $short= $c->shortener($c->config->{length});
+                            $short= $c->shortener($c->config('length'));
                         } while (LstuModel::Lstu->count('WHERE short = ?', $short));
 
                         LstuModel::Lstu->create(
@@ -44,11 +54,24 @@ sub startup {
     );
 
     $self->helper(
+        prefix => sub {
+            my $c = shift;
+
+            my $prefix = $c->url_for('index')->to_abs;
+            # Forced domain
+            $prefix->host($c->config('fixed_domain')) if (defined($c->config('fixed_domain')));
+            # Hack for prefix (subdir) handling
+            $prefix .= '/' if ($c->config('prefix') && $c->config('prefix') ne '/');
+            return $prefix;
+        }
+    );
+
+    $self->helper(
         shortener => sub {
             my $c      = shift;
             my $length = shift;
 
-            my @chars  = ('a'..'z','A'..'Z','0'..'9');
+            my @chars  = ('a'..'z','A'..'Z','0'..'9', '-', '_');
             my $result = '';
             foreach (1..$length) {
                 $result .= $chars[rand scalar(@chars)];
@@ -57,78 +80,65 @@ sub startup {
         }
     );
 
+    $self->hook(
+        after_dispatch => sub {
+            shift->provisioning();
+        }
+    );
+
+    $self->hook(
+        before_dispatch => sub {
+            my $c = shift;
+
+            # API allowed domains
+            if (defined($c->config('allowed_domains'))) {
+                if ($c->config('allowed_domains')->[0] eq '*') {
+                    $c->res->headers->header('Access-Control-Allow-Origin' => '*');
+                } elsif (my $origin = $c->req->headers->origin) {
+                    for my $domain (@{$c->config('allowed_domains')}) {
+                        if ($domain eq $origin) {
+                            $c->res->headers->header('Access-Control-Allow-Origin' => $origin);
+                            last;
+                        }
+                    }
+                }
+            }
+        }
+    );
+
     # For the first launch (after, this isn't really useful)
-    $self->provisionning();
+    $self->provisioning();
+
+    # Default layout
+    $self->defaults(layout => 'default');
 
     # Router
     my $r = $self->routes;
 
     # Normal route to controller
     $r->get('/' => sub {
-        my $c = shift;
-
-        if (defined($c->flash('format')) && $c->flash('format') eq 'json') {
-            my %struct;
-            if (defined($c->flash('msg'))) {
-                %struct = (
-                    success => Mojo::JSON->false,
-                    msg     => $c->flash('msg')
-                );
-            } else {
-                %struct = (
-                    success => Mojo::JSON->true,
-                    short   => $c->url_for('/')->to_abs().$c->flash('short'),
-                    url     => $c->flash('url')
-                );
-            }
-            $c->render(json => \%struct);
-        } else {
-            $c->render(template => 'index');
-        }
-
-        # Check provisionning
-        $c->on(finish => sub {
-            shift->provisionning();
-        });
+        shift->render(template => 'index');
     })->name('index');
 
-    my $add = sub {
+    $r->post('/a' => sub {
         my $c          = shift;
-        my $url        = $c->param('lsturl');
+        my $url        = Mojo::URL->new($c->param('lsturl'));
         my $custom_url = $c->param('lsturl-custom');
         my $format     = $c->param('format');
 
-        my @keys = $c->param;
-        my @params;
-        foreach my $key (sort @keys) {
-            push @params, $key.'='.$c->param($key) unless ($key eq 'lsturl' || $key eq 'lsturl-custom' || ($key eq 'format' && $c->param('format') eq 'json'));
-        }
-
-        $c->flash(format => 'json') if (defined($c->param('format')) && $c->param('format') eq 'json');
-
-        $url.= '&'.join('&', @params) if (scalar(@params));
-
         $custom_url = undef if (defined($custom_url) && $custom_url eq '');
 
-        if (defined($custom_url) && ($custom_url =~ m/^a$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/)) {
-            $c->flash(
-                msg => $c->l('no_valid_shorcut', $url)
-            );
+        my ($msg, $short);
+        if (defined($custom_url) && ($custom_url =~ m/^a(pi)?|stats$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/)) {
+            $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ characters and can\'t be "a", "api" or "stats". Your URL to shorten: [_1]', $url);
         } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
-            $c->flash(
-                msg => $c->l('already_taken', $custom_url)
-            );
-        } elsif (is_uri($url)) {
-            my $short;
-
+            $msg = $c->l('The shortened text ([_1]) is already used. Please choose another one.', $custom_url);
+        } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {
             my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
 
             if (scalar(@records) && !defined($custom_url)) {
                 # Already got this URL
-                $c->flash(
-                    short => $records[0]->short,
-                    url   => $url
-                );
+                $short = $records[0]->short;
             } else {
                 if(LstuModel->begin) {
                     if (defined($custom_url)) {
@@ -138,10 +148,8 @@ sub startup {
                             counter   => 0,
                             timestamp => time()
                         );
-                        $c->flash(
-                            short => $custom_url,
-                            url   => $url
-                        );
+
+                        $short = $custom_url;
                     } else {
                         @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
                         if (scalar(@records)) {
@@ -151,36 +159,122 @@ sub startup {
                                 timestamp => time()
                             );
 
-                            $c->flash(
-                                short => $records[0]->short,
-                                url   => $url
-                            );
+                            $short = $records[0]->short;
                         } else {
                             # Houston, we have a problem
-                            $c->flash(
-                                msg => $c->l('no_more_short', $c->config->{contact}, $url)
-                            );
+                            $msg = $c->l('No shortened URL available. Please retry or contact the administrator at [_1]. Your URL to shorten: [_2]', $c->config('contact'), $url);
                         }
                     }
                     LstuModel->commit;
                 }
             }
         } else {
-            $c->flash(
-                msg => $c->l('no_valid_url', $url)
+            $msg = $c->l('[_1] is not a valid URL.', $url);
+        }
+        if ($msg) {
+            $c->respond_to(
+                json => { json => { success => Mojo::JSON->false, msg => $msg } },
+                any  => sub { 
+                    my $c = shift;
+
+                    $c->flash('msg' => $msg);
+                    $c->redirect_to('index');
+                }
+            );
+        } else {
+            # Get URLs from cookie
+            my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
+            # Add the new URL
+            push @{$u}, $short;
+            # Make the array contain only unique URLs
+            my %k = map { $_, 1 } @{$u};
+            @{$u} = keys %k;
+            # And set the cookie
+            my $cookie = to_json($u);
+            $c->cookie('url' => $cookie, {expires => time + 142560000}); # expires in 10 years
+
+            my $prefix = $c->prefix;
+
+            $c->respond_to(
+                json => { json => { success => Mojo::JSON->true, url => $url, short => $prefix.$short } },
+                any  => sub { 
+                    my $c = shift;
+
+                    $c->flash('url'   => $url);
+                    $c->flash('short' => $prefix.$short);
+                    $c->redirect_to('index');
+                }
             );
         }
-        $c->redirect_to('/');
+    })->name('add');
 
-        # Check provisionning
-        $c->on(finish => sub {
-            shift->provisionning();
-        });
-    };
+    $r->get('/api' => sub {
+        shift->render(
+            template => 'api'
+        );
+    })->name('api');
 
-    $r->post('/a' => $add)->name('add');
+    $r->get('/stats' => sub {
+        my $c = shift;
 
-    $r->get('/a'  => $add)->name('add');
+        my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
+
+        my $p = join ",", (('?') x @{$u});
+        my @urls = LstuModel::Lstu->select("WHERE short IN ($p) ORDER BY counter DESC", @{$u});
+
+        my $prefix = $c->prefix;
+
+        $c->respond_to(
+            json => sub {
+                my @struct;
+                for my $url (@urls) {
+                    push @struct, { 
+                        short      => $prefix.$url->{short},
+                        url        => $url->{url},
+                        counter    => $url->{counter},
+                        created_at => $url->{timestamp}
+                    };
+                }
+                $c->render( json => \@struct );
+            },
+            any  => sub {
+                shift->render(
+                    template => 'stats',
+                    prefix   => $prefix,
+                    urls     => \@urls
+                )
+            }
+        )
+    })->name('stats');
+
+    $r->post('/stats' => sub {
+        my $c    = shift;
+        my $pwd  = $c->param('adminpwd');
+        my $page = $c->param('page') || 0;
+           $page = 0 if ($page < 0);
+
+        if (defined($c->config('adminpwd')) &&  $pwd eq $c->config('adminpwd')) {
+            my $total = LstuModel::Lstu->count("WHERE url IS NOT NULL");
+               $page  = $page - 1 if ($page * $c->config('page_offset') > $total);
+
+            my ($first, $last) = (!$page, ($page * $c->config('page_offset') <= $total && $total < ($page + 1) * $c->config('page_offset')));
+
+            my @urls  = LstuModel::Lstu->select("WHERE url IS NOT NULL ORDER BY counter DESC LIMIT ? offset ?", $c->config('page_offset'), $page * $c->config('page_offset'));
+            $c->render(
+                template => 'stats',
+                prefix   => $c->prefix,
+                urls     => \@urls,
+                first    => $first,
+                last     => $last,
+                page     => $page,
+                adminpwd => $pwd,
+                total    => $total
+            )
+        } else {
+            $c->flash('msg' => $c->l('Bad password'));
+            $c->redirect_to('stats');
+        }
+    });
 
     $r->get('/:short' => sub {
         my $c = shift;
@@ -188,24 +282,33 @@ sub startup {
 
         my @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
         if (scalar(@urls)) {
-            $c->res->code(301);
-            $c->redirect_to($urls[0]->url);
-
-            # Update counter and check provisionning
+            my $url = $urls[0]->url;
+            $c->respond_to(
+                json => { json => { success => Mojo::JSON->true, url => $url } },
+                any  => sub {
+                    my $c = shift;
+                    $c->res->code(301);
+                    $c->redirect_to($url);
+                }
+            );
+            # Update counter
             $c->on(finish => sub {
                 my $counter = $urls[0]->counter + 1;
                 $urls[0]->update (counter => $counter);
-
-                shift->provisionning();
             });
         } else {
-            $c->flash(
-                msg => $c->l('url_not_found', $c->url_for('/')->to_abs.$short)
+            my $msg = $c->l('The shortened URL [_1] doesn\'t exist.', $c->url_for('/')->to_abs.$short);
+            $c->respond_to(
+                json => { json => { success => Mojo::JSON->false, msg => $msg } },
+                any  => sub {
+                    my $c = shift;
+
+                    $c->flash('msg' => $msg);
+                    $c->redirect_to('index');
+                }
             );
-            $c->redirect_to('/');
         }
     })->name('short');
-
 }
 
 1;

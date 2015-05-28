@@ -1,0 +1,42 @@
+% # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+% title 'Lstu API';
+%= stylesheet begin
+    dd > strong {
+        padding-left: 15px;
+    }
+% end
+<h2>Lstu API</h2>
+<dl>
+    <dt>POST /a</dt>
+    <dd>
+        <strong><%= l('Parameters:') %></strong>
+        <ul>
+            <li><strong>lsturl</strong><br><%= l('URL to shorten') %> <em><%= l('mandatory') %></em></li>
+            <li><strong>lsturl-custom</strong><br><%= l('Custom shortened text')%> <em><%= l('optional') %></em></li>
+            <li><strong>format</strong><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %> <em><%= l('optional') %></em></li>
+        </ul>
+        <strong><%= l('Response:') %></strong>
+        <ul>
+            <li><strong><%= l('JSON: success') %></strong><br><code>{"url":"https:\/\/fiat-tux.fr","short":"https:\/\/lstu.fr\/XzQBd6eF","success":true}</code></li>
+            <li><strong><%= l('JSON: failure') %></strong><br><code>{"msg":"<%= l('Failure reason') %>","success":false}</code></li>
+            <li><strong><%= l('Response for HTML format') %></strong><br><%= l('You will be redirected to the Lstu interface with a message giving the shortened URL') %></li>
+        </ul>
+    </dd>
+    <dt>GET /<%= l('shortened_url') %></dt>
+    <dd>
+        <strong><%= l('Response:') %></strong>
+        <ul>
+            <li>
+                <%= l('You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason') %>
+            </li>
+        </ul>
+    </dd>
+    <dt>GET /<%= l('shortened_url') %>.json</dt>
+    <dd>
+        <strong><%= l('Response:') %></strong>
+        <ul>
+            <li><strong><%= l('JSON: success') %></strong><br><code>{"url":"https:\/\/fiat-tux.fr","success":true}</code></li>
+            <li><strong><%= l('JSON: failure') %></strong><br><code>{"msg":"<%= l('Failure reason') %>","success":false}</code></li>
+        </li>
+    </dd>
+</dl>
