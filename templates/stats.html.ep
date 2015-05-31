@@ -3,20 +3,23 @@
 % use Mojo::Date;
 <h2><%= l('Statistics') %></h2>
 % if (defined(config('adminpwd'))) {
-%     if (!defined(stash('adminpwd'))) {
 <form class="form" role="form" method="POST" action="<%== url_for 'stats' %>">
+%     if (defined(stash('admin'))) {
+    <input type="hidden" value="logout" name="action"></input>
+    <%= submit_button l('Logout from admin stats'), class => 'btn btn-default btn-primary' %>
+%     } else {
     <div class="form-group">
         <label class="sr-only" for="adminpwd"><%= l('Admin password') %></label>
         <input type="password" name="adminpwd" id="adminpwd" class="form-control" placeholder="<%= l('Admin password') %>" required></input>
     </div>
     <input type="hidden" value="0" name="page"></input>
     <%= submit_button l('Go!'), class => 'btn btn-default btn-primary' %>
+%     }
 </form>
 % if (defined(flash('msg'))) {
     <h3 class="alert alert-danger"><%= flash('msg') %><h3>
 % }
 <br>
-%     }
 % }
 <table class="table table-striped">
     <tr>
@@ -30,6 +33,7 @@
 % if (defined(stash('page')) && stash('page') >= 0) {
 %     $i = 1 + config('page_offset') * stash('page');
 % }
+% my $j = $i;
 % for my $url (@{$urls}) {
     <tr>
         <td><%= $i++ %></td>
@@ -41,22 +45,13 @@
 % }
 </table>
 % if (defined(config('adminpwd'))) {
-%     if (defined(stash('adminpwd'))) {
+%     if (defined(stash('admin'))) {
 <nav>
-<form class="form" role="form" method="POST" action="<%== url_for 'stats' %>" id="form">
-<input type="hidden" value="<%= stash('adminpwd') %>" name="adminpwd">
-<input type="hidden" value="<%= stash('page') %>" name="page" id="page">
   <ul class="pager">
-    <li class="previous<%= (stash('first')) ? ' disabled' : '' %>"><a href="javascript: sub(<%= (stash('first')) ? 0 : stash('page') - 1 %>)"><span aria-hidden="true">&larr;</span> <%= l('Previous') %></a></li>
-    <li class="next<%= (stash('last')) ? ' disabled' : '' %>"><a href="javascript: sub(<%= (stash('last')) ? stash('page') : stash('page') + 1 %>)"><%= l('Next') %> <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="previous<%= (stash('first')) ? ' disabled' : '' %>"><%= link_to url_for->query(page => (stash('first')) ? 0 : stash('page') - 1) => begin %><span aria-hidden="true">&larr;</span> <%= l('Previous') %><% end %></li>
+    <li class="center"><%= $j.'-'.--$i.'/'.stash('total') %></li>
+    <li class="next<%= (stash('last')) ? ' disabled' : '' %>"><%= link_to url_for->query(page => (stash('last')) ? stash('page') : stash('page') + 1) => begin %><%= l('Next') %> <span aria-hidden="true">&rarr;</span><% end %></li>
   </ul>
-</form>
 </nav>
-%= javascript begin
-    function sub(val) {
-        document.getElementById("page").value = val;
-        document.getElementById("form").submit();
-    }
-% end
 %     }
 % }

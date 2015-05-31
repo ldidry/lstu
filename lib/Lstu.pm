@@ -174,7 +174,7 @@ sub startup {
         if ($msg) {
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->false, msg => $msg } },
-                any  => sub { 
+                any  => sub {
                     my $c = shift;
 
                     $c->flash('msg' => $msg);
@@ -197,7 +197,7 @@ sub startup {
 
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->true, url => $url, short => $prefix.$short } },
-                any  => sub { 
+                any  => sub {
                     my $c = shift;
 
                     $c->flash('url'   => $url);
@@ -217,44 +217,10 @@ sub startup {
     $r->get('/stats' => sub {
         my $c = shift;
 
-        my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
-
-        my $p = join ",", (('?') x @{$u});
-        my @urls = LstuModel::Lstu->select("WHERE short IN ($p) ORDER BY counter DESC", @{$u});
-
-        my $prefix = $c->prefix;
-
-        $c->respond_to(
-            json => sub {
-                my @struct;
-                for my $url (@urls) {
-                    push @struct, { 
-                        short      => $prefix.$url->{short},
-                        url        => $url->{url},
-                        counter    => $url->{counter},
-                        created_at => $url->{timestamp}
-                    };
-                }
-                $c->render( json => \@struct );
-            },
-            any  => sub {
-                shift->render(
-                    template => 'stats',
-                    prefix   => $prefix,
-                    urls     => \@urls
-                )
-            }
-        )
-    })->name('stats');
-
-    $r->post('/stats' => sub {
-        my $c    = shift;
-        my $pwd  = $c->param('adminpwd');
-        my $page = $c->param('page') || 0;
-           $page = 0 if ($page < 0);
-
-        if (defined($c->config('adminpwd')) &&  $pwd eq $c->config('adminpwd')) {
+        if (defined($c->app->{token}) && defined($c->session('token')) && $c->session('token') eq $c->app->{token}) {
             my $total = LstuModel::Lstu->count("WHERE url IS NOT NULL");
+            my $page  = $c->param('page') || 0;
+               $page  = 0 if ($page < 0);
                $page  = $page - 1 if ($page * $c->config('page_offset') > $total);
 
             my ($first, $last) = (!$page, ($page * $c->config('page_offset') <= $total && $total < ($page + 1) * $c->config('page_offset')));
@@ -267,9 +233,57 @@ sub startup {
                 first    => $first,
                 last     => $last,
                 page     => $page,
-                adminpwd => $pwd,
+                admin    => 1,
                 total    => $total
             )
+        } else {
+            my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
+
+            my $p = join ",", (('?') x @{$u});
+            my @urls = LstuModel::Lstu->select("WHERE short IN ($p) ORDER BY counter DESC", @{$u});
+
+            my $prefix = $c->prefix;
+
+            $c->respond_to(
+                json => sub {
+                    my @struct;
+                    for my $url (@urls) {
+                        push @struct, {
+                            short      => $prefix.$url->{short},
+                            url        => $url->{url},
+                            counter    => $url->{counter},
+                            created_at => $url->{timestamp}
+                        };
+                    }
+                    $c->render( json => \@struct );
+                },
+                any  => sub {
+                    shift->render(
+                        template => 'stats',
+                        prefix   => $prefix,
+                        urls     => \@urls
+                    )
+                }
+            )
+        }
+    })->name('stats');
+
+    $r->post('/stats' => sub {
+        my $c    = shift;
+        my $pwd  = $c->param('adminpwd');
+        my $act  = $c->param('action');
+
+        if (defined($c->config('adminpwd')) && defined($pwd) && $pwd eq $c->config('adminpwd')) {
+            my $token = $c->shortener(32);
+
+            $c->app->{token} = $token;
+            $c->session('token' => $token);
+            $c->redirect_to('stats');
+        } elsif (defined($act) && $act eq 'logout') {
+            #$c->signed_cookie('token' => '', {expires => 1});
+            delete $c->app->{token};
+            delete $c->session->{token};
+            $c->redirect_to('stats');
         } else {
             $c->flash('msg' => $c->l('Bad password'));
             $c->redirect_to('stats');

@@ -26,19 +26,19 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: templates/stats.html.ep:10 templates/stats.html.ep:9
+#: templates/stats.html.ep:12 templates/stats.html.ep:13
 msgid "Admin password"
 msgstr ""
 
-#: lib/Lstu.pm:274
+#: lib/Lstu.pm:288
 msgid "Bad password"
 msgstr ""
 
-#: templates/stats.html.ep:26
+#: templates/stats.html.ep:29
 msgid "Counter"
 msgstr ""
 
-#: templates/stats.html.ep:27
+#: templates/stats.html.ep:30
 msgid "Created"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Failure reason"
 msgstr ""
 
-#: templates/index.html.ep:12 templates/stats.html.ep:13
+#: templates/index.html.ep:12 templates/stats.html.ep:16
 msgid "Go!"
 msgstr ""
 
@@ -70,7 +70,11 @@ msgstr ""
 msgid "License:"
 msgstr ""
 
-#: templates/stats.html.ep:51
+#: templates/stats.html.ep:9
+msgid "Logout from admin stats"
+msgstr ""
+
+#: templates/stats.html.ep:53
 msgid "Next"
 msgstr ""
 
@@ -83,7 +87,7 @@ msgstr ""
 msgid "Parameters:"
 msgstr ""
 
-#: templates/stats.html.ep:50
+#: templates/stats.html.ep:51
 msgid "Previous"
 msgstr ""
 
@@ -95,7 +99,7 @@ msgstr ""
 msgid "Response:"
 msgstr ""
 
-#: templates/stats.html.ep:25
+#: templates/stats.html.ep:28
 msgid "Shortened URL"
 msgstr ""
 
@@ -104,7 +108,7 @@ msgid "Statistics"
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu.pm:300
+#: lib/Lstu.pm:314
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
@@ -118,7 +122,7 @@ msgstr ""
 msgid "The shortened text can contain only numbers, letters and the - and _ characters and can't be \"a\", \"api\" or \"stats\". Your URL to shorten: %1"
 msgstr ""
 
-#: templates/stats.html.ep:24
+#: templates/stats.html.ep:27
 msgid "URL"
 msgstr ""
 
