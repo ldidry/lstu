@@ -1,6 +1,6 @@
 # Lstu
 
-## What Lstu means ?
+## What does Lstu mean?
 
 It means Let's Shorten That Url.
 
@@ -8,7 +8,7 @@ It means Let's Shorten That Url.
 
 Lstu is licensed under the terms of the WTFPL. See the LICENSE file.
 
-## Dependancies
+## Dependencies
 
 * Carton : Perl dependencies manager, it will get what you need, so don't bother for dependencies (but you can read the file `cpanfile` if you want).
 
@@ -83,6 +83,6 @@ You can see it working and use it at https://lstu.fr.
 
 See https://lstu.fr/api
 
-## Others projects dependencies
+## Other projects dependencies
 
 Lstu is written in Perl with the Mojolicious framework and uses the Twitter bootstrap framework to look not too ugly.
