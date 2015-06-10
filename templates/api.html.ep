@@ -11,9 +11,9 @@
     <dd>
         <strong><%= l('Parameters:') %></strong>
         <ul>
-            <li><strong>lsturl</strong><br><%= l('URL to shorten') %> <em><%= l('mandatory') %></em></li>
-            <li><strong>lsturl-custom</strong><br><%= l('Custom shortened text')%> <em><%= l('optional') %></em></li>
-            <li><strong>format</strong><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %> <em><%= l('optional') %></em></li>
+            <li><strong>lsturl</strong> <em><%= l('mandatory') %></em><br><%= l('URL to shorten') %></li>
+            <li><strong>lsturl-custom</strong> <em><%= l('optional') %></em><br><%= l('Custom shortened text')%></li>
+            <li><strong>format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
         </ul>
         <strong><%= l('Response:') %></strong>
         <ul>
