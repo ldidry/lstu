@@ -24,17 +24,48 @@ git clone https://git.framasoft.org/luc/lstu.git
 cd lstu
 carton install
 cp lstu.conf.template lstu.conf
+vi lstu.conf
 ```
+
+The configuration file is self-documented.
 
 ## Usage
 
+### Launch manually
+
+This is good for test, not for production.
+
 ```
 carton exec hypnotoad script/lstu
+# stop it
+carton exec hypnotoad -s script/lstu
 ```
 
 Yup, that's all, it will listen at "http://127.0.0.1:8080".
 
 For more options (interfaces, user, etc.), change the configuration in `lstu.conf` (have a look at http://mojolicio.us/perldoc/Mojo/Server/Hypnotoad#SETTINGS for the available options).
+
+### Systemd
+
+```
+sudo su
+cp utilities/lstu.service /etc/systemd/system/
+vi /etc/systemd/system/lstu.service
+systemctl daemon-reload
+systemctl enable lstu.service
+systemctl start lstu.service
+```
+
+### SysVinit
+
+```
+sudo su
+cp utilities/lstu.default /etc/default/lstu
+vi /etc/default/lstu
+cp utilities/lstu.init /etc/init.d/lstu
+update-rc.d lstu defaults
+service lstu start
+```
 
 ## Other options
 
