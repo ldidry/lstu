@@ -2,6 +2,7 @@
 package Lstu;
 use Mojo::Base 'Mojolicious';
 use LstuModel;
+use SessionModel;
 use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
@@ -90,6 +91,8 @@ sub startup {
         before_dispatch => sub {
             my $c = shift;
 
+            # Delete old sessions
+            SessionModel::Sessions->delete_where('until < ?', time);
             # API allowed domains
             if (defined($c->config('allowed_domains'))) {
                 if ($c->config('allowed_domains')->[0] eq '*') {
@@ -217,7 +220,7 @@ sub startup {
     $r->get('/stats' => sub {
         my $c = shift;
 
-        if (defined($c->app->{token}) && defined($c->session('token')) && $c->session('token') eq $c->app->{token}) {
+        if (defined($c->session('token')) && SessionModel::Sessions->count('WHERE token = ?', $c->session('token'))) {
             my $total = LstuModel::Lstu->count("WHERE url IS NOT NULL");
             my $page  = $c->param('page') || 0;
                $page  = 0 if ($page < 0);
@@ -276,12 +279,11 @@ sub startup {
         if (defined($c->config('adminpwd')) && defined($pwd) && $pwd eq $c->config('adminpwd')) {
             my $token = $c->shortener(32);
 
-            $c->app->{token} = $token;
+            SessionModel::Sessions->create(token => $token, until => time + 3600);
             $c->session('token' => $token);
             $c->redirect_to('stats');
         } elsif (defined($act) && $act eq 'logout') {
-            #$c->signed_cookie('token' => '', {expires => 1});
-            delete $c->app->{token};
+            SessionModel::Sessions->delete_where('token = ?', $c->session->{token});
             delete $c->session->{token};
             $c->redirect_to('stats');
         } else {
