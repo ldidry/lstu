@@ -1,0 +1,19 @@
+upstream lstu {
+    server 127.0.0.1:8442;
+}
+
+server {
+    listen 80; 
+    listen [::]:80;
+
+    server_name lstu.example.org;
+
+    access_log  /var/log/nginx/lstu.access.log;
+    error_log   /var/log/nginx/lstu.error.log;
+
+    location / {
+        proxy_set_header    Host $host;
+        proxy_pass http://lstu;
+        proxy_redirect http://lstu https://lstu.example.org;
+    }
+

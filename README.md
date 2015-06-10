@@ -94,7 +94,7 @@ PRAGMA writable_schema = 0;
 
 ## Reverse proxy
 
-You can use a reverse proxy like Nginx or Varnish (or Apache with the mod\_proxy module). The web is full of tutos.
+For Nginx, use `utilities/lstu.nginx` as a template for your virtualhost configuration.
 
 ## Internationalization
 
