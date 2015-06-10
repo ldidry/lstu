@@ -1,4 +1,15 @@
-Revision history for Perl module Mojolicious::Plugin::ConfigRW
+Revision history for Perl application Lstu
+
+0.04 Wed Jun 10 23:18:00 2015 +0200
+    -  Change internationalization system (.po files now)
+    -  Fixed domain for shortened URLs system (#12)
+    -  Fix XSS vulnerability (#15)
+    -  Subdirectory mounting system (#16)
+    -  Show your URLs ("stats") page
+    -  Show all URLs page for admin (#11)
+    -  API description page
+    -  API change
+    -  Self-documented configuration template
 
 0.03 Wed Sep 25 16:18:00 2013 +0200
     - FIX #5 again by using transactions
