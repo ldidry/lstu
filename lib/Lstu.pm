@@ -129,8 +129,8 @@ sub startup {
         $custom_url = undef if (defined($custom_url) && $custom_url eq '');
 
         my ($msg, $short);
-        if (defined($custom_url) && ($custom_url =~ m/^a(pi)?|stats$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/)) {
-            $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ characters and can\'t be "a", "api" or "stats". Your URL to shorten: [_1]', $url);
+        if (defined($custom_url) && ($custom_url =~ m/^a(pi)?|stats$/ || $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/)) {
+            $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api" or "stats" or end with ".json". Your URL to shorten: [_1]', $url);
         } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
             $msg = $c->l('The shortened text ([_1]) is already used. Please choose another one.', $custom_url);
         } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {

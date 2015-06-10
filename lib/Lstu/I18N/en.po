@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lstu - 0.04\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-05-28 23:35+0100\n"
+"PO-Revision-Date: 2015-06-10 07:44+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Last-Translator: Luc Didry <luc@didry.org>\n"
 "Language-Team: Luc Didry <admin@lstu.fr>\n"
 "Language: en\n"
-"X-Generator: Poedit 1.7.7\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
@@ -42,7 +42,8 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: templates/api.html.ep:15 templates/index.html.ep:10 templates/index.html.ep:9
+#: templates/api.html.ep:15 templates/index.html.ep:10
+#: templates/index.html.ep:9
 msgid "Custom shortened text"
 msgstr ""
 
@@ -55,7 +56,8 @@ msgid "Go!"
 msgstr ""
 
 #: templates/api.html.ep:16
-msgid "If equal to \"json\", response will be in JSON format, HTML format otherwise"
+msgid ""
+"If equal to \"json\", response will be in JSON format, HTML format otherwise"
 msgstr ""
 
 #: templates/api.html.ep:21 templates/api.html.ep:39
@@ -80,7 +82,9 @@ msgstr ""
 
 #. ($c->config('contact')
 #: lib/Lstu.pm:165
-msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
+msgid ""
+"No shortened URL available. Please retry or contact the administrator at %1. "
+"Your URL to shorten: %2"
 msgstr ""
 
 #: templates/api.html.ep:12
@@ -119,23 +123,31 @@ msgstr ""
 
 #. ($url)
 #: lib/Lstu.pm:133
-msgid "The shortened text can contain only numbers, letters and the - and _ characters and can't be \"a\", \"api\" or \"stats\". Your URL to shorten: %1"
+msgid ""
+"The shortened text can contain only numbers, letters and the - and _ "
+"character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your "
+"URL to shorten: %1"
 msgstr ""
 
 #: templates/stats.html.ep:27
 msgid "URL"
 msgstr ""
 
-#: templates/api.html.ep:14 templates/index.html.ep:5 templates/index.html.ep:6
+#: templates/api.html.ep:14 templates/index.html.ep:5
+#: templates/index.html.ep:6
 msgid "URL to shorten"
 msgstr ""
 
 #: templates/api.html.ep:22
-msgid "You will be redirected to the Lstu interface with a message giving the shortened URL"
+msgid ""
+"You will be redirected to the Lstu interface with a message giving the "
+"shortened URL"
 msgstr ""
 
 #: templates/api.html.ep:30
-msgid "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
+msgid ""
+"You will be redirected to the targeted URL or to the Lstu interface with a "
+"message giving the failure reason"
 msgstr ""
 
 #: templates/api.html.ep:14
