@@ -1,6 +1,8 @@
 EXTRACTFILES=utilities/locales_files.txt
-EXTRACTTO=lib/Lstu/I18N/en.po
+EN=lib/Lstu/I18N/en.po
+FR=lib/Lstu/I18N/fr.po
 XGETTEXT=carton exec local/bin/xgettext.pl
 
 locales:
-	$(XGETTEXT) -f $(EXTRACTFILES) -o $(EXTRACTTO)
+	$(XGETTEXT) -f $(EXTRACTFILES) -o $(EN)
+	$(XGETTEXT) -f $(EXTRACTFILES) -o $(FR)
