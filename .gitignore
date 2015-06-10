@@ -1,4 +1,5 @@
 local/*
+.tx/*
 lstu.db
 lstu.conf
 script/hypnotoad.pid
