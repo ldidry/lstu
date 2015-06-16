@@ -7,7 +7,7 @@ If you want to work with us, **fork us on [git.framasoft.org](https://git.framas
 Si vous souhaitez travailler avec nous, **forkez-nous sur [git.framasoft.org](https://git.framasoft.org)**. (l'inscription n'est pas nécessaire, vous pouvez vous connecter avec votre compte Github)
 * * *
 
-Frama.link est la version traduite et personnalisée du logiciel Lutim que l'association Framasoft propose sur le site : https://frama.link  
+Frama.link est la version traduite et personnalisée du logiciel LSTU que l'association Framasoft propose sur le site : https://frama.link  
 La personnalisation s'appuie sur la librairie Bootstrap dont les fichiers se trouvent dans la [Framanav](https://git.framasoft.org/framasoft/framanav).
 
 * * *
