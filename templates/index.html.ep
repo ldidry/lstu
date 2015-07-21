@@ -1,34 +1,67 @@
 % # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
 % layout 'default';
-% title 'Lstu';
-<h1>Let's Shorten That Url</h1>
-<p>
-    <small><%=l 'api' %> <%= link_to url_for('add')->query(lsturl => 'http://example.com', format => 'json')->to_abs => begin %><%= url_for('add')->query(lsturl => 'http://example.com', format => 'json')->to_abs %><% end %></small>
-</p>
-<p>
-    <small>&copy; 2013 <%= link_to 'http://www.fiat-tux.fr' => begin %>Luc Didry<% end %> — 
-        <%=l 'license' %> <%= link_to 'http://www.wtfpl.net/' => begin %>WTFPL<% end %> — 
-        <%= link_to 'https://github.com/ldidry/lstu' => begin %><%=l 'about' %><% end %>
-    </small>
-</p>
+% my $title = ($self->req->url->to_abs->host eq 'frama.link') ? 'Frama.link' : 'Huit.re';
+% title $title;
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Raccourcir un lien</h2>
+
+<!-- index.html.ep LSTU -->
 <form class="form" role="form" method="POST" action="<%== url_for 'add' %>">
     <div class="form-group">
-        <label class="sr-only" for="lsturl"><%=l 'url_to_shorten' %></label>
-        <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%=l 'url_to_shorten' %>" required></input>
+        <label class="sr-only" for="lsturl"><%= l('URL to shorten') %></label>
+        <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%= l('URL to shorten') %>" required></input>
     </div>
     <div class="form-group">
-        <label class="sr-only" for="lsturl-custom"><%=l 'custom-url' %></label>
-        <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%=l 'custom-url' %>"></input>
+        <label class="sr-only" for="lsturl-custom"><%= l('Custom shortened text') %></label>
+        <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%= l('Custom shortened text') %>"></input>
     </div>
-    <%= submit_button l('go'), class => 'btn btn-default btn-primary' %>
+    <%= submit_button l('Go!'), class => 'btn btn-default btn-primary' %>
 </form>
 
 % if (defined(flash('short')) && defined(flash('url'))) {
     <h3 class="alert alert-success">
-        <%= link_to flash('url') => begin %><%== flash('url') %><%= end %></a> =&gt;
-        <%= link_to url_for('/')->to_abs.flash('short') => begin %><%= url_for('/')->to_abs.flash('short') %><%= end %>
+        <%= link_to flash('url') => begin %><%= flash('url') %><%= end %></a> =&gt;
+        <%= link_to flash('short') => begin %><%= flash('short') %><%= end %>
     </h3>
 % }
 % if (defined(flash('msg'))) {
-    <h3 class="alert alert-danger"><%== flash('msg') %><h3>
+    <h3 class="alert alert-danger"><%= flash('msg') %><h3>
 % }
+<!-- /index.html.ep LSTU -->
+
+        </div>
+    </div>
+    <hr role="presentation" />
+    <div class="row">
+        <div class="col-md-4" id="tuto-faq">
+            <h2>Prise en main</h2>
+            <p class="text-center" role="presentation"><span class="glyphicon glyphicon-question-sign"></span></p>
+            <div id="aboutbox">
+                <p><span class="framalink"><%= $title %></span> est un service en ligne libre et minimaliste qui permet de raccourcir des liens.</p>
+                <ol>
+                    <li>Collez le lien à raccourcir dans le formulaire.</li>
+                    <li>Si besoin, choisissez le texte du lien raccourci.</li>
+                    <li>Partagez ensuite avec vos correspondants le lien qui vous est donné.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="col-md-4" id="le-logiciel">
+            <h2>Le logiciel</h2>
+            <p class="text-center" role="presentation"><span class="glyphicon glyphicon-cloud"></span></p>
+            <p><span class="framalink"><%= $title %></span> est une instance du logiciel <a href="https://lstu.fr"><abbr>LSTU</abbr></a> développé par <a href="http://www.fiat-tux.fr/">Luc Didry</a>.</p>
+            <p><abbr>LSTU</abbr> est sous licence <a href="http://www.wtfpl.net/"><abbr title="Do What The Fuck you want to Public License" lang="en">WTFPL</abbr></a>.</p>
+            <p><span class="framalink"><%= $title %></span> dispose d’<a href="/api">une <abbr title="Application Programming Interface" lang="en">API</abbr> pour raccourcir rapidement un lien</a>.</p>
+        </div>
+
+        <div class="col-md-4" id="jardin">
+            <h2>Cultivez votre jardin</h2>
+            <p class="text-center" role="presentation"><span class="glyphicon glyphicon-tree-deciduous"></span></p>
+            <p>Pour participer au développement du logiciel, proposer des améliorations
+               ou simplement le télécharger, rendez-vous sur <a href="https://github.com/ldidry/lstu">le site de développement</a>.</p>
+            <p>Si vous souhaitez installer ce logiciel pour votre propre usage et ainsi gagner en autonomie, nous vous aidons sur :</p>
+            <p class="text-center"><a href="http://framacloud.org/cultiver-son-jardin/installation-de-lstu/" class="btn btn-success"><span class="glyphicon glyphicon-tree-deciduous"></span> framacloud.org</a></p>
+        </div>
+    </div>
