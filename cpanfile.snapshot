@@ -382,10 +382,10 @@ DISTRIBUTIONS
       Mojolicious 5
       Test::More 0
       perl 5.010001
-  Net-Domain-TLD-1.70
-    pathname: A/AL/ALEXP/Net-Domain-TLD-1.70.tar.gz
+  Net-Domain-TLD-1.73
+    pathname: A/AL/ALEXP/Net-Domain-TLD-1.73.tar.gz
     provides:
-      Net::Domain::TLD 1.70
+      Net::Domain::TLD 1.73
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
