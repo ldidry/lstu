@@ -1,163 +1,161 @@
 # Lstu
 # Copyright (C) 2013 - 2015 Luc Didry
 # This file is distributed under the same license as the Lstu package.
-# Luc Didry <luc@didry.org>, 2015.
-#
+# 
+# Translators:
+# Luc Didry <luc@didry.org>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Lstu - 0.04\n"
+"Project-Id-Version: Lstu\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2015-06-10 07:44+0100\n"
+"PO-Revision-Date: 2015-07-31 07:58+0000\n"
+"Last-Translator: Luc Didry <luc@didry.org>\n"
+"Language-Team: English (http://www.transifex.com/projects/p/lstu/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Luc Didry <luc@didry.org>\n"
-"Language-Team: Luc Didry <admin@lstu.fr>\n"
 "Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu.pm:172
+#: lib/Lstu.pm:175
 msgid "%1 is not a valid URL."
-msgstr ""
+msgstr "%1 is not a valid URL."
 
-#: templates/layouts/default.html.ep:27
+#: templates/layouts/default.html.ep:28
 msgid "About"
-msgstr ""
+msgstr "About"
 
 #: templates/stats.html.ep:12 templates/stats.html.ep:13
 msgid "Admin password"
-msgstr ""
+msgstr "Admin password"
 
-#: lib/Lstu.pm:288
+#: lib/Lstu.pm:290
 msgid "Bad password"
+msgstr "Bad password"
+
+#: templates/index.html.ep:20
+msgid "Copy to clipboard"
 msgstr ""
 
 #: templates/stats.html.ep:29
 msgid "Counter"
-msgstr ""
+msgstr "Counter"
 
 #: templates/stats.html.ep:30
 msgid "Created"
-msgstr ""
+msgstr "Created"
 
-#: templates/api.html.ep:15 templates/index.html.ep:10
-#: templates/index.html.ep:9
+#: templates/api.html.ep:15 templates/index.html.ep:10 templates/index.html.ep:9
 msgid "Custom shortened text"
-msgstr ""
+msgstr "Custom shortened text"
 
 #: templates/api.html.ep:21 templates/api.html.ep:39
 msgid "Failure reason"
-msgstr ""
+msgstr "Failure reason"
 
 #: templates/index.html.ep:12 templates/stats.html.ep:16
 msgid "Go!"
-msgstr ""
+msgstr "Go!"
+
+#: templates/index.html.ep:52
+msgid "Hit Enter, then Ctrl+C to copy the short link"
+msgstr "Hit Enter, then Ctrl+C to copy the short link"
 
 #: templates/api.html.ep:16
-msgid ""
-"If equal to \"json\", response will be in JSON format, HTML format otherwise"
-msgstr ""
+msgid "If equal to \"json\", response will be in JSON format, HTML format otherwise"
+msgstr "If equal to \"json\", response will be in JSON format, HTML format otherwise"
 
 #: templates/api.html.ep:21 templates/api.html.ep:39
 msgid "JSON: failure"
-msgstr ""
+msgstr "JSON: failure"
 
 #: templates/api.html.ep:20 templates/api.html.ep:38
 msgid "JSON: success"
-msgstr ""
+msgstr "JSON: success"
 
-#: templates/layouts/default.html.ep:26
+#: templates/layouts/default.html.ep:27
 msgid "License:"
-msgstr ""
+msgstr "License:"
 
 #: templates/stats.html.ep:9
 msgid "Logout from admin stats"
-msgstr ""
+msgstr "Logout from admin stats"
 
 #: templates/stats.html.ep:53
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 #. ($c->config('contact')
-#: lib/Lstu.pm:165
-msgid ""
-"No shortened URL available. Please retry or contact the administrator at %1. "
-"Your URL to shorten: %2"
-msgstr ""
+#: lib/Lstu.pm:168
+msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
+msgstr "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 
 #: templates/api.html.ep:12
 msgid "Parameters:"
-msgstr ""
+msgstr "Parameters:"
 
 #: templates/stats.html.ep:51
 msgid "Previous"
-msgstr ""
+msgstr "Previous"
 
 #: templates/api.html.ep:22
 msgid "Response for HTML format"
-msgstr ""
+msgstr "Response for HTML format"
 
 #: templates/api.html.ep:18 templates/api.html.ep:27 templates/api.html.ep:36
 msgid "Response:"
-msgstr ""
+msgstr "Response:"
 
 #: templates/stats.html.ep:28
 msgid "Shortened URL"
-msgstr ""
+msgstr "Shortened URL"
 
-#: templates/layouts/default.html.ep:29 templates/stats.html.ep:4
+#: templates/layouts/default.html.ep:30 templates/stats.html.ep:4
 msgid "Statistics"
-msgstr ""
+msgstr "Statistics"
 
 #. ($c->url_for('/')
-#: lib/Lstu.pm:314
+#: lib/Lstu.pm:316
 msgid "The shortened URL %1 doesn't exist."
-msgstr ""
+msgstr "The shortened URL %1 doesn't exist."
 
 #. ($custom_url)
-#: lib/Lstu.pm:135
+#: lib/Lstu.pm:138
 msgid "The shortened text (%1) is already used. Please choose another one."
-msgstr ""
+msgstr "The shortened text (%1) is already used. Please choose another one."
 
 #. ($url)
-#: lib/Lstu.pm:133
-msgid ""
-"The shortened text can contain only numbers, letters and the - and _ "
-"character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your "
-"URL to shorten: %1"
-msgstr ""
+#: lib/Lstu.pm:136
+msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
+msgstr "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 
 #: templates/stats.html.ep:27
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
-#: templates/api.html.ep:14 templates/index.html.ep:5
-#: templates/index.html.ep:6
+#: templates/api.html.ep:14 templates/index.html.ep:5 templates/index.html.ep:6
 msgid "URL to shorten"
-msgstr ""
+msgstr "URL to shorten"
 
 #: templates/api.html.ep:22
-msgid ""
-"You will be redirected to the Lstu interface with a message giving the "
-"shortened URL"
-msgstr ""
+msgid "You will be redirected to the Lstu interface with a message giving the shortened URL"
+msgstr "You will be redirected to the Lstu interface with a message giving the shortened URL"
 
 #: templates/api.html.ep:30
-msgid ""
-"You will be redirected to the targeted URL or to the Lstu interface with a "
-"message giving the failure reason"
-msgstr ""
+msgid "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
+msgstr "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
 
 #: templates/api.html.ep:14
 msgid "mandatory"
-msgstr ""
+msgstr "mandatory"
 
 #: templates/api.html.ep:15 templates/api.html.ep:16
 msgid "optional"
-msgstr ""
+msgstr "optional"
 
 #: templates/api.html.ep:25 templates/api.html.ep:34
 msgid "shortened_url"
-msgstr ""
+msgstr "shortened_url"

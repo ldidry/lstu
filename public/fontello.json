@@ -1,0 +1,16 @@
+{
+  "name": "fontelico",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "c9bef3dc67fea47e94c4a5030ea64dad",
+      "css": "clipboard",
+      "code": 59392,
+      "src": "elusive"
+    }
+  ]
+}
