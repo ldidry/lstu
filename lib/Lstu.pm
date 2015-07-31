@@ -62,7 +62,7 @@ sub startup {
             # Forced domain
             $prefix->host($c->config('fixed_domain')) if (defined($c->config('fixed_domain')));
             # Hack for prefix (subdir) handling
-            $prefix .= '/' if ($c->config('prefix') && $c->config('prefix') ne '/');
+            $prefix .= '/' unless ($prefix =~ m#/$#);
             return $prefix;
         }
     );
