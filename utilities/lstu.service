@@ -1,13 +1,16 @@
 [Unit]
 Description=Shortened URLs service
-After=systemd-user-sessions.service
+Requires=network.target
+After=network.target
 
 [Service]
-User=www-data
+Type=simple
+RemainAfterExit=yes
 WorkingDirectory=/var/www/lstu/
-ExecStart=/usr/local/bin/carton exec hypnotoad -f script/lstu
+PIDFile=/var/www/lstu/script/hypnotoad.pid
+ExecStart=/usr/local/bin/carton exec hypnotoad script/lstu -f
+ExecStop=/usr/local/bin/carton exec hypnotoad -s script/lstu
 ExecReload=/usr/local/bin/carton exec hypnotoad script/lstu
-Restart=always
 
 [Install]
 WantedBy=multi-user.target
