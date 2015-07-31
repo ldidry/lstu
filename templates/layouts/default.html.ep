@@ -5,6 +5,7 @@
         <title><%= title %></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         %= stylesheet 'css/bootstrap.min.css', media => 'screen'
+        %= stylesheet 'css/fontelico.css'
         %= stylesheet begin
             body {
                 padding-top: 40px;
