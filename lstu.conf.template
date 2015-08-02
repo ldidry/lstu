@@ -45,7 +45,7 @@
 
     # URL sub-directory in which you want Lstu to be accessible
     # example: you want to have Lstu under https://example.org/lstu/
-    # => set url_sub_dir to '/lstu' or to '/lstu/', it doesn't matter
+    # => set prefix to '/lstu' or to '/lstu/', it doesn't matter
     # optional, defaut is /
     #prefix        => '/',
 
