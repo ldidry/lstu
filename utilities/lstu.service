@@ -1,14 +1,14 @@
 [Unit]
 Description=Shortened URLs service
+Documentation=https://git.framasoft.org/luc/lstu
 Requires=network.target
 After=network.target
 
 [Service]
 Type=simple
-RemainAfterExit=yes
 WorkingDirectory=/var/www/lstu/
 PIDFile=/var/www/lstu/script/hypnotoad.pid
-ExecStart=/usr/local/bin/carton exec hypnotoad script/lstu -f
+ExecStart=/usr/local/bin/carton exec hypnotoad -f script/lstu
 ExecStop=/usr/local/bin/carton exec hypnotoad -s script/lstu
 ExecReload=/usr/local/bin/carton exec hypnotoad script/lstu
 
