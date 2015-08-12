@@ -7,6 +7,7 @@
         <link rel="icon" type="image/png" href="/favicon.png">
         %= stylesheet 'css/bootstrap.min.css', media => 'screen'
         %= stylesheet 'css/frama.link.css', media => 'screen'
+        %= stylesheet 'css/fontelico.css'
         <script type="text/javascript" src="https://n3.framasoft.org/nav/lib/jquery/jquery.min.js"></script>
     </head>
     <body>

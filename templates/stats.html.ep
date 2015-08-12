@@ -1,0 +1,59 @@
+% # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+% my $title = ($self->req->url->to_abs->host eq 'frama.link') ? 'Frama.link' : 'Huit.re';
+% $title .= ' stats';
+% title $title;
+% use Mojo::Date;
+<h2><%= l('Statistics') %></h2>
+% if (defined(config('adminpwd'))) {
+<form class="form" role="form" method="POST" action="<%== url_for 'stats' %>">
+%     if (defined(stash('admin'))) {
+    <input type="hidden" value="logout" name="action"></input>
+    <%= submit_button l('Logout from admin stats'), class => 'btn btn-default btn-primary' %>
+%     } else {
+    <div class="form-group">
+        <label class="sr-only" for="adminpwd"><%= l('Admin password') %></label>
+        <input type="password" name="adminpwd" id="adminpwd" class="form-control" placeholder="<%= l('Admin password') %>" required></input>
+    </div>
+    <input type="hidden" value="0" name="page"></input>
+    <%= submit_button l('Go!'), class => 'btn btn-default btn-primary' %>
+%     }
+</form>
+% if (defined(flash('msg'))) {
+    <h3 class="alert alert-danger"><%= flash('msg') %><h3>
+% }
+<br>
+% }
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th><%= l('URL') %></th>
+        <th><%= l('Shortened URL') %></th>
+        <th><%= l('Counter') %></th>
+        <th><%= l('Created') %></th>
+    </tr>
+% my $i = 1;
+% if (defined(stash('page')) && stash('page') >= 0) {
+%     $i = 1 + config('page_offset') * stash('page');
+% }
+% my $j = $i;
+% for my $url (@{$urls}) {
+    <tr>
+        <td><%= $i++ %></td>
+        <td><%= link_to $url->{url} => $url->{url} %></td>
+        <td><%= link_to $prefix.$url->{short} => $prefix.$url->{short} %></td>
+        <td><%= $url->{counter} %></td>
+        <td><%= Mojo::Date->new($url->{timestamp})->to_string %></td>
+    </tr>
+% }
+</table>
+% if (defined(config('adminpwd'))) {
+%     if (defined(stash('admin'))) {
+<nav>
+  <ul class="pager">
+    <li class="previous<%= (stash('first')) ? ' disabled' : '' %>"><%= link_to url_for->query(page => (stash('first')) ? 0 : stash('page') - 1) => begin %><span aria-hidden="true">&larr;</span> <%= l('Previous') %><% end %></li>
+    <li class="center"><%= $j.'-'.--$i.'/'.stash('total') %></li>
+    <li class="next<%= (stash('last')) ? ' disabled' : '' %>"><%= link_to url_for->query(page => (stash('last')) ? stash('page') : stash('page') + 1) => begin %><%= l('Next') %> <span aria-hidden="true">&rarr;</span><% end %></li>
+  </ul>
+</nav>
+%     }
+% }
