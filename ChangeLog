@@ -1,5 +1,9 @@
 Revision history for Perl application Lstu
 
+0.06 Fri Sep 04 11:47:00 2015 +0200
+	- Add Spamhaus checking before accepting the URL
+	- Fix small bug
+
 0.05 Fri Jul 31 10:11:00 2015 +0200
 	- Add copy-to-clipboard button (#1)
 	- Add test suite
