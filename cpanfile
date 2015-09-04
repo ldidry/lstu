@@ -5,3 +5,4 @@ requires 'Net::Domain::TLD', '>= 1.73'; # Must have the last version to handle (
 requires 'Mojolicious::Plugin::I18N';
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';
+requires 'Net::Abuse::Utils::Spamhaus';

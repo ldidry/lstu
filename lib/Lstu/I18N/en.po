@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu.pm:175
+#: lib/Lstu.pm:181
 msgid "%1 is not a valid URL."
 msgstr ""
 
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Admin password"
 msgstr ""
 
-#: lib/Lstu.pm:290
+#: lib/Lstu.pm:296
 msgid "Bad password"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgid "Next"
 msgstr ""
 
 #. ($c->config('contact')
-#: lib/Lstu.pm:168
+#: lib/Lstu.pm:173
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
@@ -117,18 +117,23 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
+#. ($url->host)
+#: lib/Lstu.pm:143
+msgid "The URL host (%1) is blacklisted at Spamhaus. I refuse to shorten it."
+msgstr ""
+
 #. ($c->url_for('/')
-#: lib/Lstu.pm:316
+#: lib/Lstu.pm:322
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
 #. ($custom_url)
-#: lib/Lstu.pm:138
+#: lib/Lstu.pm:139
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
 
 #. ($url)
-#: lib/Lstu.pm:136
+#: lib/Lstu.pm:137
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
 

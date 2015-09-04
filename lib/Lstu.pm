@@ -6,6 +6,7 @@ use SessionModel;
 use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
+use Net::Abuse::Utils::Spamhaus qw(check_fqdn);
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
 
@@ -137,38 +138,43 @@ sub startup {
         } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
             $msg = $c->l('The shortened text ([_1]) is already used. Please choose another one.', $custom_url);
         } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {
-            my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
-
-            if (scalar(@records) && !defined($custom_url)) {
-                # Already got this URL
-                $short = $records[0]->short;
+            my $res = check_fqdn($url->host);
+            if (defined $res) {
+                $msg = $c->l('The URL host ([_1]) is blacklisted at Spamhaus. I refuse to shorten it.', $url->host);
             } else {
-                if(LstuModel->begin) {
-                    if (defined($custom_url)) {
-                        LstuModel::Lstu->create(
-                            short     => $custom_url,
-                            url       => $url,
-                            counter   => 0,
-                            timestamp => time()
-                        );
+                my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
 
-                        $short = $custom_url;
-                    } else {
-                        @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
-                        if (scalar(@records)) {
-                            $records[0]->update(
+                if (scalar(@records) && !defined($custom_url)) {
+                    # Already got this URL
+                    $short = $records[0]->short;
+                } else {
+                    if(LstuModel->begin) {
+                        if (defined($custom_url)) {
+                            LstuModel::Lstu->create(
+                                short     => $custom_url,
                                 url       => $url,
                                 counter   => 0,
                                 timestamp => time()
                             );
 
-                            $short = $records[0]->short;
+                            $short = $custom_url;
                         } else {
-                            # Houston, we have a problem
-                            $msg = $c->l('No shortened URL available. Please retry or contact the administrator at [_1]. Your URL to shorten: [_2]', $c->config('contact'), $url);
+                            @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
+                            if (scalar(@records)) {
+                                $records[0]->update(
+                                    url       => $url,
+                                    counter   => 0,
+                                    timestamp => time()
+                                );
+
+                                $short = $records[0]->short;
+                            } else {
+                                # Houston, we have a problem
+                                $msg = $c->l('No shortened URL available. Please retry or contact the administrator at [_1]. Your URL to shorten: [_2]', $c->config('contact'), $url);
+                            }
                         }
+                        LstuModel->commit;
                     }
-                    LstuModel->commit;
                 }
             }
         } else {

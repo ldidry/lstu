@@ -161,6 +161,17 @@ DISTRIBUTIONS
       Data::Validate::Domain 0
       Data::Validate::IP 0
       ExtUtils::MakeMaker 0
+  Digest-HMAC-1.03
+    pathname: G/GA/GAAS/Digest-HMAC-1.03.tar.gz
+    provides:
+      Digest::HMAC 1.03
+      Digest::HMAC_MD5 1.01
+      Digest::HMAC_SHA1 1.03
+    requirements:
+      Digest::MD5 2
+      Digest::SHA 1
+      ExtUtils::MakeMaker 0
+      perl 5.004
   File-Remove-1.52
     pathname: A/AD/ADAMK/File-Remove-1.52.tar.gz
     provides:
@@ -207,6 +218,12 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.30
       Locale::Maketext 1.17
+  MIME-Base32-1.02a
+    pathname: D/DA/DANPEDER/MIME-Base32-1.02a.tar.gz
+    provides:
+      MIME::Base32 1.02
+    requirements:
+      ExtUtils::MakeMaker 0
   Module-Build-0.4212
     pathname: L/LE/LEONT/Module-Build-0.4212.tar.gz
     provides:
@@ -382,6 +399,115 @@ DISTRIBUTIONS
       Mojolicious 5
       Test::More 0
       perl 5.010001
+  Net-Abuse-Utils-Spamhaus-0.07
+    pathname: S/SA/SAXJAZMAN/net/Net-Abuse-Utils-Spamhaus-0.07.tar.gz
+    provides:
+      Net::Abuse::Utils::Spamhaus 0.07
+    requirements:
+      ExtUtils::MakeMaker 6.59
+      Net::DNS 0.74
+      perl 5.008008
+  Net-DNS-1.01
+    pathname: N/NL/NLNETLABS/Net-DNS-1.01.tar.gz
+    provides:
+      Net::DNS 1.01
+      Net::DNS::Domain 1372
+      Net::DNS::DomainName 1360
+      Net::DNS::DomainName1035 1360
+      Net::DNS::DomainName2535 1360
+      Net::DNS::Header 1367
+      Net::DNS::Mailbox 1355
+      Net::DNS::Mailbox1035 1355
+      Net::DNS::Mailbox2535 1355
+      Net::DNS::Nameserver 1363
+      Net::DNS::Packet 1367
+      Net::DNS::Parameters 1365
+      Net::DNS::Question 1356
+      Net::DNS::RR 1363
+      Net::DNS::RR::A 1360
+      Net::DNS::RR::AAAA 1360
+      Net::DNS::RR::AFSDB 1362
+      Net::DNS::RR::APL 1362
+      Net::DNS::RR::APL::Item 1362
+      Net::DNS::RR::CAA 1362
+      Net::DNS::RR::CDNSKEY 1339
+      Net::DNS::RR::CDS 1339
+      Net::DNS::RR::CERT 1362
+      Net::DNS::RR::CNAME 1348
+      Net::DNS::RR::CSYNC 1362
+      Net::DNS::RR::DHCID 1362
+      Net::DNS::RR::DLV 1339
+      Net::DNS::RR::DNAME 1347
+      Net::DNS::RR::DNSKEY 1367
+      Net::DNS::RR::DS 1370
+      Net::DNS::RR::EUI48 1362
+      Net::DNS::RR::EUI64 1362
+      Net::DNS::RR::GPOS 1348
+      Net::DNS::RR::HINFO 1362
+      Net::DNS::RR::HIP 1362
+      Net::DNS::RR::IPSECKEY 1362
+      Net::DNS::RR::ISDN 1362
+      Net::DNS::RR::KEY 1339
+      Net::DNS::RR::KX 1362
+      Net::DNS::RR::L32 1362
+      Net::DNS::RR::L64 1362
+      Net::DNS::RR::LOC 1362
+      Net::DNS::RR::LP 1362
+      Net::DNS::RR::MB 1348
+      Net::DNS::RR::MG 1348
+      Net::DNS::RR::MINFO 1348
+      Net::DNS::RR::MR 1348
+      Net::DNS::RR::MX 1362
+      Net::DNS::RR::NAPTR 1362
+      Net::DNS::RR::NID 1362
+      Net::DNS::RR::NS 1348
+      Net::DNS::RR::NSEC 1362
+      Net::DNS::RR::NSEC3 1370
+      Net::DNS::RR::NSEC3PARAM 1362
+      Net::DNS::RR::NULL 1348
+      Net::DNS::RR::OPENPGPKEY 1362
+      Net::DNS::RR::OPT 1367
+      Net::DNS::RR::PTR 1348
+      Net::DNS::RR::PX 1362
+      Net::DNS::RR::RP 1362
+      Net::DNS::RR::RRSIG 1370
+      Net::DNS::RR::RT 1362
+      Net::DNS::RR::SIG 1370
+      Net::DNS::RR::SOA 1362
+      Net::DNS::RR::SPF 1362
+      Net::DNS::RR::SRV 1362
+      Net::DNS::RR::SSHFP 1370
+      Net::DNS::RR::TKEY 1362
+      Net::DNS::RR::TLSA 1370
+      Net::DNS::RR::TSIG 1367
+      Net::DNS::RR::TXT 1339
+      Net::DNS::RR::URI 1362
+      Net::DNS::RR::X25 1362
+      Net::DNS::Resolver 1356
+      Net::DNS::Resolver::Base 1370
+      Net::DNS::Resolver::MSWin32 1370
+      Net::DNS::Resolver::Recurse 1339
+      Net::DNS::Resolver::UNIX 1345
+      Net::DNS::Resolver::android 1339
+      Net::DNS::Resolver::cygwin 1348
+      Net::DNS::Resolver::os2 1339
+      Net::DNS::Text 1370
+      Net::DNS::Update 1367
+      Net::DNS::ZoneFile 1370
+      Net::DNS::ZoneFile::Generator 1370
+      Net::DNS::ZoneFile::Text 1370
+    requirements:
+      Digest::HMAC 1.03
+      Digest::MD5 2.13
+      Digest::SHA 5.23
+      ExtUtils::MakeMaker 0
+      File::Spec 0.86
+      IO::Socket 1.24
+      MIME::Base32 1.01
+      MIME::Base64 2.11
+      Test::More 0.52
+      Time::Local 1.19
+      perl 5.00404
   Net-Domain-TLD-1.73
     pathname: A/AL/ALEXP/Net-Domain-TLD-1.73.tar.gz
     provides:
