@@ -5,10 +5,12 @@ Requires=network.target
 After=network.target
 
 [Service]
-Type=simple
+Type=forking
+User=www-data
+RemainAfterExit=yes
 WorkingDirectory=/var/www/lstu/
 PIDFile=/var/www/lstu/script/hypnotoad.pid
-ExecStart=/usr/local/bin/carton exec hypnotoad -f script/lstu
+ExecStart=/usr/local/bin/carton exec hypnotoad script/lstu
 ExecStop=/usr/local/bin/carton exec hypnotoad -s script/lstu
 ExecReload=/usr/local/bin/carton exec hypnotoad script/lstu
 
