@@ -4,8 +4,20 @@
     <head>
         <title><%= title %></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        %= stylesheet 'css/bootstrap.min.css', media => 'screen'
-        %= stylesheet 'css/fontelico.css'
+        <meta charset="utf-8" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="icon" type="image/png" href="<%= url_for('/img/favicon.png') %>">
+        <link rel="icon" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
+        <link rel="icon" sizes="196x196" href="<%= url_for('/img/lstu196.png') %>">
+        <link rel="apple-touch-icon" href="<%= url_for('/img/lstu60.png') %>">
+        <link rel="apple-touch-icon" sizes="76x76" href="<%= url_for('/img/lstu76.png') %>">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%= url_for('/img/lstu120.png') %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= url_for('/img/lstu152.png') %>">
+        <link rel="apple-touch-icon-precomposed" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
+        %= stylesheet '/css/bootstrap.min.css', media => 'screen'
+        %= stylesheet '/css/fontelico.css'
         %= stylesheet begin
             body {
                 padding-top: 40px;
@@ -17,11 +29,28 @@
                 padding: 15px;
                 margin: 0 auto;
             }
+            @font-face {
+                font-family: 'Henny_Penny';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Henny Penny'), local('HennyPenny-Regular'), url(<%= url_for('/font/hennypenny.ttf') %>) format('truetype');
+            }
+            .hennypenny {
+                font-family: 'Henny_Penny', cursive;
+                font-size: 42px;
+            }
+            .link_nocol, .link_nocol:hover {
+                color: #000;
+                text-decoration: none;
+            }
         % end
     </head>
     <body>
         <div class="container">
-            <h1><%= link_to url_for('index') => begin %>Let's Shorten That Url<% end %></h1>
+            <div class="pull-left hidden-xs logo">
+                <img src="<%= url_for('/img/lstu.png') %>" alt="lstu logo" width="100" height="83">
+            </div>
+            <%= link_to url_for('/') => (class => 'link_nocol') => begin %><h1 class="hennypenny">Let's Shorten That Url</h1><% end %>
             <p>
                 <small>&copy; 2013 — 2015 <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> — 
                     <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> — 
