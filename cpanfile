@@ -6,3 +6,4 @@ requires 'Mojolicious::Plugin::I18N';
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';
 requires 'Net::Abuse::Utils::Spamhaus';
+requires 'IO::Socket::SSL';
