@@ -1,16 +1,16 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  CPAN-Meta-2.150001
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.150001.tar.gz
+  CPAN-Meta-2.150005
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.150005.tar.gz
     provides:
-      CPAN::Meta 2.150001
-      CPAN::Meta::Converter 2.150001
-      CPAN::Meta::Feature 2.150001
-      CPAN::Meta::History 2.150001
-      CPAN::Meta::Merge 2.150001
-      CPAN::Meta::Prereqs 2.150001
-      CPAN::Meta::Spec 2.150001
-      CPAN::Meta::Validator 2.150001
+      CPAN::Meta 2.150005
+      CPAN::Meta::Converter 2.150005
+      CPAN::Meta::Feature 2.150005
+      CPAN::Meta::History 2.150005
+      CPAN::Meta::Merge 2.150005
+      CPAN::Meta::Prereqs 2.150005
+      CPAN::Meta::Spec 2.150005
+      CPAN::Meta::Validator 2.150005
     requirements:
       CPAN::Meta::Requirements 2.121
       CPAN::Meta::YAML 0.008
@@ -23,13 +23,17 @@ DISTRIBUTIONS
       strict 0
       version 0.88
       warnings 0
-  DBD-SQLite-1.40
-    pathname: I/IS/ISHIGAKI/DBD-SQLite-1.40.tar.gz
+  DBD-SQLite-1.48
+    pathname: I/IS/ISHIGAKI/DBD-SQLite-1.48.tar.gz
     provides:
-      DBD::SQLite 1.40
-      DBD::SQLite::_WriteOnceHash 1.40
-      DBD::SQLite::db 1.40
-      DBD::SQLite::dr 1.40
+      DBD::SQLite 1.48
+      DBD::SQLite::Constants undef
+      DBD::SQLite::VirtualTable 1.48
+      DBD::SQLite::VirtualTable::Cursor 1.48
+      DBD::SQLite::VirtualTable::FileContent undef
+      DBD::SQLite::VirtualTable::FileContent::Cursor undef
+      DBD::SQLite::VirtualTable::PerlData undef
+      DBD::SQLite::VirtualTable::PerlData::Cursor undef
     requirements:
       DBI 1.57
       ExtUtils::MakeMaker 0
@@ -38,8 +42,8 @@ DISTRIBUTIONS
       Test::More 0.47
       Tie::Hash 0
       perl 5.006
-  DBI-1.628
-    pathname: T/TI/TIMB/DBI-1.628.tar.gz
+  DBI-1.634
+    pathname: T/TI/TIMB/DBI-1.634.tar.gz
     provides:
       Bundle::DBI 12.008696
       DBD::DBM 0.08
@@ -52,15 +56,15 @@ DISTRIBUTIONS
       DBD::ExampleP::db 12.014311
       DBD::ExampleP::dr 12.014311
       DBD::ExampleP::st 12.014311
-      DBD::File 0.42
-      DBD::File::DataSource::File 0.42
-      DBD::File::DataSource::Stream 0.42
-      DBD::File::Statement 0.42
-      DBD::File::Table 0.42
-      DBD::File::TableSource::FileSystem 0.42
-      DBD::File::db 0.42
-      DBD::File::dr 0.42
-      DBD::File::st 0.42
+      DBD::File 0.44
+      DBD::File::DataSource::File 0.44
+      DBD::File::DataSource::Stream 0.44
+      DBD::File::Statement 0.44
+      DBD::File::Table 0.44
+      DBD::File::TableSource::FileSystem 0.44
+      DBD::File::db 0.44
+      DBD::File::dr 0.44
+      DBD::File::st 0.44
       DBD::Gofer 0.015327
       DBD::Gofer::Policy::Base 0.010088
       DBD::Gofer::Policy::classic 0.010088
@@ -88,7 +92,7 @@ DISTRIBUTIONS
       DBD::Sponge::dr 12.010003
       DBD::Sponge::st 12.010003
       DBDI 12.015129
-      DBI 1.628
+      DBI 1.634
       DBI::Const::GetInfo::ANSI 2.008697
       DBI::Const::GetInfo::ODBC 2.011374
       DBI::Const::GetInfoReturn 2.008697
@@ -129,26 +133,29 @@ DISTRIBUTIONS
       DBI::SQL::Nano::Table_ 1.015544
       DBI::Util::CacheMemory 0.010315
       DBI::Util::_accessor 0.009479
-      DBI::common 1.628
+      DBI::common 1.634
     requirements:
       ExtUtils::MakeMaker 6.48
       Test::Simple 0.90
       perl 5.008
-  Data-Validate-Domain-0.10
-    pathname: N/NE/NEELY/Data-Validate-Domain-0.10.tar.gz
+  Data-Validate-Domain-0.11
+    pathname: D/DR/DROLSKY/Data-Validate-Domain-0.11.tar.gz
     provides:
-      Data::Validate::Domain 0.10
-    requirements:
-      ExtUtils::MakeMaker 0
-      Net::Domain::TLD 1.62
-      Test::More 0
-  Data-Validate-IP-0.20
-    pathname: D/DR/DROLSKY/Data-Validate-IP-0.20.tar.gz
-    provides:
-      Data::Validate::IP 0.20
+      Data::Validate::Domain 0.11
     requirements:
       Exporter 0
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 0
+      Net::Domain::TLD 0
+      perl 5.006
+      strict 0
+      warnings 0
+  Data-Validate-IP-0.24
+    pathname: D/DR/DROLSKY/Data-Validate-IP-0.24.tar.gz
+    provides:
+      Data::Validate::IP 0.24
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
       NetAddr::IP 4
       Scalar::Util 0
       strict 0
@@ -182,10 +189,18 @@ DISTRIBUTIONS
       File::Spec 3.29
       Test::More 0.42
       perl 5.00503
-  IPC-Run3-0.046
-    pathname: R/RJ/RJBS/IPC-Run3-0.046.tar.gz
+  IO-Socket-IP-0.37
+    pathname: P/PE/PEVANS/IO-Socket-IP-0.37.tar.gz
     provides:
-      IPC::Run3 0.046
+      IO::Socket::IP 0.37
+    requirements:
+      IO::Socket 0
+      Socket 1.97
+      Test::More 0.88
+  IPC-Run3-0.048
+    pathname: R/RJ/RJBS/IPC-Run3-0.048.tar.gz
+    provides:
+      IPC::Run3 0.048
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0.31
@@ -218,34 +233,28 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.30
       Locale::Maketext 1.17
-  MIME-Base32-1.02a
-    pathname: D/DA/DANPEDER/MIME-Base32-1.02a.tar.gz
+  Module-Build-0.4214
+    pathname: L/LE/LEONT/Module-Build-0.4214.tar.gz
     provides:
-      MIME::Base32 1.02
-    requirements:
-      ExtUtils::MakeMaker 0
-  Module-Build-0.4212
-    pathname: L/LE/LEONT/Module-Build-0.4212.tar.gz
-    provides:
-      Module::Build 0.4212
-      Module::Build::Base 0.4212
-      Module::Build::Compat 0.4212
-      Module::Build::Config 0.4212
-      Module::Build::Cookbook 0.4212
-      Module::Build::Dumper 0.4212
-      Module::Build::Notes 0.4212
-      Module::Build::PPMMaker 0.4212
-      Module::Build::Platform::Default 0.4212
-      Module::Build::Platform::MacOS 0.4212
-      Module::Build::Platform::Unix 0.4212
-      Module::Build::Platform::VMS 0.4212
-      Module::Build::Platform::VOS 0.4212
-      Module::Build::Platform::Windows 0.4212
-      Module::Build::Platform::aix 0.4212
-      Module::Build::Platform::cygwin 0.4212
-      Module::Build::Platform::darwin 0.4212
-      Module::Build::Platform::os2 0.4212
-      Module::Build::PodParser 0.4212
+      Module::Build 0.4214
+      Module::Build::Base 0.4214
+      Module::Build::Compat 0.4214
+      Module::Build::Config 0.4214
+      Module::Build::Cookbook 0.4214
+      Module::Build::Dumper 0.4214
+      Module::Build::Notes 0.4214
+      Module::Build::PPMMaker 0.4214
+      Module::Build::Platform::Default 0.4214
+      Module::Build::Platform::MacOS 0.4214
+      Module::Build::Platform::Unix 0.4214
+      Module::Build::Platform::VMS 0.4214
+      Module::Build::Platform::VOS 0.4214
+      Module::Build::Platform::Windows 0.4214
+      Module::Build::Platform::aix 0.4214
+      Module::Build::Platform::cygwin 0.4214
+      Module::Build::Platform::darwin 0.4214
+      Module::Build::Platform::os2 0.4214
+      Module::Build::PodParser 0.4214
     requirements:
       CPAN::Meta 2.142060
       CPAN::Meta::YAML 0.003
@@ -274,8 +283,8 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.008000
       version 0.87
-  Mojolicious-6.11
-    pathname: S/SR/SRI/Mojolicious-6.11.tar.gz
+  Mojolicious-6.38
+    pathname: S/SR/SRI/Mojolicious-6.38.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -307,7 +316,6 @@ DISTRIBUTIONS
       Mojo::IOLoop::Stream undef
       Mojo::JSON undef
       Mojo::JSON::Pointer undef
-      Mojo::JSON::_Bool undef
       Mojo::Loader undef
       Mojo::Log undef
       Mojo::Message undef
@@ -338,7 +346,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Server undef
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
-      Mojolicious 6.11
+      Mojolicious 6.38
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -386,13 +394,14 @@ DISTRIBUTIONS
       ojo undef
     requirements:
       ExtUtils::MakeMaker 0
-      IO::Socket::IP 0.26
+      IO::Socket::IP 0.37
+      JSON::PP 2.27103
       Pod::Simple 3.09
       Time::Local 1.2
-  Mojolicious-Plugin-I18N-1.5
-    pathname: S/SH/SHARIFULN/Mojolicious-Plugin-I18N-1.5.tar.gz
+  Mojolicious-Plugin-I18N-1.6
+    pathname: S/SH/SHARIFULN/Mojolicious-Plugin-I18N-1.6.tar.gz
     provides:
-      Mojolicious::Plugin::I18N 1.5
+      Mojolicious::Plugin::I18N 1.6
     requirements:
       I18N::LangTags 0.35
       Module::Build 0.42
@@ -407,103 +416,104 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Net::DNS 0.74
       perl 5.008008
-  Net-DNS-1.01
-    pathname: N/NL/NLNETLABS/Net-DNS-1.01.tar.gz
+  Net-DNS-1.04
+    pathname: N/NL/NLNETLABS/Net-DNS-1.04.tar.gz
     provides:
-      Net::DNS 1.01
-      Net::DNS::Domain 1372
-      Net::DNS::DomainName 1360
-      Net::DNS::DomainName1035 1360
-      Net::DNS::DomainName2535 1360
-      Net::DNS::Header 1367
-      Net::DNS::Mailbox 1355
-      Net::DNS::Mailbox1035 1355
-      Net::DNS::Mailbox2535 1355
-      Net::DNS::Nameserver 1363
-      Net::DNS::Packet 1367
-      Net::DNS::Parameters 1365
-      Net::DNS::Question 1356
-      Net::DNS::RR 1363
-      Net::DNS::RR::A 1360
-      Net::DNS::RR::AAAA 1360
-      Net::DNS::RR::AFSDB 1362
-      Net::DNS::RR::APL 1362
-      Net::DNS::RR::APL::Item 1362
-      Net::DNS::RR::CAA 1362
+      Net::DNS 1.04
+      Net::DNS::Domain 1406
+      Net::DNS::DomainName 1381
+      Net::DNS::DomainName1035 1381
+      Net::DNS::DomainName2535 1381
+      Net::DNS::Header 1381
+      Net::DNS::Mailbox 1406
+      Net::DNS::Mailbox1035 1406
+      Net::DNS::Mailbox2535 1406
+      Net::DNS::Nameserver 1406
+      Net::DNS::Packet 1408
+      Net::DNS::Parameters 1439
+      Net::DNS::Question 1381
+      Net::DNS::RR 1408
+      Net::DNS::RR::A 1388
+      Net::DNS::RR::AAAA 1441
+      Net::DNS::RR::AFSDB 1406
+      Net::DNS::RR::APL 1390
+      Net::DNS::RR::APL::Item 1390
+      Net::DNS::RR::CAA 1406
       Net::DNS::RR::CDNSKEY 1339
       Net::DNS::RR::CDS 1339
-      Net::DNS::RR::CERT 1362
-      Net::DNS::RR::CNAME 1348
-      Net::DNS::RR::CSYNC 1362
-      Net::DNS::RR::DHCID 1362
+      Net::DNS::RR::CERT 1390
+      Net::DNS::RR::CNAME 1406
+      Net::DNS::RR::CSYNC 1390
+      Net::DNS::RR::DHCID 1390
       Net::DNS::RR::DLV 1339
-      Net::DNS::RR::DNAME 1347
-      Net::DNS::RR::DNSKEY 1367
-      Net::DNS::RR::DS 1370
-      Net::DNS::RR::EUI48 1362
-      Net::DNS::RR::EUI64 1362
-      Net::DNS::RR::GPOS 1348
-      Net::DNS::RR::HINFO 1362
-      Net::DNS::RR::HIP 1362
-      Net::DNS::RR::IPSECKEY 1362
-      Net::DNS::RR::ISDN 1362
-      Net::DNS::RR::KEY 1339
-      Net::DNS::RR::KX 1362
-      Net::DNS::RR::L32 1362
-      Net::DNS::RR::L64 1362
-      Net::DNS::RR::LOC 1362
-      Net::DNS::RR::LP 1362
-      Net::DNS::RR::MB 1348
-      Net::DNS::RR::MG 1348
-      Net::DNS::RR::MINFO 1348
-      Net::DNS::RR::MR 1348
-      Net::DNS::RR::MX 1362
-      Net::DNS::RR::NAPTR 1362
-      Net::DNS::RR::NID 1362
-      Net::DNS::RR::NS 1348
-      Net::DNS::RR::NSEC 1362
-      Net::DNS::RR::NSEC3 1370
-      Net::DNS::RR::NSEC3PARAM 1362
+      Net::DNS::RR::DNAME 1406
+      Net::DNS::RR::DNSKEY 1406
+      Net::DNS::RR::DS 1390
+      Net::DNS::RR::EUI48 1390
+      Net::DNS::RR::EUI64 1390
+      Net::DNS::RR::GPOS 1382
+      Net::DNS::RR::HINFO 1406
+      Net::DNS::RR::HIP 1390
+      Net::DNS::RR::IPSECKEY 1390
+      Net::DNS::RR::ISDN 1406
+      Net::DNS::RR::KEY 1381
+      Net::DNS::RR::KX 1406
+      Net::DNS::RR::L32 1408
+      Net::DNS::RR::L64 1408
+      Net::DNS::RR::LOC 1390
+      Net::DNS::RR::LP 1406
+      Net::DNS::RR::MB 1406
+      Net::DNS::RR::MG 1406
+      Net::DNS::RR::MINFO 1406
+      Net::DNS::RR::MR 1406
+      Net::DNS::RR::MX 1406
+      Net::DNS::RR::NAPTR 1406
+      Net::DNS::RR::NID 1408
+      Net::DNS::RR::NS 1406
+      Net::DNS::RR::NSEC 1406
+      Net::DNS::RR::NSEC3 1389
+      Net::DNS::RR::NSEC3PARAM 1390
       Net::DNS::RR::NULL 1348
-      Net::DNS::RR::OPENPGPKEY 1362
-      Net::DNS::RR::OPT 1367
-      Net::DNS::RR::PTR 1348
-      Net::DNS::RR::PX 1362
-      Net::DNS::RR::RP 1362
-      Net::DNS::RR::RRSIG 1370
-      Net::DNS::RR::RT 1362
-      Net::DNS::RR::SIG 1370
-      Net::DNS::RR::SOA 1362
-      Net::DNS::RR::SPF 1362
-      Net::DNS::RR::SRV 1362
-      Net::DNS::RR::SSHFP 1370
-      Net::DNS::RR::TKEY 1362
-      Net::DNS::RR::TLSA 1370
-      Net::DNS::RR::TSIG 1367
-      Net::DNS::RR::TXT 1339
-      Net::DNS::RR::URI 1362
-      Net::DNS::RR::X25 1362
-      Net::DNS::Resolver 1356
-      Net::DNS::Resolver::Base 1370
-      Net::DNS::Resolver::MSWin32 1370
-      Net::DNS::Resolver::Recurse 1339
-      Net::DNS::Resolver::UNIX 1345
-      Net::DNS::Resolver::android 1339
-      Net::DNS::Resolver::cygwin 1348
-      Net::DNS::Resolver::os2 1339
-      Net::DNS::Text 1370
-      Net::DNS::Update 1367
-      Net::DNS::ZoneFile 1370
-      Net::DNS::ZoneFile::Generator 1370
-      Net::DNS::ZoneFile::Text 1370
+      Net::DNS::RR::OPENPGPKEY 1390
+      Net::DNS::RR::OPT 1388
+      Net::DNS::RR::PTR 1406
+      Net::DNS::RR::PX 1406
+      Net::DNS::RR::RP 1406
+      Net::DNS::RR::RRSIG 1425
+      Net::DNS::RR::RT 1406
+      Net::DNS::RR::SIG 1425
+      Net::DNS::RR::SOA 1408
+      Net::DNS::RR::SPF 1382
+      Net::DNS::RR::SRV 1406
+      Net::DNS::RR::SSHFP 1390
+      Net::DNS::RR::TKEY 1406
+      Net::DNS::RR::TLSA 1390
+      Net::DNS::RR::TSIG 1406
+      Net::DNS::RR::TXT 1382
+      Net::DNS::RR::URI 1406
+      Net::DNS::RR::X25 1406
+      Net::DNS::Resolver 1430
+      Net::DNS::Resolver::Base 1436
+      Net::DNS::Resolver::MSWin32 1406
+      Net::DNS::Resolver::Recurse 1422
+      Net::DNS::Resolver::UNIX 1408
+      Net::DNS::Resolver::android 1406
+      Net::DNS::Resolver::cygwin 1406
+      Net::DNS::Resolver::os2 1406
+      Net::DNS::Text 1406
+      Net::DNS::Update 1418
+      Net::DNS::ZoneFile 1408
+      Net::DNS::ZoneFile::Generator 1408
+      Net::DNS::ZoneFile::Text 1408
     requirements:
       Digest::HMAC 1.03
       Digest::MD5 2.13
       Digest::SHA 5.23
       ExtUtils::MakeMaker 0
       File::Spec 0.86
-      IO::Socket 1.24
-      MIME::Base32 1.01
+      IO::Socket 1.16
+      IO::Socket::INET 1.25
+      IO::Socket::IP 0.29
       MIME::Base64 2.11
       Test::More 0.52
       Time::Local 1.19
@@ -516,15 +526,15 @@ DISTRIBUTIONS
       Carp 0
       ExtUtils::MakeMaker 0
       Storable 0
-  NetAddr-IP-4.070
-    pathname: M/MI/MIKER/NetAddr-IP-4.070.tar.gz
+  NetAddr-IP-4.078
+    pathname: M/MI/MIKER/NetAddr-IP-4.078.tar.gz
     provides:
-      NetAddr::IP 4.070
+      NetAddr::IP 4.078
       NetAddr::IP::InetBase 0.08
-      NetAddr::IP::Lite 1.51
-      NetAddr::IP::Util 1.50
+      NetAddr::IP::Lite 1.56
+      NetAddr::IP::Util 1.53
       NetAddr::IP::UtilPP 1.09
-      NetAddr::IP::UtilPolluted 1.50
+      NetAddr::IP::UtilPolluted 1.53
       NetAddr::IP::Util_IS 1
     requirements:
       ExtUtils::MakeMaker 0
@@ -565,16 +575,15 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       File::Spec 0
       strict 0
-  Test-Script-1.07
-    pathname: A/AD/ADAMK/Test-Script-1.07.tar.gz
+  Test-Script-1.10
+    pathname: P/PL/PLICEASE/Test-Script-1.10.tar.gz
     provides:
-      Test::Script 1.07
+      Test::Script 1.10
     requirements:
-      ExtUtils::MakeMaker 6.42
+      ExtUtils::MakeMaker 0
       File::Spec 0.80
       IPC::Run3 0.034
       Probe::Perl 0.01
       Test::Builder 0.32
-      Test::Builder::Tester 1.02
-      Test::More 0.62
-      blib 0
+      Test::More 0.96
+      perl 5.006
