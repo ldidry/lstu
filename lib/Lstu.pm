@@ -82,6 +82,36 @@ sub startup {
         }
     );
 
+    $self->helper(
+        is_spam => sub {
+            my $c        = shift;
+            my $url      = shift;
+            my $nb_redir = shift;
+
+            if ($nb_redir++ <= 10) {
+                my $res = check_fqdn($url->host);
+                if (defined $res) {
+                   return {
+                       is_spam => 1,
+                       msg     => $c->l('The URL host or one of its redirection(s) ([_1]) is blacklisted at Spamhaus. I refuse to shorten it.', $url->host)
+                   }
+                } else {
+                    my $res = $c->ua->get($url)->res;
+                    if ($res->code >= 300 && $res->code < 400) {
+                        return $c->is_spam(Mojo::URL->new($res->headers->location), $nb_redir);
+                    } else {
+                        return { is_spam => 0 };
+                    }
+                }
+            } else {
+               return {
+                   is_spam => 1,
+                   msg     => $c->l('The URL redirects 10 times or most. It\'s most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it.', $url->host)
+               }
+            }
+        }
+    );
+
     $self->hook(
         after_dispatch => sub {
             shift->provisioning();
@@ -138,9 +168,9 @@ sub startup {
         } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
             $msg = $c->l('The shortened text ([_1]) is already used. Please choose another one.', $custom_url);
         } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {
-            my $res = check_fqdn($url->host);
-            if (defined $res) {
-                $msg = $c->l('The URL host ([_1]) is blacklisted at Spamhaus. I refuse to shorten it.', $url->host);
+            my $res = $c->is_spam($url, 0);
+            if ($res->{is_spam}) {
+                $msg = $res->{msg};
             } else {
                 my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
 

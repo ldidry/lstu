@@ -20,11 +20,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu.pm:181
+#: lib/Lstu.pm:211
 msgid "%1 is not a valid URL."
 msgstr ""
 
-#: templates/layouts/default.html.ep:28
+#: templates/layouts/default.html.ep:57
 msgid "About"
 msgstr ""
 
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Admin password"
 msgstr ""
 
-#: lib/Lstu.pm:296
+#: lib/Lstu.pm:326
 msgid "Bad password"
 msgstr ""
 
@@ -60,6 +60,14 @@ msgstr ""
 msgid "Go!"
 msgstr ""
 
+#: templates/layouts/default.html.ep:36
+msgid "Henny Penny"
+msgstr ""
+
+#: templates/layouts/default.html.ep:36
+msgid "HennyPenny-Regular"
+msgstr ""
+
 #: templates/index.html.ep:52
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr ""
@@ -76,7 +84,7 @@ msgstr ""
 msgid "JSON: success"
 msgstr ""
 
-#: templates/layouts/default.html.ep:27
+#: templates/layouts/default.html.ep:56
 msgid "License:"
 msgstr ""
 
@@ -89,7 +97,7 @@ msgid "Next"
 msgstr ""
 
 #. ($c->config('contact')
-#: lib/Lstu.pm:173
+#: lib/Lstu.pm:203
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
@@ -113,27 +121,32 @@ msgstr ""
 msgid "Shortened URL"
 msgstr ""
 
-#: templates/layouts/default.html.ep:30 templates/stats.html.ep:4
+#: templates/layouts/default.html.ep:59 templates/stats.html.ep:4
 msgid "Statistics"
 msgstr ""
 
 #. ($url->host)
-#: lib/Lstu.pm:143
-msgid "The URL host (%1) is blacklisted at Spamhaus. I refuse to shorten it."
+#: lib/Lstu.pm:96
+msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
+msgstr ""
+
+#. ($url->host)
+#: lib/Lstu.pm:109
+msgid "The URL redirects 10 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu.pm:322
+#: lib/Lstu.pm:352
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
 #. ($custom_url)
-#: lib/Lstu.pm:139
+#: lib/Lstu.pm:169
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
 
 #. ($url)
-#: lib/Lstu.pm:137
+#: lib/Lstu.pm:167
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
 
