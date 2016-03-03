@@ -1,8 +1,9 @@
 requires 'Mojolicious', '>= 4.63';
 requires 'ORLite';
 requires 'Data::Validate::URI';
-requires 'Net::Domain::TLD', '>= 1.73'; # Must have the last version to handle (at least) .xyz and .link
+requires 'Net::Domain::TLD', '>= 1.74';
 requires 'Mojolicious::Plugin::I18N';
+requires "Mojolicious::Plugin::DebugDumperHelper";
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';
 requires 'Net::Abuse::Utils::Spamhaus';

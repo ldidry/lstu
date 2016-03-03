@@ -1,0 +1,59 @@
+# Lstu
+# Copyright (C) 2013 - 2015 Luc Didry
+# This file is distributed under the same license as the Lstu package.
+# 
+# Translators:
+# Luc Didry <luc@didry.org>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Lstu\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-07-31 07:58+0000\n"
+"Last-Translator: Luc Didry <luc@didry.org>\n"
+"Language-Team: English (http://www.transifex.com/projects/p/lstu/language/en/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#. ($url)
+#: lib/Lstu.pm:228
+msgid "%1 is not a valid URL."
+msgstr ""
+
+#: lib/Lstu.pm:343
+msgid "Bad password"
+msgstr ""
+
+#. ($c->config('contact')
+#: lib/Lstu.pm:220
+msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
+msgstr ""
+
+#. ($url->host)
+#: lib/Lstu.pm:113
+msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
+msgstr ""
+
+#. ($url->host)
+#: lib/Lstu.pm:126
+msgid "The URL redirects 10 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
+msgstr ""
+
+#. ($c->url_for('/')
+#: lib/Lstu.pm:369
+msgid "The shortened URL %1 doesn't exist."
+msgstr ""
+
+#. ($custom_url)
+#: lib/Lstu.pm:186
+msgid "The shortened text (%1) is already used. Please choose another one."
+msgstr ""
+
+#. ($url)
+#: lib/Lstu.pm:184
+msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
+msgstr ""

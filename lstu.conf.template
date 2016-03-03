@@ -7,12 +7,9 @@
     hypnotoad => {
         # array of IP addresses and ports you want to listen to
         listen => ['http://127.0.0.1:8080'],
-        # user and group you want for Lstu to run with
-        # be sure that this user/group have rights on the lstu directory
-        # if you launch lstu from a different user, be sure that this user have the right to su this user/group
-        # => if current_user is not the user that you sets here and is not root, there's chances that it will fail (see https://github.com/ldidry/lstu/issues/25)
-        user   => 'www-data',
-        group  => 'www-data'
+        # if you use Lstu behind a reverse proxy like Nginx, you want to set proxy to 1
+        # if you use Lstu directly, let it commented
+        #proxy  => 1,
     },
 
     # put a way to contact you here and uncomment it
@@ -26,6 +23,10 @@
     # secret passphrase to access some admin features
     # optional, but you won't have access to admin /stats if not set
     #adminpwd      => 's3cr3T',
+
+    # choose a theme. See the available themes in `themes` directory
+    # optional, default is 'default'
+    #theme         => 'default',
 
     # number of URLs to be displayed per page in /stats
     # optional, default is 10
@@ -57,4 +58,10 @@
     # if set, the shortened URLs will use this domain
     # optional
     #fixed_domain => 'example.org',
+
+    # define a path to the SQLite database
+    # you can define it relative to lstu directory or set an absolute path
+    # remember that it has to be in a directory writable by Lstu user
+    # optional, default is lstu.db
+    #db_path           => 'lstu.db',
 };

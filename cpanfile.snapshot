@@ -160,10 +160,10 @@ DISTRIBUTIONS
       Scalar::Util 0
       strict 0
       warnings 0
-  Data-Validate-URI-0.06
-    pathname: S/SO/SONNEN/Data-Validate-URI-0.06.tar.gz
+  Data-Validate-URI-0.07
+    pathname: S/SO/SONNEN/Data-Validate-URI-0.07.tar.gz
     provides:
-      Data::Validate::URI 0.06
+      Data::Validate::URI 0.07
     requirements:
       Data::Validate::Domain 0
       Data::Validate::IP 0
@@ -197,17 +197,17 @@ DISTRIBUTIONS
       IO::Socket 0
       Socket 1.97
       Test::More 0.88
-  IO-Socket-SSL-2.022
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.022.tar.gz
+  IO-Socket-SSL-2.024
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.024.tar.gz
     provides:
-      IO::Socket::SSL 2.022
+      IO::Socket::SSL 2.024
       IO::Socket::SSL::Intercept 2.014
-      IO::Socket::SSL::OCSP_Cache 2.022
-      IO::Socket::SSL::OCSP_Resolver 2.022
+      IO::Socket::SSL::OCSP_Cache 2.024
+      IO::Socket::SSL::OCSP_Resolver 2.024
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.022
-      IO::Socket::SSL::SSL_HANDLE 2.022
-      IO::Socket::SSL::Session_Cache 2.022
+      IO::Socket::SSL::SSL_Context 2.024
+      IO::Socket::SSL::SSL_HANDLE 2.024
+      IO::Socket::SSL::Session_Cache 2.024
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
@@ -299,8 +299,8 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.008000
       version 0.87
-  Mojolicious-6.38
-    pathname: S/SR/SRI/Mojolicious-6.38.tar.gz
+  Mojolicious-6.52
+    pathname: S/SR/SRI/Mojolicious-6.52.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -362,7 +362,8 @@ DISTRIBUTIONS
       Mojo::UserAgent::Server undef
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
-      Mojolicious 6.38
+      Mojo::WebSocket undef
+      Mojolicious 6.52
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -414,6 +415,13 @@ DISTRIBUTIONS
       JSON::PP 2.27103
       Pod::Simple 3.09
       Time::Local 1.2
+  Mojolicious-Plugin-DebugDumperHelper-0.02
+    pathname: L/LD/LDIDRY/Mojolicious-Plugin-DebugDumperHelper-0.02.tar.gz
+    provides:
+      Mojolicious::Plugin::DebugDumperHelper 0.02
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mojolicious 6.11
   Mojolicious-Plugin-I18N-1.6
     pathname: S/SH/SHARIFULN/Mojolicious-Plugin-I18N-1.6.tar.gz
     provides:
@@ -534,10 +542,10 @@ DISTRIBUTIONS
       Test::More 0.52
       Time::Local 1.19
       perl 5.00404
-  Net-Domain-TLD-1.73
-    pathname: A/AL/ALEXP/Net-Domain-TLD-1.73.tar.gz
+  Net-Domain-TLD-1.74
+    pathname: A/AL/ALEXP/Net-Domain-TLD-1.74.tar.gz
     provides:
-      Net::Domain::TLD 1.73
+      Net::Domain::TLD 1.74
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0

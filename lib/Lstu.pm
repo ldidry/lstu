@@ -21,6 +21,7 @@ sub startup {
             length        => 8,
             secret        => ['hfudsifdsih'],
             page_offset   => 10,
+            theme         => 'default'
         }
     });
 
@@ -28,7 +29,24 @@ sub startup {
 
     die "You need to provide a contact information in lstu.conf!" unless (defined($config->{contact}));
 
+    # Themes handling
+    shift @{$self->renderer->paths};
+    shift @{$self->static->paths};
+    if ($config->{theme} ne 'default') {
+        my $theme = $self->home->rel_dir('themes/'.$config->{theme});
+        push @{$self->renderer->paths}, $theme.'/templates' if -d $theme.'/templates';
+        push @{$self->static->paths}, $theme.'/public' if -d $theme.'/public';
+    }
+    push @{$self->renderer->paths}, $self->home->rel_dir('themes/default/templates');
+    push @{$self->static->paths}, $self->home->rel_dir('themes/default/public');
+
+    # Internationalization
+    my $lib = $self->home->rel_dir('themes/'.$config->{theme}.'/lib');
+    eval qq(use lib "$lib");
     $self->plugin('I18N');
+
+    # Debug
+    $self->plugin('DebugDumperHelper');
 
     $self->secrets($config->{secret});
 
@@ -93,7 +111,7 @@ sub startup {
                 if (defined $res) {
                    return {
                        is_spam => 1,
-                       msg     => $c->l('The URL host or one of its redirection(s) ([_1]) is blacklisted at Spamhaus. I refuse to shorten it.', $url->host)
+                       msg     => $c->l('The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it.', $url->host)
                    }
                 } else {
                     my $res = $c->ua->get($url)->res;
@@ -164,9 +182,9 @@ sub startup {
 
         my ($msg, $short);
         if (defined($custom_url) && ($custom_url =~ m/^a(pi)?$|^stats$/ || $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/)) {
-            $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api" or "stats" or end with ".json". Your URL to shorten: [_1]', $url);
+            $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api" or "stats" or end with ".json". Your URL to shorten: %1', $url);
         } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
-            $msg = $c->l('The shortened text ([_1]) is already used. Please choose another one.', $custom_url);
+            $msg = $c->l('The shortened text (%1) is already used. Please choose another one.', $custom_url);
         } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {
             my $res = $c->is_spam($url, 0);
             if ($res->{is_spam}) {
@@ -200,7 +218,7 @@ sub startup {
                                 $short = $records[0]->short;
                             } else {
                                 # Houston, we have a problem
-                                $msg = $c->l('No shortened URL available. Please retry or contact the administrator at [_1]. Your URL to shorten: [_2]', $c->config('contact'), $url);
+                                $msg = $c->l('No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: [_2]', $c->config('contact'), $url);
                             }
                         }
                         LstuModel->commit;
@@ -208,7 +226,7 @@ sub startup {
                 }
             }
         } else {
-            $msg = $c->l('[_1] is not a valid URL.', $url);
+            $msg = $c->l('%1 is not a valid URL.', $url);
         }
         if ($msg) {
             $c->respond_to(
@@ -349,7 +367,7 @@ sub startup {
                 $urls[0]->update (counter => $counter);
             });
         } else {
-            my $msg = $c->l('The shortened URL [_1] doesn\'t exist.', $c->url_for('/')->to_abs.$short);
+            my $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->false, msg => $msg } },
                 any  => sub {

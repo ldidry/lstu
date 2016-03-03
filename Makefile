@@ -1,6 +1,6 @@
 EXTRACTFILES=utilities/locales_files.txt
-EN=lib/Lstu/I18N/en.po
-FR=lib/Lstu/I18N/fr.po
+EN=themes/default/lib/Lstu/I18N/en.po
+FR=themes/default/lib/Lstu/I18N/fr.po
 XGETTEXT=carton exec local/bin/xgettext.pl
 CARTON=carton exec
 REAL_LSTU=script/application
@@ -14,4 +14,4 @@ test:
 	$(CARTON) $(REAL_LSTU) test
 
 dev:
-	$(CARTON) morbo $(LSTU) --listen http://0.0.0.0:3000
+	$(CARTON) morbo $(LSTU) --listen http://0.0.0.0:3000 --watch lib/ --watch script/ --watch themes/ --watch lstu.conf

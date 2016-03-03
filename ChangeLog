@@ -2,6 +2,8 @@ Revision history for Perl application Lstu
 
 0.07 ?
 	- Add logo
+	- Add theme system
+	- Better Spamhaus checking
 
 0.06 Fri Sep 04 11:47:00 2015 +0200
 	- Add Spamhaus checking before accepting the URL
