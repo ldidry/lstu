@@ -1,0 +1,13 @@
+image: debian:jessie
+job1:
+  script: 
+    - apt-get update
+    - apt-get install -y build-essential libssl-dev openssl
+    - echo yes | cpan Carton
+    - carton install
+    - cp lstu.conf.template lstu.conf
+    - sed -i -e "s@#contact@contact@" lstu.conf
+    - make test
+  tags:
+    - Debian
+    - Jessie
