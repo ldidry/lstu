@@ -106,7 +106,7 @@ sub startup {
             my $url      = shift;
             my $nb_redir = shift;
 
-            if ($nb_redir++ <= 10) {
+            if ($nb_redir++ <= 2) {
                 my $res = check_fqdn($url->host);
                 if (defined $res) {
                    return {
@@ -124,12 +124,13 @@ sub startup {
             } else {
                return {
                    is_spam => 1,
-                   msg     => $c->l('The URL redirects 10 times or most. It\'s most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it.', $url->host)
+                   msg     => $c->l('The URL redirects 3 times or most. It\'s most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it.', $url->host)
                }
             }
         }
     );
 
+    # Hooks
     $self->hook(
         after_dispatch => sub {
             shift->provisioning();
