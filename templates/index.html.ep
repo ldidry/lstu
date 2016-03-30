@@ -45,6 +45,28 @@
                     <li>Si besoin, choisissez le texte du lien raccourci.</li>
                     <li>Partagez ensuite avec vos correspondants le lien qui vous est donné.</li>
                 </ol>
+                <p>Pour vous aider dans l’utilisation du logiciel, voici <a href="https://framatube.org/media/tutoriel-framalink" data-toggle="modal" onclick="$('#TutoVideo').modal('show'); return false;">un tutoriel vidéo</a> réalisé par <a href="http://arpinux.org/">arpinux</a>, artisan paysagiste de la distribution GNU/Linux pour débutant <a href="https://handylinux.org/">HandyLinux</a>.</p>
+
+    <!-- modale vidéo -->
+    <div class="modal fade" id="TutoVideo" tabindex="-1" role="dialog" aria-labelledby="TutoVideoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Fermer</span></button>
+                    <h1 id="TutoVideoLabel">Tutoriel vidéo</h1>
+                </div>
+                <div class="modal-body">
+                    <p><video controls="controls" preload="none" poster="https://framatube.org/images/media/990l.jpg" height="340" width="570">
+                        <source src="https://framatube.org/blip/framalink.mp4" type="video/mp4">
+                        <source src="https://framatube.org/blip/framalink.webm" type="video/webm">
+                    </video></p>
+                    <p>-&gt; La <a href="https://framatube.org/blip/framalink.webm">vidéo au format webm</a></p>
+               </div>
+               <div class="modal-footer"><a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a></div>
+           </div>
+        </div>
+    </div>
+    <!-- /modale vidéo -->
             </div>
         </div>
 
