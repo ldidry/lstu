@@ -7,10 +7,10 @@
         <link rel="icon" type="image/png" href="/favicon.png">
         %= stylesheet 'css/bootstrap.min.css', media => 'screen'
         %= stylesheet 'css/frama.link.css', media => 'screen'
-        <script type="text/javascript" src="https://n3.framasoft.org/nav/lib/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="https://framasoft.org/nav/lib/jquery/jquery.min.js"></script>
     </head>
     <body>
-        <script src="https://n3.framasoft.org/nav/nav.js" type="text/javascript"></script>
+        <script src="https://framasoft.org/nav/nav.js" type="text/javascript"></script>
         <div class="container ombre">
             <header role="banner">
             % if ($self->req->url->to_abs->host eq 'frama.link') {
