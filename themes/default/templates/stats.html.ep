@@ -48,7 +48,7 @@
         <td><%= Mojo::Date->new($url->{timestamp})->to_string %></td>
 % if (defined(config('adminpwd'))) {
 %     if (defined(stash('admin'))) {
-        <td><%= link_to x => url_for('delete', {short => $url->{short}}) %></td>
+        <td><a href="<%= url_for('delete', {short => $url->{short}}) %>"><span class="icon icon-trash"></span></a></td>
 %     }
 % }
     </tr>

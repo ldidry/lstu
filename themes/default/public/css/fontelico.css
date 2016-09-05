@@ -1,10 +1,11 @@
 @font-face {
   font-family: 'fontelico';
-  src: url('../font/fontelico.eot?90041976');
-  src: url('../font/fontelico.eot?90041976#iefix') format('embedded-opentype'),
-       url('../font/fontelico.woff?90041976') format('woff'),
-       url('../font/fontelico.ttf?90041976') format('truetype'),
-       url('../font/fontelico.svg?90041976#fontelico') format('svg');
+  src: url('../font/fontelico.eot?21941692');
+  src: url('../font/fontelico.eot?21941692#iefix') format('embedded-opentype'),
+       url('../font/fontelico.woff2?21941692') format('woff2'),
+       url('../font/fontelico.woff?21941692') format('woff'),
+       url('../font/fontelico.ttf?21941692') format('truetype'),
+       url('../font/fontelico.svg?21941692#fontelico') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontelico';
-    src: url('../font/fontelico.svg?90041976#fontelico') format('svg');
+    src: url('../font/fontelico.svg?21941692#fontelico') format('svg');
   }
 }
 */
@@ -55,3 +56,4 @@
 }
  
 .icon-clipboard:before { content: '\e800'; } /* '' */
+.icon-trash:before { content: '\e804'; } /* '' */

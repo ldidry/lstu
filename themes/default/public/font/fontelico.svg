@@ -1,12 +1,14 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg">
-<metadata>Copyright (C) 2015 by original authors @ fontello.com</metadata>
+<metadata>Copyright (C) 2016 by original authors @ fontello.com</metadata>
 <defs>
 <font id="fontelico" horiz-adv-x="1000" >
 <font-face font-family="fontelico" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
-<glyph glyph-name="clipboard" unicode="&#xe800;" d="m0-150l0 904 225 0 0-64-161 0 0-774 579 0 0 774-161 0 0 64 225 0 0-904-707 0z m129 129l0 31 31 0 0-31-31 0z m0 121l0 31 31 0 0-31-31 0z m0 121l0 31 31 0 0-31-31 0z m0 121l0 32 31 0 0-32-31 0z m0 121l0 32 31 0 0-32-31 0z m0 96l0 94 129 0 0 97q0 41 27 71t69 29 69-30 28-70q0-56-2-97l129 0 0-94-449 0z m96-582l0 33 353 0 0-33-353 0z m0 121l0 33 353 0 0-33-353 0z m0 121l0 33 353 0 0-33-353 0z m0 121l0 34 353 0 0-34-353 0z m0 121l0 34 353 0 0-34-353 0z m97 260q0-14 9-22t23-9 22 9 9 22-9 24-22 9-23-9-9-24z" horiz-adv-x="707" />
+<glyph glyph-name="clipboard" unicode="&#xe800;" d="M0-150l0 904 225 0 0-64-161 0 0-774 579 0 0 774-161 0 0 64 225 0 0-904-707 0z m129 129l0 31 31 0 0-31-31 0z m0 121l0 31 31 0 0-31-31 0z m0 121l0 31 31 0 0-31-31 0z m0 121l0 32 31 0 0-32-31 0z m0 121l0 32 31 0 0-32-31 0z m0 96l0 94 129 0 0 97q0 41 27 71t69 29 69-30 28-70q0-56-2-97l129 0 0-94-449 0z m96-582l0 33 353 0 0-33-353 0z m0 121l0 33 353 0 0-33-353 0z m0 121l0 33 353 0 0-33-353 0z m0 121l0 34 353 0 0-34-353 0z m0 121l0 34 353 0 0-34-353 0z m97 260q0-14 9-22t23-9 22 9 9 22-9 24-22 9-23-9-9-24z" horiz-adv-x="707" />
+
+<glyph glyph-name="trash" unicode="&#xe804;" d="M286 439v-321q0-8-5-13t-13-5h-36q-8 0-13 5t-5 13v321q0 8 5 13t13 5h36q8 0 13-5t5-13z m143 0v-321q0-8-5-13t-13-5h-36q-8 0-13 5t-5 13v321q0 8 5 13t13 5h36q8 0 13-5t5-13z m142 0v-321q0-8-5-13t-12-5h-36q-8 0-13 5t-5 13v321q0 8 5 13t13 5h36q7 0 12-5t5-13z m72-404v529h-500v-529q0-12 4-22t8-15 6-5h464q2 0 6 5t8 15 4 22z m-375 601h250l-27 65q-4 5-9 6h-177q-6-1-10-6z m518-18v-36q0-8-5-13t-13-5h-54v-529q0-46-26-80t-63-34h-464q-37 0-63 33t-27 79v531h-53q-8 0-13 5t-5 13v36q0 8 5 13t13 5h172l39 93q9 21 31 35t44 15h178q23 0 44-15t30-35l39-93h173q8 0 13-5t5-13z" horiz-adv-x="785.7" />
 </font>
 </defs>
 </svg>
