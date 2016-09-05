@@ -40,4 +40,30 @@ $t->get_ok('/stats.json')
     ->json_is('/0/url' => 'https://lstu.fr', '/0/short' => $a)
     ->json_like('/0/created_at' => qr#\d+#, '/0/counter' => qr#\d+#);
 
+my $b = $a;
+$b =~ s#http://127\.0\.0\.1:\d+/##;
+
+$t->ua->max_redirects(1);
+$t->get_ok('/d/'.$b)
+    ->status_is(200)
+    ->content_like(qr/Bad password/);
+
+$t->post_ok('/stats' => form => { adminpwd => 'toto', page => 0 })
+    ->status_is(200)
+    ->content_like(qr/$a/);
+
+$t->get_ok('/d/'.$b)
+    ->status_is(200);
+
+$t->get_ok($a.'i.json')
+    ->status_is(200)
+    ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
+
+$a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
+$a =~ s#http://127\.0\.0\.1:\d+/##;
+
+$t->get_ok('/d/'.$a.'?format=json')
+    ->status_is(200)
+    ->json_is({success => true, deleted => 1});
+
 done_testing();
