@@ -361,7 +361,6 @@ sub startup {
                     json => { json => { success => Mojo::JSON->true, deleted => $deleted } },
                     any  => sub {
                         my $c = shift;
-                        $c->res->code(301);
                         $c->redirect_to('stats');
                     }
                 );
