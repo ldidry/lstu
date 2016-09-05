@@ -1,5 +1,5 @@
-templates/api.html.ep
-templates/index.html.ep
-templates/stats.html.ep
-templates/layouts/default.html.ep
+themes/default/templates/api.html.ep
+themes/default/templates/index.html.ep
+themes/default/templates/stats.html.ep
+themes/default/templates/layouts/default.html.ep
 lib/Lstu.pm

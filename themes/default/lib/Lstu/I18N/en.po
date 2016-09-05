@@ -20,41 +20,164 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu.pm:228
+#: lib/Lstu.pm:232
 msgid "%1 is not a valid URL."
 msgstr ""
 
-#: lib/Lstu.pm:343
+#: themes/default/templates/layouts/default.html.ep:57
+msgid "About"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:12 themes/default/templates/stats.html.ep:13
+msgid "Admin password"
+msgstr ""
+
+#: lib/Lstu.pm:347 lib/Lstu.pm:379
 msgid "Bad password"
 msgstr ""
 
+#: themes/default/templates/index.html.ep:20
+msgid "Copy to clipboard"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:29
+msgid "Counter"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:30
+msgid "Created"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:15 themes/default/templates/index.html.ep:10 themes/default/templates/index.html.ep:9
+msgid "Custom shortened text"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:33
+msgid "Delete"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:21 themes/default/templates/api.html.ep:39
+msgid "Failure reason"
+msgstr ""
+
+#: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:16
+msgid "Go!"
+msgstr ""
+
+#: themes/default/templates/layouts/default.html.ep:36
+msgid "Henny Penny"
+msgstr ""
+
+#: themes/default/templates/layouts/default.html.ep:36
+msgid "HennyPenny-Regular"
+msgstr ""
+
+#: themes/default/templates/index.html.ep:52
+msgid "Hit Enter, then Ctrl+C to copy the short link"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:16
+msgid "If equal to \"json\", response will be in JSON format, HTML format otherwise"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:21 themes/default/templates/api.html.ep:39
+msgid "JSON: failure"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:20 themes/default/templates/api.html.ep:38
+msgid "JSON: success"
+msgstr ""
+
+#: themes/default/templates/layouts/default.html.ep:56
+msgid "License:"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:9
+msgid "Logout from admin stats"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:63
+msgid "Next"
+msgstr ""
+
 #. ($c->config('contact')
-#: lib/Lstu.pm:220
+#: lib/Lstu.pm:224
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
+#: themes/default/templates/api.html.ep:12
+msgid "Parameters:"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:61
+msgid "Previous"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:22
+msgid "Response for HTML format"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:36
+msgid "Response:"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:28
+msgid "Shortened URL"
+msgstr ""
+
+#: themes/default/templates/layouts/default.html.ep:59 themes/default/templates/stats.html.ep:4
+msgid "Statistics"
+msgstr ""
+
 #. ($url->host)
-#: lib/Lstu.pm:113
+#: lib/Lstu.pm:114
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr ""
 
 #. ($url->host)
-#: lib/Lstu.pm:126
-msgid "The URL redirects 10 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
+#: lib/Lstu.pm:127
+msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu.pm:369
+#: lib/Lstu.pm:368 lib/Lstu.pm:405
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
 #. ($custom_url)
-#: lib/Lstu.pm:186
+#: lib/Lstu.pm:190
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
 
 #. ($url)
-#: lib/Lstu.pm:184
-msgid "The shortened text can contain only numbers, letters and the - and _
-character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
+#: lib/Lstu.pm:188
+msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:27
+msgid "URL"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:14 themes/default/templates/index.html.ep:5 themes/default/templates/index.html.ep:6
+msgid "URL to shorten"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:22
+msgid "You will be redirected to the Lstu interface with a message giving the shortened URL"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:30
+msgid "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:14
+msgid "mandatory"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:15 themes/default/templates/api.html.ep:16
+msgid "optional"
+msgstr ""
+
+#: themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:34
+msgid "shortened_url"
 msgstr ""
