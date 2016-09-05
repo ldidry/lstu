@@ -54,6 +54,16 @@ sub startup {
     $self->secrets($config->{secret});
 
     $self->helper(
+        ip => sub {
+            my $c           = shift;
+            my $proxy       = $c->req->headers->header('X-Forwarded-For');
+            my $ip          = ($proxy) ? $proxy : $c->tx->remote_address;
+
+            return $ip;
+        }
+    );
+
+    $self->helper(
         provisioning => sub {
             my $c = shift;
 
@@ -133,6 +143,17 @@ sub startup {
         }
     );
 
+    $self->helper(
+        cleaning => sub {
+            my $c = shift;
+
+            # Delete old sessions
+            LstuModel::Sessions->delete_where('until < ?', time);
+            # Delete old bans
+            LstuModel::Ban->delete_where('until < ?', time);
+        }
+    );
+
     # Hooks
     $self->hook(
         after_dispatch => sub {
@@ -144,8 +165,6 @@ sub startup {
         before_dispatch => sub {
             my $c = shift;
 
-            # Delete old sessions
-            LstuModel::Sessions->delete_where('until < ?', time);
             # API allowed domains
             if (defined($c->config('allowed_domains'))) {
                 if ($c->config('allowed_domains')->[0] eq '*') {

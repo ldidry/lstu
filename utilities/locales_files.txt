@@ -3,3 +3,5 @@ themes/default/templates/index.html.ep
 themes/default/templates/stats.html.ep
 themes/default/templates/layouts/default.html.ep
 lib/Lstu.pm
+lib/Lstu/Controller/Admin.pm
+lib/Lstu/Controller/Lstu.pm

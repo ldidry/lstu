@@ -5,6 +5,13 @@ use Mojo::JSON qw(true false);
 use Test::More;
 use Test::Mojo;
 
+use lib 'lib';
+use LstuModel;
+
+# Rotten syntax, but prevents "Static LstuModel->delete has been deprecated"
+LstuModel::Lstu->delete_where('1 = 1');
+LstuModel::Ban->delete_where('1 = 1');
+
 my $t = Test::Mojo->new('Lstu');
 $t->get_ok('/')
   ->status_is(200)
@@ -21,6 +28,7 @@ $t->post_ok('/a' => form => { lsturl => 'truc', format => 'json' })
     ->json_has('msg', 'success')
     ->json_is({success => false, msg => 'truc is not a valid URL.'});
 
+LstuModel::Ban->delete_where('1 = 1'); # Prevents banishing
 my $a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
 
 $t->get_ok($a)
@@ -65,5 +73,35 @@ $a =~ s#http://127\.0\.0\.1:\d+/##;
 $t->get_ok('/d/'.$a.'?format=json')
     ->status_is(200)
     ->json_is({success => true, deleted => 1});
+
+$t->post_ok('/stats' => form => { adminpwd => 'toto', action => 'logout' })
+    ->status_is(200);
+
+# Test admin banishing
+$t->post_ok('/stats' => form => { adminpwd => 'totoi' })
+    ->status_is(200)
+    ->content_like(qr/Bad password/);
+
+$t->post_ok('/stats' => form => { adminpwd => 'totoi' })
+    ->status_is(200)
+    ->content_like(qr/Bad password/);
+
+$t->post_ok('/stats' => form => { adminpwd => 'totoi' })
+    ->status_is(200)
+    ->content_like(qr/Too many bad passwords\./);
+
+# Test user banishing
+LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
+LstuModel::Lstu->delete_where('1 = 1');
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr',      format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lut.im',       format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://erco.xyz',     format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://onsenfout.fr', format => 'json' });
+
+$t->post_ok('/a' => form => { lsturl => 'https://lufi.io', format => 'json' })
+    ->status_is(200)
+    ->json_has('msg', 'success')
+    ->json_is('/success' => false)
+    ->json_like('/msg' => qr#You asked to shorten too many URLs too quickly\. You're banned for \d+ hour\(s\)\.#);
 
 done_testing();

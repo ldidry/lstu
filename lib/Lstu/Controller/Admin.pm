@@ -8,19 +8,55 @@ sub login {
     my $pwd  = $c->param('adminpwd');
     my $act  = $c->param('action');
 
-    if (defined($c->config('adminpwd')) && defined($pwd) && $pwd eq $c->config('adminpwd')) {
-        my $token = $c->shortener(32);
+    $c->cleaning;
 
-        LstuModel::Sessions->create(token => $token, until => time + 3600);
-        $c->session('token' => $token);
-        $c->redirect_to('stats');
-    } elsif (defined($act) && $act eq 'logout') {
-        LstuModel::Sessions->delete_where('token = ?', $c->session->{token});
-        delete $c->session->{token};
+    my $ip = $c->ip;
+
+    my @banned = LstuModel::Ban->select('WHERE ip = ? AND until > ? AND strike >= 3', $ip, time);
+    if (scalar @banned) {
+        my $penalty = 3600;
+        if ($banned[0]->strike >= 6) {
+            $penalty = 3600 * 24 * 30; # 30 days of banishing
+        }
+        $banned[0]->update(
+            strike => $banned[0]->strike + 1,
+            until  => time + $penalty
+        );
+        $c->flash('msg'    => $c->l('Too many bad passwords. You\'re banned.'));
+        $c->flash('banned' => 1);
         $c->redirect_to('stats');
     } else {
-        $c->flash('msg' => $c->l('Bad password'));
-        $c->redirect_to('stats');
+        if (defined($c->config('adminpwd')) && defined($pwd) && $pwd eq $c->config('adminpwd')) {
+            my $token = $c->shortener(32);
+
+            LstuModel::Sessions->create(
+                token => $token,
+                until => time + 3600
+            );
+            $c->session('token' => $token);
+            $c->redirect_to('stats');
+        } elsif (defined($act) && $act eq 'logout') {
+            LstuModel::Sessions->delete_where('token = ?', $c->session->{token});
+            delete $c->session->{token};
+            $c->redirect_to('stats');
+        } else {
+            my @bans = LstuModel::Ban->select('WHERE ip = ?', $ip);
+
+            if (scalar @bans) {
+                $bans[0]->update(
+                    strike => $bans[0]->strike + 1,
+                    until  => time + 3600
+                );
+            } else {
+                LstuModel::Ban->create(
+                    ip     => $ip,
+                    strike => 1,
+                    until  => time + 3600
+                );
+            }
+            $c->flash('msg' => $c->l('Bad password'));
+            $c->redirect_to('stats');
+        }
     }
 }
 

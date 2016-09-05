@@ -3,22 +3,24 @@
 % use Mojo::Date;
 <h2><%= l('Statistics') %></h2>
 % if (defined(config('adminpwd'))) {
+%     if (!flash('banned')) {
 <form class="form" role="form" method="POST" action="<%== url_for 'stats' %>">
-%     if (defined(stash('admin'))) {
+%         if (defined(stash('admin'))) {
     <input type="hidden" value="logout" name="action"></input>
     <%= submit_button l('Logout from admin stats'), class => 'btn btn-default btn-primary' %>
-%     } else {
+%         } else {
     <div class="form-group">
         <label class="sr-only" for="adminpwd"><%= l('Admin password') %></label>
         <input type="password" name="adminpwd" id="adminpwd" class="form-control" placeholder="<%= l('Admin password') %>" required></input>
     </div>
     <input type="hidden" value="0" name="page"></input>
     <%= submit_button l('Go!'), class => 'btn btn-default btn-primary' %>
-%     }
+%         }
 </form>
-% if (defined(flash('msg'))) {
+%     }
+%     if (defined(flash('msg'))) {
     <h3 class="alert alert-danger"><%= flash('msg') %></h3>
-% }
+%     }
 <br>
 % }
 <table class="table table-striped">
