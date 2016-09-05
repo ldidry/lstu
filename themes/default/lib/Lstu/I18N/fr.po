@@ -1,7 +1,7 @@
 # Lstu
 # Copyright (C) 2013 - 2015 Luc Didry
 # This file is distributed under the same license as the Lstu package.
-# 
+#
 # Translators:
 # Translators:
 # Luc Didry <luc@didry.org>, 2015
@@ -143,9 +143,9 @@ msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "Le texte du raccourci (%1) est déjà utilisé. Veuillez en choisir un autre"
 
 #. ($url)
-#: lib/Lstu.pm:184
-msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
-msgstr "Le texte du raccourci ne doit contenir que des chiffres, des lettres et les caractères - et _, ne peut être \"a\", \"api\" ou \"stats\" ou se terminer par \".json\". Rappel de l’URL à raccourcir : %1"
+#: lib/Lstu.pm:188
+msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
+msgstr "Le texte du raccourci ne doit contenir que des chiffres, des lettres et les caractères - et _, ne peut être \"a\", \"api\", \"d\" ou \"stats\" ou se terminer par \".json\". Rappel de l’URL à raccourcir : %1"
 
 #:
 msgid "URL"

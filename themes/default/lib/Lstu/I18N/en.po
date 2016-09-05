@@ -1,7 +1,7 @@
 # Lstu
 # Copyright (C) 2013 - 2015 Luc Didry
 # This file is distributed under the same license as the Lstu package.
-# 
+#
 # Translators:
 # Luc Didry <luc@didry.org>, 2015
 msgid ""
@@ -55,5 +55,6 @@ msgstr ""
 
 #. ($url)
 #: lib/Lstu.pm:184
-msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
+msgid "The shortened text can contain only numbers, letters and the - and _
+character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
