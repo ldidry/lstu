@@ -29,6 +29,17 @@ use ORLite {
                counter   INTEGER,
                timestamp INTEGER)'
           );
+          $dbh->do(
+              'CREATE TABLE sessions (
+              token TEXT PRIMARY KEY,
+              until INTEGER)'
+          );
+          $dbh->do(
+              'CREATE TABLE ban (
+              ip TEXT PRIMARY KEY,
+              until INTEGER,
+              strike INTEGER)'
+          );
           return 1;
      }
 };

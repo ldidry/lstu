@@ -2,7 +2,6 @@
 package Lstu;
 use Mojo::Base 'Mojolicious';
 use LstuModel;
-use SessionModel;
 use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
@@ -47,6 +46,10 @@ sub startup {
 
     # Debug
     $self->plugin('DebugDumperHelper');
+
+    # Schema updates
+    LstuModel->do('CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, until INTEGER)');
+    LstuModel->do('CREATE TABLE IF NOT EXISTS ban (ip TEXT PRIMARY KEY, until INTEGER, strike INTEGER)');
 
     $self->secrets($config->{secret});
 
@@ -142,7 +145,7 @@ sub startup {
             my $c = shift;
 
             # Delete old sessions
-            SessionModel::Sessions->delete_where('until < ?', time);
+            LstuModel::Sessions->delete_where('until < ?', time);
             # API allowed domains
             if (defined($c->config('allowed_domains'))) {
                 if ($c->config('allowed_domains')->[0] eq '*') {
@@ -173,247 +176,28 @@ sub startup {
         shift->render(template => 'index');
     })->name('index');
 
-    $r->post('/a' => sub {
-        my $c          = shift;
-        my $url        = Mojo::URL->new($c->param('lsturl'));
-        my $custom_url = $c->param('lsturl-custom');
-        my $format     = $c->param('format');
-
-        $custom_url = undef if (defined($custom_url) && $custom_url eq '');
-
-        my ($msg, $short);
-        if (defined($custom_url) && ($custom_url =~ m/^a(pi)?$|^stats$/ || $custom_url =~ m/^d$/ ||
-            $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/))
-        {
-            $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api", "d" or "stats" or end with ".json". Your URL to shorten: %1', $url);
-        } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
-            $msg = $c->l('The shortened text (%1) is already used. Please choose another one.', $custom_url);
-        } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {
-            my $res = $c->is_spam($url, 0);
-            if ($res->{is_spam}) {
-                $msg = $res->{msg};
-            } else {
-                my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
-
-                if (scalar(@records) && !defined($custom_url)) {
-                    # Already got this URL
-                    $short = $records[0]->short;
-                } else {
-                    if(LstuModel->begin) {
-                        if (defined($custom_url)) {
-                            LstuModel::Lstu->create(
-                                short     => $custom_url,
-                                url       => $url,
-                                counter   => 0,
-                                timestamp => time()
-                            );
-
-                            $short = $custom_url;
-                        } else {
-                            @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
-                            if (scalar(@records)) {
-                                $records[0]->update(
-                                    url       => $url,
-                                    counter   => 0,
-                                    timestamp => time()
-                                );
-
-                                $short = $records[0]->short;
-                            } else {
-                                # Houston, we have a problem
-                                $msg = $c->l('No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: [_2]', $c->config('contact'), $url);
-                            }
-                        }
-                        LstuModel->commit;
-                    }
-                }
-            }
-        } else {
-            $msg = $c->l('%1 is not a valid URL.', $url);
-        }
-        if ($msg) {
-            $c->respond_to(
-                json => { json => { success => Mojo::JSON->false, msg => $msg } },
-                any  => sub {
-                    my $c = shift;
-
-                    $c->flash('msg' => $msg);
-                    $c->redirect_to('index');
-                }
-            );
-        } else {
-            # Get URLs from cookie
-            my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
-            # Add the new URL
-            push @{$u}, $short;
-            # Make the array contain only unique URLs
-            my %k = map { $_, 1 } @{$u};
-            @{$u} = keys %k;
-            # And set the cookie
-            my $cookie = to_json($u);
-            $c->cookie('url' => $cookie, {expires => time + 142560000}); # expires in 10 years
-
-            my $prefix = $c->prefix;
-
-            $c->respond_to(
-                json => { json => { success => Mojo::JSON->true, url => $url, short => $prefix.$short } },
-                any  => sub {
-                    my $c = shift;
-
-                    $c->flash('url'   => $url);
-                    $c->flash('short' => $prefix.$short);
-                    $c->redirect_to('index');
-                }
-            );
-        }
-    })->name('add');
-
     $r->get('/api' => sub {
-        shift->render(
-            template => 'api'
-        );
+        shift->render(template => 'api');
     })->name('api');
 
-    $r->get('/stats' => sub {
-        my $c = shift;
+    $r->post('/stats')
+        ->to('Admin#login');
 
-        if (defined($c->session('token')) && SessionModel::Sessions->count('WHERE token = ?', $c->session('token'))) {
-            my $total = LstuModel::Lstu->count("WHERE url IS NOT NULL");
-            my $page  = $c->param('page') || 0;
-               $page  = 0 if ($page < 0);
-               $page  = $page - 1 if ($page * $c->config('page_offset') > $total);
+    $r->get('/d/:short')
+        ->to('Admin#delete')
+        ->name('delete');
 
-            my ($first, $last) = (!$page, ($page * $c->config('page_offset') <= $total && $total < ($page + 1) * $c->config('page_offset')));
+    $r->post('/a')
+        ->to('Lstu#add')
+        ->name('add');
 
-            my @urls  = LstuModel::Lstu->select("WHERE url IS NOT NULL ORDER BY counter DESC LIMIT ? offset ?", $c->config('page_offset'), $page * $c->config('page_offset'));
-            $c->render(
-                template => 'stats',
-                prefix   => $c->prefix,
-                urls     => \@urls,
-                first    => $first,
-                last     => $last,
-                page     => $page,
-                admin    => 1,
-                total    => $total
-            )
-        } else {
-            my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
+    $r->get('/stats')
+        ->to('Lstu#stats')
+        ->name('stats');
 
-            my $p = join ",", (('?') x @{$u});
-            my @urls = LstuModel::Lstu->select("WHERE short IN ($p) ORDER BY counter DESC", @{$u});
-
-            my $prefix = $c->prefix;
-
-            $c->respond_to(
-                json => sub {
-                    my @struct;
-                    for my $url (@urls) {
-                        push @struct, {
-                            short      => $prefix.$url->{short},
-                            url        => $url->{url},
-                            counter    => $url->{counter},
-                            created_at => $url->{timestamp}
-                        };
-                    }
-                    $c->render( json => \@struct );
-                },
-                any  => sub {
-                    shift->render(
-                        template => 'stats',
-                        prefix   => $prefix,
-                        urls     => \@urls
-                    )
-                }
-            )
-        }
-    })->name('stats');
-
-    $r->post('/stats' => sub {
-        my $c    = shift;
-        my $pwd  = $c->param('adminpwd');
-        my $act  = $c->param('action');
-
-        if (defined($c->config('adminpwd')) && defined($pwd) && $pwd eq $c->config('adminpwd')) {
-            my $token = $c->shortener(32);
-
-            SessionModel::Sessions->create(token => $token, until => time + 3600);
-            $c->session('token' => $token);
-            $c->redirect_to('stats');
-        } elsif (defined($act) && $act eq 'logout') {
-            SessionModel::Sessions->delete_where('token = ?', $c->session->{token});
-            delete $c->session->{token};
-            $c->redirect_to('stats');
-        } else {
-            $c->flash('msg' => $c->l('Bad password'));
-            $c->redirect_to('stats');
-        }
-    });
-
-    $r->get('/d/:short' => sub {
-        my $c = shift;
-        my $short = $c->param('short');
-
-        if (defined($c->session('token')) && SessionModel::Sessions->count('WHERE token = ?', $c->session('token'))) {
-            my @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
-            if (scalar(@urls)) {
-                my $deleted = LstuModel::Lstu->delete_where('short = ?', $short);
-                $c->respond_to(
-                    json => { json => { success => Mojo::JSON->true, deleted => $deleted } },
-                    any  => sub {
-                        my $c = shift;
-                        $c->redirect_to('stats');
-                    }
-                );
-            } else {
-                my $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);
-                $c->respond_to(
-                    json => { json => { success => Mojo::JSON->false, msg => $msg } },
-                    any  => sub {
-                        my $c = shift;
-                        $c->flash('msg' => $msg);
-                        $c->redirect_to('stats');
-                    }
-                );
-            }
-        } else {
-            $c->flash('msg' => $c->l('Bad password'));
-            $c->redirect_to('stats');
-        }
-    })->name('delete');
-
-    $r->get('/:short' => sub {
-        my $c = shift;
-        my $short = $c->param('short');
-
-        my @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
-        if (scalar(@urls)) {
-            my $url = $urls[0]->url;
-            $c->respond_to(
-                json => { json => { success => Mojo::JSON->true, url => $url } },
-                any  => sub {
-                    my $c = shift;
-                    $c->res->code(301);
-                    $c->redirect_to($url);
-                }
-            );
-            # Update counter
-            $c->on(finish => sub {
-                my $counter = $urls[0]->counter + 1;
-                $urls[0]->update (counter => $counter);
-            });
-        } else {
-            my $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);
-            $c->respond_to(
-                json => { json => { success => Mojo::JSON->false, msg => $msg } },
-                any  => sub {
-                    my $c = shift;
-
-                    $c->flash('msg' => $msg);
-                    $c->redirect_to('index');
-                }
-            );
-        }
-    })->name('short');
+    $r->get('/:short')
+        ->to('Lstu#get')
+        ->name('short');
 }
 
 1;
