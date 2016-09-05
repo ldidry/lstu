@@ -15,3 +15,6 @@ test:
 
 dev:
 	$(CARTON) morbo $(LSTU) --listen http://0.0.0.0:3000 --watch lib/ --watch script/ --watch themes/ --watch lstu.conf
+
+devlog:
+	multitail log/development.log
