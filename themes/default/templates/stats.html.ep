@@ -28,6 +28,11 @@
         <th><%= l('Shortened URL') %></th>
         <th><%= l('Counter') %></th>
         <th><%= l('Created') %></th>
+% if (defined(config('adminpwd'))) {
+%     if (defined(stash('admin'))) {
+        <th><%= l('Delete') %></th>
+%     }
+% }
     </tr>
 % my $i = 1;
 % if (defined(stash('page')) && stash('page') >= 0) {
@@ -41,6 +46,11 @@
         <td><%= link_to $prefix.$url->{short} => $prefix.$url->{short} %></td>
         <td><%= $url->{counter} %></td>
         <td><%= Mojo::Date->new($url->{timestamp})->to_string %></td>
+% if (defined(config('adminpwd'))) {
+%     if (defined(stash('admin'))) {
+        <td><%= link_to x => url_for('delete', {short => $url->{short}}) %></td>
+%     }
+% }
     </tr>
 % }
 </table>

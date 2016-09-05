@@ -182,8 +182,10 @@ sub startup {
         $custom_url = undef if (defined($custom_url) && $custom_url eq '');
 
         my ($msg, $short);
-        if (defined($custom_url) && ($custom_url =~ m/^a(pi)?$|^stats$/ || $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/)) {
-            $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api" or "stats" or end with ".json". Your URL to shorten: %1', $url);
+        if (defined($custom_url) && ($custom_url =~ m/^a(pi)?$|^stats$/ || $custom_url =~ m/^d$/ ||
+            $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/))
+        {
+            $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api", "d" or "stats" or end with ".json". Your URL to shorten: %1', $url);
         } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
             $msg = $c->l('The shortened text (%1) is already used. Please choose another one.', $custom_url);
         } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {
@@ -346,6 +348,39 @@ sub startup {
             $c->redirect_to('stats');
         }
     });
+
+    $r->get('/d/:short' => sub {
+        my $c = shift;
+        my $short = $c->param('short');
+
+        if (defined($c->session('token')) && SessionModel::Sessions->count('WHERE token = ?', $c->session('token'))) {
+            my @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
+            if (scalar(@urls)) {
+                my $deleted = LstuModel::Lstu->delete_where('short = ?', $short);
+                $c->respond_to(
+                    json => { json => { success => Mojo::JSON->true, deleted => $deleted } },
+                    any  => sub {
+                        my $c = shift;
+                        $c->res->code(301);
+                        $c->redirect_to('stats');
+                    }
+                );
+            } else {
+                my $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);
+                $c->respond_to(
+                    json => { json => { success => Mojo::JSON->false, msg => $msg } },
+                    any  => sub {
+                        my $c = shift;
+                        $c->flash('msg' => $msg);
+                        $c->redirect_to('stats');
+                    }
+                );
+            }
+        } else {
+            $c->flash('msg' => $c->l('Bad password'));
+            $c->redirect_to('stats');
+        }
+    })->name('delete');
 
     $r->get('/:short' => sub {
         my $c = shift;
