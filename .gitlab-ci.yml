@@ -1,12 +1,12 @@
 image: debian:jessie
-job1:
+test:
   script: 
     - apt-get update
     - apt-get install -y build-essential libssl-dev openssl
     - echo yes | cpan Carton
     - carton install
     - cp lstu.conf.template lstu.conf
-    - sed -i -e "s@#contact@contact@" lstu.conf
+    - sed -i -e "s@#contact@contact@" -e "s@#adminpwd.*@adminpwd => 'toto'@" lstu.conf
     - make test
   tags:
     - Debian
