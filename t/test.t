@@ -93,10 +93,14 @@ $t->post_ok('/stats' => form => { adminpwd => 'totoi' })
 # Test user banishing
 LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
 LstuModel::Lstu->delete_where('1 = 1');
-$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr',      format => 'json' });
-$t->ua->post('/a' => form => { lsturl => 'https://lut.im',       format => 'json' });
-$t->ua->post('/a' => form => { lsturl => 'https://erco.xyz',     format => 'json' });
-$t->ua->post('/a' => form => { lsturl => 'https://onsenfout.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr',       format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lut.im',        format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://erco.xyz',      format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://onsenfout.fr',  format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://framasoft.org', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://framagit.org',  format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://framateam.org', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://frama.io',      format => 'json' });
 
 $t->post_ok('/a' => form => { lsturl => 'https://lufi.io', format => 'json' })
     ->status_is(200)
