@@ -1,6 +1,6 @@
 [Unit]
 Description=Shortened URLs service
-Documentation=https://git.framasoft.org/luc/lstu
+Documentation=https://framagit.org/luc/lstu
 Requires=network.target
 After=network.target
 

@@ -22,4 +22,4 @@ server {
         proxy_pass http://lstu;
         proxy_redirect http://lstu https://lstu.example.org;
     }
-
+}
