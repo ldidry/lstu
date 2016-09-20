@@ -55,24 +55,24 @@ sub add {
             } else {
                 my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
 
+                my @bans = LstuModel::Ban->select('WHERE ip = ?', $ip);
+                if (scalar @bans) {
+                    $bans[0]->update(
+                        strike => $bans[0]->strike + 1,
+                        until  => time + 1
+                    );
+                } else {
+                    LstuModel::Ban->create(
+                        ip     => $ip,
+                        strike => 1,
+                        until  => time + 1
+                    );
+                }
+
                 if (scalar(@records) && !defined($custom_url)) {
                     # Already got this URL
                     $short = $records[0]->short;
                 } else {
-                    my @bans = LstuModel::Ban->select('WHERE ip = ?', $ip);
-                    if (scalar @bans) {
-                        $bans[0]->update(
-                            strike => $bans[0]->strike + 1,
-                            until  => time + 1
-                        );
-                    } else {
-                        LstuModel::Ban->create(
-                            ip     => $ip,
-                            strike => 1,
-                            until  => time + 1
-                        );
-                    }
-
                     if(LstuModel->begin) {
                         if (defined($custom_url)) {
                             LstuModel::Lstu->create(
