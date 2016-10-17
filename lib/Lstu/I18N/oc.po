@@ -10,79 +10,79 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: oc <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: templates/index.html.ep:77
 msgid "<abbr>LSTU</abbr> est sous licence <a href=\"http://www.wtfpl.net/\"><abbr title=\"Do What The Fuck you want to Public License\" lang=\"en\">WTFPL</abbr></a>."
-msgstr ""
+msgstr "<abbr>LSTU</abbr> es jos licéncia <a href=\"http://www.wtfpl.net/\"><abbr title=\"Do What The Fuck you want to Public License\" lang=\"en\">WTFPL</abbr></a>."
 
 #. ($title)
 #: templates/index.html.ep:78
 msgid "<span class=\"framalink\">%1</span> dispose d’<a href=\"/api\">une <abbr title=\"Application Programming Interface\" lang=\"en\">API</abbr> pour raccourcir rapidement un lien</a>."
-msgstr ""
+msgstr "<span class=\"framalink\">%1</span> a una <a href=\"/api\">une <abbr title=\"Application Programming Interface\" lang=\"en\">API</abbr> per acorchar rapidament un ligam</a>."
 
 #. ($title)
 #: templates/index.html.ep:42
 msgid "<span class=\"framalink\">%1</span> est un service en ligne libre et minimaliste qui permet de raccourcir des liens."
-msgstr ""
+msgstr "<span class=\"framalink\">%1</span> es un servici en linha liure e minimalista que permet d’acorchar de ligams."
 
 #. ($title)
 #: templates/index.html.ep:76
 msgid "<span class=\"framalink\">%1</span> est une instance du logiciel <a href=\"https://lstu.fr\"><abbr>LSTU</abbr></a> développé par <a href=\"http://www.fiat-tux.fr/\">Luc Didry</a>."
-msgstr ""
+msgstr "<span class=\"framalink\">%1</span> es una instància del logicial <a href=\"https://lstu.fr\"><abbr>LSTU</abbr></a> desvolopat per <a href=\"http://www.fiat-tux.fr/\">Luc Didry</a>."
 
 #: templates/index.html.ep:44
 msgid "Collez le lien à raccourcir dans le formulaire."
-msgstr ""
+msgstr "Pegatz lo ligam per acorchar dins lo formulari."
 
 #: templates/index.html.ep:82
 msgid "Cultivez votre jardin"
-msgstr ""
+msgstr "Cultivatz vòstre òrt"
 
 #: templates/index.html.ep:65
 msgid "Fermer"
-msgstr ""
+msgstr "Tampar"
 
 #: templates/index.html.ep:63
 msgid "La <a href=\"https://framatube.org/blip/framalink.webm\">vidéo au format webm</a>"
-msgstr ""
+msgstr "La <a href=\"https://framatube.org/blip/framalink.webm\">vidèo al format webm</a>"
 
 #: templates/layouts/default.html.ep:22
 msgid "La perle des raccourcisseurs d’URL"
-msgstr ""
+msgstr "L’AS dels acorchadors d’URL"
 
 #: templates/index.html.ep:46
 msgid "Partagez ensuite avec vos correspondants le lien qui vous est donné."
-msgstr ""
+msgstr "Partejatz en seguida amb vòstres correspondents lo ligam que vos serà donat."
 
 #: templates/index.html.ep:84
 msgid "Pour participer au développement du logiciel, proposer des améliorations ou simplement le télécharger, rendez-vous sur <a href=\"https://framagit.org/luc/lstu\">le site de développement</a>."
-msgstr ""
+msgstr "Per participar al desvolopament del logicial, prepausar de milhoraments o simplament lo telecargar, anatz <a href=\"https://framagit.org/luc/lstu\">sul site de desvolopament</a>. "
 
 #: templates/index.html.ep:48
 msgid "Pour vous aider dans l’utilisation du logiciel, voici <a href=\"https://framatube.org/media/tutoriel-framalink\" data-toggle=\"modal\" onclick=\"$('#TutoVideo').modal('show'); return false;\">un tutoriel vidéo</a> réalisé par <a href=\"http://arpinux.org/\">arpinux</a>, artisan paysagiste de la distribution GNU/Linux pour débutant <a href=\"https://handylinux.org/\">HandyLinux</a>."
-msgstr ""
+msgstr "Per vos ajudar dins l’utilizacion del logicial, vaquí <a href=\"https://framatube.org/media/tutoriel-framalink\" data-toggle=\"modal\" onclick=\"$('#TutoVideo').modal('show'); return false;\">un cors vidèo</a> realizat per <a href=\"http://arpinux.org/\">arpinux</a>, artisan païsatgista de la distribucion GNU/Linux per començaire <a href=\"https://handylinux.org/\">HandyLinux</a>."
 
 #: templates/index.html.ep:8
 msgid "Raccourcir un lien"
-msgstr ""
+msgstr "Acorchar un ligam"
 
 #: templates/layouts/default.html.ep:18
 msgid "Raccourcissez vos URLs"
-msgstr ""
+msgstr "Acorchatz vòstres ligams"
 
 #: templates/index.html.ep:45
 msgid "Si besoin, choisissez le texte du lien raccourci."
-msgstr ""
+msgstr "Se cal, caussissètz lo tèxte del ligam acorchat."
 
 #: templates/index.html.ep:85
 msgid "Si vous souhaitez installer ce logiciel pour votre propre usage et ainsi gagner en autonomie, nous vous aidons sur :"
-msgstr ""
+msgstr "Se volètz installar aqueste logicial per vòstre pròpri usatge e aital aver mai d'autonomia, vos podèm ajudar sus :"
 
 #: templates/index.html.ep:56
 msgid "Tutoriel vidéo"
-msgstr ""
+msgstr "Tutorial vidèo"
 
