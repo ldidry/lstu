@@ -1,0 +1,195 @@
+# Lstu
+# Copyright (C) 2013 - 2015 Luc Didry
+# This file is distributed under the same license as the Lstu package.
+# 
+# Translators:
+# Luc Didry <luc@didry.org>, 2015
+# Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: Lstu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-02 11:14+0000\n"
+"PO-Revision-Date: 2016-10-06 21:06+0200\n"
+"Last-Translator: Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>\n"
+"Language-Team: Tot En Òc\n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-POOTLE-MTIME: 1441357092.000000\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#. ($url)
+#: lib/Lstu/Controller/Lstu.pm:106
+msgid "%1 is not a valid URL."
+msgstr "%1 es pas una URL valida."
+
+#: themes/default/templates/layouts/default.html.ep:57
+msgid "About"
+msgstr "A prepaus"
+
+#: themes/default/templates/stats.html.ep:13 themes/default/templates/stats.html.ep:14
+msgid "Admin password"
+msgstr "Senhal administrator"
+
+#: lib/Lstu/Controller/Admin.pm:57 lib/Lstu/Controller/Admin.pm:90
+msgid "Bad password"
+msgstr "Senhal incorrèct"
+
+#: themes/default/templates/index.html.ep:20
+msgid "Copy to clipboard"
+msgstr "Copiar al quichapapièrs"
+
+#: themes/default/templates/stats.html.ep:31
+msgid "Counter"
+msgstr "Comptador"
+
+#: themes/default/templates/stats.html.ep:32
+msgid "Created"
+msgstr "Creat lo"
+
+#: themes/default/templates/api.html.ep:15 themes/default/templates/index.html.ep:10 themes/default/templates/index.html.ep:9
+msgid "Custom shortened text"
+msgstr "Tèxte de l'acorchi personalizat"
+
+#: themes/default/templates/stats.html.ep:35
+msgid "Delete"
+msgstr "Suprimir"
+
+#: themes/default/templates/api.html.ep:21 themes/default/templates/api.html.ep:39
+msgid "Failure reason"
+msgstr "Rason del fracàs"
+
+#: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
+msgid "Go!"
+msgstr "Zo !"
+
+#: themes/default/templates/layouts/default.html.ep:36
+msgid "Henny Penny"
+msgstr "Henny Penny"
+
+#: themes/default/templates/layouts/default.html.ep:36
+msgid "HennyPenny-Regular"
+msgstr "HennyPenny-Regular"
+
+#: themes/default/templates/index.html.ep:52
+msgid "Hit Enter, then Ctrl+C to copy the short link"
+msgstr "Picatz sus Entrada puèi fasètz Ctrl+C per copiar lo ligam"
+
+#: themes/default/templates/api.html.ep:16
+msgid "If equal to \"json\", response will be in JSON format, HTML format otherwise"
+msgstr "Se egal a \"json\", la responsa serà al format JSON, autrament aquò serà una responsa en HTML"
+
+#: themes/default/templates/api.html.ep:21 themes/default/templates/api.html.ep:39
+msgid "JSON: failure"
+msgstr "JSON : fracàs"
+
+#: themes/default/templates/api.html.ep:20 themes/default/templates/api.html.ep:38
+msgid "JSON: success"
+msgstr "JSON : succès"
+
+#: themes/default/templates/layouts/default.html.ep:56
+msgid "License:"
+msgstr "Licéncia :"
+
+#: themes/default/templates/stats.html.ep:10
+msgid "Logout from admin stats"
+msgstr "Desconnexion de las estatisticas admin"
+
+#: themes/default/templates/stats.html.ep:65
+msgid "Next"
+msgstr "Seguent"
+
+#. ($c->config('contact')
+#: lib/Lstu/Controller/Lstu.pm:98
+msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
+msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensejar o de contactar l’administrator sus %1. Recòrd de l’URL per acorchar : %2"
+
+#: themes/default/templates/api.html.ep:12
+msgid "Parameters:"
+msgstr "Paramètres :"
+
+#: themes/default/templates/stats.html.ep:63
+msgid "Previous"
+msgstr "Precedent"
+
+#: themes/default/templates/api.html.ep:22
+msgid "Response for HTML format"
+msgstr "Reponsa pel format HTML"
+
+#: themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:36
+msgid "Response:"
+msgstr "Responsa :"
+
+#: themes/default/templates/stats.html.ep:30
+msgid "Shortened URL"
+msgstr "URL acorchada"
+
+#: themes/default/templates/layouts/default.html.ep:59 themes/default/templates/stats.html.ep:4
+msgid "Statistics"
+msgstr "Estatisticas"
+
+#. ($url->host)
+#: lib/Lstu.pm:127
+msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
+msgstr "L’òste de l’URL o d’una de sas redireccions (%1) es considerat coma nociu per Spamhaus. Refusi de l’acorchar."
+
+#. ($url->host)
+#: lib/Lstu.pm:140
+msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
+msgstr "L’URL endralha 3 còps o mai cap a un a autre site. Pòt èsser una URL dangerossa (porrièl, pesca electronica, etc). Refusi de l’acorchar"
+
+#. ($c->url_for('/')
+#: lib/Lstu/Controller/Admin.pm:79 lib/Lstu/Controller/Lstu.pm:221
+msgid "The shortened URL %1 doesn't exist."
+msgstr "L’URL acorchada %1 existís pas"
+
+#. ($custom_url)
+#: lib/Lstu/Controller/Lstu.pm:50
+msgid "The shortened text (%1) is already used. Please choose another one."
+msgstr "Lo tèxte de l’acorchi (%1) es ja utilizat. Mercés de ne causir un autre"
+
+#. ($url)
+#: lib/Lstu/Controller/Lstu.pm:48
+msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
+msgstr "Lo tèxte de l’acorchi deu pas que contenir de chifras, letras e los caractèrs - e _, èsser \"a\", \"api\", \"d\" o \"stats\" o acabar per \".json\". Recòrd de l’URL per acorchar : %1"
+
+#: lib/Lstu/Controller/Admin.pm:25
+msgid "Too many bad passwords. You're banned."
+msgstr "Tròp de marrits senhals. Sètz bandit."
+
+#: themes/default/templates/stats.html.ep:29
+msgid "URL"
+msgstr "URL"
+
+#: themes/default/templates/api.html.ep:14 themes/default/templates/index.html.ep:5 themes/default/templates/index.html.ep:6
+msgid "URL to shorten"
+msgstr "URL per acorchar"
+
+#. ($penalty/3600)
+#: lib/Lstu/Controller/Lstu.pm:26
+msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
+msgstr "Avètz demandat d’acorchar tròp d'URL en pauc de temps. Sètz bandit per %1 ora(s)."
+
+#: themes/default/templates/api.html.ep:22
+msgid "You will be redirected to the Lstu interface with a message giving the shortened URL"
+msgstr "Auretz l’interfàcia normala de Lstu amb un messatge qu’indica l’URL acorchada"
+
+#: themes/default/templates/api.html.ep:30
+msgid "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
+msgstr "Seretz dirigit cap a l’URL finala o la pagina d’acuèlh de Lstu amb un messatge qu'indica la rason del fracàs"
+
+#: themes/default/templates/api.html.ep:14
+msgid "mandatory"
+msgstr "obligatòri"
+
+#: themes/default/templates/api.html.ep:15 themes/default/templates/api.html.ep:16
+msgid "optional"
+msgstr "facultatiu"
+
+#: themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:34
+msgid "shortened_url"
+msgstr "url_acorchida"
