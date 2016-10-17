@@ -3,8 +3,6 @@
 # This file is distributed under the same license as the Lstu package.
 #
 # Translators:
-# Translators:
-# Luc Didry <luc@didry.org>, 2015
 # Luc Didry <luc@didry.org>, 2015
 msgid ""
 msgstr ""

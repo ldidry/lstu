@@ -3,4 +3,8 @@ local/*
 sessions.db
 lstu.db
 lstu.conf
+*.swp
 script/hypnotoad.pid
+themes/*
+!themes/default
+!themes/default/*
