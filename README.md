@@ -10,17 +10,18 @@ Lstu is licensed under the terms of the WTFPL. See the LICENSE file.
 
 ## Dependencies
 
-* Carton : Perl dependencies manager, it will get what you need, so don't bother for dependencies (but you can read the file `cpanfile` if you want).
+* Carton : Perl dependencies manager, it will get what you need, so don't bother about dependencies (but you can read the file `cpanfile` if you want).
 
 ```shell
 sudo cpan Carton
 ```
 
 ## Installation
+
 After installing Carton :
 
 ```shell
-git clone https://git.framasoft.org/luc/lstu.git
+git clone https://framagit.org/luc/lstu.git
 cd lstu
 carton install
 cp lstu.conf.template lstu.conf
@@ -36,6 +37,7 @@ The configuration file is self-documented.
 This is good for test, not for production.
 
 ```
+# start it
 carton exec hypnotoad script/lstu
 # stop it
 carton exec hypnotoad -s script/lstu
@@ -71,13 +73,13 @@ service lstu start
 
 There is the `contact` option (mandatory), where you have to put some way for the users to contact you, and the `secret` where you have to put a random string in order to protect your Mojolicious cookies (not really useful and optional).
 
-Please, have a look at the `lstu.conf.template`, it's full of options and self-documented.
+Please, have a look at the `lstu.conf.template`, it's full of options and is self-documented.
 
-## How many urls can it handle ?
+## How many URLs can it handle ?
 
 By default, there are 8 361 453 672 available combinations. I think the sqlite db will explode before you reach this limit. If you want more shortened URLs than that, open `lstu.conf` and change the `length` setting.
 
-Everytime somebody uses Lstu, it will create 'waiting' shortened URLs codes in order to be quick to shorten the URLs.
+Every time somebody uses Lstu, it will create 'waiting' shortened URLs codes in order to be quick to shorten the URLs.
 
 Accordingly to the `lstu.conf` configuration file, it will create `provisioning` waiting URLs, adding them `provis_step` by `provis_step`.
 

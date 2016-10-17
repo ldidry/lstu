@@ -26,6 +26,11 @@ then
         echo "LDIR variable is empty, please fill it in /etc/default/lstu"
         exit 0
     fi
+    if [ -z $USER ]
+    then
+        echo "USER variable is empty, please fill it in /etc/default/lstu"
+        exit 0
+    fi
 else
     echo "Missing /etc/default/lstu file"
     exit 0
@@ -49,7 +54,7 @@ do_start()
     # 2 if daemon could not be started
 
     cd $LDIR
-    carton exec hypnotoad $DAEMON >/dev/null 2>&1
+    su $USER -c "carton exec hypnotoad $DAEMON >/dev/null 2>&1"
     return "$?"
 }
 
@@ -62,7 +67,7 @@ do_stop()
     # other if a failure occurred
 
     cd $LDIR
-    carton exec hypnotoad -s $DAEMON >/dev/null 2>&1
+    su $USER -c "carton exec hypnotoad -s $DAEMON >/dev/null 2>&1"
     return "$?"
 }
 
@@ -75,10 +80,10 @@ do_status()
         if [ "$?" = "0" ]; then
             log_progress_msg "$NAME is running"
         else
-            log_progress_msg "$NAME is NOT running"
+            log_failure_msg "$NAME is NOT running but PID file exists"
         fi
     else
-        log_progress_msg "$NAME is NOT running"
+        log_failure_msg "$NAME is NOT running"
     fi
 }
 
@@ -101,7 +106,7 @@ case "$1" in
                          log_end_msg 0
                          ;;
                      2)
-                         log_progress_msg "failed"
+                         log_failure_msg "failed"
                          log_end_msg 1
                          ;;
                  esac
@@ -114,7 +119,7 @@ case "$1" in
                     log_end_msg 0
                     ;;
                 2)
-                    log_progress_msg "failed"
+                    log_failure_msg "failed"
                     log_end_msg 1
                     ;;
             esac
@@ -134,16 +139,16 @@ case "$1" in
                         log_end_msg 0
                         ;;
                     *)
-                        log_progress_msg "failed"
+                        log_failure_msg "failed"
                         log_end_msg 1
                         ;;
                 esac
             else
-                log_progress_msg "$NAME is NOT running. Unable to stop"
+                log_failure_msg "$NAME is NOT running. Unable to stop"
                 log_end_msg 1
             fi
         else
-            log_progress_msg "$NAME is NOT running. Unable to stop"
+            log_failure_msg "$NAME is NOT running. Unable to stop"
             log_end_msg 1
         fi
         ;;
@@ -155,13 +160,14 @@ case "$1" in
     reload)
         log_daemon_msg "Reloading $NAME"
         do_start
+        sleep 1
         case "$?" in
             0|1)
                 log_progress_msg "done"
                 log_end_msg 0
                 ;;
             2)
-                log_progress_msg "failed"
+                log_failure_msg "failed"
                 log_end_msg 1
                 ;;
         esac
@@ -169,7 +175,7 @@ case "$1" in
     restart)
         log_daemon_msg "Restarting $NAME"
         do_stop
-        sleep 1
+        sleep 6
         do_start
         case "$?" in
             0|1)
@@ -177,7 +183,7 @@ case "$1" in
                 log_end_msg 0
                 ;;
             2)
-                log_progress_msg "failed";
+                log_failure_msg "failed";
                 log_end_msg 1
                 ;;
         esac
