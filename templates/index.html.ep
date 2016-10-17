@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h2>Raccourcir un lien</h2>
+            <h2><%= l('Raccourcir un lien') %></h2>
 
 <!-- index.html.ep LSTU -->
 <form class="form" role="form" method="POST" action="<%== url_for 'add' %>">
@@ -39,13 +39,13 @@
             <h2>Prise en main</h2>
             <p class="text-center" role="presentation"><span class="glyphicon glyphicon-question-sign"></span></p>
             <div id="aboutbox">
-                <p><span class="framalink"><%= $title %></span> est un service en ligne libre et minimaliste qui permet de raccourcir des liens.</p>
+                <p><%== l('<span class="framalink">%1</span> est un service en ligne libre et minimaliste qui permet de raccourcir des liens.', $title) %></p>
                 <ol>
-                    <li>Collez le lien à raccourcir dans le formulaire.</li>
-                    <li>Si besoin, choisissez le texte du lien raccourci.</li>
-                    <li>Partagez ensuite avec vos correspondants le lien qui vous est donné.</li>
+                    <li><%= l('Collez le lien à raccourcir dans le formulaire.') %></li>
+                    <li><%= l('Si besoin, choisissez le texte du lien raccourci.') %></li>
+                    <li><%= l('Partagez ensuite avec vos correspondants le lien qui vous est donné.') %></li>
                 </ol>
-                <p>Pour vous aider dans l’utilisation du logiciel, voici <a href="https://framatube.org/media/tutoriel-framalink" data-toggle="modal" onclick="$('#TutoVideo').modal('show'); return false;">un tutoriel vidéo</a> réalisé par <a href="http://arpinux.org/">arpinux</a>, artisan paysagiste de la distribution GNU/Linux pour débutant <a href="https://handylinux.org/">HandyLinux</a>.</p>
+                <p><%== l('Pour vous aider dans l’utilisation du logiciel, voici <a href="https://framatube.org/media/tutoriel-framalink" data-toggle="modal" onclick="$(\'#TutoVideo\').modal(\'show\'); return false;">un tutoriel vidéo</a> réalisé par <a href="http://arpinux.org/">arpinux</a>, artisan paysagiste de la distribution GNU/Linux pour débutant <a href="https://handylinux.org/">HandyLinux</a>.') %></p>
 
     <!-- modale vidéo -->
     <div class="modal fade" id="TutoVideo" tabindex="-1" role="dialog" aria-labelledby="TutoVideoLabel" aria-hidden="true">
@@ -53,16 +53,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Fermer</span></button>
-                    <h1 id="TutoVideoLabel">Tutoriel vidéo</h1>
+                    <h1 id="TutoVideoLabel"><%= l('Tutoriel vidéo') %></h1>
                 </div>
                 <div class="modal-body">
                     <p><video controls="controls" preload="none" poster="https://framatube.org/images/media/990l.jpg" height="340" width="570">
                         <source src="https://framatube.org/blip/framalink.mp4" type="video/mp4">
                         <source src="https://framatube.org/blip/framalink.webm" type="video/webm">
                     </video></p>
-                    <p>-&gt; La <a href="https://framatube.org/blip/framalink.webm">vidéo au format webm</a></p>
+                    <p>→ <%= l('La <a href="https://framatube.org/blip/framalink.webm">vidéo au format webm</a>') %></p>
                </div>
-               <div class="modal-footer"><a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a></div>
+               <div class="modal-footer"><a href="#" class="btn btn-default" data-dismiss="modal"><%= l('Fermer') %></a></div>
            </div>
         </div>
     </div>
@@ -73,17 +73,16 @@
         <div class="col-md-4" id="le-logiciel">
             <h2>Le logiciel</h2>
             <p class="text-center" role="presentation"><span class="glyphicon glyphicon-cloud"></span></p>
-            <p><span class="framalink"><%= $title %></span> est une instance du logiciel <a href="https://lstu.fr"><abbr>LSTU</abbr></a> développé par <a href="http://www.fiat-tux.fr/">Luc Didry</a>.</p>
-            <p><abbr>LSTU</abbr> est sous licence <a href="http://www.wtfpl.net/"><abbr title="Do What The Fuck you want to Public License" lang="en">WTFPL</abbr></a>.</p>
-            <p><span class="framalink"><%= $title %></span> dispose d’<a href="/api">une <abbr title="Application Programming Interface" lang="en">API</abbr> pour raccourcir rapidement un lien</a>.</p>
+            <p><%== l('<span class="framalink">%1</span> est une instance du logiciel <a href="https://lstu.fr"><abbr>LSTU</abbr></a> développé par <a href="http://www.fiat-tux.fr/">Luc Didry</a>.', $title) %></p>
+            <p><%== l('<abbr>LSTU</abbr> est sous licence <a href="http://www.wtfpl.net/"><abbr title="Do What The Fuck you want to Public License" lang="en">WTFPL</abbr></a>.') %></p>
+            <p><%== l('<span class="framalink">%1</span> dispose d’<a href="/api">une <abbr title="Application Programming Interface" lang="en">API</abbr> pour raccourcir rapidement un lien</a>.', $title) %></p>
         </div>
 
         <div class="col-md-4" id="jardin">
-            <h2>Cultivez votre jardin</h2>
+            <h2><%= l('Cultivez votre jardin') %></h2>
             <p class="text-center" role="presentation"><span class="glyphicon glyphicon-tree-deciduous"></span></p>
-            <p>Pour participer au développement du logiciel, proposer des améliorations
-               ou simplement le télécharger, rendez-vous sur <a href="https://github.com/ldidry/lstu">le site de développement</a>.</p>
-            <p>Si vous souhaitez installer ce logiciel pour votre propre usage et ainsi gagner en autonomie, nous vous aidons sur :</p>
+            <p><%== l('Pour participer au développement du logiciel, proposer des améliorations ou simplement le télécharger, rendez-vous sur <a href="https://framagit.org/luc/lstu">le site de développement</a>.') %></p>
+            <p><%= l('Si vous souhaitez installer ce logiciel pour votre propre usage et ainsi gagner en autonomie, nous vous aidons sur :') %></p>
             <p class="text-center"><a href="http://framacloud.org/cultiver-son-jardin/installation-de-lstu/" class="btn btn-success"><span class="glyphicon glyphicon-tree-deciduous"></span> framacloud.org</a></p>
         </div>
     </div>

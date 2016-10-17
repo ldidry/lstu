@@ -1,0 +1,88 @@
+# Lstu language file.
+# Copyright (C) 2015 Luc Didry
+# This file is distributed under the same license as the Lstu package.
+# Luc Didry <luc@framasoft.org> 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Luc Didry <luc@framasoft.org>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/index.html.ep:77
+msgid "<abbr>LSTU</abbr> est sous licence <a href=\"http://www.wtfpl.net/\"><abbr title=\"Do What The Fuck you want to Public License\" lang=\"en\">WTFPL</abbr></a>."
+msgstr ""
+
+#. ($title)
+#: templates/index.html.ep:78
+msgid "<span class=\"framalink\">%1</span> dispose d’<a href=\"/api\">une <abbr title=\"Application Programming Interface\" lang=\"en\">API</abbr> pour raccourcir rapidement un lien</a>."
+msgstr ""
+
+#. ($title)
+#: templates/index.html.ep:42
+msgid "<span class=\"framalink\">%1</span> est un service en ligne libre et minimaliste qui permet de raccourcir des liens."
+msgstr ""
+
+#. ($title)
+#: templates/index.html.ep:76
+msgid "<span class=\"framalink\">%1</span> est une instance du logiciel <a href=\"https://lstu.fr\"><abbr>LSTU</abbr></a> développé par <a href=\"http://www.fiat-tux.fr/\">Luc Didry</a>."
+msgstr ""
+
+#: templates/index.html.ep:44
+msgid "Collez le lien à raccourcir dans le formulaire."
+msgstr ""
+
+#: templates/index.html.ep:82
+msgid "Cultivez votre jardin"
+msgstr ""
+
+#: templates/index.html.ep:65
+msgid "Fermer"
+msgstr ""
+
+#: templates/index.html.ep:63
+msgid "La <a href=\"https://framatube.org/blip/framalink.webm\">vidéo au format webm</a>"
+msgstr ""
+
+#: templates/layouts/default.html.ep:22
+msgid "La perle des raccourcisseurs d’URL"
+msgstr ""
+
+#: templates/index.html.ep:46
+msgid "Partagez ensuite avec vos correspondants le lien qui vous est donné."
+msgstr ""
+
+#: templates/index.html.ep:84
+msgid "Pour participer au développement du logiciel, proposer des améliorations ou simplement le télécharger, rendez-vous sur <a href=\"https://framagit.org/luc/lstu\">le site de développement</a>."
+msgstr ""
+
+#: templates/index.html.ep:48
+msgid "Pour vous aider dans l’utilisation du logiciel, voici <a href=\"https://framatube.org/media/tutoriel-framalink\" data-toggle=\"modal\" onclick=\"$('#TutoVideo').modal('show'); return false;\">un tutoriel vidéo</a> réalisé par <a href=\"http://arpinux.org/\">arpinux</a>, artisan paysagiste de la distribution GNU/Linux pour débutant <a href=\"https://handylinux.org/\">HandyLinux</a>."
+msgstr ""
+
+#: templates/index.html.ep:8
+msgid "Raccourcir un lien"
+msgstr ""
+
+#: templates/layouts/default.html.ep:18
+msgid "Raccourcissez vos URLs"
+msgstr ""
+
+#: templates/index.html.ep:45
+msgid "Si besoin, choisissez le texte du lien raccourci."
+msgstr ""
+
+#: templates/index.html.ep:85
+msgid "Si vous souhaitez installer ce logiciel pour votre propre usage et ainsi gagner en autonomie, nous vous aidons sur :"
+msgstr ""
+
+#: templates/index.html.ep:56
+msgid "Tutoriel vidéo"
+msgstr ""
+
