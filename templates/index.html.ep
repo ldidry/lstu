@@ -1,5 +1,4 @@
 % # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
-% layout 'default';
 % my $title = ($self->req->url->to_abs->host eq 'frama.link') ? 'Frama.link' : 'Huit.re';
 % title $title;
 
@@ -21,10 +20,54 @@
 </form>
 
 % if (defined(flash('short')) && defined(flash('url'))) {
-    <h3 class="alert alert-success">
-        <%= link_to flash('url') => begin %><%= flash('url') %><%= end %></a> =&gt;
-        <%= link_to flash('short') => begin %><%= flash('short') %><%= end %>
+    <h3 class="alert alert-success form-inline">
+        <div class="form-group">
+            <label><%= link_to flash('url') => begin %><%= flash('url') %><%= end %></a></label>
+            <br> → <input id="input-short" value="<%== flash('short') %>" class="form-control">
+            <span id="js" class="hidden"><a href="#" id="clipboard" class="btn btn-default" title="<%= l('Copy to clipboard') %>"><span class="icon icon-clipboard"></span></a><span>
+        </div>
     </h3>
+%= javascript begin
+    var j = document.getElementById('js');
+    j.classList.remove('hidden');
+    // Code from http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+    function copyTextToClipboard(text) {
+        var textArea              = document.createElement("textarea");
+        textArea.style.position   = 'fixed';
+        textArea.style.top        = 0;
+        textArea.style.left       = 0;
+        textArea.style.width      = '2em';
+        textArea.style.height     = '2em';
+        textArea.style.padding    = 0;
+        textArea.style.border     = 'none';
+        textArea.style.outline    = 'none';
+        textArea.style.boxShadow  = 'none';
+        textArea.style.background = 'transparent';
+        textArea.value            = text;
+
+        document.body.appendChild(textArea);
+        textArea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'successful' : 'unsuccessful';
+          console.log('Copying text command was ' + msg);
+        } catch (err) {
+          var myInput = document.getElementById('input-short');
+          myInput.focus();
+          myInput.setSelectionRange(0, 9999);
+          alert('<%= l('Hit Enter, then Ctrl+C to copy the short link') %>');
+        }
+
+        document.body.removeChild(textArea);
+    }
+
+    var copyBtn = document.getElementById('clipboard');
+
+    copyBtn.addEventListener('click', function(event) {
+        copyTextToClipboard('<%= flash('short') %>');
+    });
+% end
 % }
 % if (defined(flash('msg'))) {
     <h3 class="alert alert-danger"><%= flash('msg') %><h3>
@@ -76,6 +119,7 @@
             <p><%== l('<span class="framalink">%1</span> est une instance du logiciel <a href="https://lstu.fr"><abbr>LSTU</abbr></a> développé par <a href="http://www.fiat-tux.fr/">Luc Didry</a>.', $title) %></p>
             <p><%== l('<abbr>LSTU</abbr> est sous licence <a href="http://www.wtfpl.net/"><abbr title="Do What The Fuck you want to Public License" lang="en">WTFPL</abbr></a>.') %></p>
             <p><%== l('<span class="framalink">%1</span> dispose d’<a href="/api">une <abbr title="Application Programming Interface" lang="en">API</abbr> pour raccourcir rapidement un lien</a>.', $title) %></p>
+            <p><%== l('Vous pouvez consulter vos liens passés en vous rendant sur la <a href="%1">page de statistiques</a> (fonctionne avec des cookies, donc valable uniquement avec le navigateur utilisé pour raccourcir vos liens).', url_for('stats')) %></p>
         </div>
 
         <div class="col-md-4" id="jardin">

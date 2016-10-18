@@ -4,9 +4,11 @@
     <head>
         <title><%= title %></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
         <link rel="icon" type="image/png" href="/favicon.png">
         %= stylesheet 'css/bootstrap.min.css', media => 'screen'
         %= stylesheet 'css/frama.link.css', media => 'screen'
+        %= stylesheet 'css/fontelico.css'
         <script type="text/javascript" src="https://framasoft.org/nav/lib/jquery/jquery.min.js"></script>
     </head>
     <body>
