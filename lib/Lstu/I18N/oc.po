@@ -89,5 +89,5 @@ msgstr "Tutorial vidèo"
 #. (url_for('stats')
 #: templates/index.html.ep:122
 msgid "Vous pouvez consulter vos liens passés en vous rendant sur la <a href=\"%1\">page de statistiques</a> (fonctionne avec des cookies, donc valable uniquement avec le navigateur utilisé pour raccourcir vos liens)."
-msgstr ""
+msgstr "Podètz consultar vòstre ligams ja creats en anant sus la <a href=\"%1\">pagina d'estatisticas</a> (foncciona amb de cookies, doncas valable solament amb lo navigator utilizat per acorchar vòstres ligams)."
 
