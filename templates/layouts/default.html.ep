@@ -17,7 +17,7 @@
             <header role="banner">
             % if ($self->req->url->to_abs->host eq 'frama.link') {
                 <h1 class="framalink"><span class="frama">Frama</span>.<span class="services">link</span></h1>
-                <p class="lead"><%= l('Raccourcissez vos URLs') %></p>
+                <p class="lead"><%= l('Raccourcissez vos URL') %></p>
                 <hr class="trait" role="presentation" />
             % } else {
                 <h1 class="framalink"><img src="/huitre.png" alt="Huit.re"></h1>

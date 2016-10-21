@@ -71,7 +71,7 @@ msgid "Raccourcir un lien"
 msgstr "Acorchar un ligam"
 
 #: templates/layouts/default.html.ep:20
-msgid "Raccourcissez vos URLs"
+msgid "Raccourcissez vos URL"
 msgstr "Acorchatz vòstres ligams"
 
 #: templates/index.html.ep:88

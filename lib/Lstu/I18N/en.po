@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Goofy <goofy@framasoft.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf8\n"
@@ -17,77 +17,77 @@ msgstr ""
 
 #: templates/index.html.ep:120
 msgid "<abbr>LSTU</abbr> est sous licence <a href=\"http://www.wtfpl.net/\"><abbr title=\"Do What The Fuck you want to Public License\" lang=\"en\">WTFPL</abbr></a>."
-msgstr ""
+msgstr "<abbr>LSTU</abbr> is licensed under the terms of the <a href=\"http://www.wtfpl.net/\"><abbr title=\"Do What The Fuck you want to Public License\" lang=\"en\">WTFPL</abbr></a>."
 
 #. ($title)
 #: templates/index.html.ep:121
 msgid "<span class=\"framalink\">%1</span> dispose d’<a href=\"/api\">une <abbr title=\"Application Programming Interface\" lang=\"en\">API</abbr> pour raccourcir rapidement un lien</a>."
-msgstr ""
+msgstr "<span class=\"framalink\">%1</span> provides <a href=\"/api\">an <abbr title=\"Application Programming Interface\" lang=\"en\">API</abbr> to shorten your links quite easily</a>."
 
 #. ($title)
 #: templates/index.html.ep:85
 msgid "<span class=\"framalink\">%1</span> est un service en ligne libre et minimaliste qui permet de raccourcir des liens."
-msgstr ""
+msgstr "<span class=\"framalink\">%1</span> is a free (as in free speech) simple online URL shortener."
 
 #. ($title)
 #: templates/index.html.ep:119
 msgid "<span class=\"framalink\">%1</span> est une instance du logiciel <a href=\"https://lstu.fr\"><abbr>LSTU</abbr></a> développé par <a href=\"http://www.fiat-tux.fr/\">Luc Didry</a>."
-msgstr ""
+msgstr "<span class=\"framalink\">%1</span> is derived from <a href=\"https://lstu.fr\"><abbr>LSTU</abbr></a> created and maintained by <a href=\"http://www.fiat-tux.fr/\">Luc Didry</a>."
 
 #: templates/index.html.ep:87
 msgid "Collez le lien à raccourcir dans le formulaire."
-msgstr ""
+msgstr "Paste a long URL to make it shorter."
 
 #: templates/index.html.ep:126
 msgid "Cultivez votre jardin"
-msgstr ""
+msgstr "Grown your own"
 
 #: templates/index.html.ep:108
 msgid "Fermer"
-msgstr ""
+msgstr "Close"
 
 #: templates/index.html.ep:106
 msgid "La <a href=\"https://framatube.org/blip/framalink.webm\">vidéo au format webm</a>"
-msgstr ""
+msgstr "Watch <a href=\"https://framatube.org/blip/framalink.webm\">the webm video</a>"
 
 #: templates/layouts/default.html.ep:24
 msgid "La perle des raccourcisseurs d’URL"
-msgstr ""
+msgstr "Your precious URL shortener"
 
 #: templates/index.html.ep:89
 msgid "Partagez ensuite avec vos correspondants le lien qui vous est donné."
-msgstr ""
+msgstr "Next step: share your short link with whoever you wish."
 
 #: templates/index.html.ep:128
 msgid "Pour participer au développement du logiciel, proposer des améliorations ou simplement le télécharger, rendez-vous sur <a href=\"https://framagit.org/luc/lstu\">le site de développement</a>."
-msgstr ""
+msgstr "If you want to contribute on development, suggest improvements and patches, or simply download, hop on <a href=\"https://framagit.org/luc/lstu\">Development site</a>."
 
 #: templates/index.html.ep:91
 msgid "Pour vous aider dans l’utilisation du logiciel, voici <a href=\"https://framatube.org/media/tutoriel-framalink\" data-toggle=\"modal\" onclick=\"$('#TutoVideo').modal('show'); return false;\">un tutoriel vidéo</a> réalisé par <a href=\"http://arpinux.org/\">arpinux</a>, artisan paysagiste de la distribution GNU/Linux pour débutant <a href=\"https://handylinux.org/\">HandyLinux</a>."
-msgstr ""
+msgstr "If you need help to use this program, have a look on <a href=\"https://framatube.org/media/tutoriel-framalink\" data-toggle=\"modal\" onclick=\"$('#TutoVideo').modal('show'); return false;\">this video tutorial</a> courtesy of <a href=\"http://arpinux.org/\">arpinux</a>, a great guide for newcomers on <a href=\"https://handylinux.org/\">HandyLinux</a> GNU/Linux distro."
 
 #: templates/index.html.ep:7
 msgid "Raccourcir un lien"
-msgstr ""
+msgstr "Shorten a link"
 
 #: templates/layouts/default.html.ep:20
-msgid "Raccourcissez vos URLs"
-msgstr ""
+msgid "Raccourcissez vos URL"
+msgstr "Shorten your URLs"
 
 #: templates/index.html.ep:88
 msgid "Si besoin, choisissez le texte du lien raccourci."
-msgstr ""
+msgstr "If needed, you can choose the text for the shortened link"
 
 #: templates/index.html.ep:129
 msgid "Si vous souhaitez installer ce logiciel pour votre propre usage et ainsi gagner en autonomie, nous vous aidons sur :"
-msgstr ""
+msgstr "If you want to install this software for you own usage, we help you on:"
 
 #: templates/index.html.ep:99
 msgid "Tutoriel vidéo"
-msgstr ""
+msgstr "Video tutorial"
 
 #. (url_for('stats')
 #: templates/index.html.ep:122
 msgid "Vous pouvez consulter vos liens passés en vous rendant sur la <a href=\"%1\">page de statistiques</a> (fonctionne avec des cookies, donc valable uniquement avec le navigateur utilisé pour raccourcir vos liens)."
-msgstr ""
+msgstr "You can see a list of you past links on the <a href=\"%1\">statistics page</a> (it works with cookies, so it will work only with the browser you use to shorten your links)"
 

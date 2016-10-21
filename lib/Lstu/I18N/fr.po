@@ -71,7 +71,7 @@ msgid "Raccourcir un lien"
 msgstr ""
 
 #: templates/layouts/default.html.ep:20
-msgid "Raccourcissez vos URLs"
+msgid "Raccourcissez vos URL"
 msgstr ""
 
 #: templates/index.html.ep:88
