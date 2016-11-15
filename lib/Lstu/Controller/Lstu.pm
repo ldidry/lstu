@@ -9,7 +9,7 @@ use Mojo::URL;
 sub add {
     my $c = shift;
 
-    #$c->cleaning;
+    $c->cleaning;
 
     my $ip = $c->ip;
 
