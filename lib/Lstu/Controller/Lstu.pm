@@ -35,7 +35,9 @@ sub add {
             }
         );
     } else {
-        my $url        = Mojo::URL->new($c->param('lsturl'));
+        my $lsturl     = $c->param('lsturl');
+        $lsturl        =~ s/^\s+|\s+$//g;
+        my $url        = Mojo::URL->new($lsturl);
         my $custom_url = $c->param('lsturl-custom');
         my $format     = $c->param('format');
 
