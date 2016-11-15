@@ -102,4 +102,11 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->json_is('/success' => false)
     ->json_like('/msg' => qr#You asked to shorten too many URLs too quickly\. You're banned for \d+ hour\(s\)\.#);
 
+LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
+$t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json' })
+    ->status_is(200)
+    ->json_has('url', 'short', 'success')
+    ->json_is('/success' => true, '/url' => 'https://fiat-tux.fr')
+    ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
+
 done_testing();
