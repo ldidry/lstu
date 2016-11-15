@@ -95,6 +95,8 @@ LstuModel::Lstu->delete_where('1 = 1');
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 
 $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->status_is(200)
