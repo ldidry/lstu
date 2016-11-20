@@ -1,0 +1,40 @@
+% # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="icon" type="image/png" href="<%= url_for('/img/favicon.png') %>">
+        <link rel="icon" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
+        <link rel="icon" sizes="196x196" href="<%= url_for('/img/lstu196.png') %>">
+        <link rel="apple-touch-icon" href="<%= url_for('/img/lstu60.png') %>">
+        <link rel="apple-touch-icon" sizes="76x76" href="<%= url_for('/img/lstu76.png') %>">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%= url_for('/img/lstu120.png') %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= url_for('/img/lstu152.png') %>">
+        <link rel="apple-touch-icon-precomposed" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
+        %= stylesheet '/css/milligram.min.css'
+        %= stylesheet '/css/fontelico.css'
+        %= stylesheet '/css/lstu.css'
+    </head>
+    <body>
+        <div class="container">
+            <div class="float-left hidden-xs logo">
+                <img src="<%= url_for('/img/lstu.png') %>" alt="lstu logo" width="100" height="83">
+            </div>
+            <%= link_to url_for('/') => (class => 'link_nocol') => begin %><h1 class="hennypenny">Let's Shorten That Url</h1><% end %>
+            <p>
+                <small>&copy; 2013 — 2016 <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> — 
+                    <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> — 
+                    <%= link_to l('About') => 'https://framagit.org/luc/lstu#tab-readme' %> —
+                    <%= link_to 'API' => url_for('api') %> — 
+                    <%= link_to l('Statistics') => url_for('stats') %>
+                </small>
+            </p>
+            <%= content %>
+        </div>
+    </body>
+</html>
