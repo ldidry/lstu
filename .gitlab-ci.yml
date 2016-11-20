@@ -6,7 +6,8 @@ test:
     - echo yes | cpan Carton
     - carton install
     - cp lstu.conf.template lstu.conf
-    - sed -i -e "s@#contact@contact@" -e "s@#adminpwd.*@adminpwd => 'toto'@" lstu.conf
+    - sed -i -e "s@#contact@contact@" -e "s@#adminpwd.*@adminpwd => 'toto',@" -e "s@#dbpath.*@dbpath => 'test.db',@" lstu.conf
+    - rm test.db
     - make test
   tags:
     - Debian
