@@ -180,6 +180,10 @@ sub startup {
             }
         }
     );
+    $self->hook(after_static => sub {
+        my $c = shift;
+        $c->res->headers->cache_control('max-age=2592000, must-revalidate');
+    });
 
     # For the first launch (after, this isn't really useful)
     $self->provisioning();

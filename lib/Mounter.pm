@@ -27,6 +27,10 @@ sub startup {
     }
     push @{$self->static->paths}, $self->home->rel_dir('themes/default/public');
 
+    $self->hook(after_static => sub {
+        my $c = shift;
+        $c->res->headers->cache_control('max-age=2592000, must-revalidate');
+    });
     $self->plugin('Mount' => {$config->{prefix} => File::Spec->catfile($Bin, '..', 'script', 'application')});
 }
 
