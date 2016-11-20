@@ -19,6 +19,14 @@
         %= stylesheet '/css/milligram.min.css'
         %= stylesheet '/css/fontelico.css'
         %= stylesheet '/css/lstu.css'
+        %= stylesheet begin
+            @font-face {
+                font-family: 'Henny_Penny';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Henny Penny'), local('HennyPenny-Regular'), url(<%= url_for('/font/hennypenny.ttf') %>) format('truetype');
+            }
+        % end
     </head>
     <body>
         <div class="container">

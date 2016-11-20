@@ -6,12 +6,6 @@ body {
     padding: 15px;
     margin: 0 auto;
 }
-@font-face {
-    font-family: 'Henny_Penny';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Henny Penny'), local('HennyPenny-Regular'), url(<%= url_for('/font/hennypenny.ttf') %>) format('truetype');
-}
 .hennypenny {
     font-family: 'Henny_Penny', cursive;
     font-size: 42px;
