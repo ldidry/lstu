@@ -21,9 +21,15 @@
     #secret        => ['fdjsofjoihrei'],
 
     # secret passphrase to access some admin features
-    # The passphrase should be encoded in SHA256 (hex)
-    # optional, but you won't have access to admin /stats if not set
-    #adminpwd      => '4e738ca5563c06cfd0018299933d58db1dd8bf97f6973dc99bf6cdc64b5550bd',
+    # If you don't want to have a plain text password in configuration,
+    # use hashed_adminpwd instead
+    # optional, but you won't have access to admin /stats if not set and if hashed_adminpwd is not set either
+    #adminpwd      => 's3cr3T',
+
+    # secret hashed passphrase to access some admin features
+    # Hash your password by issuing `echo -n s3cr3T | sha256sum` on your terminal
+    # optional, but you won't have access to admin /stats if not set and if adminpwd is not set either
+    #hashed_adminpwd => '94b2feede6ea5e2eec62f457ecb7d3f719b24d19c29d4e5466246a31908fc23b',
 
     # choose a theme. See the available themes in `themes` directory
     # optional, default is 'default'
