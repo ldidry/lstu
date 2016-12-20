@@ -4,6 +4,10 @@ Revision history for Perl application Lstu
 	- Add logo
 	- Add theme system
 	- Better Spamhaus checking
+	- Add ban system
+	- Add occitan translation
+	- Add Milligram theme
+	- Add cache system
 
 0.06 Fri Sep 04 11:47:00 2015 +0200
 	- Add Spamhaus checking before accepting the URL
