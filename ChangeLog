@@ -1,6 +1,6 @@
 Revision history for Perl application Lstu
 
-0.07 ?
+0.07 Tue Dec 20 17:55:00 2016 +0100
 	- Add logo
 	- Add theme system
 	- Better Spamhaus checking
@@ -8,6 +8,7 @@ Revision history for Perl application Lstu
 	- Add occitan translation
 	- Add Milligram theme
 	- Add cache system
+	- Add hashed_adminpwd option
 
 0.06 Fri Sep 04 11:47:00 2015 +0200
 	- Add Spamhaus checking before accepting the URL

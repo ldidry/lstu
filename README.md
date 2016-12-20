@@ -119,3 +119,7 @@ See https://lstu.fr/api
 ## Other projects dependencies
 
 Lstu is written in Perl with the Mojolicious framework and uses the Twitter bootstrap framework to look not too ugly.
+
+## Authors
+
+See the [AUTHORS.md](AUTHORS.md) file.
