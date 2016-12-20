@@ -203,9 +203,16 @@ sub get {
     my $c = shift;
     my $short = $c->param('short');
 
-    my @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
-    if (scalar(@urls)) {
-        my $url = $urls[0]->url;
+    my ($url, @urls);
+    if (defined $c->cache->{$short}) {
+        $url = $c->cache->{$short}->{url};
+    } else {
+        @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
+        if (scalar(@urls)) {
+            $url = $urls[0]->url;
+        }
+    }
+    if ($url) {
         $c->respond_to(
             json => { json => { success => Mojo::JSON->true, url => $url } },
             any  => sub {
@@ -216,8 +223,18 @@ sub get {
         );
         # Update counter
         $c->on(finish => sub {
+            if (defined $c->cache->{$short}) {
+                @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
+            } else {
+                $c->cache->{$short} = {
+                    last_used => time,
+                    url       => $url
+                };
+            }
             my $counter = $urls[0]->counter + 1;
-            $urls[0]->update (counter => $counter);
+            $urls[0]->update(counter => $counter);
+
+            $c->clear_cache;
         });
     } else {
         my $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);

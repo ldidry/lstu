@@ -53,11 +53,30 @@ sub startup {
 
     $self->secrets($config->{secret});
 
+    # Helpers
+    $self->helper(
+        cache => sub {
+            my $c        = shift;
+            state $cache = {};
+        }
+    );
+
+    $self->helper(
+        clear_cache => sub {
+            my $c     = shift;
+            my $cache = $c->cache;
+            my @keys  = keys %{$cache};
+
+            my $limit = ($c->app->mode eq 'production') ? 500 : 1;
+            map {delete $cache->{$_};} @keys if (scalar(@keys) > $limit);
+        }
+    );
+
     $self->helper(
         ip => sub {
-            my $c           = shift;
-            my $proxy       = $c->req->headers->header('X-Forwarded-For');
-            my $ip          = ($proxy) ? $proxy : $c->tx->remote_address;
+            my $c     = shift;
+            my $proxy = $c->req->headers->header('X-Forwarded-For');
+            my $ip    = ($proxy) ? $proxy : $c->tx->remote_address;
 
             return $ip;
         }
