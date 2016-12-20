@@ -64,4 +64,12 @@
     # remember that it has to be in a directory writable by Lstu user
     # optional, default is lstu.db
     #db_path           => 'lstu.db',
+
+    # Rate-limiting for the API
+    # After ban_min_strike requests in a second, the IP address will be
+    # banned for one hour.
+    # If it continues to query the API during this ban time at least
+    # ban_min_strike times, it will be banned for a month.
+    # optional, default is 3
+    ban_min_strike    => 3,
 };
