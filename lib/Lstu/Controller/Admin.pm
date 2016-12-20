@@ -1,5 +1,6 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu::Controller::Admin;
+use Digest::SHA qw(sha256_hex);
 use Mojo::Base 'Mojolicious::Controller';
 use LstuModel;
 
@@ -26,7 +27,7 @@ sub login {
         $c->flash('banned' => 1);
         $c->redirect_to('stats');
     } else {
-        if (defined($c->config('adminpwd')) && defined($pwd) && $pwd eq $c->config('adminpwd')) {
+        if (defined($c->config('adminpwd')) && defined($pwd) && sha256_hex($pwd) eq $c->config('adminpwd')) {
             my $token = $c->shortener(32);
 
             LstuModel::Sessions->create(

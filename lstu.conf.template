@@ -21,8 +21,9 @@
     #secret        => ['fdjsofjoihrei'],
 
     # secret passphrase to access some admin features
+    # The passphrase should be encoded in SHA256 (hex)
     # optional, but you won't have access to admin /stats if not set
-    #adminpwd      => 's3cr3T',
+    #adminpwd      => '4e738ca5563c06cfd0018299933d58db1dd8bf97f6973dc99bf6cdc64b5550bd',
 
     # choose a theme. See the available themes in `themes` directory
     # optional, default is 'default'
