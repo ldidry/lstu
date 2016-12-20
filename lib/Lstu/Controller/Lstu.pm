@@ -13,10 +13,10 @@ sub add {
 
     my $ip = $c->ip;
 
-    my @banned = LstuModel::Ban->select('WHERE ip = ? AND until > ? AND strike >= 3', $ip, time);
+    my @banned = LstuModel::Ban->select('WHERE ip = ? AND until > ? AND strike >= ?', $ip, time, $c->config('ban_min_strike'));
     if (scalar @banned) {
         my $penalty = 3600;
-        if ($banned[0]->strike >= 6) {
+        if ($banned[0]->strike >= 2 * $c->config('ban_min_strike')) {
             $penalty = 3600 * 24 * 30; # 30 days of banishing
         }
         $banned[0]->update(

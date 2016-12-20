@@ -15,12 +15,13 @@ sub startup {
 
     my $config = $self->plugin('Config' => {
         default =>  {
-            provisioning => 100,
-            provis_step   => 5,
-            length        => 8,
-            secret        => ['hfudsifdsih'],
-            page_offset   => 10,
-            theme         => 'default'
+            provisioning    => 100,
+            provis_step     => 5,
+            length          => 8,
+            secret          => ['hfudsifdsih'],
+            page_offset     => 10,
+            theme           => 'default',
+            ban_min_strike  => 3
         }
     });
 
