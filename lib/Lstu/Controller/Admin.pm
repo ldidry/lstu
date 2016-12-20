@@ -27,7 +27,10 @@ sub login {
         $c->flash('banned' => 1);
         $c->redirect_to('stats');
     } else {
-        if (defined($c->config('adminpwd')) && defined($pwd) && sha256_hex($pwd) eq $c->config('adminpwd')) {
+        if (
+            (defined($c->config('adminpwd')) && defined($pwd) && $pwd eq $c->config('adminpwd')) ||
+            (defined($c->config('hashed_adminpwd')) && defined($pwd) && sha256_hex($pwd) eq $c->config('hashed_adminpwd'))
+           ) {
             my $token = $c->shortener(32);
 
             LstuModel::Sessions->create(

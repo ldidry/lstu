@@ -6,7 +6,10 @@ test:
     - echo yes | cpan Carton
     - carton install
     - cp lstu.conf.template lstu.conf
-    - sed -i -e "s@#contact@contact@" -e "s@#adminpwd.*@adminpwd => '31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66',@" -e "s@#db_path.*@db_path => 'test.db',@" lstu.conf
+    - sed -i -e "s@#contact@contact@" -e "s@#adminpwd.*@adminpwd => 'toto',@" -e "s@#db_path.*@db_path => 'test.db',@" lstu.conf
+    - rm -f test.db
+    - make test
+    - sed -i -e "s@ \(adminpwd.*\)@ \#\1@" -e "s@#hashed_adminpwd.*@hashed_adminpwd => '31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66',@" lstu.conf
     - rm -f test.db
     - make test
   tags:

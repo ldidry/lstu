@@ -2,7 +2,7 @@
 % title 'Lstu stats';
 % use Mojo::Date;
 <h2><%= l('Statistics') %></h2>
-% if (defined(config('adminpwd'))) {
+% if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
 %     if (!flash('banned')) {
 <form class="form" role="form" method="POST" action="<%== url_for 'stats' %>">
     <fieldset>
@@ -30,7 +30,7 @@
         <th><%= l('Shortened URL') %></th>
         <th><%= l('Counter') %></th>
         <th><%= l('Created') %></th>
-% if (defined(config('adminpwd'))) {
+% if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
 %     if (defined(stash('admin'))) {
         <th><%= l('Delete') %></th>
 %     }
@@ -48,7 +48,7 @@
         <td><%= link_to $prefix.$url->{short} => $prefix.$url->{short} %></td>
         <td><%= $url->{counter} %></td>
         <td><%= Mojo::Date->new($url->{timestamp})->to_string %></td>
-% if (defined(config('adminpwd'))) {
+% if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
 %     if (defined(stash('admin'))) {
         <td><a href="<%= url_for('delete', {short => $url->{short}}) %>"><h5><span class="icon icon-trash"></span></h5></a></td>
 %     }
@@ -56,7 +56,7 @@
     </tr>
 % }
 </table>
-% if (defined(config('adminpwd'))) {
+% if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
 %     if (defined(stash('admin'))) {
 <nav>
   <ul class="pager">
