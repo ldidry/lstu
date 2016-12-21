@@ -217,6 +217,15 @@ sub get {
             json => { json => { success => Mojo::JSON->true, url => $url } },
             any  => sub {
                 my $c = shift;
+                if (defined($c->config('piwik_url')) && defined($c->config('piwik_idsite'))) {
+                    $c->piwik_api(
+                        'Track' => {
+                            idSite     => $c->config('piwik_idsite'),
+                            action_url => $c->{url},
+                            url        => $c->config('piwik_url')
+                        }
+                    );
+                }
                 $c->res->code(301);
                 $c->redirect_to($url);
             }
