@@ -233,6 +233,15 @@ sub get {
             }
             my $counter = $urls[0]->counter + 1;
             $urls[0]->update(counter => $counter);
+            if (defined($c->config('piwik'))) {
+                $c->piwik_api(
+                    'Track' => {
+                        idSite     => $c->config('piwik')->{idsite},
+                        action_url => $c->{url},
+                        url        => $c->config('piwik')->{url}
+                    }
+                );
+            }
 
             $c->clear_cache;
         });
