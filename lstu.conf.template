@@ -79,4 +79,12 @@
     # ban_min_strike times, it will be banned for a month.
     # optional, default is 3
     #ban_min_strike    => 3,
+
+    # define an URL to the Piwik instance and the ID of a website to track
+    # set if you want to track views in Piwik
+    # optional, Piwik tracking is disabled by default
+    #piwik => {
+    #    url    => 'http://piwik.example.com',
+    #    idsite => '1',
+    #}
 };

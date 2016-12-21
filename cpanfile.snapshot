@@ -189,6 +189,22 @@ DISTRIBUTIONS
       File::Spec 3.29
       Test::More 0.42
       perl 5.00503
+  IO-Socket-INET6-2.72
+    pathname: S/SH/SHLOMIF/IO-Socket-INET6-2.72.tar.gz
+    provides:
+      IO::Socket::INET6 2.72
+    requirements:
+      Carp 0
+      Errno 0
+      Exporter 0
+      IO::Socket 0
+      Module::Build 0.36
+      Socket 0
+      Socket6 0.12
+      Test::More 0
+      perl 5.008
+      strict 0
+      warnings 0
   IO-Socket-IP-0.37
     pathname: P/PE/PEVANS/IO-Socket-IP-0.37.tar.gz
     provides:
@@ -425,11 +441,25 @@ DISTRIBUTIONS
   Mojolicious-Plugin-I18N-1.6
     pathname: S/SH/SHARIFULN/Mojolicious-Plugin-I18N-1.6.tar.gz
     provides:
+      App undef
+      App::I18N undef
+      App::I18N::en undef
+      App::I18N::ru undef
       Mojolicious::Plugin::I18N 1.6
+      Mojolicious::Plugin::I18N::_Handler 1.6
     requirements:
       I18N::LangTags 0.35
       Module::Build 0.42
       Mojolicious 5
+      Test::More 0
+      perl 5.010001
+  Mojolicious-Plugin-Piwik-0.19
+    pathname: A/AK/AKRON/Mojolicious-Plugin-Piwik-0.19.tar.gz
+    provides:
+      Mojolicious::Plugin::Piwik 0.19
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mojolicious 4.88
       Test::More 0
       perl 5.010001
   Net-Abuse-Utils-Spamhaus-0.07
@@ -537,6 +567,7 @@ DISTRIBUTIONS
       File::Spec 0.86
       IO::Socket 1.16
       IO::Socket::INET 1.25
+      IO::Socket::INET6 2.01
       IO::Socket::IP 0.29
       MIME::Base64 2.11
       Test::More 0.52
@@ -609,6 +640,12 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       File::Spec 0
       strict 0
+  Socket6-0.27
+    pathname: U/UM/UMEMOTO/Socket6-0.27.tar.gz
+    provides:
+      Socket6 0.27
+    requirements:
+      ExtUtils::MakeMaker 0
   Test-Script-1.10
     pathname: P/PL/PLICEASE/Test-Script-1.10.tar.gz
     provides:

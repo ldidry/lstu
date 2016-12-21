@@ -48,6 +48,9 @@ sub startup {
     # Debug
     $self->plugin('DebugDumperHelper');
 
+    # Piwik
+    $self->plugin('Piwik');
+
     # Schema updates
     LstuModel->do('CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, until INTEGER)');
     LstuModel->do('CREATE TABLE IF NOT EXISTS ban (ip TEXT PRIMARY KEY, until INTEGER, strike INTEGER)');
