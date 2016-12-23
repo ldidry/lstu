@@ -116,6 +116,10 @@ You can see it working and use it at https://lstu.fr.
 
 See https://lstu.fr/api
 
+## Contributing
+
+See the [contributing guidelines](CONTRIBUTING.md).
+
 ## Other projects dependencies
 
 Lstu is written in Perl with the Mojolicious framework and uses the Twitter bootstrap framework to look not too ugly.
