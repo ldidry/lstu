@@ -1,28 +1,5 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  CPAN-Meta-2.150005
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.150005.tar.gz
-    provides:
-      CPAN::Meta 2.150005
-      CPAN::Meta::Converter 2.150005
-      CPAN::Meta::Feature 2.150005
-      CPAN::Meta::History 2.150005
-      CPAN::Meta::Merge 2.150005
-      CPAN::Meta::Prereqs 2.150005
-      CPAN::Meta::Spec 2.150005
-      CPAN::Meta::Validator 2.150005
-    requirements:
-      CPAN::Meta::Requirements 2.121
-      CPAN::Meta::YAML 0.008
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      JSON::PP 2.27200
-      Parse::CPAN::Meta 1.4414
-      Scalar::Util 0
-      perl 5.008
-      strict 0
-      version 0.88
-      warnings 0
   DBD-SQLite-1.48
     pathname: I/IS/ISHIGAKI/DBD-SQLite-1.48.tar.gz
     provides:
@@ -205,28 +182,21 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  IO-Socket-IP-0.37
-    pathname: P/PE/PEVANS/IO-Socket-IP-0.37.tar.gz
+  IO-Socket-SSL-2.040
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.040.tar.gz
     provides:
-      IO::Socket::IP 0.37
-    requirements:
-      IO::Socket 0
-      Socket 1.97
-      Test::More 0.88
-  IO-Socket-SSL-2.024
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.024.tar.gz
-    provides:
-      IO::Socket::SSL 2.024
+      IO::Socket::SSL 2.040
       IO::Socket::SSL::Intercept 2.014
-      IO::Socket::SSL::OCSP_Cache 2.024
-      IO::Socket::SSL::OCSP_Resolver 2.024
+      IO::Socket::SSL::OCSP_Cache 2.040
+      IO::Socket::SSL::OCSP_Resolver 2.040
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.024
-      IO::Socket::SSL::SSL_HANDLE 2.024
-      IO::Socket::SSL::Session_Cache 2.024
+      IO::Socket::SSL::SSL_Context 2.040
+      IO::Socket::SSL::SSL_HANDLE 2.040
+      IO::Socket::SSL::Session_Cache 2.040
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
+      Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
   IPC-Run3-0.048
@@ -315,8 +285,8 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.008000
       version 0.87
-  Mojolicious-6.52
-    pathname: S/SR/SRI/Mojolicious-6.52.tar.gz
+  Mojolicious-7.12
+    pathname: S/SR/SRI/Mojolicious-7.12.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -346,6 +316,7 @@ DISTRIBUTIONS
       Mojo::IOLoop::Delay undef
       Mojo::IOLoop::Server undef
       Mojo::IOLoop::Stream undef
+      Mojo::IOLoop::Subprocess undef
       Mojo::JSON undef
       Mojo::JSON::Pointer undef
       Mojo::Loader undef
@@ -379,7 +350,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 6.52
+      Mojolicious 7.12
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -401,7 +372,6 @@ DISTRIBUTIONS
       Mojolicious::Controller undef
       Mojolicious::Lite undef
       Mojolicious::Plugin undef
-      Mojolicious::Plugin::Charset undef
       Mojolicious::Plugin::Config undef
       Mojolicious::Plugin::Config::Sandbox undef
       Mojolicious::Plugin::DefaultHelpers undef
@@ -431,22 +401,18 @@ DISTRIBUTIONS
       JSON::PP 2.27103
       Pod::Simple 3.09
       Time::Local 1.2
-  Mojolicious-Plugin-DebugDumperHelper-0.02
-    pathname: L/LD/LDIDRY/Mojolicious-Plugin-DebugDumperHelper-0.02.tar.gz
+      perl 5.010001
+  Mojolicious-Plugin-DebugDumperHelper-0.03
+    pathname: L/LD/LDIDRY/Mojolicious-Plugin-DebugDumperHelper-0.03.tar.gz
     provides:
-      Mojolicious::Plugin::DebugDumperHelper 0.02
+      Mojolicious::Plugin::DebugDumperHelper 0.03
     requirements:
       ExtUtils::MakeMaker 0
       Mojolicious 6.11
   Mojolicious-Plugin-I18N-1.6
     pathname: S/SH/SHARIFULN/Mojolicious-Plugin-I18N-1.6.tar.gz
     provides:
-      App undef
-      App::I18N undef
-      App::I18N::en undef
-      App::I18N::ru undef
       Mojolicious::Plugin::I18N 1.6
-      Mojolicious::Plugin::I18N::_Handler 1.6
     requirements:
       I18N::LangTags 0.35
       Module::Build 0.42
@@ -462,10 +428,18 @@ DISTRIBUTIONS
       Mojolicious 4.88
       Test::More 0
       perl 5.010001
-  Net-Abuse-Utils-Spamhaus-0.07
-    pathname: S/SA/SAXJAZMAN/net/Net-Abuse-Utils-Spamhaus-0.07.tar.gz
+  Mozilla-CA-20160104
+    pathname: A/AB/ABH/Mozilla-CA-20160104.tar.gz
     provides:
-      Net::Abuse::Utils::Spamhaus 0.07
+      Mozilla::CA 20160104
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test 0
+      perl 5.006
+  Net-Abuse-Utils-Spamhaus-0.09
+    pathname: S/SA/SAXJAZMAN/net/Net-Abuse-Utils-Spamhaus-0.09.tar.gz
+    provides:
+      Net::Abuse::Utils::Spamhaus 0.09
     requirements:
       ExtUtils::MakeMaker 6.59
       Net::DNS 0.74
@@ -573,18 +547,18 @@ DISTRIBUTIONS
       Test::More 0.52
       Time::Local 1.19
       perl 5.00404
-  Net-Domain-TLD-1.74
-    pathname: A/AL/ALEXP/Net-Domain-TLD-1.74.tar.gz
+  Net-Domain-TLD-1.75
+    pathname: A/AL/ALEXP/Net-Domain-TLD-1.75.tar.gz
     provides:
-      Net::Domain::TLD 1.74
+      Net::Domain::TLD 1.75
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
       Storable 0
-  Net-SSLeay-1.72
-    pathname: M/MI/MIKEM/Net-SSLeay-1.72.tar.gz
+  Net-SSLeay-1.78
+    pathname: M/MI/MIKEM/Net-SSLeay-1.78.tar.gz
     provides:
-      Net::SSLeay 1.72
+      Net::SSLeay 1.78
       Net::SSLeay::Handle 0.61
     requirements:
       ExtUtils::MakeMaker 6.36
@@ -640,10 +614,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       File::Spec 0
       strict 0
-  Socket6-0.27
-    pathname: U/UM/UMEMOTO/Socket6-0.27.tar.gz
+  Socket6-0.28
+    pathname: U/UM/UMEMOTO/Socket6-0.28.tar.gz
     provides:
-      Socket6 0.27
+      Socket6 0.28
     requirements:
       ExtUtils::MakeMaker 0
   Test-Script-1.10
