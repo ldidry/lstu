@@ -127,7 +127,7 @@ sub startup {
             my $c      = shift;
             my $length = shift;
 
-            my @chars  = ('a'..'z','A'..'Z','0'..'9', '-', '_');
+            my @chars  = ('a'..'h', 'j', 'k', 'm'..'z','A'..'H', 'J'..'N', 'P'..'Z','0'..'9', '-', '_');
             my $result = '';
             foreach (1..$length) {
                 $result .= $chars[rand scalar(@chars)];
