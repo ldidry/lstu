@@ -1,7 +1,6 @@
 local/*
 .tx/*
-sessions.db
-lstu.db
+*.db
 lstu.conf
 *.swp
 script/hypnotoad.pid
