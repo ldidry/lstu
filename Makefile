@@ -14,6 +14,9 @@ locales:
 
 test:
 	$(CARTON) $(REAL_LSTU) test
+	R=$?
+	cat test.output
+	exit $R
 
 dev:
 	$(CARTON) morbo $(LSTU) --listen http://0.0.0.0:3000 --watch lib/ --watch script/ --watch themes/ --watch lstu.conf

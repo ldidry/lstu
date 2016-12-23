@@ -92,17 +92,33 @@ $t->post_ok('/stats' => form => { adminpwd => 'totoi' })
 # Test user banishing
 LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
 LstuModel::Lstu->delete_where('1 = 1');
+open my $fh, '>', 'test.output';
+print $fh time."\n";
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+print $fh time."\n";
+use Data::Dumper;
+print $fh Dumper(LstuModel::Ban->select);
 
 $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->status_is(200)
     ->json_has('msg', 'success')
     ->json_is('/success' => false)
     ->json_like('/msg' => qr#You asked to shorten too many URLs too quickly\. You're banned for \d+ hour\(s\)\.#);
+print $fh Dumper(LstuModel::Ban->select);
 
 LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
 $t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json' })
