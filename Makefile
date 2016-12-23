@@ -1,6 +1,7 @@
 EXTRACTFILES=utilities/locales_files.txt
 EN=themes/default/lib/Lstu/I18N/en.po
 FR=themes/default/lib/Lstu/I18N/fr.po
+OC=themes/default/lib/Lstu/I18N/oc.po
 XGETTEXT=carton exec local/bin/xgettext.pl
 CARTON=carton exec
 REAL_LSTU=script/application
@@ -9,6 +10,7 @@ LSTU=script/lstu
 locales:
 	$(XGETTEXT) -f $(EXTRACTFILES) -o $(EN) 2>/dev/null
 	$(XGETTEXT) -f $(EXTRACTFILES) -o $(FR) 2>/dev/null
+	$(XGETTEXT) -f $(EXTRACTFILES) -o $(OC) 2>/dev/null
 
 test:
 	$(CARTON) $(REAL_LSTU) test
