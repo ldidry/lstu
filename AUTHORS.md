@@ -10,3 +10,4 @@
 * Armando Lüscher
 * Quentin Pagès (occitan translation)
 * Phyks (Lucas Verney)
+* Pierre Rudloff
