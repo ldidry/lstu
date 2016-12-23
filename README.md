@@ -111,6 +111,9 @@ PRAGMA writable_schema = 0;
 
 For Nginx, use `utilities/lstu.nginx` as a template for your virtualhost configuration.
 
+For Apache, use `utilities/lstu.apache` as a template for your virtualhost configuration.
+Please note that this Apache template comes [from the community](https://framagit.org/luc/lstu/issues/12) and that there is **no official support for Apache**.
+
 ## Internationalization
 
 Lstu comes with English, French and Occitan languages. It will choose the language to display with the browser's settings.

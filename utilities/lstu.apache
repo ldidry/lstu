@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+    ServerName http://lstu.example.org
+    ServerAdmin contact@lstu.example.org
+
+    ProxyRequests Off
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:8080/
+    ProxyPassReverse / http://lstu.example.org/
+
+    LogLevel info
+    ErrorLog ${APACHE_LOG_DIR}/lstu.error.log
+    CustomLog ${APACHE_LOG_DIR}/lstu.access.log combined
+
+    # Local reverse proxy authorization override
+    # Most unix distribution deny proxy by default
+    <Proxy http://127.0.0.1:8080/*>;
+        # If apache 2.4:
+        Require all granted
+        # If apache 2.2:
+        #Order deny,allow
+        #Allow from all
+    </Proxy>
+</VirtualHost>
