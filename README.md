@@ -23,7 +23,7 @@ After installing Carton :
 ```shell
 git clone https://framagit.org/luc/lstu.git
 cd lstu
-carton install
+make installdeps
 cp lstu.conf.template lstu.conf
 vi lstu.conf
 ```

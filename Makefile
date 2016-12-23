@@ -20,3 +20,9 @@ dev:
 
 devlog:
 	multitail log/development.log
+
+installdeps:
+	carton install
+
+updatedeps:
+	carton update
