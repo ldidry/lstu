@@ -120,6 +120,27 @@ See https://lstu.fr/api
 
 See the [contributing guidelines](CONTRIBUTING.md).
 
+## Create new theme
+
+Go to your Lstu directory and do:
+
+```
+carton exec ./script/lstu theme name_of_your_new_theme
+```
+
+It will create a skeleton in `themes` directory.
+
+If you create a file with the same name and path as one in the default theme, it will prevail.
+If you create a new file, it will be available.
+
+If you want to translate strings from your theme (`<% l('To translate') %>`), go to your theme directory and do:
+
+```
+make locales
+```
+
+Then use the files in your theme's `lib/I18N` to translate your strings.
+
 ## Other projects dependencies
 
 Lstu is written in Perl with the Mojolicious framework and uses the Twitter bootstrap framework to look not too ugly.
