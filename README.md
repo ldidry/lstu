@@ -30,6 +30,17 @@ vi lstu.conf
 
 The configuration file is self-documented.
 
+## Upgrade
+
+```shell
+cd /your/lstu/installation/directory
+git pull
+make installdeps
+vimdiff lstu.conf.template lstu.conf
+```
+
+Then reload the service manually (see below) or with your init system (`service lstu reload`).
+
 ## Usage
 
 ### Launch manually
@@ -38,6 +49,8 @@ This is good for test, not for production.
 
 ```
 # start it
+carton exec hypnotoad script/lstu
+# reload it while running (yep, same command)
 carton exec hypnotoad script/lstu
 # stop it
 carton exec hypnotoad -s script/lstu
@@ -100,13 +113,13 @@ For Nginx, use `utilities/lstu.nginx` as a template for your virtualhost configu
 
 ## Internationalization
 
-Lstu comes with English and French languages. It will choose the language to display with the browser's settings.
+Lstu comes with English, French and Occitan languages. It will choose the language to display with the browser's settings.
 
 If you want to add more languages, please help on <https://www.transifex.com/projects/p/lstu/>
 
 There are just a few sentences, so it will be quick to translate.
 
-If you add sentences to translate, just do `make locales` to update the en.po file and don't forget to update the others translation files.
+If you add sentences to translate, just do `make locales` to update the po files.
 
 ## Official instance
 
