@@ -21,7 +21,11 @@ sub startup {
             secret          => ['hfudsifdsih'],
             page_offset     => 10,
             theme           => 'default',
-            ban_min_strike  => 3
+            ban_min_strike  => 3,
+            minion          => {
+                enabled => 0,
+                db_path => 'minion.db'
+            }
         }
     });
 
@@ -50,6 +54,11 @@ sub startup {
 
     # Piwik
     $self->plugin('Piwik');
+
+    # Minion
+    if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {
+        $self->plugin('Minion' => { SQLite => 'sqlite:'.$config->{minion}->{db_path} });
+    }
 
     # Schema updates
     LstuModel->do('CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, until INTEGER)');
@@ -203,10 +212,38 @@ sub startup {
             }
         }
     );
+
     $self->hook(after_static => sub {
         my $c = shift;
         $c->res->headers->cache_control('max-age=2592000, must-revalidate');
     });
+
+    # Minion
+    if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {
+        $self->app->minion->add_task(
+            increase_counter => sub {
+                my $job   = shift;
+                my $short = shift;
+                my $url   = shift;
+
+                my @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
+                if (scalar(@urls)) {
+                    $urls[0]->update(counter => $urls[0]->counter + 1);
+                }
+
+                my $piwik = $job->app->config('piwik');
+                if (defined($piwik) && $piwik->{idsite} && $piwik->{url}) {
+                    $job->app->piwik_api(
+                        'Track' => {
+                            idSite     => $piwik->{idsite},
+                            action_url => $url,
+                            url        => $piwik->{url}
+                        }
+                    );
+                }
+            }
+        );
+    }
 
     # For the first launch (after, this isn't really useful)
     $self->provisioning();
