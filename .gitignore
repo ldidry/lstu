@@ -1,6 +1,9 @@
 local/*
 .tx/*
 *.db
+*.db-shm
+*.db-wal
+*.db-journal
 lstu.conf
 *.swp
 script/hypnotoad.pid
