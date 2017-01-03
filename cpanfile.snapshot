@@ -1,12 +1,12 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  DBD-SQLite-1.48
-    pathname: I/IS/ISHIGAKI/DBD-SQLite-1.48.tar.gz
+  DBD-SQLite-1.54
+    pathname: I/IS/ISHIGAKI/DBD-SQLite-1.54.tar.gz
     provides:
-      DBD::SQLite 1.48
+      DBD::SQLite 1.54
       DBD::SQLite::Constants undef
-      DBD::SQLite::VirtualTable 1.48
-      DBD::SQLite::VirtualTable::Cursor 1.48
+      DBD::SQLite::VirtualTable 1.54
+      DBD::SQLite::VirtualTable::Cursor 1.54
       DBD::SQLite::VirtualTable::FileContent undef
       DBD::SQLite::VirtualTable::FileContent::Cursor undef
       DBD::SQLite::VirtualTable::PerlData undef
@@ -156,6 +156,45 @@ DISTRIBUTIONS
       Digest::SHA 1
       ExtUtils::MakeMaker 0
       perl 5.004
+  ExtUtils-Config-0.008
+    pathname: L/LE/LEONT/ExtUtils-Config-0.008.tar.gz
+    provides:
+      ExtUtils::Config 0.008
+    requirements:
+      Data::Dumper 0
+      ExtUtils::MakeMaker 6.30
+      strict 0
+      warnings 0
+  ExtUtils-Helpers-0.026
+    pathname: L/LE/LEONT/ExtUtils-Helpers-0.026.tar.gz
+    provides:
+      ExtUtils::Helpers 0.026
+      ExtUtils::Helpers::Unix 0.026
+      ExtUtils::Helpers::VMS 0.026
+      ExtUtils::Helpers::Windows 0.026
+    requirements:
+      Carp 0
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Copy 0
+      File::Spec::Functions 0
+      Text::ParseWords 3.24
+      perl 5.006
+      strict 0
+      warnings 0
+  ExtUtils-InstallPaths-0.011
+    pathname: L/LE/LEONT/ExtUtils-InstallPaths-0.011.tar.gz
+    provides:
+      ExtUtils::InstallPaths 0.011
+    requirements:
+      Carp 0
+      ExtUtils::Config 0.002
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      perl 5.006
+      strict 0
+      warnings 0
   File-Remove-1.52
     pathname: A/AD/ADAMK/File-Remove-1.52.tar.gz
     provides:
@@ -235,6 +274,34 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.30
       Locale::Maketext 1.17
+  Minion-6.02
+    pathname: S/SR/SRI/Minion-6.02.tar.gz
+    provides:
+      Minion 6.02
+      Minion::Backend undef
+      Minion::Backend::Pg undef
+      Minion::Command::minion undef
+      Minion::Command::minion::job undef
+      Minion::Command::minion::worker undef
+      Minion::Job undef
+      Minion::Worker undef
+      Mojolicious::Plugin::Minion undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mojolicious 6.0
+      perl 5.010001
+  Minion-Backend-SQLite-0.009
+    pathname: D/DB/DBOOK/Minion-Backend-SQLite-0.009.tar.gz
+    provides:
+      Minion::Backend::SQLite 0.009
+    requirements:
+      Minion 4.0
+      Module::Build::Tiny 0.034
+      Mojo::SQLite 1.002
+      Mojolicious 6.0
+      Sys::Hostname 0
+      Time::HiRes 0
+      perl 5.010001
   Module-Build-0.4214
     pathname: L/LE/LEONT/Module-Build-0.4214.tar.gz
     provides:
@@ -285,8 +352,55 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.008000
       version 0.87
-  Mojolicious-7.12
-    pathname: S/SR/SRI/Mojolicious-7.12.tar.gz
+  Module-Build-Tiny-0.039
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.039.tar.gz
+    provides:
+      Module::Build::Tiny 0.039
+    requirements:
+      CPAN::Meta 0
+      DynaLoader 0
+      Exporter 5.57
+      ExtUtils::CBuilder 0
+      ExtUtils::Config 0.003
+      ExtUtils::Helpers 0.020
+      ExtUtils::Install 0
+      ExtUtils::InstallPaths 0.002
+      ExtUtils::ParseXS 0
+      File::Basename 0
+      File::Find 0
+      File::Path 0
+      File::Spec::Functions 0
+      Getopt::Long 2.36
+      JSON::PP 2
+      Pod::Man 0
+      TAP::Harness::Env 0
+      perl 5.006
+      strict 0
+      warnings 0
+  Mojo-SQLite-1.003
+    pathname: D/DB/DBOOK/Mojo-SQLite-1.003.tar.gz
+    provides:
+      Mojo::SQLite 1.003
+      Mojo::SQLite::Database 1.003
+      Mojo::SQLite::Migrations 1.003
+      Mojo::SQLite::PubSub 1.003
+      Mojo::SQLite::Results 1.003
+      Mojo::SQLite::Transaction 1.003
+    requirements:
+      Carp 0
+      DBD::SQLite 1.50
+      DBI 1.627
+      File::Spec::Functions 0
+      File::Temp 0
+      Module::Build::Tiny 0.034
+      Mojolicious 6.14
+      Scalar::Util 0
+      URI 1.69
+      URI::db 0.15
+      URI::file 4.21
+      perl 5.010001
+  Mojolicious-7.13
+    pathname: S/SR/SRI/Mojolicious-7.13.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -350,7 +464,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.12
+      Mojolicious 7.13
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -632,3 +746,123 @@ DISTRIBUTIONS
       Test::Builder 0.32
       Test::More 0.96
       perl 5.006
+  URI-1.71
+    pathname: E/ET/ETHER/URI-1.71.tar.gz
+    provides:
+      URI 1.71
+      URI::Escape 3.31
+      URI::Heuristic 4.20
+      URI::IRI 1.71
+      URI::QueryParam 1.71
+      URI::Split 1.71
+      URI::URL 5.04
+      URI::WithBase 2.20
+      URI::_foreign 1.71
+      URI::_generic 1.71
+      URI::_idna 1.71
+      URI::_ldap 1.71
+      URI::_login 1.71
+      URI::_punycode 1.71
+      URI::_query 1.71
+      URI::_segment 1.71
+      URI::_server 1.71
+      URI::_userpass 1.71
+      URI::data 1.71
+      URI::file 4.21
+      URI::file::Base 1.71
+      URI::file::FAT 1.71
+      URI::file::Mac 1.71
+      URI::file::OS2 1.71
+      URI::file::QNX 1.71
+      URI::file::Unix 1.71
+      URI::file::Win32 1.71
+      URI::ftp 1.71
+      URI::gopher 1.71
+      URI::http 1.71
+      URI::https 1.71
+      URI::ldap 1.71
+      URI::ldapi 1.71
+      URI::ldaps 1.71
+      URI::mailto 1.71
+      URI::mms 1.71
+      URI::news 1.71
+      URI::nntp 1.71
+      URI::pop 1.71
+      URI::rlogin 1.71
+      URI::rsync 1.71
+      URI::rtsp 1.71
+      URI::rtspu 1.71
+      URI::sftp 1.71
+      URI::sip 1.71
+      URI::sips 1.71
+      URI::snews 1.71
+      URI::ssh 1.71
+      URI::telnet 1.71
+      URI::tn3270 1.71
+      URI::urn 1.71
+      URI::urn::isbn undef
+      URI::urn::oid 1.71
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      MIME::Base64 2
+      Scalar::Util 0
+      parent 0
+      perl 5.008001
+      utf8 0
+  URI-Nested-0.10
+    pathname: D/DW/DWHEELER/URI-Nested-0.10.tar.gz
+    provides:
+      URI::Nested 0.10
+    requirements:
+      Module::Build 0.30
+      Test::More 0.88
+      URI 1.40
+      perl 5.008001
+  URI-db-0.17
+    pathname: D/DW/DWHEELER/URI-db-0.17.tar.gz
+    provides:
+      URI::cassandra 0.17
+      URI::couch 0.17
+      URI::couchdb 0.17
+      URI::cubrid 0.17
+      URI::db 0.17
+      URI::db2 0.17
+      URI::derby 0.17
+      URI::firebird 0.17
+      URI::hive 0.17
+      URI::impala 0.17
+      URI::informix 0.17
+      URI::ingres 0.17
+      URI::interbase 0.17
+      URI::ldapdb 0.17
+      URI::maria 0.17
+      URI::mariadb 0.17
+      URI::max 0.17
+      URI::maxdb 0.17
+      URI::monet 0.17
+      URI::monetdb 0.17
+      URI::mongo 0.17
+      URI::mongodb 0.17
+      URI::mssql 0.17
+      URI::mysql 0.17
+      URI::oracle 0.17
+      URI::pg 0.17
+      URI::pgsql 0.17
+      URI::pgxc 0.17
+      URI::postgres 0.17
+      URI::postgresql 0.17
+      URI::postgresxc 0.17
+      URI::sqlite 0.17
+      URI::sqlite3 0.17
+      URI::sqlserver 0.17
+      URI::sybase 0.17
+      URI::teradata 0.17
+      URI::unify 0.17
+      URI::vertica 0.17
+    requirements:
+      Module::Build 0.30
+      Test::More 0.88
+      URI 1.40
+      URI::Nested 0.10
+      perl 5.008001
