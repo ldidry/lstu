@@ -1,0 +1,12 @@
+[Unit]
+Description=Shortened URLs service job queue
+Documentation=https://framagit.org/luc/lstu
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/lstu/
+ExecStart=/usr/local/bin/carton exec script/application minion worker
+
+[Install]
+WantedBy=multi-user.target

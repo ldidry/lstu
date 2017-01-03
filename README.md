@@ -88,6 +88,32 @@ There is the `contact` option (mandatory), where you have to put some way for th
 
 Please, have a look at the `lstu.conf.template`, it's full of options and is self-documented.
 
+## Heavily used instances
+
+If your instance of Lstu is heavily used, you should take a look at the `minion` option: instead of updating the URL's counter right after a visit, this update is enqueued in [Minion](http://mojolicious.org/perldoc/Minion).
+
+After enabling the use of Minion in `lstu.conf`, you'll need to start the queue processing daemon.
+You can start it manually with `make minion`, but it's better to start it as a service.
+
+Unfortunately for SysVinit users, I only created a systemd service file:
+
+```
+sudo su
+cp utilities/lstu-minion@.service /etc/systemd/system/
+vi /etc/systemd/system/lstu-minion@.service
+systemctl daemon-reload
+systemctl enable lstu-minion@1.service
+systemctl start lstu-minion@1.service
+```
+
+You can see that this is a [template](https://fedoramagazine.org/systemd-template-unit-files/) unit file: you can start more than one minion worker with the same unit file.
+You only need to enable it with an other name (`lstu-minion@1.service`, `lstu-minion@2.service`, etc.).
+
+The more minion worker you will start, the quicker the job queue will be processed.
+But be careful! As Lstu uses a SQLite database, too much workers will only lead to failures due to an `already locked database`.
+
+Start with one worker, and add one if it's not enough to process the queue quick enough.
+
 ## How many URLs can it handle ?
 
 By default, there are 8 361 453 672 available combinations. I think the sqlite db will explode before you reach this limit. If you want more shortened URLs than that, open `lstu.conf` and change the `length` setting.
