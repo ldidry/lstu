@@ -42,11 +42,15 @@ $t->get_ok($a.'i.json')
     ->status_is(200)
     ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
 
+# Needed if we use Minion for increasing counters
+sleep 2;
+
 $t->get_ok('/stats.json')
     ->status_is(200)
     ->json_has('/0/created_at', '/0/counter', '/0/short', '/0/url')
     ->json_is('/0/url' => 'https://lstu.fr', '/0/short' => $a)
-    ->json_like('/0/created_at' => qr#\d+#, '/0/counter' => qr#\d+#);
+    ->json_is('/0/counter' => 2)
+    ->json_like('/0/created_at' => qr#\d+#);
 
 my $b = $a;
 $b =~ s#http://127\.0\.0\.1:\d+/##;

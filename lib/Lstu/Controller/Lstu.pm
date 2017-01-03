@@ -223,27 +223,30 @@ sub get {
         );
         # Update counter
         $c->on(finish => sub {
-            if (defined $c->cache->{$short}) {
-                @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
-            } else {
-                $c->cache->{$short} = {
-                    last_used => time,
-                    url       => $url
-                };
-            }
-            my $counter = $urls[0]->counter + 1;
-            $urls[0]->update(counter => $counter);
-            my $piwik = $c->config('piwik');
-            if (defined($piwik) && $piwik->{idsite} && $piwik->{url}) {
-                $c->piwik_api(
-                    'Track' => {
-                        idSite     => $piwik->{idsite},
-                        action_url => $c->{url},
-                        url        => $piwik->{url}
-                    }
-                );
-            }
+            @urls = LstuModel::Lstu->select('WHERE short = ?', $short) if (defined $c->cache->{$short});
+            $c->cache->{$short} = {
+                last_used => time,
+                url       => $url
+            };
 
+            if ($c->config('minion')->{enabled} && $c->config('minion')->{db_path}) {
+                $c->app->minion->enqueue(increase_counter => [$short, $c->{url}]);
+            } else {
+                my $counter = $urls[0]->counter + 1;
+                $urls[0]->update(counter => $counter);
+
+                my $piwik = $c->config('piwik');
+                if (defined($piwik) && $piwik->{idsite} && $piwik->{url}) {
+                    $c->piwik_api(
+                        'Track' => {
+                            idSite     => $piwik->{idsite},
+                            action_url => $c->{url},
+                            url        => $piwik->{url}
+                        }
+                    );
+                }
+
+            }
             $c->clear_cache;
         });
     } else {

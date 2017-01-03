@@ -86,5 +86,13 @@
     #piwik => {
     #    url    => 'http://piwik.example.com',
     #    idsite => '1',
-    #}
+    #},
+
+    # use Minion instead of directly increase counters
+    # need to launch a minion worker service if enabled
+    # optional, Minion is disabled by default
+    #minion => {
+    #    enabled => 0,
+    #    db_path => 'minion.db' # you can define it relative to lstu directory or set an absolute path
+    #},
 };

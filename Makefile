@@ -21,6 +21,9 @@ dev:
 devlog:
 	multitail log/development.log
 
+minion:
+	$(CARTON) $(REAL_LSTU) minion worker
+
 installdeps:
 	carton install
 
