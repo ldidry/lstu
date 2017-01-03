@@ -157,16 +157,35 @@ sub stats {
         my ($first, $last) = (!$page, ($page * $c->config('page_offset') <= $total && $total < ($page + 1) * $c->config('page_offset')));
 
         my @urls  = LstuModel::Lstu->select("WHERE url IS NOT NULL ORDER BY counter DESC LIMIT ? offset ?", $c->config('page_offset'), $page * $c->config('page_offset'));
-        $c->render(
-            template => 'stats',
-            prefix   => $c->prefix,
-            urls     => \@urls,
-            first    => $first,
-            last     => $last,
-            page     => $page,
-            admin    => 1,
-            total    => $total
-        )
+        $c->respond_to(
+            json => sub {
+                my $c = shift;
+                $c->render(
+                    json => {
+                        prefix   => $c->prefix,
+                        urls     => \@urls,
+                        first    => $first,
+                        last     => $last,
+                        page     => $page,
+                        admin    => 1,
+                        total    => $total
+                    }
+                );
+            },
+            any => sub {
+                my $c = shift;
+                $c->render(
+                    template => 'stats',
+                    prefix   => $c->prefix,
+                    urls     => \@urls,
+                    first    => $first,
+                    last     => $last,
+                    page     => $page,
+                    admin    => 1,
+                    total    => $total
+                )
+            }
+        );
     } else {
         my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
 
