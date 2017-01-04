@@ -124,7 +124,7 @@ sub startup {
 
             my $prefix = $c->url_for('index')->to_abs;
             # Forced domain
-            $prefix->host($c->config('fixed_domain')) if (defined($c->config('fixed_domain')));
+            $prefix->host($c->config('fixed_domain')) if (defined($c->config('fixed_domain')) && $c->config('fixed_domain') ne '');
             # Hack for prefix (subdir) handling
             $prefix .= '/' unless ($prefix =~ m#/$#);
             return $prefix;
@@ -198,7 +198,7 @@ sub startup {
             my $c = shift;
 
             # API allowed domains
-            if (defined($c->config('allowed_domains'))) {
+            if (defined($c->config('allowed_domains')) && scalar @{$c->config('allowed_domains')}) {
                 if ($c->config('allowed_domains')->[0] eq '*') {
                     $c->res->headers->header('Access-Control-Allow-Origin' => '*');
                 } elsif (my $origin = $c->req->headers->origin) {
