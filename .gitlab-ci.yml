@@ -12,7 +12,7 @@ test:
     - sed -i -e "s@ \(adminpwd.*\)@ \#\1@" -e "s@#hashed_adminpwd.*@hashed_adminpwd => '31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66',@" lstu.conf
     - rm -f test.db
     - make test
-    - sed -i -e "s@#minion.*@minion => { enabled => 0, db_path => 'minion.db' },@" lstu.conf
+    - sed -i -e "s@#minion.*@minion => { enabled => 1, db_path => 'minion.db' },@" lstu.conf
     - rm -f test.db minion.db
     - make minion &
     - make test
