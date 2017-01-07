@@ -6,6 +6,8 @@ use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
 use Net::Abuse::Utils::Spamhaus qw(check_fqdn);
+use Net::LDAP;
+use Apache::Htpasswd;
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
 
@@ -15,17 +17,18 @@ sub startup {
 
     my $config = $self->plugin('Config' => {
         default =>  {
-            provisioning    => 100,
-            provis_step     => 5,
-            length          => 8,
-            secret          => ['hfudsifdsih'],
-            page_offset     => 10,
-            theme           => 'default',
-            ban_min_strike  => 3,
-            minion          => {
+            provisioning     => 100,
+            provis_step      => 5,
+            length           => 8,
+            secret           => ['hfudsifdsih'],
+            page_offset      => 10,
+            theme            => 'default',
+            ban_min_strike   => 3,
+            minion           => {
                 enabled => 0,
                 db_path => 'minion.db'
-            }
+            },
+            session_duration => 3600,
         }
     });
 
@@ -54,6 +57,71 @@ sub startup {
 
     # Piwik
     $self->plugin('Piwik');
+
+    # Authentication (if configured)
+    if (defined($self->config('ldap')) || defined($self->config('htpasswd'))) {
+        die 'Unable to read '.$self->config('htpasswd') if (defined($self->config('htpasswd')) && !-r $self->config('htpasswd'));
+        $self->plugin('Authentication' =>
+            {
+                autoload_user => 1,
+                session_key   => 'Lstu',
+                load_user     => sub {
+                    my ($c, $username) = @_;
+
+                    return $username;
+                },
+                validate_user => sub {
+                    my ($c, $username, $password, $extradata) = @_;
+
+                    if (defined($c->config('ldap'))) {
+                        my $ldap = Net::LDAP->new($c->config->{ldap}->{uri});
+                        my $mesg = $ldap->bind($c->config->{ldap}->{bind_user}.$c->config->{ldap}->{bind_dn},
+                            password => $c->config->{ldap}->{bind_pwd}
+                        );
+
+                        $mesg->code && die $mesg->error;
+
+                        $mesg = $ldap->search(
+                            base   => $c->config->{ldap}->{user_tree},
+                            filter => "(&(uid=$username)".$c->config->{ldap}->{user_filter}.")"
+                        );
+
+                        if ($mesg->code) {
+                            $c->app->log->error($mesg->error);
+                            return undef;
+                        }
+
+                        # Now we know that the user exists
+                        $mesg = $ldap->bind('uid='.$username.$c->config->{ldap}->{bind_dn},
+                            password => $password
+                        );
+
+                        if ($mesg->code) {
+                            $c->app->log->info("[LDAP authentication failed] login: $username, IP: ".$c->ip);
+                            $c->app->log->error("[LDAP authentication failed] ".$mesg->error);
+                            return undef;
+                        }
+
+                        $c->app->log->info("[LDAP authentication successful] login: $username, IP: ".$c->ip);
+                    } elsif (defined($c->config('htpasswd'))) {
+                        my $htpasswd = new Apache::Htpasswd(
+                            {
+                                passwdFile => $c->config('htpasswd'),
+                                ReadOnly   => 1
+                            }
+                        );
+                        if (!$htpasswd->htCheckPassword($username, $password)) {
+                            return undef;
+                        }
+                        $c->app->log->info("[Simple authentication successful] login: $username, IP: ".$c->ip);
+                    }
+
+                    return $username;
+                }
+            }
+        );
+        $self->app->sessions->default_expiration($self->config('session_duration'));
+    }
 
     # Minion
     if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {
@@ -256,8 +324,46 @@ sub startup {
 
     # Normal route to controller
     $r->get('/' => sub {
-        shift->render(template => 'index');
+        my $c = shift;
+        if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {
+            $c->render(template => 'index');
+        } else {
+            $c->redirect_to('login');
+        }
     })->name('index');
+
+    if (defined $self->config('ldap') || defined $self->config('htpasswd')) {
+        # Login page
+        $r->get('/login' => sub {
+            my $c = shift;
+            if ($c->is_user_authenticated) {
+                $c->redirect_to('index');
+            } else {
+                $c->render(template => 'login');
+            }
+        });
+        # Authentication
+        $r->post('/login' => sub {
+            my $c = shift;
+            my $login = $c->param('login');
+            my $pwd   = $c->param('password');
+
+            if($c->authenticate($login, $pwd)) {
+                $c->redirect_to('index');
+            } else {
+                $c->stash(msg => $c->l('Please, check your credentials: unable to authenticate.'));
+                $c->render(template => 'login');
+            }
+        });
+        # Logout page
+        $r->get('/logout' => sub {
+            my $c = shift;
+            if ($c->is_user_authenticated) {
+                $c->logout;
+            }
+            $c->render(template => 'logout');
+        })->name('logout');
+    }
 
     $r->get('/api' => sub {
         shift->render(template => 'api');

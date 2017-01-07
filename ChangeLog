@@ -3,6 +3,7 @@ Revision history for Perl application Lstu
 0.08 ?
 	- Add Piwik tracking option
 	- Add Minion option for async counters increasing
+	- Add LDAP and Htpasswd authentication (#8)
 
 0.07 Tue Dec 20 17:55:00 2016 +0100
 	- Add logo
