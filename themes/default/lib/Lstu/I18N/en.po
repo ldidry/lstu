@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:106
+#: lib/Lstu/Controller/Lstu.pm:108
 msgid "%1 is not a valid URL."
 msgstr ""
 
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Admin password"
 msgstr ""
 
-#: lib/Lstu/Controller/Admin.pm:57 lib/Lstu/Controller/Admin.pm:90
+#: lib/Lstu/Controller/Admin.pm:61 lib/Lstu/Controller/Admin.pm:94
 msgid "Bad password"
 msgstr ""
 
@@ -92,6 +92,10 @@ msgstr ""
 msgid "License:"
 msgstr ""
 
+#: themes/default/templates/layouts/default.html.ep:62
+msgid "Logout"
+msgstr ""
+
 #: themes/default/templates/stats.html.ep:10
 msgid "Logout from admin stats"
 msgstr ""
@@ -101,12 +105,16 @@ msgid "Next"
 msgstr ""
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:98
+#: lib/Lstu/Controller/Lstu.pm:100
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
 #: themes/default/templates/api.html.ep:12
 msgid "Parameters:"
+msgstr ""
+
+#: lib/Lstu.pm:353
+msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
 #: themes/default/templates/stats.html.ep:63
@@ -125,36 +133,40 @@ msgstr ""
 msgid "Shortened URL"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:59 themes/default/templates/stats.html.ep:4
+#: themes/default/templates/layouts/default.html.ep:64
+msgid "Signin"
+msgstr ""
+
+#: themes/default/templates/layouts/default.html.ep:61 themes/default/templates/layouts/default.html.ep:67 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
 msgstr ""
 
 #. ($url->host)
-#: lib/Lstu.pm:127
+#: lib/Lstu.pm:226
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr ""
 
 #. ($url->host)
-#: lib/Lstu.pm:140
+#: lib/Lstu.pm:239
 msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:79 lib/Lstu/Controller/Lstu.pm:221
+#: lib/Lstu/Controller/Admin.pm:83 lib/Lstu/Controller/Lstu.pm:275
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:50
+#: lib/Lstu/Controller/Lstu.pm:52
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:48
+#: lib/Lstu/Controller/Lstu.pm:50
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
 
-#: lib/Lstu/Controller/Admin.pm:25
+#: lib/Lstu/Controller/Admin.pm:26
 msgid "Too many bad passwords. You're banned."
 msgstr ""
 

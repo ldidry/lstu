@@ -95,4 +95,27 @@
     #    enabled => 0,
     #    db_path => 'minion.db' # you can define it relative to lstu directory or set an absolute path
     #},
+
+    # set `ldap` if you want that only authenticated users can shorten URLs
+    # please note that everybody can still use shortend URLs
+    # optional, no default
+    #ldap => {
+    #    uri         => 'ldaps://ldap.example.org',
+    #    user_tree   => 'ou=users,dc=example,dc=org',
+    #    bind_dn     => ',ou=users,dc=example,dc=org',
+    #    bind_user   => 'uid=ldap_user',
+    #    bind_pwd    => 'secr3t',
+    #    user_filter => '!(uid=ldap_user)'
+    #},
+
+    # set `htpasswd` if you want to use an htpasswd file instead of ldap
+    # create the file with `htpasswd -c lstu.passwd user`, update it with `htpasswd lstu.passwd user2`
+    # make sure that lstu can read the file!
+    # optional, no default
+    #htpasswd => 'lstu.passwd',
+
+    # if you've set ldap or htpasswd above, the session will last `session_duration` seconds before
+    # the user needs to reauthenticate
+    # optional, default is 3600
+    #session_duration => 3600,
 };

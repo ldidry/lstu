@@ -1,0 +1,17 @@
+% # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+% if (defined stash('msg')) {
+    <%= stash('msg') %>
+% }
+<form method="post" action="<%= url_for('login') %>"  class="form-inline">
+    <div class="form-group">
+        <label for="login"><%= l('Login') %></label>
+        <input id="login" type="text" class="validate" name="login">
+    </div>
+    <div class="form-group">
+        <label for="password"><%= l('Password') %></label>
+        <input id="password" type="password" class="validate" name="password">
+    </div>
+    <button class="btn btn-default" type="submit" name="action">
+        <%= l('Signin') %>
+    </button>
+</form>

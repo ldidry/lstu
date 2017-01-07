@@ -1,6 +1,7 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 use Mojo::Base -strict;
 use Mojo::JSON qw(true false);
+use Mojo::Util qw(slurp spurt);
 
 use Test::More;
 use Test::Mojo;
@@ -114,5 +115,44 @@ $t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json'
     ->json_has('url', 'short', 'success')
     ->json_is('/success' => true, '/url' => 'https://fiat-tux.fr')
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
+
+# Test htpasswd
+my $config      = slurp 'lstu.conf';
+my $config_orig = $config;
+        $config =~ s/#?htpasswd.*/htpasswd => 't\/lstu.passwd'/gm;
+spurt $config, 'lstu.conf';
+
+LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
+LstuModel::Lstu->delete_where('1 = 1');
+
+$t = Test::Mojo->new('Lstu');
+$t->get_ok('/')
+    ->status_is(302);
+
+$t->get_ok('/login')
+    ->status_is(200)
+    ->content_like(qr/Login/);
+
+$t->post_ok('/login' => form => { login => 'luc', password => 'titi' })
+    ->status_is(200)
+    ->content_like(qr/Please, check your credentials: unable to authenticate\./);
+
+$t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
+    ->status_is(302);
+
+$t->post_ok('/login' => form => { login => 'luc', password => 'toto' })
+    ->status_is(302);
+
+$t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
+    ->status_is(200)
+    ->json_has('url', 'short', 'success')
+    ->json_is('/success' => true, '/url' => 'https://lstu.fr')
+    ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
+
+$t->get_ok('/logout')
+  ->status_is(200)
+  ->content_like(qr/You have been successfully logged out\./);
+
+spurt $config_orig, 'lstu.conf';
 
 done_testing();
