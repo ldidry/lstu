@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:108
+#: lib/Lstu/Controller/Lstu.pm:109
 msgid "%1 is not a valid URL."
 msgstr "%1 n’est pas une URL valide."
 
@@ -38,6 +38,10 @@ msgstr "Mot de passe administrateur"
 #: lib/Lstu/Controller/Admin.pm:61 lib/Lstu/Controller/Admin.pm:94
 msgid "Bad password"
 msgstr "Mot de passe incorrect"
+
+#: themes/default/templates/layouts/default.html.ep:69
+msgid "Browser extensions"
+msgstr "Extensions navigateur"
 
 #: themes/default/templates/index.html.ep:20
 msgid "Copy to clipboard"
@@ -108,7 +112,7 @@ msgid "Next"
 msgstr "Suivant"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:100
+#: lib/Lstu/Controller/Lstu.pm:101
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr "Il n’y a plus d’URL raccourcie disponible. Veuillez réessayer ou contactez l’administrateur sur %1. Rappel de l’URL à raccourcir : %2"
 
@@ -116,7 +120,7 @@ msgstr "Il n’y a plus d’URL raccourcie disponible. Veuillez réessayer ou co
 msgid "Parameters:"
 msgstr "Paramètres :"
 
-#: lib/Lstu.pm:353
+#: lib/Lstu.pm:354
 msgid "Please, check your credentials: unable to authenticate."
 msgstr "Impossible de s’authentifier, veuillez vérifier vos identifiants"
 
@@ -145,27 +149,27 @@ msgid "Statistics"
 msgstr "Statistiques"
 
 #. ($url->host)
-#: lib/Lstu.pm:226
+#: lib/Lstu.pm:227
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr "L'hôte de l'URL ou d'une de ses redirections (%1) est considéré comme nocif par Spamhaus. Je refuse de la raccourcir."
 
 #. ($url->host)
-#: lib/Lstu.pm:239
+#: lib/Lstu.pm:240
 msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr "L'URL redirige 3 fois ou plus vers un autre site. Il est probable qu'il s'agisse d'une URL dangereuse (pourriel, hameçonnage, etc.). Je refuse de la raccourcir."
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:83 lib/Lstu/Controller/Lstu.pm:275
+#: lib/Lstu/Controller/Admin.pm:83 lib/Lstu/Controller/Lstu.pm:279
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL raccourcie %1 n’existe pas"
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:52
+#: lib/Lstu/Controller/Lstu.pm:53
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "Le texte du raccourci (%1) est déjà utilisé. Veuillez en choisir un autre"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:50
+#: lib/Lstu/Controller/Lstu.pm:51
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr "Le texte du raccourci ne doit contenir que des chiffres, des lettres et les caractères - et _, ne peut être \"a\", \"api\", \"d\" ou \"stats\" ou se terminer par \".json\". Rappel de l’URL à raccourcir : %1"
 
@@ -182,7 +186,7 @@ msgid "URL to shorten"
 msgstr "URL à raccourcir"
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:26
+#: lib/Lstu/Controller/Lstu.pm:27
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Vous avez demandé à réduire trop d’URLs en trop peu de temps. Vous êtes banni pour %1 heure(s)."
 

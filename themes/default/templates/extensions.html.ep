@@ -1,0 +1,5 @@
+% # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+<ul>
+    <li><%= link_to 'Firefox' => 'https://addons.mozilla.org/fr/firefox/addon/frama-link-shortener/' %></li>
+    <li><%= link_to 'Chrome/Chomium' => 'https://chrome.google.com/webstore/detail/framalink-shortener/iaifohljkblilajpaengcgfnobjdmlpd' %></li>
+</ul>

@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:108
+#: lib/Lstu/Controller/Lstu.pm:109
 msgid "%1 is not a valid URL."
 msgstr "%1 es pas una URL valida."
 
@@ -38,6 +38,10 @@ msgstr "Senhal administrator"
 #: lib/Lstu/Controller/Admin.pm:61 lib/Lstu/Controller/Admin.pm:94
 msgid "Bad password"
 msgstr "Senhal incorrèct"
+
+#: themes/default/templates/layouts/default.html.ep:69
+msgid "Browser extensions"
+msgstr ""
 
 #: themes/default/templates/index.html.ep:20
 msgid "Copy to clipboard"
@@ -108,7 +112,7 @@ msgid "Next"
 msgstr "Seguent"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:100
+#: lib/Lstu/Controller/Lstu.pm:101
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensejar o de contactar l’administrator sus %1. Recòrd de l’URL per acorchar : %2"
 
@@ -116,7 +120,7 @@ msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensejar o 
 msgid "Parameters:"
 msgstr "Paramètres :"
 
-#: lib/Lstu.pm:353
+#: lib/Lstu.pm:354
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
@@ -145,27 +149,27 @@ msgid "Statistics"
 msgstr "Estatisticas"
 
 #. ($url->host)
-#: lib/Lstu.pm:226
+#: lib/Lstu.pm:227
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr "L’òste de l’URL o d’una de sas redireccions (%1) es considerat coma nociu per Spamhaus. Refusi de l’acorchar."
 
 #. ($url->host)
-#: lib/Lstu.pm:239
+#: lib/Lstu.pm:240
 msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr "L’URL endralha 3 còps o mai cap a un a autre site. Pòt èsser una URL dangerossa (porrièl, pesca electronica, etc). Refusi de l’acorchar"
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:83 lib/Lstu/Controller/Lstu.pm:275
+#: lib/Lstu/Controller/Admin.pm:83 lib/Lstu/Controller/Lstu.pm:279
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL acorchada %1 existís pas"
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:52
+#: lib/Lstu/Controller/Lstu.pm:53
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "Lo tèxte de l’acorchi (%1) es ja utilizat. Mercés de ne causir un autre"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:50
+#: lib/Lstu/Controller/Lstu.pm:51
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr "Lo tèxte de l’acorchi deu pas que contenir de chifras, letras e los caractèrs - e _, èsser \"a\", \"api\", \"d\" o \"stats\" o acabar per \".json\". Recòrd de l’URL per acorchar : %1"
 
@@ -182,7 +186,7 @@ msgid "URL to shorten"
 msgstr "URL per acorchar"
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:26
+#: lib/Lstu/Controller/Lstu.pm:27
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Avètz demandat d’acorchar tròp d'URL en pauc de temps. Sètz bandit per %1 ora(s)."
 
