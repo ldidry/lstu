@@ -1,17 +1,35 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 use Mojo::Base -strict;
 use Mojo::JSON qw(true false);
-use Mojo::Util qw(slurp spurt);
+use Mojo::File;
+use Mojolicious;
 
 use Test::More;
 use Test::Mojo;
 
 use lib 'lib';
-use LstuModel;
+use Lstu::DB::URL;
+use Lstu::DB::Ban;
+use Lstu::DB::Session;
+use FindBin qw($Bin);
+use File::Spec::Functions;
 
-# Rotten syntax, but prevents "Static LstuModel->delete has been deprecated"
-LstuModel::Lstu->delete_where('1 = 1');
-LstuModel::Ban->delete_where('1 = 1');
+my $config;
+
+BEGIN {
+    my $m = Mojolicious->new;
+    $config = $m->plugin('Config' =>
+        {
+            file    => catfile($Bin, '..' ,'lstu.conf'),
+            default => {
+                dbtype => 'sqlite'
+            }
+        }
+    );
+}
+
+Lstu::DB::URL->new(dbtype => $config->{dbtype})->delete_all;
+Lstu::DB::Ban->new(dbtype => $config->{dbtype})->delete_all;
 
 my $t = Test::Mojo->new('Lstu');
 $t->get_ok('/')
@@ -29,7 +47,7 @@ $t->post_ok('/a' => form => { lsturl => 'truc', format => 'json' })
     ->json_has('msg', 'success')
     ->json_is({success => false, msg => 'truc is not a valid URL.'});
 
-LstuModel::Ban->delete_where('1 = 1'); # Prevents banishing
+Lstu::DB::Ban->new(dbtype => $config->{dbtype})->delete_all; # prevents banishing
 my $a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
 
 $t->get_ok($a)
@@ -82,7 +100,6 @@ $t->get_ok('/d/'.$a.'?format=json')
 $t->post_ok('/stats' => form => { adminpwd => 'toto', action => 'logout' })
     ->status_is(200);
 
-LstuModel::Ban->delete_where('1 = 1');
 # Test admin banishing
 for my $i (1..3) {
     $t->post_ok('/stats' => form => { adminpwd => 'totoi' })
@@ -95,8 +112,8 @@ $t->post_ok('/stats' => form => { adminpwd => 'totoi' })
     ->content_like(qr/Too many bad passwords\./);
 
 # Test user banishing
-LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
-LstuModel::Lstu->delete_where('1 = 1');
+Lstu::DB::Ban->new(dbtype => $config->{dbtype})->delete_all; # reset banishing
+Lstu::DB::URL->new(dbtype => $config->{dbtype})->delete_all;
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
@@ -109,7 +126,7 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->json_is('/success' => false)
     ->json_like('/msg' => qr#You asked to shorten too many URLs too quickly\. You're banned for \d+ hour\(s\)\.#);
 
-LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
+Lstu::DB::Ban->new(dbtype => $config->{dbtype})->delete_all; # reset banishing
 $t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json' })
     ->status_is(200)
     ->json_has('url', 'short', 'success')
@@ -117,13 +134,14 @@ $t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json'
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
 # Test htpasswd
-my $config      = slurp 'lstu.conf';
-my $config_orig = $config;
-        $config =~ s/#?htpasswd.*/htpasswd => 't\/lstu.passwd'/gm;
-spurt $config, 'lstu.conf';
+my $config_file    = Mojo::File->new('lstu.conf');
+my $config_content = $config_file->slurp;
+my $config_orig    = $config_content;
+   $config_content =~ s/#?htpasswd.*/htpasswd => 't\/lstu.passwd'/gm;
+$config_file->spurt($config_content);
 
-LstuModel::Ban->delete_where('1 = 1'); # Reset banishing
-LstuModel::Lstu->delete_where('1 = 1');
+Lstu::DB::Ban->new(dbtype => $config->{dbtype})->delete_all; # reset banishing
+Lstu::DB::URL->new(dbtype => $config->{dbtype})->delete_all;
 
 $t = Test::Mojo->new('Lstu');
 $t->get_ok('/')
@@ -153,6 +171,6 @@ $t->get_ok('/logout')
   ->status_is(200)
   ->content_like(qr/You have been successfully logged out\./);
 
-spurt $config_orig, 'lstu.conf';
+$config_file->spurt($config_orig);
 
 done_testing();

@@ -2,7 +2,9 @@
 package Lstu::Controller::Admin;
 use Digest::SHA qw(sha256_hex);
 use Mojo::Base 'Mojolicious::Controller';
-use LstuModel;
+use Lstu::DB::URL;
+use Lstu::DB::Ban;
+use Lstu::DB::Session;
 
 sub login {
     my $c    = shift;
@@ -13,16 +15,17 @@ sub login {
 
     my $ip = $c->ip;
 
-    my @banned = LstuModel::Ban->select('WHERE ip = ? AND until > ? AND strike >= ?', $ip, time, $c->config('ban_min_strike'));
-    if (scalar @banned) {
+    my $banned = Lstu::DB::Ban->new(
+        dbtype => $c->config('dbtype'),
+        ip     => $ip
+    )->is_banned($c->config('ban_min_strike'));
+    if (defined $banned) {
         my $penalty = 3600;
-        if ($banned[0]->strike >= 2 * $c->config('ban_min_strike')) {
+        if ($banned->strike >= 2 * $c->config('ban_min_strike')) {
             $penalty = 3600 * 24 * 30; # 30 days of banishing
         }
-        $banned[0]->update(
-            strike => $banned[0]->strike + 1,
-            until  => time + $penalty
-        );
+        $banned->increment_ban_delay($penalty);
+
         $c->flash('msg'    => $c->l('Too many bad passwords. You\'re banned.'));
         $c->flash('banned' => 1);
         $c->redirect_to('stats');
@@ -33,31 +36,27 @@ sub login {
            ) {
             my $token = $c->shortener(32);
 
-            LstuModel::Sessions->create(
-                token => $token,
-                until => time + 3600
-            );
+            Lstu::DB::Session->new(
+                dbtype => $c->config('dbtype'),
+                token  => $token,
+                until  => time + 3600
+            )->write;
+
             $c->session('token' => $token);
             $c->redirect_to('stats');
         } elsif (defined($act) && $act eq 'logout') {
-            LstuModel::Sessions->delete_where('token = ?', $c->session->{token});
+            Lstu::DB::Session->new(
+                dbtype => $c->config('dbtype'),
+                token  => $c->session('token')
+            )->delete;
             delete $c->session->{token};
             $c->redirect_to('stats');
         } else {
-            my @bans = LstuModel::Ban->select('WHERE ip = ?', $ip);
+            Lstu::DB::Ban->new(
+                dbtype => $c->config('dbtype'),
+                ip     => $ip
+            )->increment_ban_delay(3600);
 
-            if (scalar @bans) {
-                $bans[0]->update(
-                    strike => $bans[0]->strike + 1,
-                    until  => time + 3600
-                );
-            } else {
-                LstuModel::Ban->create(
-                    ip     => $ip,
-                    strike => 1,
-                    until  => time + 3600
-                );
-            }
             $c->flash('msg' => $c->l('Bad password'));
             $c->redirect_to('stats');
         }
@@ -65,13 +64,20 @@ sub login {
 }
 
 sub delete {
-    my $c = shift;
+    my $c     = shift;
     my $short = $c->param('short');
 
-    if (defined($c->session('token')) && LstuModel::Sessions->count('WHERE token = ?', $c->session('token'))) {
-        my @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
-        if (scalar(@urls)) {
-            my $deleted = LstuModel::Lstu->delete_where('short = ?', $short);
+    my $db_session = Lstu::DB::Session->new(
+        dbtype => $c->config('dbtype'),
+        token  => $c->session('token')
+    );
+    if (defined($c->session('token')) && $db_session->is_valid) {
+        my $db_url = Lstu::DB::URL->new(
+            dbtype => $c->config('dbtype'),
+            short  => $short
+        );
+        if ($db_url->url) {
+            my $deleted = $db_url->delete;
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->true, deleted => $deleted } },
                 any  => sub {

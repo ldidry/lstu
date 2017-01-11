@@ -30,6 +30,32 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.42
       Test::More 0
       perl 5.005
+  CPAN-Meta-2.150010
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.150010.tar.gz
+    provides:
+      CPAN::Meta 2.150010
+      CPAN::Meta::Converter 2.150010
+      CPAN::Meta::Feature 2.150010
+      CPAN::Meta::History 2.150010
+      CPAN::Meta::Merge 2.150010
+      CPAN::Meta::Prereqs 2.150010
+      CPAN::Meta::Spec 2.150010
+      CPAN::Meta::Validator 2.150010
+      Parse::CPAN::Meta 2.150010
+    requirements:
+      CPAN::Meta::Requirements 2.121
+      CPAN::Meta::YAML 0.011
+      Carp 0
+      Encode 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.17
+      File::Spec 0.80
+      JSON::PP 2.27300
+      Scalar::Util 0
+      perl 5.008001
+      strict 0
+      version 0.88
+      warnings 0
   Convert-ASN1-0.27
     pathname: G/GB/GBARR/Convert-ASN1-0.27.tar.gz
     provides:
@@ -381,37 +407,28 @@ DISTRIBUTIONS
       Encode 2.10
       Exporter 5.57
       ExtUtils::MakeMaker 6.30
-  IO-Socket-INET6-2.72
-    pathname: S/SH/SHLOMIF/IO-Socket-INET6-2.72.tar.gz
+  IO-Socket-IP-0.38
+    pathname: P/PE/PEVANS/IO-Socket-IP-0.38.tar.gz
     provides:
-      IO::Socket::INET6 2.72
+      IO::Socket::IP 0.38
     requirements:
-      Carp 0
-      Errno 0
-      Exporter 0
       IO::Socket 0
-      Module::Build 0.36
-      Socket 0
-      Socket6 0.12
-      Test::More 0
-      perl 5.008
-      strict 0
-      warnings 0
-  IO-Socket-SSL-2.040
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.040.tar.gz
+      Socket 1.97
+      Test::More 0.88
+  IO-Socket-SSL-2.043
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.043.tar.gz
     provides:
-      IO::Socket::SSL 2.040
+      IO::Socket::SSL 2.043
       IO::Socket::SSL::Intercept 2.014
-      IO::Socket::SSL::OCSP_Cache 2.040
-      IO::Socket::SSL::OCSP_Resolver 2.040
+      IO::Socket::SSL::OCSP_Cache 2.043
+      IO::Socket::SSL::OCSP_Resolver 2.043
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.040
-      IO::Socket::SSL::SSL_HANDLE 2.040
-      IO::Socket::SSL::Session_Cache 2.040
+      IO::Socket::SSL::SSL_Context 2.043
+      IO::Socket::SSL::SSL_HANDLE 2.043
+      IO::Socket::SSL::Session_Cache 2.043
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
-      Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
   IPC-Run3-0.048
@@ -428,6 +445,15 @@ DISTRIBUTIONS
       JSON 2.90
       JSON::Backend::PP 2.90
       JSON::Boolean 2.90
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
+  JSON-PP-2.27400
+    pathname: M/MA/MAKAMAKA/JSON-PP-2.27400.tar.gz
+    provides:
+      JSON::PP 2.27400
+      JSON::PP::Boolean 2.27400
+      JSON::PP::IncrParser 2.27400
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -481,7 +507,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Mojolicious 6.0
-      perl 5.010001
   Minion-Backend-SQLite-0.009
     pathname: D/DB/DBOOK/Minion-Backend-SQLite-0.009.tar.gz
     provides:
@@ -591,8 +616,8 @@ DISTRIBUTIONS
       URI::db 0.15
       URI::file 4.21
       perl 5.010001
-  Mojolicious-7.13
-    pathname: S/SR/SRI/Mojolicious-7.13.tar.gz
+  Mojolicious-7.18
+    pathname: S/SR/SRI/Mojolicious-7.18.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -614,6 +639,7 @@ DISTRIBUTIONS
       Mojo::Date undef
       Mojo::EventEmitter undef
       Mojo::Exception undef
+      Mojo::File undef
       Mojo::Headers undef
       Mojo::HelloWorld undef
       Mojo::Home undef
@@ -656,7 +682,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.13
+      Mojolicious 7.18
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -707,7 +733,6 @@ DISTRIBUTIONS
       JSON::PP 2.27103
       Pod::Simple 3.09
       Time::Local 1.2
-      perl 5.010001
   Mojolicious-Plugin-Authentication-1.29
     pathname: M/MA/MADCAT/Mojolicious-Plugin-Authentication-1.29.tar.gz
     provides:
@@ -743,14 +768,6 @@ DISTRIBUTIONS
       Mojolicious 4.88
       Test::More 0
       perl 5.010001
-  Mozilla-CA-20160104
-    pathname: A/AB/ABH/Mozilla-CA-20160104.tar.gz
-    provides:
-      Mozilla::CA 20160104
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test 0
-      perl 5.006
   Net-Abuse-Utils-Spamhaus-0.09
     pathname: S/SA/SAXJAZMAN/net/Net-Abuse-Utils-Spamhaus-0.09.tar.gz
     provides:
@@ -856,7 +873,6 @@ DISTRIBUTIONS
       File::Spec 0.86
       IO::Socket 1.16
       IO::Socket::INET 1.25
-      IO::Socket::INET6 2.01
       IO::Socket::IP 0.29
       MIME::Base64 2.11
       Test::More 0.52
@@ -948,12 +964,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       File::Spec 0
       strict 0
-  Socket6-0.28
-    pathname: U/UM/UMEMOTO/Socket6-0.28.tar.gz
-    provides:
-      Socket6 0.28
-    requirements:
-      ExtUtils::MakeMaker 0
   Test-Script-1.10
     pathname: P/PL/PLICEASE/Test-Script-1.10.tar.gz
     provides:
@@ -1105,6 +1115,15 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
+  XML-SAX-Base-1.08
+    pathname: G/GR/GRANTM/XML-SAX-Base-1.08.tar.gz
+    provides:
+      XML::SAX::Base 1.08
+      XML::SAX::Base::NoHandler 1.08
+      XML::SAX::Exception 1.08
+    requirements:
+      ExtUtils::MakeMaker 6.31
+      Test::More 0.88
   libwww-perl-6.15
     pathname: E/ET/ETHER/libwww-perl-6.15.tar.gz
     provides:
@@ -1233,7 +1252,6 @@ DISTRIBUTIONS
       HTTP::Response 0
       HTTP::Status 0
       IO::File 0
-      IO::Socket::INET6 0
       IO::Socket::SSL 1.26
       JSON 0
       LWP 0
@@ -1244,4 +1262,5 @@ DISTRIBUTIONS
       Text::Soundex 0
       Time::Local 0
       URI::ldap 1.1
+      XML::SAX::Base 0
       perl 5.008001

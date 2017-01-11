@@ -1,13 +1,15 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu;
 use Mojo::Base 'Mojolicious';
-use LstuModel;
 use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
 use Net::Abuse::Utils::Spamhaus qw(check_fqdn);
 use Net::LDAP;
 use Apache::Htpasswd;
+use Lstu::DB::URL;
+use Lstu::DB::Ban;
+use Lstu::DB::Session;
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
 
@@ -29,6 +31,7 @@ sub startup {
                 db_path => 'minion.db'
             },
             session_duration => 3600,
+            dbtype           => 'sqlite',
         }
     });
 
@@ -40,15 +43,15 @@ sub startup {
     shift @{$self->renderer->paths};
     shift @{$self->static->paths};
     if ($config->{theme} ne 'default') {
-        my $theme = $self->home->rel_dir('themes/'.$config->{theme});
+        my $theme = $self->home->rel_file('themes/'.$config->{theme});
         push @{$self->renderer->paths}, $theme.'/templates' if -d $theme.'/templates';
         push @{$self->static->paths}, $theme.'/public' if -d $theme.'/public';
     }
-    push @{$self->renderer->paths}, $self->home->rel_dir('themes/default/templates');
-    push @{$self->static->paths}, $self->home->rel_dir('themes/default/public');
+    push @{$self->renderer->paths}, $self->home->rel_file('themes/default/templates');
+    push @{$self->static->paths}, $self->home->rel_file('themes/default/public');
 
     # Internationalization
-    my $lib = $self->home->rel_dir('themes/'.$config->{theme}.'/lib');
+    my $lib = $self->home->rel_file('themes/'.$config->{theme}.'/lib');
     eval qq(use lib "$lib");
     $self->plugin('I18N');
 
@@ -128,10 +131,7 @@ sub startup {
         $self->plugin('Minion' => { SQLite => 'sqlite:'.$config->{minion}->{db_path} });
     }
 
-    # Schema updates
-    LstuModel->do('CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, until INTEGER)');
-    LstuModel->do('CREATE TABLE IF NOT EXISTS ban (ip TEXT PRIMARY KEY, until INTEGER, strike INTEGER)');
-
+    # Secrets
     $self->secrets($config->{secret});
 
     # Helpers
@@ -168,19 +168,15 @@ sub startup {
             my $c = shift;
 
             # Create some short patterns for provisioning
-            if (LstuModel::Lstu->count('WHERE url IS NULL') < $c->config('provisioning')) {
+            my $db_url = Lstu::DB::URL->new(dbtype => $c->config('dbtype'));
+            if ($db_url->count_empty < $c->config('provisioning')) {
                 for (my $i = 0; $i < $c->config('provis_step'); $i++) {
-                    if (LstuModel->begin) {
-                        my $short;
-                        do {
-                            $short= $c->shortener($c->config('length'));
-                        } while (LstuModel::Lstu->count('WHERE short = ?', $short));
+                    my $short;
+                    do {
+                        $short= $c->shortener($c->config('length'));
+                    } while ($db_url->exist($short));
 
-                        LstuModel::Lstu->create(
-                            short => $short
-                        );
-                        LstuModel->commit;
-                    }
+                    $db_url->short($short)->write;
                 }
             }
         }
@@ -248,9 +244,9 @@ sub startup {
             my $c = shift;
 
             # Delete old sessions
-            LstuModel::Sessions->delete_where('until < ?', time);
+            Lstu::DB::Session->new(dbtype => $c->config('dbtype'))->clear();
             # Delete old bans
-            LstuModel::Ban->delete_where('until < ?', time);
+            Lstu::DB::Ban->new(dbtype => $c->config('dbtype'))->clear();
         }
     );
 
@@ -294,10 +290,10 @@ sub startup {
                 my $short = shift;
                 my $url   = shift;
 
-                my @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
-                if (scalar(@urls)) {
-                    $urls[0]->update(counter => $urls[0]->counter + 1);
-                }
+                my $db_url = Lstu::DB::URL->new(
+                    dbtype => $job->app->config('dbtype'),
+                    short  => $short
+                )->increment_counter;
 
                 my $piwik = $job->app->config('piwik');
                 if (defined($piwik) && $piwik->{idsite} && $piwik->{url}) {
