@@ -1,7 +1,9 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu::Controller::Lstu;
 use Mojo::Base 'Mojolicious::Controller';
-use LstuModel;
+use Lstu::DB::URL;
+use Lstu::DB::Ban;
+use Lstu::DB::Session;
 use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
@@ -14,16 +16,17 @@ sub add {
     if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {
         my $ip = $c->ip;
 
-        my @banned = LstuModel::Ban->select('WHERE ip = ? AND until > ? AND strike >= ?', $ip, time, $c->config('ban_min_strike'));
-        if (scalar @banned) {
+        my $banned = Lstu::DB::Ban->new(
+            dbtype => $c->config('dbtype'),
+            ip     => $c->ip
+        )->is_banned($c->config('ban_min_strike'));
+        if (defined $banned) {
             my $penalty = 3600;
-            if ($banned[0]->strike >= 2 * $c->config('ban_min_strike')) {
+            if ($banned->strike >= 2 * $c->config('ban_min_strike')) {
                 $penalty = 3600 * 24 * 30; # 30 days of banishing
             }
-            $banned[0]->update(
-                strike => $banned[0]->strike + 1,
-                until  => time + $penalty
-            );
+            $banned->increment_ban_delay($penalty);
+
             my $msg = $c->l('You asked to shorten too many URLs too quickly. You\'re banned for %1 hour(s).', $penalty/3600);
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->false, msg => $msg } },
@@ -49,59 +52,45 @@ sub add {
                 $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/))
             {
                 $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api", "d" or "stats" or end with ".json". Your URL to shorten: %1', $url);
-            } elsif (defined($custom_url) && LstuModel::Lstu->count('WHERE short = ?', $custom_url) > 0) {
+            } elsif (defined($custom_url) && Lstu::DB::URL->new()->exist($custom_url) > 0) {
                 $msg = $c->l('The shortened text (%1) is already used. Please choose another one.', $custom_url);
             } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {
                 my $res = $c->is_spam($url, 0);
                 if ($res->{is_spam}) {
                     $msg = $res->{msg};
                 } else {
-                    my @records = LstuModel::Lstu->select('WHERE url = ?', $url);
+                    my $db_url = Lstu::DB::URL->new(
+                        dbtype => $c->config('dbtype'),
+                        url    => $url
+                    );
 
-                    my @bans = LstuModel::Ban->select('WHERE ip = ?', $ip);
-                    if (scalar @bans) {
-                        $bans[0]->update(
-                            strike => $bans[0]->strike + 1,
-                            until  => time + 1
-                        );
-                    } else {
-                        LstuModel::Ban->create(
-                            ip     => $ip,
-                            strike => 1,
-                            until  => time + 1
-                        );
-                    }
+                    Lstu::DB::Ban->new(
+                        dbtype => $c->config('dbtype'),
+                        ip     => $ip
+                    )->increment_ban_delay(1);
 
-                    if (scalar(@records) && !defined($custom_url)) {
+                    if ($db_url->short && !defined($custom_url)) {
                         # Already got this URL
-                        $short = $records[0]->short;
+                        $short = $db_url->short;
                     } else {
-                        if(LstuModel->begin) {
-                            if (defined($custom_url)) {
-                                LstuModel::Lstu->create(
-                                    short     => $custom_url,
-                                    url       => $url,
-                                    counter   => 0,
-                                    timestamp => time()
-                                );
+                        if (defined($custom_url)) {
+                            Lstu::DB::URL->new(
+                                short     => $custom_url,
+                                url       => $url,
+                                timestamp => time()
+                            )->write;
 
-                                $short = $custom_url;
+                            $short = $custom_url;
+                        } else {
+                            $db_url = Lstu::DB::URL->new(dbtype => $c->config('dbtype'))->choose_empty;
+                            if (defined $db_url) {
+                                $db_url->url($url)->timestamp(time)->write;
+
+                                $short = $db_url->short;
                             } else {
-                                @records = LstuModel::Lstu->select('WHERE url IS NULL LIMIT 1');
-                                if (scalar(@records)) {
-                                    $records[0]->update(
-                                        url       => $url,
-                                        counter   => 0,
-                                        timestamp => time()
-                                    );
-
-                                    $short = $records[0]->short;
-                                } else {
-                                    # Houston, we have a problem
-                                    $msg = $c->l('No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: [_2]', $c->config('contact'), $url);
-                                }
+                                # Houston, we have a problem
+                                $msg = $c->l('No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: [_2]', $c->config('contact'), $url);
                             }
-                            LstuModel->commit;
                         }
                     }
                 }
@@ -152,15 +141,21 @@ sub add {
 sub stats {
     my $c = shift;
     if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {
-        if (defined($c->session('token')) && LstuModel::Sessions->count('WHERE token = ?', $c->session('token'))) {
-            my $total = LstuModel::Lstu->count("WHERE url IS NOT NULL");
+        my $db_session = Lstu::DB::Session->new(
+            dbtype => $c->config('dbtype'),
+            token  => $c->session('token')
+        );
+        if (defined($c->session('token')) && $db_session->is_valid) {
+            my $total = Lstu::DB::URL->new(dbtype => $c->config('dbtype'))->total;
             my $page  = $c->param('page') || 0;
                $page  = 0 if ($page < 0);
                $page  = $page - 1 if ($page * $c->config('page_offset') > $total);
 
             my ($first, $last) = (!$page, ($page * $c->config('page_offset') <= $total && $total < ($page + 1) * $c->config('page_offset')));
 
-            my @urls  = LstuModel::Lstu->select("WHERE url IS NOT NULL ORDER BY counter DESC LIMIT ? offset ?", $c->config('page_offset'), $page * $c->config('page_offset'));
+            my @urls  = Lstu::DB::URL->new(
+                dbtype => $c->config('dbtype'),
+            )->paginate($page, $c->config('page_offset'));
             $c->respond_to(
                 json => sub {
                     my $c = shift;
@@ -193,8 +188,9 @@ sub stats {
         } else {
             my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
 
-            my $p = join ",", (('?') x @{$u});
-            my @urls = LstuModel::Lstu->select("WHERE short IN ($p) ORDER BY counter DESC", @{$u});
+            my @urls  = Lstu::DB::URL->new(
+                dbtype => $c->config('dbtype'),
+            )->get_a_lot($u);
 
             my $prefix = $c->prefix;
 
@@ -229,14 +225,15 @@ sub get {
     my $c = shift;
     my $short = $c->param('short');
 
-    my ($url, @urls);
+    my ($url, $db_url);
     if (defined $c->cache->{$short}) {
         $url = $c->cache->{$short}->{url};
     } else {
-        @urls = LstuModel::Lstu->select('WHERE short = ?', $short);
-        if (scalar(@urls)) {
-            $url = $urls[0]->url;
-        }
+        $db_url = Lstu::DB::URL->new(
+            dbtype => $c->config('dbtype'),
+            short  => $short
+        );
+        $url = $db_url->url;
     }
     if ($url) {
         $c->respond_to(
@@ -249,7 +246,6 @@ sub get {
         );
         # Update counter
         $c->on(finish => sub {
-            @urls = LstuModel::Lstu->select('WHERE short = ?', $short) if (defined $c->cache->{$short});
             $c->cache->{$short} = {
                 last_used => time,
                 url       => $url
@@ -258,8 +254,12 @@ sub get {
             if ($c->config('minion')->{enabled} && $c->config('minion')->{db_path}) {
                 $c->app->minion->enqueue(increase_counter => [$short, $c->{url}]);
             } else {
-                my $counter = $urls[0]->counter + 1;
-                $urls[0]->update(counter => $counter);
+                $db_url = Lstu::DB::URL->new(
+                    dbtype => $c->config('dbtype'),
+                    short  => $short
+                ) if (defined $c->cache->{$short});
+
+                $db_url->increment_counter;
 
                 my $piwik = $c->config('piwik');
                 if (defined($piwik) && $piwik->{idsite} && $piwik->{url}) {
