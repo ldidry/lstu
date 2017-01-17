@@ -15,19 +15,6 @@ sub new {
     return $c;
 }
 
-sub clear {
-    my $c = shift;
-
-    Lstu::DB::SQLite::Sessions->delete_where('until < ?', time);
-}
-
-sub delete_all {
-    my $c = shift;
-
-    # Rotten syntax, but prevents "Static Lstu::DB::SQLite->delete has been deprecated"
-    Lstu::DB::SQLite::Sessions->delete_where('1 = 1');
-}
-
 sub delete {
     my $c = shift;
 
@@ -60,6 +47,19 @@ sub write {
     }
 
     return $c;
+}
+
+sub clear {
+    my $c = shift;
+
+    Lstu::DB::SQLite::Sessions->delete_where('until < ?', time);
+}
+
+sub delete_all {
+    my $c = shift;
+
+    # Rotten syntax, but prevents "Static Lstu::DB::SQLite->delete has been deprecated"
+    Lstu::DB::SQLite::Sessions->delete_where('1 = 1');
 }
 
 sub _slurp {

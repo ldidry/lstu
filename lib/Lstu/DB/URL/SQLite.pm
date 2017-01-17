@@ -15,26 +15,6 @@ sub new {
     return $c;
 }
 
-sub delete_all {
-    my $c = shift;
-
-    # Rotten syntax, but prevents "Static Lstu::DB::SQLite->delete has been deprecated"
-    Lstu::DB::SQLite::Lstu->delete_where('1 = 1');
-}
-
-sub delete {
-    my $c = shift;
-
-    my $result;
-    if (Lstu::DB::SQLite->begin) {
-        $result = $c->record->delete;
-        $c->record(undef);
-        Lstu::DB::SQLite->commit;
-    }
-
-    return $result;
-}
-
 sub increment_counter {
     my $c = shift;
 
@@ -42,21 +22,6 @@ sub increment_counter {
     $c->counter($c->counter + 1);
 
     return $c;
-}
-
-sub count_empty {
-    my $c = shift;
-
-    return Lstu::DB::SQLite::Lstu->count('WHERE url IS NULL');
-}
-
-sub exist {
-    my $c     = shift;
-    my $short = shift;
-
-    return undef unless $short;
-
-    return Lstu::DB::SQLite::Lstu->count('WHERE short = ?', $short);
 }
 
 sub write {
@@ -85,6 +50,28 @@ sub write {
     return $c;
 }
 
+sub delete {
+    my $c = shift;
+
+    my $result;
+    if (Lstu::DB::SQLite->begin) {
+        $result = $c->record->delete;
+        $c->record(undef);
+        Lstu::DB::SQLite->commit;
+    }
+
+    return $result;
+}
+
+sub exist {
+    my $c     = shift;
+    my $short = shift;
+
+    return undef unless $short;
+
+    return Lstu::DB::SQLite::Lstu->count('WHERE short = ?', $short);
+}
+
 sub choose_empty {
     my $c = shift;
 
@@ -99,10 +86,10 @@ sub choose_empty {
     }
 }
 
-sub total {
+sub count_empty {
     my $c = shift;
 
-    return Lstu::DB::SQLite::Lstu->count("WHERE url IS NOT NULL");
+    return Lstu::DB::SQLite::Lstu->count('WHERE url IS NULL');
 }
 
 sub paginate {
@@ -119,6 +106,19 @@ sub get_a_lot {
 
     my $p = join ",", (('?') x @{$u});
     return Lstu::DB::SQLite::Lstu->select("WHERE short IN ($p) ORDER BY counter DESC", @{$u});
+}
+
+sub total {
+    my $c = shift;
+
+    return Lstu::DB::SQLite::Lstu->count("WHERE url IS NOT NULL");
+}
+
+sub delete_all {
+    my $c = shift;
+
+    # Rotten syntax, but prevents "Static Lstu::DB::SQLite->delete has been deprecated"
+    Lstu::DB::SQLite::Lstu->delete_where('1 = 1');
 }
 
 sub _slurp {

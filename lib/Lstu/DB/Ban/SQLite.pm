@@ -15,19 +15,6 @@ sub new {
     return $c;
 }
 
-sub clear {
-    my $c = shift;
-
-    Lstu::DB::SQLite::Ban->delete_where('until < ?', time);
-}
-
-sub delete_all {
-    my $c = shift;
-
-    # Rotten syntax, but prevents "Static Lstu::DB::SQLite->delete has been deprecated"
-    Lstu::DB::SQLite::Ban->delete_where('1 = 1');
-}
-
 sub is_banned {
     my $c              = shift;
     my $ban_min_strike = shift;
@@ -71,6 +58,19 @@ sub increment_ban_delay {
     $c->until($until);
 
     return $c;
+}
+
+sub clear {
+    my $c = shift;
+
+    Lstu::DB::SQLite::Ban->delete_where('until < ?', time);
+}
+
+sub delete_all {
+    my $c = shift;
+
+    # Rotten syntax, but prevents "Static Lstu::DB::SQLite->delete has been deprecated"
+    Lstu::DB::SQLite::Ban->delete_where('1 = 1');
 }
 
 sub _slurp {

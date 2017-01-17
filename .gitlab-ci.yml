@@ -2,7 +2,7 @@ image: debian:jessie
 test:
   script: 
     - apt-get update
-    - apt-get install -y build-essential libssl-dev openssl
+    - apt-get install -y build-essential libssl-dev openssl perl-doc
     - echo yes | cpan Carton
     - carton install
     - cp lstu.conf.template lstu.conf

@@ -12,7 +12,10 @@ locales:
 	$(XGETTEXT) -f $(EXTRACTFILES) -o $(FR) 2>/dev/null
 	$(XGETTEXT) -f $(EXTRACTFILES) -o $(OC) 2>/dev/null
 
-test:
+podcheck:
+	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm
+
+test: podcheck
 	$(CARTON) $(REAL_LSTU) test
 
 dev:
