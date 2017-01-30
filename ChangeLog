@@ -4,6 +4,11 @@ Revision history for Perl application Lstu
 	- Add Piwik tracking option
 	- Add Minion option for async counters increasing
 	- Add LDAP and Htpasswd authentication (#8)
+	- Add Database abstraction layer
+	- Add PostgreSQL (#21)
+	- Allow to run several Lstu's instances from the same code but with
+	  different configuration files (#23)
+	- Cache dependencies for the different stages of the CI
 
 0.07 Tue Dec 20 17:55:00 2016 +0100
 	- Add logo
