@@ -1,0 +1,2 @@
+CREATE USER lstu WITH PASSWORD 'lstu';
+CREATE DATABASE lstu OWNER lstu;

@@ -1,15 +1,9 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu;
 use Mojo::Base 'Mojolicious';
-use Data::Validate::URI qw(is_http_uri is_https_uri);
-use Mojo::JSON qw(to_json decode_json);
-use Mojo::URL;
-use Net::Abuse::Utils::Spamhaus qw(check_fqdn);
 use Net::LDAP;
 use Apache::Htpasswd;
 use Lstu::DB::URL;
-use Lstu::DB::Ban;
-use Lstu::DB::Session;
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
 
@@ -60,6 +54,9 @@ sub startup {
 
     # Piwik
     $self->plugin('Piwik');
+
+    # Lstu Helpers
+    $self->plugin('Lstu::Plugin::Helpers');
 
     # Authentication (if configured)
     if (defined($self->config('ldap')) || defined($self->config('htpasswd'))) {
@@ -134,122 +131,6 @@ sub startup {
     # Secrets
     $self->secrets($config->{secret});
 
-    # Helpers
-    $self->helper(
-        cache => sub {
-            my $c        = shift;
-            state $cache = {};
-        }
-    );
-
-    $self->helper(
-        clear_cache => sub {
-            my $c     = shift;
-            my $cache = $c->cache;
-            my @keys  = keys %{$cache};
-
-            my $limit = ($c->app->mode eq 'production') ? 500 : 1;
-            map {delete $cache->{$_};} @keys if (scalar(@keys) > $limit);
-        }
-    );
-
-    $self->helper(
-        ip => sub {
-            my $c     = shift;
-            my $proxy = $c->req->headers->header('X-Forwarded-For');
-            my $ip    = ($proxy) ? $proxy : $c->tx->remote_address;
-
-            return $ip;
-        }
-    );
-
-    $self->helper(
-        provisioning => sub {
-            my $c = shift;
-
-            # Create some short patterns for provisioning
-            my $db_url = Lstu::DB::URL->new(dbtype => $c->config('dbtype'));
-            if ($db_url->count_empty < $c->config('provisioning')) {
-                for (my $i = 0; $i < $c->config('provis_step'); $i++) {
-                    my $short;
-                    do {
-                        $short= $c->shortener($c->config('length'));
-                    } while ($db_url->exist($short));
-
-                    $db_url->short($short)->write;
-                }
-            }
-        }
-    );
-
-    $self->helper(
-        prefix => sub {
-            my $c = shift;
-
-            my $prefix = $c->url_for('index')->to_abs;
-            # Forced domain
-            $prefix->host($c->config('fixed_domain')) if (defined($c->config('fixed_domain')) && $c->config('fixed_domain') ne '');
-            # Hack for prefix (subdir) handling
-            $prefix .= '/' unless ($prefix =~ m#/$#);
-            return $prefix;
-        }
-    );
-
-    $self->helper(
-        shortener => sub {
-            my $c      = shift;
-            my $length = shift;
-
-            my @chars  = ('a'..'h', 'j', 'k', 'm'..'z','A'..'H', 'J'..'N', 'P'..'Z','0'..'9', '-', '_');
-            my $result = '';
-            foreach (1..$length) {
-                $result .= $chars[rand scalar(@chars)];
-            }
-            return $result;
-        }
-    );
-
-    $self->helper(
-        is_spam => sub {
-            my $c        = shift;
-            my $url      = shift;
-            my $nb_redir = shift;
-
-            if ($nb_redir++ <= 2) {
-                my $res = check_fqdn($url->host);
-                if (defined $res) {
-                   return {
-                       is_spam => 1,
-                       msg     => $c->l('The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it.', $url->host)
-                   }
-                } else {
-                    my $res = $c->ua->get($url)->res;
-                    if ($res->code >= 300 && $res->code < 400) {
-                        return $c->is_spam(Mojo::URL->new($res->headers->location), $nb_redir);
-                    } else {
-                        return { is_spam => 0 };
-                    }
-                }
-            } else {
-               return {
-                   is_spam => 1,
-                   msg     => $c->l('The URL redirects 3 times or most. It\'s most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it.', $url->host)
-               }
-            }
-        }
-    );
-
-    $self->helper(
-        cleaning => sub {
-            my $c = shift;
-
-            # Delete old sessions
-            Lstu::DB::Session->new(dbtype => $c->config('dbtype'))->clear();
-            # Delete old bans
-            Lstu::DB::Ban->new(dbtype => $c->config('dbtype'))->clear();
-        }
-    );
-
     # Hooks
     $self->hook(
         after_dispatch => sub {
@@ -291,7 +172,7 @@ sub startup {
                 my $url   = shift;
 
                 my $db_url = Lstu::DB::URL->new(
-                    dbtype => $job->app->config('dbtype'),
+                    app    => $job->app,
                     short  => $short
                 )->increment_counter;
 

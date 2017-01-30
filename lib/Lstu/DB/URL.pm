@@ -6,7 +6,7 @@ has 'short';
 has 'url';
 has 'counter' => 0;
 has 'timestamp';
-has 'dbtype';
+has 'app';
 
 =head1 NAME
 
@@ -31,7 +31,7 @@ Have a look at Lstu::DB::URL::SQLite's code: it's simple and may be more underst
 
 =item B<timestamp> : unix timestamp
 
-=item B<dbtype>    : string
+=item B<app>       : a mojolicious object
 
 =back
 
@@ -41,7 +41,7 @@ Have a look at Lstu::DB::URL::SQLite's code: it's simple and may be more underst
 
 =over 1
 
-=item B<Usage>     : C<$c = Lstu::DB::URL-E<gt>new(dbtype =E<gt> 'sqlite');>
+=item B<Usage>     : C<$c = Lstu::DB::URL-E<gt>new(app =E<gt> $self);>
 
 =item B<Arguments> : any of the attribute above
 
@@ -49,7 +49,7 @@ Have a look at Lstu::DB::URL::SQLite's code: it's simple and may be more underst
 
 =item B<Returns>   : the db accessor object
 
-=item B<Info>      : the dbtype argument is used by Lstu::DB::URL to choose which db accessor will be used, you don't need to use it
+=item B<Info>      : the app argument is used by Lstu::DB::URL to choose which db accessor will be used, you don't need to use it in new(), but you can use it to access helpers or configuration settings in the other subroutines
 
 =back
 
@@ -61,9 +61,13 @@ sub new {
     $c = $c->SUPER::new(@_);
 
     if (ref($c) eq 'Lstu::DB::URL') {
-        if ($c->dbtype eq 'sqlite') {
+        my $dbtype = $c->app->config('dbtype');
+        if ($dbtype eq 'sqlite') {
             use Lstu::DB::URL::SQLite;
             $c = Lstu::DB::URL::SQLite->new(@_);
+        } elsif ($dbtype eq 'postgresql') {
+            use Lstu::DB::URL::Pg;
+            $c = Lstu::DB::URL::Pg->new(@_);
         }
     }
 
