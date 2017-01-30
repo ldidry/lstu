@@ -74,6 +74,17 @@ DISTRIBUTIONS
       Test::More 0.94
       strict 0
       warnings 0
+  DBD-Pg-3.5.3
+    pathname: T/TU/TURNSTEP/DBD-Pg-3.5.3.tar.gz
+    provides:
+      Bundle::DBD::Pg v3.5.3
+      DBD::Pg v3.5.3
+    requirements:
+      DBI 1.614
+      ExtUtils::MakeMaker 6.11
+      Test::More 0.88
+      Time::HiRes 0
+      version 0
   DBD-SQLite-1.54
     pathname: I/IS/ISHIGAKI/DBD-SQLite-1.54.tar.gz
     provides:
@@ -415,17 +426,17 @@ DISTRIBUTIONS
       IO::Socket 0
       Socket 1.97
       Test::More 0.88
-  IO-Socket-SSL-2.043
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.043.tar.gz
+  IO-Socket-SSL-2.044
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.044.tar.gz
     provides:
-      IO::Socket::SSL 2.043
+      IO::Socket::SSL 2.044
       IO::Socket::SSL::Intercept 2.014
-      IO::Socket::SSL::OCSP_Cache 2.043
-      IO::Socket::SSL::OCSP_Resolver 2.043
+      IO::Socket::SSL::OCSP_Cache 2.044
+      IO::Socket::SSL::OCSP_Resolver 2.044
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.043
-      IO::Socket::SSL::SSL_HANDLE 2.043
-      IO::Socket::SSL::Session_Cache 2.043
+      IO::Socket::SSL::SSL_Context 2.044
+      IO::Socket::SSL::SSL_HANDLE 2.044
+      IO::Socket::SSL::Session_Cache 2.044
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
@@ -594,6 +605,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Mojo-Pg-2.35
+    pathname: S/SR/SRI/Mojo-Pg-2.35.tar.gz
+    provides:
+      Mojo::Pg 2.35
+      Mojo::Pg::Database undef
+      Mojo::Pg::Migrations undef
+      Mojo::Pg::PubSub undef
+      Mojo::Pg::Results undef
+      Mojo::Pg::Transaction undef
+    requirements:
+      DBD::Pg 3.005001
+      ExtUtils::MakeMaker 0
+      Mojolicious 7.15
   Mojo-SQLite-1.003
     pathname: D/DB/DBOOK/Mojo-SQLite-1.003.tar.gz
     provides:
@@ -616,8 +640,8 @@ DISTRIBUTIONS
       URI::db 0.15
       URI::file 4.21
       perl 5.010001
-  Mojolicious-7.18
-    pathname: S/SR/SRI/Mojolicious-7.18.tar.gz
+  Mojolicious-7.23
+    pathname: S/SR/SRI/Mojolicious-7.23.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -649,6 +673,7 @@ DISTRIBUTIONS
       Mojo::IOLoop::Server undef
       Mojo::IOLoop::Stream undef
       Mojo::IOLoop::Subprocess undef
+      Mojo::IOLoop::TLS undef
       Mojo::JSON undef
       Mojo::JSON::Pointer undef
       Mojo::Loader undef
@@ -682,7 +707,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.18
+      Mojolicious 7.23
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef

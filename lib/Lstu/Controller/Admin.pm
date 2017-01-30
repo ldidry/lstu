@@ -16,7 +16,7 @@ sub login {
     my $ip = $c->ip;
 
     my $banned = Lstu::DB::Ban->new(
-        dbtype => $c->config('dbtype'),
+        app    => $c,
         ip     => $ip
     )->is_banned($c->config('ban_min_strike'));
     if (defined $banned) {
@@ -37,7 +37,7 @@ sub login {
             my $token = $c->shortener(32);
 
             Lstu::DB::Session->new(
-                dbtype => $c->config('dbtype'),
+                app    => $c,
                 token  => $token,
                 until  => time + 3600
             )->write;
@@ -46,14 +46,14 @@ sub login {
             $c->redirect_to('stats');
         } elsif (defined($act) && $act eq 'logout') {
             Lstu::DB::Session->new(
-                dbtype => $c->config('dbtype'),
+                app    => $c,
                 token  => $c->session('token')
             )->delete;
             delete $c->session->{token};
             $c->redirect_to('stats');
         } else {
             Lstu::DB::Ban->new(
-                dbtype => $c->config('dbtype'),
+                app    => $c,
                 ip     => $ip
             )->increment_ban_delay(3600);
 
@@ -68,12 +68,12 @@ sub delete {
     my $short = $c->param('short');
 
     my $db_session = Lstu::DB::Session->new(
-        dbtype => $c->config('dbtype'),
+        app    => $c,
         token  => $c->session('token')
     );
     if (defined($c->session('token')) && $db_session->is_valid) {
         my $db_url = Lstu::DB::URL->new(
-            dbtype => $c->config('dbtype'),
+            app    => $c,
             short  => $short
         );
         if ($db_url->url) {

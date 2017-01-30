@@ -66,7 +66,7 @@ sub _slurp {
     my $c = shift;
 
     my @sessions = Lstu::DB::SQLite::Sessions->select('WHERE token = ?', $c->token);
-    if (scalar(@sessions)) {
+    if (scalar @sessions) {
         $c->token($sessions[0]->token);
         $c->until($sessions[0]->until);
         $c->record($sessions[0]);

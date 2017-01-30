@@ -17,7 +17,7 @@ sub add {
         my $ip = $c->ip;
 
         my $banned = Lstu::DB::Ban->new(
-            dbtype => $c->config('dbtype'),
+            app    => $c,
             ip     => $c->ip
         )->is_banned($c->config('ban_min_strike'));
         if (defined $banned) {
@@ -60,12 +60,12 @@ sub add {
                     $msg = $res->{msg};
                 } else {
                     my $db_url = Lstu::DB::URL->new(
-                        dbtype => $c->config('dbtype'),
+                        app    => $c,
                         url    => $url
                     );
 
                     Lstu::DB::Ban->new(
-                        dbtype => $c->config('dbtype'),
+                        app    => $c,
                         ip     => $ip
                     )->increment_ban_delay(1);
 
@@ -82,7 +82,7 @@ sub add {
 
                             $short = $custom_url;
                         } else {
-                            $db_url = Lstu::DB::URL->new(dbtype => $c->config('dbtype'))->choose_empty;
+                            $db_url = Lstu::DB::URL->new(app => $c)->choose_empty;
                             if (defined $db_url) {
                                 $db_url->url($url)->timestamp(time)->write;
 
@@ -142,11 +142,11 @@ sub stats {
     my $c = shift;
     if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {
         my $db_session = Lstu::DB::Session->new(
-            dbtype => $c->config('dbtype'),
+            app    => $c,
             token  => $c->session('token')
         );
         if (defined($c->session('token')) && $db_session->is_valid) {
-            my $total = Lstu::DB::URL->new(dbtype => $c->config('dbtype'))->total;
+            my $total = Lstu::DB::URL->new(app => $c)->total;
             my $page  = $c->param('page') || 0;
                $page  = 0 if ($page < 0);
                $page  = $page - 1 if ($page * $c->config('page_offset') > $total);
@@ -154,7 +154,7 @@ sub stats {
             my ($first, $last) = (!$page, ($page * $c->config('page_offset') <= $total && $total < ($page + 1) * $c->config('page_offset')));
 
             my @urls  = Lstu::DB::URL->new(
-                dbtype => $c->config('dbtype'),
+                app    => $c,
             )->paginate($page, $c->config('page_offset'));
             $c->respond_to(
                 json => sub {
@@ -189,7 +189,7 @@ sub stats {
             my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
 
             my @urls  = Lstu::DB::URL->new(
-                dbtype => $c->config('dbtype'),
+                app    => $c
             )->get_a_lot($u);
 
             my $prefix = $c->prefix;
@@ -230,7 +230,7 @@ sub get {
         $url = $c->cache->{$short}->{url};
     } else {
         $db_url = Lstu::DB::URL->new(
-            dbtype => $c->config('dbtype'),
+            app    => $c,
             short  => $short
         );
         $url = $db_url->url;
@@ -255,7 +255,7 @@ sub get {
                 $c->app->minion->enqueue(increase_counter => [$short, $c->{url}]);
             } else {
                 $db_url = Lstu::DB::URL->new(
-                    dbtype => $c->config('dbtype'),
+                    app    => $c,
                     short  => $short
                 ) if (defined $c->cache->{$short});
 
