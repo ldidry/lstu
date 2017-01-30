@@ -18,9 +18,16 @@ my $m;
 BEGIN {
     use lib 'lib';
     $m = Mojolicious->new;
+    my $cfile = Mojo::File->new($Bin, '..' , 'lstu.conf');
+    if (defined $ENV{MOJO_CONFIG}) {
+        $cfile = Mojo::File->new($ENV{MOJO_CONFIG});
+        unless (-e $cfile->to_abs) {
+            $cfile = Mojo::File->new($Bin, '..', $ENV{MOJO_CONFIG});
+        }
+    }
     my $config = $m->plugin('Config' =>
         {
-            file    => catfile($Bin, '..' ,'lstu.conf'),
+            file    => $cfile->to_abs->to_string,
             default => {
                 dbtype => 'sqlite'
             }
