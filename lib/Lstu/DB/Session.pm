@@ -4,7 +4,7 @@ use Mojo::Base -base;
 
 has 'token';
 has 'until';
-has 'dbtype';
+has 'app';
 
 =head1 NAME
 
@@ -25,7 +25,7 @@ Have a look at Lstu::DB::Session::SQLite's code: it's simple and may be more und
 
 =item B<until>  : unix timestamp
 
-=item B<dbtype> : string
+=item B<app>    : a mojolicious object
 
 =back
 
@@ -35,7 +35,7 @@ Have a look at Lstu::DB::Session::SQLite's code: it's simple and may be more und
 
 =over 1
 
-=item B<Usage>     : C<$c = Lstu::DB::Session-E<gt>new(dbtype =E<gt> 'sqlite');>
+=item B<Usage>     : C<$c = Lstu::DB::Session-E<gt>new(app =E<gt> $self);>
 
 =item B<Arguments> : any of the attribute above
 
@@ -43,7 +43,7 @@ Have a look at Lstu::DB::Session::SQLite's code: it's simple and may be more und
 
 =item B<Returns>   : the db accessor object
 
-=item B<Info>      : the dbtype argument is used by Lstu::DB::Session to choose which db accessor will be used, you don't need to use it
+=item B<Info>      : the app argument is used by Lstu::DB::Session to choose which db accessor will be used, you don't need to use it in new(), but you can use it to access helpers or configuration settings in the other subroutines
 
 =back
 
@@ -55,9 +55,13 @@ sub new {
     $c = $c->SUPER::new(@_);
 
     if (ref($c) eq 'Lstu::DB::Session') {
-        if ($c->dbtype eq 'sqlite') {
+        my $dbtype = $c->app->config('dbtype');
+        if ($dbtype eq 'sqlite') {
             use Lstu::DB::Session::SQLite;
             $c = Lstu::DB::Session::SQLite->new(@_);
+        } elsif ($dbtype eq 'postgresql') {
+            use Lstu::DB::Session::Pg;
+            $c = Lstu::DB::Session::Pg->new(@_);
         }
     }
 
@@ -67,6 +71,7 @@ sub new {
 sub is_valid {
     my $c = shift;
 
+    return 0 unless defined $c->until;
     return ($c->until > time);
 }
 

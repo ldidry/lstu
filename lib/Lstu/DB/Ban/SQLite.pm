@@ -77,7 +77,7 @@ sub _slurp {
     my $c = shift;
 
     my @banned = Lstu::DB::SQLite::Ban->select('WHERE ip = ?', $c->ip);
-    if (scalar(@banned)) {
+    if (scalar @banned) {
         $c->until($banned[0]->until);
         $c->strike($banned[0]->strike);
         $c->record($banned[0]);
