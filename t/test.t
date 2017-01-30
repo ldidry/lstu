@@ -13,14 +13,21 @@ use Lstu::DB::Session;
 use FindBin qw($Bin);
 use File::Spec::Functions;
 
-my $m;
+my $m, $cfile;
 
 BEGIN {
     use lib 'lib';
     $m = Mojolicious->new;
+    $cfile = Mojo::File->new($Bin, '..' , 'lstu.conf');
+    if (defined $ENV{MOJO_CONFIG}) {
+        $cfile = Mojo::File->new($ENV{MOJO_CONFIG});
+        unless (-e $cfile->to_abs) {
+            $cfile = Mojo::File->new($Bin, '..', $ENV{MOJO_CONFIG});
+        }
+    }
     my $config = $m->plugin('Config' =>
         {
-            file    => catfile($Bin, '..' ,'lstu.conf'),
+            file    => $cfile->to_abs->to_string,
             default => {
                 dbtype => 'sqlite'
             }
@@ -137,7 +144,7 @@ $t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json'
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
 # Test htpasswd
-my $config_file    = Mojo::File->new('lstu.conf');
+my $config_file    = Mojo::File->new($cfile->to_abs->to_string);
 my $config_content = $config_file->slurp;
 my $config_orig    = $config_content;
    $config_content =~ s/#?htpasswd.*/htpasswd => 't\/lstu.passwd'/gm;
