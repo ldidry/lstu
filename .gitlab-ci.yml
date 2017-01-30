@@ -10,6 +10,11 @@ before_script:
   - rm -f *db
 sqlite:
   stage: sqlite
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
   script:
     - MOJO_CONFIG=t/sqlite3.conf make minion &
     - MOJO_CONFIG=t/sqlite1.conf make test
@@ -20,6 +25,11 @@ sqlite:
     - Jessie
 postgresql:
   stage: postgresql
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
   script:
     - apt-get install -y postgresql
     - service postgresql start
