@@ -1,4 +1,5 @@
 % # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+% title 'Lstu login';
 % if (defined stash('msg')) {
     <%= stash('msg') %>
 % }

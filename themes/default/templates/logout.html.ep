@@ -1,4 +1,5 @@
 % # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+% title 'Lstu logout';
 <h4><%= l('You have been successfully logged out.') %></h4>
 <p>
     <a href="<%= url_for('login') %>" class="btn btn-default"><%= l('Signin') %></a>
