@@ -10,10 +10,22 @@ Lstu is licensed under the terms of the WTFPL. See the LICENSE file.
 
 ## Dependencies
 
+* In order to compile some dependencies, you'll need some packages from your distro:
+
+```shell
+sudo apt-get install build-essential libssl-dev
+```
+
 * Carton : Perl dependencies manager, it will get what you need, so don't bother about dependencies (but you can read the file `cpanfile` if you want).
 
 ```shell
 sudo cpan Carton
+```
+
+* If you want to use PostgreSQL as a backend, install `libpq-dev` too:
+
+```shell
+sudo apt-get install libpq-dev
 ```
 
 ## Installation
@@ -23,8 +35,20 @@ After installing Carton :
 ```shell
 git clone https://framagit.org/luc/lstu.git
 cd lstu
+```
+
+If you **don't** want to use PostgreSQL as a backend, comment the line `requires 'Mojo::Pg';` in the `cpanfile` file:
+
+```shell
+sed -e "s@requires 'Mojo::Pg';@#requires 'Mojo::Pg';@" -i cpanfile
+```
+
+Let's continue the installation:
+
+```shell
 make installdeps
 cp lstu.conf.template lstu.conf
+# Edit the configuration file
 vi lstu.conf
 ```
 
@@ -35,6 +59,17 @@ The configuration file is self-documented.
 ```shell
 cd /your/lstu/installation/directory
 git pull
+```
+
+If you **don't** want to use PostgreSQL as a backend, comment the line `requires 'Mojo::Pg';` in the `cpanfile` file:
+
+```shell
+sed -e "s@requires 'Mojo::Pg';@#requires 'Mojo::Pg';@" -i cpanfile
+```
+
+Then:
+
+```shell
 make installdeps
 vimdiff lstu.conf.template lstu.conf
 ```
