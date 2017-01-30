@@ -130,7 +130,7 @@ sub _slurp {
     } elsif ($c->url) {
        @urls = Lstu::DB::SQLite::Lstu->select('WHERE url = ?', $c->url);
     }
-    if (scalar(@urls)) {
+    if (scalar @urls) {
         $c->url($urls[0]->url);
         $c->short($urls[0]->short);
         $c->counter($urls[0]->counter);
