@@ -41,7 +41,7 @@ msgstr "Senhal incorrèct"
 
 #: themes/default/templates/layouts/default.html.ep:69
 msgid "Browser extensions"
-msgstr ""
+msgstr "Extensions navigator"
 
 #: themes/default/templates/index.html.ep:20
 msgid "Copy to clipboard"
