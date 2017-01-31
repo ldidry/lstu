@@ -1,11 +1,8 @@
-image: debian:jessie
+image: hatsoftwares/test-ci:latest
 stages:
   - sqlite
   - postgresql
 before_script:
-  - apt-get update
-  - apt-get install -y build-essential libssl-dev openssl perl-doc libpq-dev
-  - echo yes | cpan Carton
   - carton install
   - rm -f *db
 sqlite:
@@ -31,10 +28,8 @@ postgresql:
     paths:
       - local
   script:
-    - apt-get install -y postgresql
     - service postgresql start
-    - sleep 2
-    - service postgresql status
+    - sleep 4
     - su -c "psql -f t/test.sql" postgres
     - MOJO_CONFIG=t/postgresql3.conf make minion &
     - MOJO_CONFIG=t/postgresql1.conf make test
