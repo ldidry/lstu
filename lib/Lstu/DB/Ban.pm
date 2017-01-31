@@ -81,6 +81,29 @@ sub to_hash {
     };
 }
 
+=head2 is_whitelisted
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>is_whitelisted>
+
+=item B<Arguments> : none
+
+=item B<Purpose>   : tells you if the current object is in the configured whitelisted IPs
+
+=item B<Returns>   : boolean
+
+=back
+
+=cut
+
+sub is_whitelisted {
+    my $c = shift;
+
+    my $ip = $c->ip;
+    return scalar(grep {/$ip/} @{$c->app->config('ban_whitelist')});
+}
+
 =head2 is_banned
 
 =over 1
@@ -94,6 +117,8 @@ sub to_hash {
 eg: C<WHERE ip = ? AND until E<gt> ? AND strike E<gt>= ?', $c->ip, time, $argument>
 
 =item B<Returns>   : the db accessor object if the ip is banned, undef otherwise
+
+=item B<Info>      : if the IP is whitelisted (see C<is_whitelisted> above), it must return undef
 
 =back
 

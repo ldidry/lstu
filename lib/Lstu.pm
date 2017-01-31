@@ -20,6 +20,7 @@ sub startup {
             page_offset      => 10,
             theme            => 'default',
             ban_min_strike   => 3,
+            ban_whitelist    => [],
             minion           => {
                 enabled => 0,
                 db_path => 'minion.db'

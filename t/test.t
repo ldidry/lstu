@@ -147,7 +147,7 @@ $t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json'
 my $config_file    = Mojo::File->new($cfile->to_abs->to_string);
 my $config_content = $config_file->slurp;
 my $config_orig    = $config_content;
-   $config_content =~ s/#?htpasswd.*/htpasswd => 't\/lstu.passwd'/gm;
+   $config_content =~ s/#?htpasswd.*/htpasswd => 't\/lstu.passwd',/gm;
 $config_file->spurt($config_content);
 
 Lstu::DB::Ban->new(app => $m)->delete_all; # reset banishing
@@ -180,6 +180,25 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
 $t->get_ok('/logout')
   ->status_is(200)
   ->content_like(qr/You have been successfully logged out\./);
+
+# Test IP whitelisting
+$config_content = $config_orig;
+$config_content =~ s/^( +)#?ban_whitelist.*/$1ban_whitelist => ['::1', '127.0.0.1'],/gm;
+$config_file->spurt($config_content);
+
+$t = Test::Mojo->new('Lstu');
+
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+
+$t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
+    ->status_is(200)
+    ->json_has('url', 'short', 'success')
+    ->json_is('/success' => true, '/url' => 'https://lstu.fr')
+    ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
 $config_file->spurt($config_orig);
 

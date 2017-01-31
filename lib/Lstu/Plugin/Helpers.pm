@@ -115,6 +115,9 @@ sub _is_spam {
     my $url      = shift;
     my $nb_redir = shift;
 
+    my $ip = $c->ip;
+    return { is_spam => 0 } if scalar(grep {/$ip/} @{$c->config('ban_whitelist')});
+
     if ($nb_redir++ <= 2) {
         my $res = check_fqdn($url->host);
         if (defined $res) {
