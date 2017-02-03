@@ -1,0 +1,18 @@
+# Lstu language file.
+# Copyright (C) 2013 Luc Didry
+# This file is distributed under the same license as the Lstu package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lstu\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Luc Didry <luc@didry.org>\n"
+"Language-Team: English (http://www.transifex.com/projects/p/lstu/language/en/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+

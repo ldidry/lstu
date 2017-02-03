@@ -1,5 +1,5 @@
 # Lstu
-# Copyright (C) 2013 - 2015 Luc Didry
+# Copyright (C) 2013 Luc Didry
 # This file is distributed under the same license as the Lstu package.
 # 
 # Translators:
@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:109
+#: lib/Lstu/Controller/Lstu.pm:98
 msgid "%1 is not a valid URL."
 msgstr "%1 es pas una URL valida."
 
@@ -35,7 +35,7 @@ msgstr "A prepaus"
 msgid "Admin password"
 msgstr "Senhal administrator"
 
-#: lib/Lstu/Controller/Admin.pm:61 lib/Lstu/Controller/Admin.pm:94
+#: lib/Lstu/Controller/Admin.pm:100 lib/Lstu/Controller/Admin.pm:60
 msgid "Bad password"
 msgstr "Senhal incorrèct"
 
@@ -99,6 +99,10 @@ msgstr "JSON : succès"
 msgid "License:"
 msgstr "Licéncia :"
 
+#: themes/default/templates/login.html.ep:8
+msgid "Login"
+msgstr ""
+
 #: themes/default/templates/layouts/default.html.ep:62
 msgid "Logout"
 msgstr "Desconnexion"
@@ -112,7 +116,7 @@ msgid "Next"
 msgstr "Seguent"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:101
+#: lib/Lstu/Controller/Lstu.pm:92
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensejar o de contactar l’administrator sus %1. Recòrd de l’URL per acorchar : %2"
 
@@ -120,7 +124,11 @@ msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensejar o 
 msgid "Parameters:"
 msgstr "Paramètres :"
 
-#: lib/Lstu.pm:354
+#: themes/default/templates/login.html.ep:12
+msgid "Password"
+msgstr ""
+
+#: lib/Lstu.pm:232
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
@@ -140,7 +148,7 @@ msgstr "Responsa :"
 msgid "Shortened URL"
 msgstr "URL acorchada"
 
-#: themes/default/templates/layouts/default.html.ep:64
+#: themes/default/templates/layouts/default.html.ep:64 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
 msgstr "Connexion"
 
@@ -149,31 +157,31 @@ msgid "Statistics"
 msgstr "Estatisticas"
 
 #. ($url->host)
-#: lib/Lstu.pm:227
+#: lib/Lstu/Plugin/Helpers.pm:126
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr "L’òste de l’URL o d’una de sas redireccions (%1) es considerat coma nociu per Spamhaus. Refusi de l’acorchar."
 
 #. ($url->host)
-#: lib/Lstu.pm:240
+#: lib/Lstu/Plugin/Helpers.pm:139
 msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr "L’URL endralha 3 còps o mai cap a un a autre site. Pòt èsser una URL dangerossa (porrièl, pesca electronica, etc). Refusi de l’acorchar"
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:83 lib/Lstu/Controller/Lstu.pm:279
+#: lib/Lstu/Controller/Admin.pm:89 lib/Lstu/Controller/Lstu.pm:279
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL acorchada %1 existís pas"
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:53
+#: lib/Lstu/Controller/Lstu.pm:56
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "Lo tèxte de l’acorchi (%1) es ja utilizat. Mercés de ne causir un autre"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:51
+#: lib/Lstu/Controller/Lstu.pm:54
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr "Lo tèxte de l’acorchi deu pas que contenir de chifras, letras e los caractèrs - e _, èsser \"a\", \"api\", \"d\" o \"stats\" o acabar per \".json\". Recòrd de l’URL per acorchar : %1"
 
-#: lib/Lstu/Controller/Admin.pm:26
+#: lib/Lstu/Controller/Admin.pm:29
 msgid "Too many bad passwords. You're banned."
 msgstr "Tròp de marrits senhals. Sètz bandit."
 
@@ -186,9 +194,13 @@ msgid "URL to shorten"
 msgstr "URL per acorchar"
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:27
+#: lib/Lstu/Controller/Lstu.pm:30
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Avètz demandat d’acorchar tròp d'URL en pauc de temps. Sètz bandit per %1 ora(s)."
+
+#: themes/default/templates/logout.html.ep:3
+msgid "You have been successfully logged out."
+msgstr ""
 
 #: themes/default/templates/api.html.ep:22
 msgid "You will be redirected to the Lstu interface with a message giving the shortened URL"

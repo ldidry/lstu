@@ -1,4 +1,4 @@
-EXTRACTFILES=utilities/locales_files.txt
+EXTRACTDIR=-D lib -D themes/default
 EN=themes/default/lib/Lstu/I18N/en.po
 FR=themes/default/lib/Lstu/I18N/fr.po
 OC=themes/default/lib/Lstu/I18N/oc.po
@@ -8,9 +8,10 @@ REAL_LSTU=script/application
 LSTU=script/lstu
 
 locales:
-	$(XGETTEXT) -f $(EXTRACTFILES) -o $(EN) 2>/dev/null
-	$(XGETTEXT) -f $(EXTRACTFILES) -o $(FR) 2>/dev/null
-	$(XGETTEXT) -f $(EXTRACTFILES) -o $(OC) 2>/dev/null
+	$(XGETTEXT) $(EXTRACTDIR) -o $(EN) 2>/dev/null
+	$(XGETTEXT) $(EXTRACTDIR) -o $(FR) 2>/dev/null
+	$(XGETTEXT) $(EXTRACTDIR) -o $(OC) 2>/dev/null
+	cd ./themes/milligram && make locales
 
 podcheck:
 	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm
