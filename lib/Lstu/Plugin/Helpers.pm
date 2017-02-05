@@ -79,7 +79,7 @@ sub _provisioning {
          for (my $i = 0; $i < $c->config('provis_step'); $i++) {
              my $short;
              do {
-                 $short= $c->shortener($c->config('length'));
+                 $short = $c->shortener($c->config('length'));
              } while ($db_url->exist($short));
 
              $db_url->short($short)->write;

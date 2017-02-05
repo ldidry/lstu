@@ -43,22 +43,64 @@ sub login {
             )->write;
 
             $c->session('token' => $token);
-            $c->redirect_to('stats');
+            $c->respond_to(
+                json => sub {
+                    my $c = shift;
+                    $c->render(
+                        json => {
+                            success => Mojo::JSON->true,
+                            msg     => $c->l('You have been successfully logged in.')
+                        }
+                    );
+                },
+                any => sub {
+                    my $c = shift;
+                    $c->redirect_to('stats');
+                }
+            );
         } elsif (defined($act) && $act eq 'logout') {
             Lstu::DB::Session->new(
                 app    => $c,
                 token  => $c->session('token')
             )->delete;
             delete $c->session->{token};
-            $c->redirect_to('stats');
+            $c->respond_to(
+                json => sub {
+                    my $c = shift;
+                    $c->render(
+                        json => {
+                            success => Mojo::JSON->true,
+                            msg     => $c->l('You have been successfully logged out.')
+                        }
+                    );
+                },
+                any => sub {
+                    shift->redirect_to('stats');
+                }
+            );
         } else {
             Lstu::DB::Ban->new(
                 app    => $c,
                 ip     => $ip
             )->increment_ban_delay(3600);
 
-            $c->flash('msg' => $c->l('Bad password'));
-            $c->redirect_to('stats');
+            my $msg = $c->l('Bad password');
+            $c->respond_to(
+                json => sub {
+                    my $c = shift;
+                    $c->render(
+                        json => {
+                            success => Mojo::JSON->false,
+                            msg     => $msg
+                        }
+                    );
+                },
+                any => sub {
+                    my $c = shift;
+                    $c->flash('msg' => $msg);
+                    $c->redirect_to('stats');
+                }
+            );
         }
     }
 }
@@ -97,7 +139,7 @@ sub delete {
             );
         }
     } else {
-        $c->flash('msg' => $c->l('Bad password'));
+        $c->flash('msg' => $c->l('You\'re not authenticated as the admin'));
         $c->redirect_to('stats');
     }
 }
