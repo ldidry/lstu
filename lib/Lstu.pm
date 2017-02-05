@@ -1,6 +1,7 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu;
 use Mojo::Base 'Mojolicious';
+use Mojo::JSON;
 use Net::LDAP;
 use Apache::Htpasswd;
 use Lstu::DB::URL;
@@ -227,10 +228,37 @@ sub startup {
             my $pwd   = $c->param('password');
 
             if($c->authenticate($login, $pwd)) {
-                $c->redirect_to('index');
+                $c->respond_to(
+                    json => sub {
+                        my $c = shift;
+                        $c->render(
+                            json => {
+                                success => Mojo::JSON->true,
+                                msg     => $c->l('You have been successfully logged in.')
+                            }
+                        );
+                    },
+                    any => sub {
+                        $c->redirect_to('index');
+                    }
+                );
             } else {
-                $c->stash(msg => $c->l('Please, check your credentials: unable to authenticate.'));
-                $c->render(template => 'login');
+                my $msg = $c->l('Please, check your credentials: unable to authenticate.');
+                $c->respond_to(
+                    json => sub {
+                        my $c = shift;
+                        $c->render(
+                            json => {
+                                success => Mojo::JSON->false,
+                                msg     => $msg
+                            }
+                        );
+                    },
+                    any => sub {
+                        $c->stash(msg => $msg);
+                        $c->render(template => 'login')
+                    }
+                );
             }
         });
         # Logout page
@@ -239,7 +267,20 @@ sub startup {
             if ($c->is_user_authenticated) {
                 $c->logout;
             }
-            $c->render(template => 'logout');
+            $c->respond_to(
+                json => sub {
+                    my $c = shift;
+                    $c->render(
+                        json => {
+                            success => Mojo::JSON->true,
+                            msg     => $c->l('You have been successfully logged out.')
+                        }
+                    );
+                },
+                any => sub {
+                    $c->render(template => 'logout');
+                }
+            );
         })->name('logout');
     }
 

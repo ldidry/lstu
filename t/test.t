@@ -86,7 +86,7 @@ $b =~ s#http://127\.0\.0\.1:\d+/##;
 $t->ua->max_redirects(1);
 $t->get_ok('/d/'.$b)
     ->status_is(200)
-    ->content_like(qr/Bad password/);
+    ->content_like(qr/You&#39;re not authenticated as the admin/);
 
 $t->post_ok('/stats' => form => { adminpwd => 'toto', page => 0 })
     ->status_is(200)

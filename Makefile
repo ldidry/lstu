@@ -19,6 +19,10 @@ podcheck:
 test: podcheck
 	$(CARTON) $(REAL_LSTU) test
 
+test-sqlite:
+	MOJO_CONFIG=t/sqlite1.conf $(CARTON) $(REAL_LSTU) test
+	MOJO_CONFIG=t/sqlite2.conf $(CARTON) $(REAL_LSTU) test
+
 dev:
 	$(CARTON) morbo $(LSTU) --listen http://0.0.0.0:3000 --watch lib/ --watch script/ --watch themes/ --watch lstu.conf
 
