@@ -1,5 +1,6 @@
 package Mounter;
 use Mojo::Base 'Mojolicious';
+use Mojo::File;
 use FindBin qw($Bin);
 use File::Spec qw(catfile);
 
@@ -9,9 +10,16 @@ sub startup {
 
     push @{$self->commands->namespaces}, 'Lstu::Command';
 
+    my $cfile = Mojo::File->new($Bin, '..' , 'lstu.conf');
+    if (defined $ENV{MOJO_CONFIG}) {
+        $cfile = Mojo::File->new($ENV{MOJO_CONFIG});
+        unless (-e $cfile->to_abs) {
+            $cfile = Mojo::File->new($Bin, '..', $ENV{MOJO_CONFIG});
+        }
+    }
     my $config = $self->plugin('Config' =>
         {
-            file    => File::Spec->catfile($Bin, '..' ,'lstu.conf'),
+            file    => $cfile,
             default => {
                 prefix => '/',
                 theme  => 'default',
