@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Lstu package.
 # 
 # Translators:
+# Lo Quentin
 # Luc Didry <luc@didry.org>, 2015
 # Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>, 2016.
 msgid ""
@@ -29,7 +30,7 @@ msgstr "%1 es pas una URL valida."
 
 #: themes/default/templates/api.html.ep:103
 msgid "A page with a table containing the same informations that the JSON response"
-msgstr ""
+msgstr "Una pagina amb un tablèu que conten las meteissas informacions que lo messatge JSON"
 
 #: themes/default/templates/layouts/default.html.ep:57
 msgid "About"
@@ -61,7 +62,7 @@ msgstr "Creat lo"
 
 #: themes/default/templates/api.html.ep:49 themes/default/templates/index.html.ep:10 themes/default/templates/index.html.ep:9
 msgid "Custom shortened text"
-msgstr "Tèxte de l'acorchi personalizat"
+msgstr "Tèxte de l’acorchi personalizat"
 
 #: themes/default/templates/stats.html.ep:35
 msgid "Delete"
@@ -89,28 +90,28 @@ msgstr "Picatz sus Entrada puèi fasètz Ctrl+C per copiar lo ligam"
 
 #: themes/default/templates/api.html.ep:126
 msgid "If \"action\" is defined to \"logout\":"
-msgstr ""
+msgstr "Se \"action\" es definit coma \"logout\" :"
 
 #: themes/default/templates/api.html.ep:119
 msgid "If \"adminpwd\" is defined:"
-msgstr ""
+msgstr "Se \"adminpwd\" es definit : "
 
 #: themes/default/templates/api.html.ep:115 themes/default/templates/api.html.ep:140 themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:32 themes/default/templates/api.html.ep:50 themes/default/templates/api.html.ep:93
 msgid "If equal to \"json\", response will be in JSON format, HTML format otherwise"
-msgstr "Se egal a \"json\", la responsa serà al format JSON, autrament aquò serà una responsa en HTML"
+msgstr "Se es egal a \"json\", la responsa serà al format JSON, autrament aquò serà una responsa en HTML"
 
 #. (config('page_offset')
 #: themes/default/templates/api.html.ep:86
 msgid "If you are logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting), it will give you statistics for all URLs, sorted by the most visited first, paginated with pages containing %1 records."
-msgstr ""
+msgstr "Se sètz connectat·ada coma admin (\"adminpwd\" o \"hashed_adminpwd\" paramètre) aquò donarà totas las estatisticas per totas las URL, triadas per nombre de visitas en primièr las mai visitas, amb una paginacion amb %1 enregistraments per pagina."
 
 #: themes/default/templates/api.html.ep:91
 msgid "If you are logged in as admin, you can provide a \"page\" parameter"
-msgstr ""
+msgstr "Se sètz connectat·ada coma admin, podètz fornir un paramètre \"page\""
 
 #: themes/default/templates/api.html.ep:84
 msgid "It will use Lstu's cookies to know which shortened URL it will return statistics for."
-msgstr ""
+msgstr "Aquò utilizarà los cookies de Lstu per saber quinas estatisticas tornar."
 
 #: themes/default/templates/api.html.ep:122 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:23 themes/default/templates/api.html.ep:58 themes/default/templates/api.html.ep:76
 msgid "JSON: failure"
@@ -126,7 +127,7 @@ msgstr "Licéncia :"
 
 #: themes/default/templates/login.html.ep:8
 msgid "Login"
-msgstr ""
+msgstr "Connexion"
 
 #: themes/default/templates/layouts/default.html.ep:62
 msgid "Logout"
@@ -143,7 +144,7 @@ msgstr "Seguent"
 #. ($c->config('contact')
 #: lib/Lstu/Controller/Lstu.pm:92
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
-msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensejar o de contactar l’administrator sus %1. Recòrd de l’URL per acorchar : %2"
+msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensajar o de contactar l’administrator sus %1. Recòrd de l’URL per acorchar : %2"
 
 #: themes/default/templates/api.html.ep:111 themes/default/templates/api.html.ep:138 themes/default/templates/api.html.ep:14 themes/default/templates/api.html.ep:30 themes/default/templates/api.html.ep:46 themes/default/templates/api.html.ep:88
 msgid "Parameters:"
@@ -151,11 +152,11 @@ msgstr "Paramètres :"
 
 #: themes/default/templates/login.html.ep:12
 msgid "Password"
-msgstr ""
+msgstr "Senhal"
 
 #: lib/Lstu.pm:246 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
-msgstr ""
+msgstr "Mercés de verificar vòstres identificants : fracàs de l’autentificacion."
 
 #: themes/default/templates/stats.html.ep:63
 msgid "Previous"
@@ -167,7 +168,7 @@ msgstr "Reponsa pel format HTML"
 
 #: themes/default/templates/api.html.ep:102
 msgid "Response for JSON format"
-msgstr ""
+msgstr "Reponsa pel format JSON"
 
 #: themes/default/templates/api.html.ep:117 themes/default/templates/api.html.ep:142 themes/default/templates/api.html.ep:20 themes/default/templates/api.html.ep:34 themes/default/templates/api.html.ep:52 themes/default/templates/api.html.ep:64 themes/default/templates/api.html.ep:73 themes/default/templates/api.html.ep:95
 msgid "Response:"
@@ -179,7 +180,7 @@ msgstr "URL acorchada"
 
 #: themes/default/templates/api.html.ep:127 themes/default/templates/api.html.ep:29
 msgid "Should always be successful"
-msgstr ""
+msgstr "Deu totjorn tornar una capitada"
 
 #: themes/default/templates/layouts/default.html.ep:64 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
@@ -216,15 +217,15 @@ msgstr "Lo tèxte de l’acorchi deu pas que contenir de chifras, letras e los c
 
 #: themes/default/templates/api.html.ep:113
 msgid "To do an admin login, set it to the password defined in the settings (\"adminpwd\" or \"hashed_adminpwd\")"
-msgstr ""
+msgstr "Per vos connectar coma admin, botatz lo senhal definit dins los paramètres (\"adminpwd\" or \"hashed_adminpwd\")"
 
 #: themes/default/templates/api.html.ep:114
 msgid "To do an admin logout, set it to \"logout\"."
-msgstr ""
+msgstr "Per vos desconnectar de l’administracion, definissètz aqueste paramètre coma \"logout\"."
 
 #: lib/Lstu/Controller/Admin.pm:29
 msgid "Too many bad passwords. You're banned."
-msgstr "Tròp de marrits senhals. Sètz bandit."
+msgstr "Tròp de marrits senhals. Sètz bandit·ida."
 
 #: themes/default/templates/api.html.ep:102 themes/default/templates/stats.html.ep:29
 msgid "URL"
@@ -237,43 +238,43 @@ msgstr "URL per acorchar"
 #. ($penalty/3600)
 #: lib/Lstu/Controller/Lstu.pm:30
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
-msgstr "Avètz demandat d’acorchar tròp d'URL en pauc de temps. Sètz bandit per %1 ora(s)."
+msgstr "Avètz demandat d’acorchar tròp d’URL en pauc de temps. Sètz bandit per %1 ora(s)."
 
 #: lib/Lstu.pm:237 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
-msgstr ""
+msgstr "Sètz ben estat·ada connectat·ada."
 
 #: lib/Lstu.pm:276 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
-msgstr ""
+msgstr "Sètz ben estat·ada desconnectat·ada."
 
 #: themes/default/templates/api.html.ep:137
 msgid "You must be logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting) to use it."
-msgstr ""
+msgstr "Vos cal èsser connectat·ada coma admin (\"adminpwd\" o \"hashed_adminpwd\" paramètres) per utilizar aquò."
 
 #: themes/default/templates/api.html.ep:44 themes/default/templates/api.html.ep:82
 msgid "You must be logged in to use it."
-msgstr ""
+msgstr "Vos cal èsser connectat·ada per utilizar aquò."
 
 #: themes/default/templates/api.html.ep:130
 msgid "You will be redirected to Lstu statistics page"
-msgstr ""
+msgstr "Seretz dirigit·ida cap a la pagina de las estatisticas de Lstu"
 
 #: themes/default/templates/api.html.ep:146
 msgid "You will be redirected to Lstu statistics page with a message in case of failure"
-msgstr ""
+msgstr "Seretz dirigit·ida cap a la pagina de las estatisticas de Lstu amb un messatge se i a agut un fracàs"
 
 #: themes/default/templates/api.html.ep:37
 msgid "You will be redirected to Lstu successfully logged out interface"
-msgstr ""
+msgstr "Seretz dirigit·ida cap a l’interfàcia de Lstu per la desconnexion"
 
 #: themes/default/templates/api.html.ep:24
 msgid "You will be redirected to the Lstu classic interface where you will be able to shorten URLs"
-msgstr ""
+msgstr "Seretz dirigit·ida cap a l’interfàcia classica de Lstu ont poiretz acorchir d’URLs"
 
 #: themes/default/templates/api.html.ep:59
 msgid "You will be redirected to the Lstu classic interface with a message giving the shortened URL"
-msgstr ""
+msgstr "Seretz dirigit·ida cap a l’interfàcia classica de Lstu amb un message donant l’URL acorchida"
 
 #:
 msgid "You will be redirected to the Lstu interface with a message giving the shortened URL"
@@ -281,27 +282,27 @@ msgstr "Auretz l’interfàcia normala de Lstu amb un messatge qu’indica l’U
 
 #: themes/default/templates/api.html.ep:67
 msgid "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
-msgstr "Seretz dirigit cap a l’URL finala o la pagina d’acuèlh de Lstu amb un messatge qu'indica la rason del fracàs"
+msgstr "Seretz dirigit·ida cap a l’URL finala o la pagina d’acuèlh de Lstu amb un messatge qu’indica la rason del fracàs"
 
 #: themes/default/templates/api.html.ep:123
 msgid "You will have the statistics page with the admin stats if you're succesfully logged in, or your stats and a failure message otherwise"
-msgstr ""
+msgstr "Auretz la pagina d’estatisticas amb las statisticas admin se sètz ben connectat·ada, autrament vòstres estatisticas amb un messatge de fracàs"
 
 #: lib/Lstu/Controller/Admin.pm:142
 msgid "You're not authenticated as the admin"
-msgstr ""
+msgstr "Sètz pas connectat·ada coma admin"
 
 #: themes/default/templates/api.html.ep:16
 msgid "Your login"
-msgstr ""
+msgstr "Vòstre identificant"
 
 #: themes/default/templates/api.html.ep:17
 msgid "Your password"
-msgstr ""
+msgstr "Vòstre senhal"
 
 #: themes/default/templates/api.html.ep:102
 msgid "integer, how many unique visits of the shortened URL"
-msgstr ""
+msgstr "entièr, quantas visitas unicas per l’URL acorchida"
 
 #: themes/default/templates/api.html.ep:16 themes/default/templates/api.html.ep:17 themes/default/templates/api.html.ep:48
 msgid "mandatory"
