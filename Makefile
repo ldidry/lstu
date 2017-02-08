@@ -2,6 +2,7 @@ EXTRACTDIR=-D lib -D themes/default
 EN=themes/default/lib/Lstu/I18N/en.po
 FR=themes/default/lib/Lstu/I18N/fr.po
 OC=themes/default/lib/Lstu/I18N/oc.po
+BR=themes/default/lib/Lstu/I18N/br.po
 XGETTEXT=carton exec local/bin/xgettext.pl
 CARTON=carton exec
 REAL_LSTU=script/application
@@ -11,6 +12,7 @@ locales:
 	$(XGETTEXT) $(EXTRACTDIR) -o $(EN) 2>/dev/null
 	$(XGETTEXT) $(EXTRACTDIR) -o $(FR) 2>/dev/null
 	$(XGETTEXT) $(EXTRACTDIR) -o $(OC) 2>/dev/null
+	$(XGETTEXT) $(EXTRACTDIR) -o $(BR) 2>/dev/null
 	cd ./themes/milligram && make locales
 
 podcheck:

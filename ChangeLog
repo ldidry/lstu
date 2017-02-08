@@ -10,6 +10,7 @@ Revision history for Perl application Lstu
 	  different configuration files (#23)
 	- Cache dependencies for the different stages of the CI
 	- Allow whitelisted IPs to bypass anti-spam/anti-bruteforce systems (#24)
+	- Add breton translation
 
 0.07 Tue Dec 20 17:55:00 2016 +0100
 	- Add logo

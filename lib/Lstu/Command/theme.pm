@@ -56,6 +56,7 @@ EOF
 EN=lib/Lstu/I18N/en.po
 FR=lib/Lstu/I18N/fr.po
 OC=lib/Lstu/I18N/oc.po
+BR=lib/Lstu/I18N/br.po
 SEDOPTS=-e "s\@SOME DESCRIPTIVE TITLE\@Lstu language file\@" \\
 		-e "s\@YEAR THE PACKAGE'S COPYRIGHT HOLDER\@2015 Luc Didry\@" \\
 		-e "s\@CHARSET\@utf8\@" \\
@@ -70,12 +71,15 @@ locales:
 		\$(XGETTEXT) -D templates -D ../default/templates -o \$(EN) 2>/dev/null
 		\$(XGETTEXT) -D templates -D ../default/templates -o \$(FR) 2>/dev/null
 		\$(XGETTEXT) -D templates -D ../default/templates -o \$(OC) 2>/dev/null
+		\$(XGETTEXT) -D templates -D ../default/templates -o \$(BR) 2>/dev/null
 		sed \$(SEDOPTS) -i \$(EN)
 		sed \$(SEDOPTS2) -i \$(EN)
 		sed \$(SEDOPTS) -i \$(FR)
 		sed \$(SEDOPTS2) -i \$(FR)
 		sed \$(SEDOPTS) -i \$(OC)
 		sed \$(SEDOPTS2) -i \$(OC)
+		sed \$(SEDOPTS) -i \$(BR)
+		sed \$(SEDOPTS2) -i \$(BR)
 EOF
 
         open $f, '>', File::Spec->catfile($home, 'Makefile') or die "Unable to open $home/Makefile: $!";
