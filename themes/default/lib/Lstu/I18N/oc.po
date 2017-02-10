@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:98
+#: lib/Lstu/Controller/Lstu.pm:100
 msgid "%1 is not a valid URL."
 msgstr "%1 es pas una URL valida."
 
@@ -48,7 +48,7 @@ msgstr "Senhal incorrèct"
 msgid "Browser extensions"
 msgstr "Extensions navigator"
 
-#: themes/default/templates/index.html.ep:20
+#: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
 msgstr "Copiar al quichapapièrs"
 
@@ -64,7 +64,7 @@ msgstr "Creat lo"
 msgid "Custom shortened text"
 msgstr "Tèxte de l’acorchi personalizat"
 
-#: themes/default/templates/stats.html.ep:35
+#: themes/default/templates/stats.html.ep:37
 msgid "Delete"
 msgstr "Suprimir"
 
@@ -84,7 +84,7 @@ msgstr "Henny Penny"
 msgid "HennyPenny-Regular"
 msgstr "HennyPenny-Regular"
 
-#: themes/default/templates/index.html.ep:52
+#: themes/default/templates/index.html.ep:53
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr "Picatz sus Entrada puèi fasètz Ctrl+C per copiar lo ligam"
 
@@ -137,12 +137,12 @@ msgstr "Desconnexion"
 msgid "Logout from admin stats"
 msgstr "Desconnexion de las estatisticas admin"
 
-#: themes/default/templates/stats.html.ep:65
+#: themes/default/templates/stats.html.ep:69
 msgid "Next"
 msgstr "Seguent"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:92
+#: lib/Lstu/Controller/Lstu.pm:94
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensajar o de contactar l’administrator sus %1. Recòrd de l’URL per acorchar : %2"
 
@@ -158,9 +158,13 @@ msgstr "Senhal"
 msgid "Please, check your credentials: unable to authenticate."
 msgstr "Mercés de verificar vòstres identificants : fracàs de l’autentificacion."
 
-#: themes/default/templates/stats.html.ep:63
+#: themes/default/templates/stats.html.ep:67
 msgid "Previous"
 msgstr "Precedent"
+
+#: themes/default/templates/stats.html.ep:35
+msgid "QRCode"
+msgstr ""
 
 #: themes/default/templates/api.html.ep:103 themes/default/templates/api.html.ep:123 themes/default/templates/api.html.ep:130 themes/default/templates/api.html.ep:146 themes/default/templates/api.html.ep:24 themes/default/templates/api.html.ep:37 themes/default/templates/api.html.ep:59
 msgid "Response for HTML format"
@@ -201,17 +205,17 @@ msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam
 msgstr "L’URL endralha 3 còps o mai cap a un a autre site. Pòt èsser una URL dangerossa (porrièl, pesca electronica, etc). Refusi de l’acorchar"
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:279
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:295
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL acorchada %1 existís pas"
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:56
+#: lib/Lstu/Controller/Lstu.pm:58
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "Lo tèxte de l’acorchi (%1) es ja utilizat. Mercés de ne causir un autre"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:54
+#: lib/Lstu/Controller/Lstu.pm:56
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr "Lo tèxte de l’acorchi deu pas que contenir de chifras, letras e los caractèrs - e _, èsser \"a\", \"api\", \"d\" o \"stats\" o acabar per \".json\". Recòrd de l’URL per acorchar : %1"
 
@@ -236,7 +240,7 @@ msgid "URL to shorten"
 msgstr "URL per acorchar"
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:30
+#: lib/Lstu/Controller/Lstu.pm:32
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Avètz demandat d’acorchar tròp d’URL en pauc de temps. Sètz bandit per %1 ora(s)."
 

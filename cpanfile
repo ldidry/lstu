@@ -15,3 +15,4 @@ requires 'Net::Abuse::Utils::Spamhaus';
 requires 'IO::Socket::SSL';
 requires 'Net::LDAP';
 requires 'Apache::Htpasswd';
+requires 'Image::PNG::QRCode';

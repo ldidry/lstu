@@ -7,6 +7,8 @@ use Lstu::DB::Session;
 use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
+use Mojo::Util qw(b64_encode);
+use Image::PNG::QRCode 'qrpng';
 
 sub add {
     my $c = shift;
@@ -121,13 +123,16 @@ sub add {
 
                 my $prefix = $c->prefix;
 
+                my $qrcode = b64_encode(qrpng(text => $prefix.$short));
+
                 $c->respond_to(
-                    json => { json => { success => Mojo::JSON->true, url => $url, short => $prefix.$short } },
+                    json => { json => { success => Mojo::JSON->true, url => $url, short => $prefix.$short, qrcode => $qrcode } },
                     any  => sub {
                         my $c = shift;
 
-                        $c->flash('url'   => $url);
-                        $c->flash('short' => $prefix.$short);
+                        $c->flash('url'    => $url);
+                        $c->flash('short'  => $prefix.$short);
+                        $c->flash('qrcode' => $qrcode);
                         $c->redirect_to('index');
                     }
                 );
@@ -202,16 +207,27 @@ sub stats {
                             short      => $prefix.$url->{short},
                             url        => $url->{url},
                             counter    => $url->{counter},
-                            created_at => $url->{timestamp}
+                            created_at => $url->{timestamp},
+                            qrcode     => b64_encode(qrpng(text => $prefix.$url->{short}))
                         };
                     }
                     $c->render( json => \@struct );
                 },
                 any  => sub {
-                    shift->render(
+                    my @struct;
+                    for my $url (@urls) {
+                        push @struct, {
+                            short     => $url->{short},
+                            url       => $url->{url},
+                            counter   => $url->{counter},
+                            timestamp => $url->{timestamp},
+                            qrcode    => b64_encode(qrpng(text => $prefix.$url->{short}))
+                        };
+                    }
+                    $c->render(
                         template => 'stats',
                         prefix   => $prefix,
-                        urls     => \@urls
+                        urls     => \@struct
                     )
                 }
             )

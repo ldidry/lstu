@@ -47,7 +47,7 @@ $t->get_ok('/')
 
 $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->status_is(200)
-    ->json_has('url', 'short', 'success')
+    ->json_has('url', 'short', 'success', 'qrcode')
     ->json_is('/success' => true, '/url' => 'https://lstu.fr')
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
@@ -75,7 +75,7 @@ sleep 4;
 
 $t->get_ok('/stats.json')
     ->status_is(200)
-    ->json_has('/0/created_at', '/0/counter', '/0/short', '/0/url')
+    ->json_has('/0/created_at', '/0/counter', '/0/short', '/0/url', '/0/qrcode')
     ->json_is('/0/url' => 'https://lstu.fr', '/0/short' => $a)
     ->json_is('/0/counter' => 2)
     ->json_like('/0/created_at' => qr#\d+#);
@@ -139,7 +139,7 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
 Lstu::DB::Ban->new(app => $m)->delete_all; # reset banishing
 $t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json' })
     ->status_is(200)
-    ->json_has('url', 'short', 'success')
+    ->json_has('url', 'short', 'success', 'qrcode')
     ->json_is('/success' => true, '/url' => 'https://fiat-tux.fr')
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
@@ -173,7 +173,7 @@ $t->post_ok('/login' => form => { login => 'luc', password => 'toto' })
 
 $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->status_is(200)
-    ->json_has('url', 'short', 'success')
+    ->json_has('url', 'short', 'success', 'qrcode')
     ->json_is('/success' => true, '/url' => 'https://lstu.fr')
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
@@ -196,7 +196,7 @@ $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
 
 $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->status_is(200)
-    ->json_has('url', 'short', 'success')
+    ->json_has('url', 'short', 'success', 'qrcode')
     ->json_is('/success' => true, '/url' => 'https://lstu.fr')
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
