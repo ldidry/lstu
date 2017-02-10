@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.09 ?
+	- Add QRcode generation
+
 0.08 Wed Feb 08 18:49:00 1017 +0100
 	- Add Piwik tracking option
 	- Add Minion option for async counters increasing
