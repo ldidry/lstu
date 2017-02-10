@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:98
+#: lib/Lstu/Controller/Lstu.pm:100
 msgid "%1 is not a valid URL."
 msgstr "%1 n'eo ket un URL talvoudek."
 
@@ -45,7 +45,7 @@ msgstr "Ger-tremen didalvoudek"
 msgid "Browser extensions"
 msgstr ""
 
-#: themes/default/templates/index.html.ep:20
+#: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
 msgstr "Eilañ"
 
@@ -61,7 +61,7 @@ msgstr "Krouet"
 msgid "Custom shortened text"
 msgstr "Testenn verr personelaet"
 
-#: themes/default/templates/stats.html.ep:35
+#: themes/default/templates/stats.html.ep:37
 msgid "Delete"
 msgstr "Dilemel"
 
@@ -81,7 +81,7 @@ msgstr "Henny Penny"
 msgid "HennyPenny-Regular"
 msgstr "HennyPenny-Regular"
 
-#: themes/default/templates/index.html.ep:52
+#: themes/default/templates/index.html.ep:53
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr "Pouezit war Enankañ, ha Reol+C evit eilañ an ere berr"
 
@@ -134,12 +134,12 @@ msgstr ""
 msgid "Logout from admin stats"
 msgstr "Digennaskañ eus stadegoù an ardoer"
 
-#: themes/default/templates/stats.html.ep:65
+#: themes/default/templates/stats.html.ep:69
 msgid "Next"
 msgstr "Da-heul"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:92
+#: lib/Lstu/Controller/Lstu.pm:94
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr "N'eus URL berr ebet hegerz. Klaskit en-dro pe kit e darempred gant an ardoer e %1. Hoc'h URL da verraat: %2"
 
@@ -155,9 +155,13 @@ msgstr ""
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:63
+#: themes/default/templates/stats.html.ep:67
 msgid "Previous"
 msgstr "Kent"
+
+#: themes/default/templates/stats.html.ep:35
+msgid "QRCode"
+msgstr ""
 
 #: themes/default/templates/api.html.ep:103 themes/default/templates/api.html.ep:123 themes/default/templates/api.html.ep:130 themes/default/templates/api.html.ep:146 themes/default/templates/api.html.ep:24 themes/default/templates/api.html.ep:37 themes/default/templates/api.html.ep:59
 msgid "Response for HTML format"
@@ -198,17 +202,17 @@ msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam
 msgstr "Adheñchet eo an URL teir gwech pe ouzhpenn. Moarvat eo un URL arvarus (spam, phishing...). Ne fell ket din e verraat."
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:279
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:295
 msgid "The shortened URL %1 doesn't exist."
 msgstr "N'eus ket eus an URL berraet %1."
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:56
+#: lib/Lstu/Controller/Lstu.pm:58
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "An destenn berraet (%1) a zo diouti endeo. Dibabit unan all mar plij."
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:54
+#: lib/Lstu/Controller/Lstu.pm:56
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr "An destenn berraet n'hall enderc'hel niverennoù, lizherennoù hag an arouezennoù - ha _ nemetken. N'hall ket bezañ \"a\", \"api\", \"d\" pe \"stats\" pe echuiñ gant \".json\". Hoc'h URL da verraat: %1"
 
@@ -233,7 +237,7 @@ msgid "URL to shorten"
 msgstr "URL da verraat"
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:30
+#: lib/Lstu/Controller/Lstu.pm:32
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Goulennet hoc'h eus da verraat re a URLoù en un amzer re verr. Forbannet hoc'h e-pad %1 eur."
 

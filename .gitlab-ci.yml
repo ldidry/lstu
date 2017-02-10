@@ -3,6 +3,7 @@ stages:
   - sqlite
   - postgresql
 before_script:
+  - apt-get install -y libpng12-dev
   - carton install
   - rm -f *db
 sqlite:

@@ -31,7 +31,9 @@
         <th><%= l('Counter') %></th>
         <th><%= l('Created') %></th>
 % if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
-%     if (defined(stash('admin'))) {
+%     unless (defined(stash('admin'))) {
+        <th><%= l('QRCode') %></th>
+%     } else {
         <th><%= l('Delete') %></th>
 %     }
 % }
@@ -49,7 +51,9 @@
         <td><%= $url->{counter} %></td>
         <td><%= Mojo::Date->new($url->{timestamp})->to_string %></td>
 % if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
-%     if (defined(stash('admin'))) {
+%     unless (defined(stash('admin'))) {
+        <td><img class="qrcode-stat" alt="QRCode" src="data:image/png;base64,<%= $url->{qrcode} %>"></td>
+%     } else {
         <td><a href="<%= url_for('delete', {short => $url->{short}}) %>"><span class="icon icon-trash"></span></a></td>
 %     }
 % }
