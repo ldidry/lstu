@@ -14,6 +14,7 @@
 
 % if (defined(flash('short')) && defined(flash('url'))) {
     <h3 class="alert alert-success form-inline">
+        <img alt="QRCode" src="data:image/png;base64,<%= flash('qrcode') %>">
         <div class="form-group">
             <label><%= link_to flash('url') => begin %><%= flash('url') %><%= end %></a></label>
             <br> =&gt; <input id="input-short" value="<%== flash('short') %>" class="form-control">

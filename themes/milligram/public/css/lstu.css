@@ -39,3 +39,6 @@ ul.pager li {
         display: none !important;
     }
 }
+.qrcode-result {
+    float: right;
+}
