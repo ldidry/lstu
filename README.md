@@ -22,7 +22,7 @@ sudo apt-get install build-essential libssl-dev
 sudo cpan Carton
 ```
 
-* If you want to use PostgreSQL as a backend, install `libpq-dev` too:
+* Install `libpq-dev` too:
 
 ```shell
 sudo apt-get install libpq-dev
@@ -35,12 +35,6 @@ After installing Carton :
 ```shell
 git clone https://framagit.org/luc/lstu.git
 cd lstu
-```
-
-If you **don't** want to use PostgreSQL as a backend, comment the line `requires 'Mojo::Pg';` in the `cpanfile` file:
-
-```shell
-sed -e "s@requires 'Mojo::Pg';@#requires 'Mojo::Pg';@" -i cpanfile
 ```
 
 Let's continue the installation:
@@ -59,13 +53,9 @@ The configuration file is self-documented.
 ```shell
 cd /your/lstu/installation/directory
 git pull
+sudo apt-get install libpq-dev
 ```
 
-If you **don't** want to use PostgreSQL as a backend, comment the line `requires 'Mojo::Pg';` in the `cpanfile` file:
-
-```shell
-sed -e "s@requires 'Mojo::Pg';@#requires 'Mojo::Pg';@" -i cpanfile
-```
 
 Then:
 
