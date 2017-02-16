@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:100
+#: lib/Lstu/Controller/Lstu.pm:156
 msgid "%1 is not a valid URL."
 msgstr ""
 
@@ -44,7 +44,7 @@ msgstr ""
 msgid "Browser extensions"
 msgstr ""
 
-#: themes/default/templates/index.html.ep:21
+#: themes/default/templates/index.html.ep:27
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Failure reason"
 msgstr ""
 
-#: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
+#: themes/default/templates/index.html.ep:18 themes/default/templates/stats.html.ep:17
 msgid "Go!"
 msgstr ""
 
@@ -80,8 +80,12 @@ msgstr ""
 msgid "HennyPenny-Regular"
 msgstr ""
 
-#: themes/default/templates/index.html.ep:53
+#: themes/default/templates/index.html.ep:59
 msgid "Hit Enter, then Ctrl+C to copy the short link"
+msgstr ""
+
+#: themes/default/templates/index.html.ep:14
+msgid "How many links do you want?"
 msgstr ""
 
 #: themes/default/templates/api.html.ep:126
@@ -138,7 +142,7 @@ msgid "Next"
 msgstr ""
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:94
+#: lib/Lstu/Controller/Lstu.pm:101 lib/Lstu/Controller/Lstu.pm:121
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
@@ -150,7 +154,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: lib/Lstu.pm:246 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:252 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
@@ -186,6 +190,11 @@ msgstr ""
 msgid "Signin"
 msgstr ""
 
+#. ($c->config('contact')
+#: lib/Lstu/Controller/Lstu.pm:128
+msgid "Something went wrong when creating the zip file. Try again later or contact the administrator (%1)."
+msgstr ""
+
 #: themes/default/templates/layouts/default.html.ep:61 themes/default/templates/layouts/default.html.ep:67 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
 msgstr ""
@@ -201,17 +210,17 @@ msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:295
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:349
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:58
+#: lib/Lstu/Controller/Lstu.pm:62
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:56
+#: lib/Lstu/Controller/Lstu.pm:60
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
 
@@ -235,16 +244,20 @@ msgstr ""
 msgid "URL to shorten"
 msgstr ""
 
+#: lib/Lstu/Controller/Lstu.pm:149
+msgid "You asked for a non-valid number of shortening."
+msgstr ""
+
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:32
+#: lib/Lstu/Controller/Lstu.pm:34
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr ""
 
-#: lib/Lstu.pm:237 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:243 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
 msgstr ""
 
-#: lib/Lstu.pm:276 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:282 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr ""
 
