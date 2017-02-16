@@ -9,6 +9,35 @@ DISTRIBUTIONS
       Digest::SHA 2
       ExtUtils::MakeMaker 0
       MIME::Base64 0
+  Archive-Zip-1.59
+    pathname: P/PH/PHRED/Archive-Zip-1.59.tar.gz
+    provides:
+      Archive::Zip 1.59
+      Archive::Zip::Archive 1.59
+      Archive::Zip::BufferedFileHandle 1.59
+      Archive::Zip::DirectoryMember 1.59
+      Archive::Zip::FileMember 1.59
+      Archive::Zip::Member 1.59
+      Archive::Zip::MemberRead 1.59
+      Archive::Zip::MockFileHandle 1.59
+      Archive::Zip::NewFileMember 1.59
+      Archive::Zip::StringMember 1.59
+      Archive::Zip::Tree 1.59
+      Archive::Zip::ZipFileMember 1.59
+    requirements:
+      Compress::Raw::Zlib 2.017
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Copy 0
+      File::Find 0
+      File::Path 0
+      File::Spec 0.80
+      File::Temp 0
+      IO::File 0
+      IO::Handle 0
+      IO::Seekable 0
+      Time::Local 0
+      perl 5.006
   Authen-SASL-2.16
     pathname: G/GB/GBARR/Authen-SASL-2.16.tar.gz
     provides:
@@ -463,17 +492,17 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  IO-Socket-SSL-2.047
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.047.tar.gz
+  IO-Socket-SSL-2.044
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.044.tar.gz
     provides:
-      IO::Socket::SSL 2.047
+      IO::Socket::SSL 2.044
       IO::Socket::SSL::Intercept 2.014
-      IO::Socket::SSL::OCSP_Cache 2.047
-      IO::Socket::SSL::OCSP_Resolver 2.047
+      IO::Socket::SSL::OCSP_Cache 2.044
+      IO::Socket::SSL::OCSP_Resolver 2.044
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.047
-      IO::Socket::SSL::SSL_HANDLE 2.047
-      IO::Socket::SSL::Session_Cache 2.047
+      IO::Socket::SSL::SSL_Context 2.044
+      IO::Socket::SSL::SSL_HANDLE 2.044
+      IO::Socket::SSL::Session_Cache 2.044
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
@@ -660,10 +689,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-3.01
-    pathname: S/SR/SRI/Mojo-Pg-3.01.tar.gz
+  Mojo-Pg-2.35
+    pathname: S/SR/SRI/Mojo-Pg-2.35.tar.gz
     provides:
-      Mojo::Pg 3.01
+      Mojo::Pg 2.35
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
@@ -673,17 +702,16 @@ DISTRIBUTIONS
       DBD::Pg 3.005001
       ExtUtils::MakeMaker 0
       Mojolicious 7.15
-      SQL::Abstract 1.81
       perl 5.010001
-  Mojo-SQLite-2.000
-    pathname: D/DB/DBOOK/Mojo-SQLite-2.000.tar.gz
+  Mojo-SQLite-1.004
+    pathname: D/DB/DBOOK/Mojo-SQLite-1.004.tar.gz
     provides:
-      Mojo::SQLite 2.000
-      Mojo::SQLite::Database 2.000
-      Mojo::SQLite::Migrations 2.000
-      Mojo::SQLite::PubSub 2.000
-      Mojo::SQLite::Results 2.000
-      Mojo::SQLite::Transaction 2.000
+      Mojo::SQLite 1.004
+      Mojo::SQLite::Database 1.004
+      Mojo::SQLite::Migrations 1.004
+      Mojo::SQLite::PubSub 1.004
+      Mojo::SQLite::Results 1.004
+      Mojo::SQLite::Transaction 1.004
     requirements:
       Carp 0
       DBD::SQLite 1.50
@@ -692,7 +720,6 @@ DISTRIBUTIONS
       File::Temp 0
       Module::Build::Tiny 0.034
       Mojolicious 7.15
-      SQL::Abstract 1.81
       Scalar::Util 0
       URI 1.69
       URI::db 0.15
@@ -716,8 +743,8 @@ DISTRIBUTIONS
       Mojolicious 7.18
       SQL::Abstract 1.81
       Test::More 0.90
-  Mojolicious-7.26
-    pathname: S/SR/SRI/Mojolicious-7.26.tar.gz
+  Mojolicious-7.25
+    pathname: S/SR/SRI/Mojolicious-7.25.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -783,7 +810,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.26
+      Mojolicious 7.25
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -1239,10 +1266,10 @@ DISTRIBUTIONS
       perl 5.006001
       strict 0
       warnings 0
-  Test-Script-1.15
-    pathname: P/PL/PLICEASE/Test-Script-1.15.tar.gz
+  Test-Script-1.14
+    pathname: P/PL/PLICEASE/Test-Script-1.14.tar.gz
     provides:
-      Test::Script 1.15
+      Test::Script 1.14
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 0.80
@@ -1414,18 +1441,18 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
-  libwww-perl-6.19
-    pathname: O/OA/OALDERS/libwww-perl-6.19.tar.gz
+  libwww-perl-6.18
+    pathname: O/OA/OALDERS/libwww-perl-6.18.tar.gz
     provides:
-      LWP 6.19
+      LWP 6.18
       LWP::Authen::Basic undef
       LWP::Authen::Digest undef
-      LWP::Authen::Ntlm 6.19
-      LWP::ConnCache 6.19
+      LWP::Authen::Ntlm 6.18
+      LWP::ConnCache 6.18
       LWP::Debug undef
       LWP::DebugFile undef
       LWP::MemberMixin undef
-      LWP::Protocol 6.19
+      LWP::Protocol 6.18
       LWP::Protocol::MyFTP undef
       LWP::Protocol::cpan undef
       LWP::Protocol::data undef
@@ -1439,9 +1466,9 @@ DISTRIBUTIONS
       LWP::Protocol::mailto undef
       LWP::Protocol::nntp undef
       LWP::Protocol::nogo undef
-      LWP::RobotUA 6.19
-      LWP::Simple 6.19
-      LWP::UserAgent 6.19
+      LWP::RobotUA 6.18
+      LWP::Simple 6.18
+      LWP::UserAgent 6.18
     requirements:
       Digest::MD5 0
       Encode 2.12

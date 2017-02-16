@@ -6,7 +6,11 @@
         <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%= l('URL to shorten') %>" required></input>
         <label class="sr-only" for="lsturl-custom"><%= l('Custom shortened text') %></label>
         <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%= l('Custom shortened text') %>"></input>
-        <%= submit_button l('Go!'), class => 'button' %>
+% if (config('allow_multiple')) {
+        <label class="sr-only" for="lsturl-how-many"><%= l('How many links do you want?') %></label>
+        <input type="number" min="1" value="1" step="1" name="lsturl-how-many" id="lsturl-how-many" class="form-control"></input>
+% }
+        %= submit_button l('Go!'), class => 'button'
     </fieldset>
 </form>
 

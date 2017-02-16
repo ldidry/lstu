@@ -7,8 +7,10 @@ use Lstu::DB::Session;
 use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
+use Mojo::File qw(tempfile);
 use Mojo::Util qw(b64_encode);
 use Image::PNG::QRCode 'qrpng';
+use Archive::Zip qw(:ERROR_CODES :CONSTANTS);
 
 sub add {
     my $c = shift;
@@ -47,6 +49,8 @@ sub add {
             my $custom_url = $c->param('lsturl-custom');
             my $format     = $c->param('format');
 
+            my $prefix  = $c->prefix;
+
             $custom_url = undef if (defined($custom_url) && $custom_url eq '');
 
             my ($msg, $short);
@@ -71,7 +75,7 @@ sub add {
                         ip     => $ip
                     )->increment_ban_delay(1);
 
-                    if ($db_url->short && !defined($custom_url)) {
+                    if ($db_url->short && !defined($custom_url) && !$c->config('allow_multiple')) {
                         # Already got this URL
                         $short = $db_url->short;
                     } else {
@@ -85,14 +89,65 @@ sub add {
 
                             $short = $custom_url;
                         } else {
-                            $db_url = Lstu::DB::URL->new(app => $c)->choose_empty;
-                            if (defined $db_url) {
-                                $db_url->url($url)->timestamp(time)->write;
+                            my $hmany = $c->param('lsturl-how-many');
+                            if (!$c->config('allow_multiple') || !defined($hmany) || $hmany == 1) {
+                                $db_url = Lstu::DB::URL->new(app => $c)->choose_empty;
+                                if (defined $db_url) {
+                                    $db_url->url($url)->timestamp(time)->write;
 
-                                $short = $db_url->short;
+                                    $short = $db_url->short;
+                                } else {
+                                    # Houston, we have a problem
+                                    $msg = $c->l('No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: [_2]', $c->config('contact'), $url);
+                                }
                             } else {
-                                # Houston, we have a problem
-                                $msg = $c->l('No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: [_2]', $c->config('contact'), $url);
+                                if ($hmany > 1) {
+                                    my $zip = Archive::Zip->new();
+                                    $zip->addDirectory('qrcodes/');
+                                    my $links = "$url\n\n";
+                                    my $qrcodes = Mojo::Collection->new();
+                                    for my $i (1..$hmany) {
+                                        $db_url = Lstu::DB::URL->new(app => $c)->choose_empty;
+                                        if (defined $db_url) {
+                                            $db_url->url($url)->timestamp(time)->write;
+
+                                            $links .= $prefix.$db_url->short."\n";
+                                            my $path = Mojo::File->new('tmp/'.$db_url->short.'.png');
+                                            $path->spurt(qrpng(text => $prefix.$db_url->short));
+                                            $zip->addFile($path->to_string, 'qrcodes/'.$db_url->short.'.png');
+                                            push @{$qrcodes}, $path->to_string;
+                                        } else {
+                                            # Houston, we have a problem
+                                            $msg = $c->l('No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: [_2]', $c->config('contact'), $url);
+                                        }
+                                    }
+                                    my $string_member = $zip->addString($links, 'links.txt');
+                                    $c->debug($links);
+                                    my ($fh, $zipfile) = Archive::Zip::tempFile();
+                                    unless ($zip->writeToFileNamed($zipfile) == AZ_OK) {
+                                        $msg = $c->l('Something went wrong when creating the zip file. Try again later or contact the administrator (%1).', $c->config('contact'));
+                                    } else {
+                                        $c->res->content->headers->content_type('application/zip;name=links.zip');
+                                        $c->res->content->headers->content_disposition('attachment;filename=links.zip');
+
+                                        my $asset = Mojo::Asset::File->new(path => $zipfile);
+
+                                        $c->res->content->asset($asset);
+                                        $c->res->content->headers->content_length($asset->size);
+
+                                        unlink $zipfile;
+                                        $qrcodes->each(
+                                            sub {
+                                                my ($e, $num) = @_;
+                                                unlink $e;
+                                            }
+                                        );
+
+                                        return $c->rendered(200);
+                                    }
+                                } else {
+                                    $msg = $c->l('You asked for a non-valid number of shortening.');
+                                }
                             }
                         }
                     }
@@ -121,8 +176,6 @@ sub add {
                 # And set the cookie
                 my $cookie = to_json($u);
                 $c->cookie('url' => $cookie, {expires => time + 142560000}); # expires in 10 years
-
-                my $prefix = $c->prefix;
 
                 my $qrcode = b64_encode(qrpng(text => $prefix.$short));
 

@@ -28,6 +28,7 @@ sub startup {
             },
             session_duration => 3600,
             dbtype           => 'sqlite',
+            allow_multiple   => 0,
         }
     });
 
@@ -59,6 +60,11 @@ sub startup {
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');
+
+    # If allow_multiple is configured
+    if ($self->config('allow_multiple')) {
+        mkdir 'tmp' unless (-d 'tmp');
+    }
 
     # Authentication (if configured)
     if (defined($self->config('ldap')) || defined($self->config('htpasswd'))) {

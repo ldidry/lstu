@@ -12,3 +12,4 @@ themes/*
 !themes/default/*
 !themes/milligram
 !themes/milligram/*
+tmp/*

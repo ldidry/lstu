@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:100
+#: lib/Lstu/Controller/Lstu.pm:156
 msgid "%1 is not a valid URL."
 msgstr "%1 es pas una URL valida."
 
@@ -48,7 +48,7 @@ msgstr "Senhal incorrèct"
 msgid "Browser extensions"
 msgstr "Extensions navigator"
 
-#: themes/default/templates/index.html.ep:21
+#: themes/default/templates/index.html.ep:27
 msgid "Copy to clipboard"
 msgstr "Copiar al quichapapièrs"
 
@@ -72,7 +72,7 @@ msgstr "Suprimir"
 msgid "Failure reason"
 msgstr "Rason del fracàs"
 
-#: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
+#: themes/default/templates/index.html.ep:18 themes/default/templates/stats.html.ep:17
 msgid "Go!"
 msgstr "Zo !"
 
@@ -84,9 +84,13 @@ msgstr "Henny Penny"
 msgid "HennyPenny-Regular"
 msgstr "HennyPenny-Regular"
 
-#: themes/default/templates/index.html.ep:53
+#: themes/default/templates/index.html.ep:59
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr "Picatz sus Entrada puèi fasètz Ctrl+C per copiar lo ligam"
+
+#: themes/default/templates/index.html.ep:14
+msgid "How many links do you want?"
+msgstr ""
 
 #: themes/default/templates/api.html.ep:126
 msgid "If \"action\" is defined to \"logout\":"
@@ -142,7 +146,7 @@ msgid "Next"
 msgstr "Seguent"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:94
+#: lib/Lstu/Controller/Lstu.pm:101 lib/Lstu/Controller/Lstu.pm:121
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr "I a pas mai d’URL acorchadas disponiblas. Mercés de tornar ensajar o de contactar l’administrator sus %1. Recòrd de l’URL per acorchar : %2"
 
@@ -154,7 +158,7 @@ msgstr "Paramètres :"
 msgid "Password"
 msgstr "Senhal"
 
-#: lib/Lstu.pm:246 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:252 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
 msgstr "Mercés de verificar vòstres identificants : fracàs de l’autentificacion."
 
@@ -190,6 +194,11 @@ msgstr "Deu totjorn tornar una capitada"
 msgid "Signin"
 msgstr "Connexion"
 
+#. ($c->config('contact')
+#: lib/Lstu/Controller/Lstu.pm:128
+msgid "Something went wrong when creating the zip file. Try again later or contact the administrator (%1)."
+msgstr ""
+
 #: themes/default/templates/layouts/default.html.ep:61 themes/default/templates/layouts/default.html.ep:67 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
 msgstr "Estatisticas"
@@ -205,17 +214,17 @@ msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam
 msgstr "L’URL endralha 3 còps o mai cap a un a autre site. Pòt èsser una URL dangerossa (porrièl, pesca electronica, etc). Refusi de l’acorchar"
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:295
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:349
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL acorchada %1 existís pas"
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:58
+#: lib/Lstu/Controller/Lstu.pm:62
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "Lo tèxte de l’acorchi (%1) es ja utilizat. Mercés de ne causir un autre"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:56
+#: lib/Lstu/Controller/Lstu.pm:60
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr "Lo tèxte de l’acorchi deu pas que contenir de chifras, letras e los caractèrs - e _, èsser \"a\", \"api\", \"d\" o \"stats\" o acabar per \".json\". Recòrd de l’URL per acorchar : %1"
 
@@ -239,16 +248,20 @@ msgstr "URL"
 msgid "URL to shorten"
 msgstr "URL per acorchar"
 
+#: lib/Lstu/Controller/Lstu.pm:149
+msgid "You asked for a non-valid number of shortening."
+msgstr ""
+
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:32
+#: lib/Lstu/Controller/Lstu.pm:34
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Avètz demandat d’acorchar tròp d’URL en pauc de temps. Sètz bandit per %1 ora(s)."
 
-#: lib/Lstu.pm:237 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:243 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
 msgstr "Sètz ben estat·ada connectat·ada."
 
-#: lib/Lstu.pm:276 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:282 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr "Sètz ben estat·ada desconnectat·ada."
 
