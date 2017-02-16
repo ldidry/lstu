@@ -65,6 +65,9 @@ sub new {
         } elsif ($dbtype eq 'postgresql') {
             use Lstu::DB::Ban::Pg;
             $c = Lstu::DB::Ban::Pg->new(@_);
+        } elsif ($dbtype eq 'mysql') {
+            use Lstu::DB::Ban::MySQL;
+            $c = Lstu::DB::Ban::MySQL->new(@_);
         }
     }
 

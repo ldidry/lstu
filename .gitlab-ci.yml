@@ -39,3 +39,22 @@ postgresql:
   tags:
     - Debian
     - Jessie
+mysql:
+  stage: mysql
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
+  script:
+    - service mysql restart
+    - sleep 10
+    - service mysql status
+    - mysql -u root < t/test_mysql.sql
+    - MOJO_CONFIG=t/mysql3.conf make minion &
+    - MOJO_CONFIG=t/mysql1.conf make test
+    - MOJO_CONFIG=t/mysql2.conf make test
+    - MOJO_CONFIG=t/mysql3.conf make test
+  tags:
+    - Debian
+    - Jessie
