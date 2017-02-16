@@ -62,6 +62,9 @@ sub new {
         } elsif ($dbtype eq 'postgresql') {
             use Lstu::DB::Session::Pg;
             $c = Lstu::DB::Session::Pg->new(@_);
+        } elsif ($dbtype eq 'mysql') {
+            use Lstu::DB::Session::MySQL;
+            $c = Lstu::DB::Session::MySQL->new(@_);
         }
     }
 
