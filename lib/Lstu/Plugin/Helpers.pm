@@ -20,6 +20,17 @@ sub register {
         } else {
             $migrations->from_file('utilities/migrations.sql')->migrate(1);
         }
+    } elsif ($app->config('dbtype') eq 'mysql') {
+        use Mojo::mysql;
+        $app->helper(mysql => \&_mysql);
+
+        # Database migration
+        my $migrations = Mojo::mysql::Migrations->new(mysql => $app->mysql);
+        if ($app->mode eq 'development') {
+            $migrations->from_file('utilities/migrations_mysql.sql')->migrate(0)->migrate(1);
+        } else {
+            $migrations->from_file('utilities/migrations_mysql.sql')->migrate(1);
+        }
     }
 
     $app->helper(cache => \&_cache);
@@ -43,6 +54,19 @@ sub _pg {
     $pg->password($c->config->{pgdb}->{pwd});
     $pg->username($c->config->{pgdb}->{user});
     return $pg;
+}
+
+sub _mysql {
+    my $c     = shift;
+
+    my $addr  = 'mysql://';
+    $addr    .= $c->config->{mysqldb}->{host};
+    $addr    .= ':'.$c->config->{mysqldb}->{port} if defined $c->config->{pgdb}->{port};
+    $addr    .= '/'.$c->config->{mysqldb}->{database};
+    state $mysql = Mojo::mysql->new($addr);
+    $mysql->password($c->config->{mysqldb}->{pwd});
+    $mysql->username($c->config->{mysqldb}->{user});
+    return $mysql;
 }
 
 sub _cache {
