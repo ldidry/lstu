@@ -75,6 +75,7 @@ sub add {
                     } else {
                         if (defined($custom_url)) {
                             Lstu::DB::URL->new(
+                                app       => $c,
                                 short     => $custom_url,
                                 url       => $url,
                                 timestamp => time()
