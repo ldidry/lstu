@@ -52,7 +52,7 @@ sub add {
                 $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/))
             {
                 $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api", "d" or "stats" or end with ".json". Your URL to shorten: %1', $url);
-            } elsif (defined($custom_url) && Lstu::DB::URL->new()->exist($custom_url) > 0) {
+            } elsif (defined($custom_url) && Lstu::DB::URL->new(app => $c)->exist($custom_url) > 0) {
                 $msg = $c->l('The shortened text (%1) is already used. Please choose another one.', $custom_url);
             } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string)) {
                 my $res = $c->is_spam($url, 0);
