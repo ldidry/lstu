@@ -1,5 +1,6 @@
 requires 'Mojolicious', '>= 4.63';
 requires 'ORLite';
+requires 'Mojo::mysql';
 requires 'Mojo::Pg';
 requires 'Data::Validate::URI';
 requires 'Net::Domain::TLD', '>= 1.74';

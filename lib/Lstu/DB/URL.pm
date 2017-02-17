@@ -68,6 +68,9 @@ sub new {
         } elsif ($dbtype eq 'postgresql') {
             use Lstu::DB::URL::Pg;
             $c = Lstu::DB::URL::Pg->new(@_);
+        } elsif ($dbtype eq 'mysql') {
+            use Lstu::DB::URL::MySQL;
+            $c = Lstu::DB::URL::MySQL->new(@_);
         }
     }
 

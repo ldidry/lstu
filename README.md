@@ -22,10 +22,10 @@ sudo apt-get install build-essential libssl-dev
 sudo cpan Carton
 ```
 
-* Install `libpq-dev` too:
+* Install `libpq-dev` and `libmysqld-dev` too:
 
 ```shell
-sudo apt-get install libpq-dev
+sudo apt-get install libpq-dev libmysqld-dev
 ```
 
 ## Installation
