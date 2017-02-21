@@ -92,7 +92,11 @@ sub get_a_lot {
     my $u = shift;
 
     my $p = join ",", (('?') x @{$u});
-    return @{$c->app->mysql->db->query('SELECT * FROM lstu WHERE short IN ('.$p.') ORDER BY counter DESC', @{$u})->hashes->to_array};
+    if ($p ne "") {
+        return @{$c->app->mysql->db->query('SELECT * FROM lstu WHERE short IN ('.$p.') ORDER BY counter DESC', @{$u})->hashes->to_array};
+    } else {
+        return ();
+    }
 }
 
 sub total {
