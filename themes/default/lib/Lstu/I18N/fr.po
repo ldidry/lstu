@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:156
+#: lib/Lstu/Controller/Lstu.pm:204
 msgid "%1 is not a valid URL."
 msgstr "%1 n’est pas une URL valide."
 
@@ -47,7 +47,7 @@ msgstr "Mot de passe incorrect"
 msgid "Browser extensions"
 msgstr "Extensions navigateur"
 
-#: themes/default/templates/index.html.ep:27
+#: themes/default/templates/index.html.ep:35
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papier"
 
@@ -71,7 +71,7 @@ msgstr "Supprimer"
 msgid "Failure reason"
 msgstr "Raison de l’échec"
 
-#: themes/default/templates/index.html.ep:18 themes/default/templates/stats.html.ep:17
+#: themes/default/templates/index.html.ep:26 themes/default/templates/stats.html.ep:17
 msgid "Go!"
 msgstr "Allons-y !"
 
@@ -83,9 +83,13 @@ msgstr "Henny Penny"
 msgid "HennyPenny-Regular"
 msgstr "HennyPenny-Regular"
 
-#: themes/default/templates/index.html.ep:59
+#: themes/default/templates/index.html.ep:67
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr "Appuyez sur Entrée puis faites Ctrl+C pour copier le lien"
+
+#: themes/default/templates/index.html.ep:18
+msgid "How many days after first visit will it last? (optional)"
+msgstr "Après combien de jours après la première visite souhaitez-vous désactiver le lien ? (optionnel)"
 
 #: themes/default/templates/index.html.ep:14
 msgid "How many links do you want?"
@@ -149,7 +153,7 @@ msgid "Next"
 msgstr "Suivant"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:101 lib/Lstu/Controller/Lstu.pm:121
+#: lib/Lstu/Controller/Lstu.pm:106 lib/Lstu/Controller/Lstu.pm:157
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr "Il n’y a plus d’URL raccourcie disponible. Veuillez réessayer ou contactez l’administrateur sur %1. Rappel de l’URL à raccourcir : %2"
 
@@ -161,7 +165,7 @@ msgstr "Paramètres :"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: lib/Lstu.pm:252 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:255 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
 msgstr "Impossible de s’authentifier, veuillez vérifier vos identifiants"
 
@@ -185,6 +189,10 @@ msgstr "Réponse pour le format JSON"
 msgid "Response:"
 msgstr "Réponse :"
 
+#: themes/default/templates/index.html.ep:22
+msgid "SVG template (optional)"
+msgstr "Modèle SVG (optionnel)"
+
 #: themes/default/templates/stats.html.ep:30
 msgid "Shortened URL"
 msgstr "URL raccourcie"
@@ -198,7 +206,7 @@ msgid "Signin"
 msgstr "Connexion"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:128
+#: lib/Lstu/Controller/Lstu.pm:164
 msgid "Something went wrong when creating the zip file. Try again later or contact the administrator (%1)."
 msgstr "Quelque chose s’est mal déroulé lors de la création du fichier zip. Veuillez réessayer plus tard ou contacter l’administrateur (%1)."
 
@@ -207,19 +215,24 @@ msgid "Statistics"
 msgstr "Statistiques"
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:126
+#: lib/Lstu/Plugin/Helpers.pm:164
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr "L'hôte de l'URL ou d'une de ses redirections (%1) est considéré comme nocif par Spamhaus. Je refuse de la raccourcir."
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:139
+#: lib/Lstu/Plugin/Helpers.pm:177
 msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr "L'URL redirige 3 fois ou plus vers un autre site. Il est probable qu'il s'agisse d'une URL dangereuse (pourriel, hameçonnage, etc.). Je refuse de la raccourcir."
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:349
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:409
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL raccourcie %1 n’existe pas"
+
+#. ($c->url_for('/')
+#: lib/Lstu/Controller/Lstu.pm:410
+msgid "The shortened URL %1 has been deactivated."
+msgstr "L’URL raccourcie %1 a été désactivée."
 
 #. ($custom_url)
 #: lib/Lstu/Controller/Lstu.pm:62
@@ -251,7 +264,7 @@ msgstr "URL"
 msgid "URL to shorten"
 msgstr "URL à raccourcir"
 
-#: lib/Lstu/Controller/Lstu.pm:149
+#: lib/Lstu/Controller/Lstu.pm:197
 msgid "You asked for a non-valid number of shortening."
 msgstr "Vous avez demandé un nombre non valide de liens raccourcis."
 
@@ -260,11 +273,11 @@ msgstr "Vous avez demandé un nombre non valide de liens raccourcis."
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Vous avez demandé à réduire trop d’URLs en trop peu de temps. Vous êtes banni pour %1 heure(s)."
 
-#: lib/Lstu.pm:243 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:246 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
 msgstr "Vous avez été connecté·e avec succès."
 
-#: lib/Lstu.pm:282 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:285 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr "Vous avez été déconnecté·e avec succès."
 

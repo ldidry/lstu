@@ -175,14 +175,17 @@ sub startup {
     if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {
         $self->app->minion->add_task(
             increase_counter => sub {
-                my $job   = shift;
-                my $short = shift;
-                my $url   = shift;
+                my $job        = shift;
+                my $short      = shift;
+                my $url        = shift;
+                my $expires_at = shift;
 
                 my $db_url = Lstu::DB::URL->new(
                     app    => $job->app,
                     short  => $short
                 )->increment_counter;
+
+                $db_url->expires_at($expires_at) if defined $expires_at;
 
                 my $piwik = $job->app->config('piwik');
                 if (defined($piwik) && $piwik->{idsite} && $piwik->{url}) {

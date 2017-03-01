@@ -31,10 +31,12 @@ use ORLite {
           my $dbh = shift;
           $dbh->do(
               'CREATE TABLE IF NOT EXISTS lstu (
-               short     TEXT PRIMARY KEY,
-               url       TEXT,
-               counter   INTEGER,
-               timestamp INTEGER)'
+               short         TEXT PRIMARY KEY,
+               url           TEXT,
+               counter       INTEGER,
+               timestamp     INTEGER,
+               expires_at    INTEGER,
+               expires_after INTEGER)'
           );
           $dbh->do(
               'CREATE TABLE IF NOT EXISTS sessions (

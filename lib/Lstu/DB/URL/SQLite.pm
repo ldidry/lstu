@@ -30,17 +30,21 @@ sub write {
     if (Lstu::DB::SQLite->begin) {
         if (defined $c->record) {
             $c->record->update(
-                short     => $c->short,
-                url       => $c->url,
-                counter   => $c->counter,
-                timestamp => $c->timestamp,
+                short         => $c->short,
+                url           => $c->url,
+                counter       => $c->counter,
+                timestamp     => $c->timestamp,
+                expires_at    => $c->expires_at,
+                expires_after => $c->expires_after,
             );
         } else {
             my $record = Lstu::DB::SQLite::Lstu->create(
-                short     => $c->short,
-                url       => $c->url,
-                counter   => $c->counter,
-                timestamp => $c->timestamp,
+                short         => $c->short,
+                url           => $c->url,
+                counter       => $c->counter,
+                timestamp     => $c->timestamp,
+                expires_at    => $c->expires_at,
+                expires_after => $c->expires_after,
             );
             $c->record($record);
         }
@@ -135,6 +139,8 @@ sub _slurp {
         $c->short($urls[0]->short);
         $c->counter($urls[0]->counter);
         $c->timestamp($urls[0]->timestamp);
+        $c->expires_at($urls[0]->expires_at);
+        $c->expires_after($urls[0]->expires_after);
         $c->record($urls[0]);
     }
 

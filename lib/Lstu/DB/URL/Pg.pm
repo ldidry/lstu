@@ -27,9 +27,9 @@ sub write {
     my $c     = shift;
 
     if ($c->record) {
-        $c->app->pg->db->query('UPDATE lstu SET url = ?, counter = ?, timestamp = ? WHERE short = ?', $c->url, $c->counter, $c->timestamp, $c->short);
+        $c->app->mysql->db->query('UPDATE lstu SET url = ?, counter = ?, timestamp = ?, expires_at = ?, expires_after = ? WHERE short = ?', $c->url, $c->counter, $c->timestamp, $c->short, $c->expires_at, $c->expires_after);
     } else {
-        $c->app->pg->db->query('INSERT INTO lstu (short, url, counter, timestamp) VALUES (?, ?, ?, ?)', $c->short, $c->url, $c->counter, $c->timestamp);
+        $c->app->mysql->db->query('INSERT INTO lstu (short, url, counter, timestamp, expires_at, expires_after) VALUES (?, ?, ?, ?, ?, ?)', $c->short, $c->url, $c->counter, $c->timestamp, $c->expires_at, $c->expires_after);
         $c->record(1);
     }
 
@@ -119,6 +119,8 @@ sub _slurp {
         $c->short($h->first->{short});
         $c->counter($h->first->{counter});
         $c->timestamp($h->first->{timestamp});
+        $c->expires_at($h->first->{expires_at});
+        $c->expires_after($h->first->{expires_after});
         $c->record(1);
     }
 

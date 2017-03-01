@@ -1,6 +1,7 @@
 package Lstu::Plugin::Helpers;
 use Mojo::Base 'Mojolicious::Plugin';
 use Mojo::URL;
+use Mojo::Collection;
 use Net::Abuse::Utils::Spamhaus qw(check_fqdn);
 use Lstu::DB::URL;
 use Lstu::DB::Ban;
@@ -16,9 +17,9 @@ sub register {
         # Database migration
         my $migrations = Mojo::Pg::Migrations->new(pg => $app->pg);
         if ($app->mode eq 'development') {
-            $migrations->from_file('utilities/migrations.sql')->migrate(0)->migrate(1);
+            $migrations->from_file('utilities/migrations.sql')->migrate(0)->migrate(2);
         } else {
-            $migrations->from_file('utilities/migrations.sql')->migrate(1);
+            $migrations->from_file('utilities/migrations.sql')->migrate(2);
         }
     } elsif ($app->config('dbtype') eq 'mysql') {
         use Mojo::mysql;
@@ -27,10 +28,23 @@ sub register {
         # Database migration
         my $migrations = Mojo::mysql::Migrations->new(mysql => $app->mysql);
         if ($app->mode eq 'development') {
-            $migrations->from_file('utilities/migrations_mysql.sql')->migrate(0)->migrate(1);
+            $migrations->from_file('utilities/migrations_mysql.sql')->migrate(0)->migrate(2);
         } else {
-            $migrations->from_file('utilities/migrations_mysql.sql')->migrate(1);
+            $migrations->from_file('utilities/migrations_mysql.sql')->migrate(2);
         }
+    } elsif ($app->config('dbtype') eq 'sqlite') {
+        # Database migration (equivalent to 2 in postgresql migrations)
+        my $missing = Mojo::Collection->new('expires_at', 'expires_after');
+        my $columns = Lstu::DB::SQLite::Lstu->table_info;
+        for my $c (@$columns) {
+            $missing = $missing->grep(sub { $_ ne $c->{name} });
+        }
+        $missing->each(
+            sub {
+                my ($e, $num) = @_;
+                Lstu::DB::SQLite->do("ALTER TABLE lstu ADD $e INTEGER");
+            }
+        );
     }
 
     $app->helper(cache => \&_cache);

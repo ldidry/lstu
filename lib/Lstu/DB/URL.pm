@@ -6,6 +6,8 @@ has 'short';
 has 'url';
 has 'counter' => 0;
 has 'timestamp';
+has 'expires_after';
+has 'expires_at';
 has 'app';
 
 =head1 NAME

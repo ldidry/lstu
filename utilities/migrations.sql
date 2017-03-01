@@ -18,3 +18,9 @@ CREATE TABLE IF NOT EXISTS ban (
 DROP TABLE ban;
 DROP TABLE sessions;
 DROP TABLE lstu;
+-- 2 up
+ALTER TABLE lstu ADD COLUMN expires_at integer;
+ALTER TABLE lstu ADD COLUMN expires_after integer;
+-- 2 down
+ALTER TABLE lstu DROP COLUMN expires_at;
+ALTER TABLE lstu DROP COLUMN expires_after;
