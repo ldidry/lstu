@@ -6,6 +6,7 @@ local/*
 *.db-journal
 lstu.conf
 *.swp
+*.passwd
 script/hypnotoad.pid
 themes/*
 !themes/default
