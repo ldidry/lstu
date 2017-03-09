@@ -130,7 +130,7 @@ sub add {
                                             # For the QRCode
                                             my $svg = $c->param('svg-file');
                                             my $path;
-                                            if (defined($svg)) {
+                                            if (defined($svg) && $svg->slurp()) {
                                                 $path = Mojo::File->new('tmp/'.$db_url->short.'.svg');
 
                                                 my $text = $svg->slurp();
