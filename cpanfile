@@ -1,4 +1,4 @@
-requires 'Mojolicious', '>= 4.63';
+requires 'Mojolicious', '>= 7.33';
 requires 'ORLite';
 requires 'Mojo::mysql';
 requires 'Mojo::Pg';

@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:100
+#: lib/Lstu/Controller/Lstu.pm:101
 msgid "%1 is not a valid URL."
 msgstr "%1 n'eo ket un URL talvoudek."
 
@@ -139,7 +139,7 @@ msgid "Next"
 msgstr "Da-heul"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:94
+#: lib/Lstu/Controller/Lstu.pm:95
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr "N'eus URL berr ebet hegerz. Klaskit en-dro pe kit e darempred gant an ardoer e %1. Hoc'h URL da verraat: %2"
 
@@ -192,17 +192,17 @@ msgid "Statistics"
 msgstr "Stadegoù"
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:126
+#: lib/Lstu/Plugin/Helpers.pm:150
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr "Ostiz an URL pe unan eus e adheñchadennoù (%1) a zo e roll du Spamhaus. Ne fell ket din e verraat."
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:139
+#: lib/Lstu/Plugin/Helpers.pm:163
 msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr "Adheñchet eo an URL teir gwech pe ouzhpenn. Moarvat eo un URL arvarus (spam, phishing...). Ne fell ket din e verraat."
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:295
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:296
 msgid "The shortened URL %1 doesn't exist."
 msgstr "N'eus ket eus an URL berraet %1."
 
