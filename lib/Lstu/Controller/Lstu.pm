@@ -57,7 +57,7 @@ sub add {
             } elsif (defined($custom_url) && Lstu::DB::URL->new(app => $c)->exist($custom_url) > 0) {
                 $msg = $c->l('The shortened text (%1) is already used. Please choose another one.', $custom_url);
             } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string) || (defined($url->host) && $url->host =~ m/\.onion$/)) {
-                my $res = $c->is_spam($url, 0);
+                my $res = ($url->host =~ m/\.onion$/) ? {} : $c->is_spam($url, 0);
                 if ($res->{is_spam}) {
                     $msg = $res->{msg};
                 } else {

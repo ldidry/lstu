@@ -51,6 +51,11 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->json_is('/success' => true, '/url' => 'https://lstu.fr')
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
+$t->post_ok('/a' => form => { lsturl => 'http://lstupiioqgxmq66f.onion', 'lsturl-custom' => 'onion', format => 'json' })
+    ->status_is(200)
+    ->json_has('url', 'short', 'success', 'qrcode')
+    ->json_is('/success' => true, '/url' => 'https://lstu.fr', '/short' => 'http://127.0.0.1/onion');
+
 $t->post_ok('/a' => form => { lsturl => 'truc', format => 'json' })
     ->status_is(200)
     ->json_has('msg', 'success')
