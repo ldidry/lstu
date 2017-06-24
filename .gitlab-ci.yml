@@ -7,7 +7,26 @@ before_script:
   - apt-get install -y libpng12-dev
   - carton install
   - rm -f *db
-sqlite:
+  - make podcheck
+sqlite1:
+  stage: sqlite
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
+  script:
+    - MOJO_CONFIG=t/sqlite1.conf make test
+sqlite2:
+  stage: sqlite
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
+  script:
+    - MOJO_CONFIG=t/sqlite2.conf make test
+sqlite3:
   stage: sqlite
   cache:
     key: "$CI_BUILD_REF_NAME"
@@ -16,13 +35,36 @@ sqlite:
       - local
   script:
     - MOJO_CONFIG=t/sqlite3.conf make minion &
-    - MOJO_CONFIG=t/sqlite1.conf make test
-    - MOJO_CONFIG=t/sqlite2.conf make test
+    - sleep 3
     - MOJO_CONFIG=t/sqlite3.conf make test
   tags:
     - Debian
     - Jessie
-postgresql:
+postgresql1:
+  stage: postgresql
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
+  script:
+    - service postgresql restart
+    - sleep 10
+    - service postgresql status
+    - MOJO_CONFIG=t/postgresql1.conf make test
+postgresql2:
+  stage: postgresql
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
+  script:
+    - service postgresql restart
+    - sleep 10
+    - service postgresql status
+    - MOJO_CONFIG=t/postgresql2.conf make test
+postgresql3:
   stage: postgresql
   cache:
     key: "$CI_BUILD_REF_NAME"
@@ -35,13 +77,12 @@ postgresql:
     - service postgresql status
     - su -c "psql -f t/test.sql" postgres
     - MOJO_CONFIG=t/postgresql3.conf make minion &
-    - MOJO_CONFIG=t/postgresql1.conf make test
-    - MOJO_CONFIG=t/postgresql2.conf make test
+    - sleep 3
     - MOJO_CONFIG=t/postgresql3.conf make test
   tags:
     - Debian
     - Jessie
-mysql:
+mysql1:
   stage: mysql
   cache:
     key: "$CI_BUILD_REF_NAME"
@@ -53,9 +94,32 @@ mysql:
     - sleep 10
     - service mysql status
     - mysql -u root < t/test_mysql.sql
-    - MOJO_CONFIG=t/mysql3.conf make minion &
     - MOJO_CONFIG=t/mysql1.conf make test
+mysql2:
+  stage: mysql
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
+  script:
+    - service mysql restart
+    - sleep 10
+    - service mysql status
     - MOJO_CONFIG=t/mysql2.conf make test
+mysql3:
+  stage: mysql
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - local
+  script:
+    - service mysql restart
+    - sleep 10
+    - service mysql status
+    - MOJO_CONFIG=t/mysql3.conf make minion &
+    - sleep 3
     - MOJO_CONFIG=t/mysql3.conf make test
   tags:
     - Debian
