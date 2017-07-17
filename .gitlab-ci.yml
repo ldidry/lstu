@@ -20,7 +20,6 @@ sqlite1:
   tags:
     - Debian
     - Jessie
-    - SQLite
 sqlite2:
   stage: sqlite
   cache:
@@ -33,7 +32,6 @@ sqlite2:
   tags:
     - Debian
     - Jessie
-    - SQLite
 sqlite3:
   stage: sqlite
   cache:
@@ -48,7 +46,6 @@ sqlite3:
   tags:
     - Debian
     - Jessie
-    - SQLite
 postgresql1:
   stage: postgresql
   cache:
@@ -64,7 +61,6 @@ postgresql1:
   tags:
     - Debian
     - Jessie
-    - PostgreSQL
 postgresql2:
   stage: postgresql
   cache:
@@ -80,7 +76,6 @@ postgresql2:
   tags:
     - Debian
     - Jessie
-    - PostgreSQL
 postgresql3:
   stage: postgresql
   cache:
@@ -99,7 +94,6 @@ postgresql3:
   tags:
     - Debian
     - Jessie
-    - PostgreSQL
 mysql1:
   stage: mysql
   cache:
@@ -116,7 +110,6 @@ mysql1:
   tags:
     - Debian
     - Jessie
-    - MySQL
 mysql2:
   stage: mysql
   cache:
@@ -133,7 +126,6 @@ mysql2:
   tags:
     - Debian
     - Jessie
-    - MySQL
 mysql3:
   stage: mysql
   cache:
@@ -152,4 +144,3 @@ mysql3:
   tags:
     - Debian
     - Jessie
-    - MySQL
