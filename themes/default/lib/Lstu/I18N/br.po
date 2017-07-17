@@ -151,7 +151,7 @@ msgstr "Arventennoù:"
 msgid "Password"
 msgstr ""
 
-#: lib/Lstu.pm:246 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:248 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
@@ -192,14 +192,19 @@ msgid "Statistics"
 msgstr "Stadegoù"
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:150
+#: lib/Lstu/Plugin/Helpers.pm:158
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr "Ostiz an URL pe unan eus e adheñchadennoù (%1) a zo e roll du Spamhaus. Ne fell ket din e verraat."
 
+#. ($c->config('max_redir')
+#: lib/Lstu/Plugin/Helpers.pm:171
+msgid "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
+msgstr "Adheñchet eo an URL %1 gwech pe ouzhpenn. Moarvat eo un URL arvarus (spam, phishing...). Ne fell ket din e verraat."
+
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:163
-msgid "The URL redirects 3 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
-msgstr "Adheñchet eo an URL teir gwech pe ouzhpenn. Moarvat eo un URL arvarus (spam, phishing...). Ne fell ket din e verraat."
+#: lib/Lstu/Plugin/Helpers.pm:150
+msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted on this server (usually because of spammers that use this domain)."
+msgstr ""
 
 #. ($c->url_for('/')
 #: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:296
@@ -241,11 +246,11 @@ msgstr "URL da verraat"
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Goulennet hoc'h eus da verraat re a URLoù en un amzer re verr. Forbannet hoc'h e-pad %1 eur."
 
-#: lib/Lstu.pm:237 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:239 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
 msgstr ""
 
-#: lib/Lstu.pm:276 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:278 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr ""
 

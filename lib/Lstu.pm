@@ -28,6 +28,8 @@ sub startup {
             },
             session_duration => 3600,
             dbtype           => 'sqlite',
+            max_redir        => 2,
+            skip_spamhaus    => 0,
         }
     });
 

@@ -141,9 +141,17 @@ sub _is_spam {
 
     my $ip = $c->ip;
     return { is_spam => 0 } if scalar(grep {/$ip/} @{$c->config('ban_whitelist')});
+    my $wl = $c->config('spam_whitelist_regex');
+    return { is_spam => 0 } if (defined($wl) && $url->host =~ m/$wl/);
 
-    if ($nb_redir++ <= 2) {
-        my $res = check_fqdn($url->host);
+    my $bl = $c->config('spam_blacklist_regex');
+    return {
+       is_spam => 1,
+       msg     => $c->l('The URL you want to shorten comes from a domain (%1) that is blacklisted on this server (usually because of spammers that use this domain).', $url->host)
+    } if (defined($bl) && $url->host =~ m/$bl/);
+
+    if ($nb_redir++ <= $c->config('max_redir')) {
+        my $res = ($c->config('skip_spamhaus')) ? undef : check_fqdn($url->host);
         if (defined $res) {
            return {
                is_spam => 1,
@@ -160,7 +168,7 @@ sub _is_spam {
     } else {
        return {
            is_spam => 1,
-           msg     => $c->l('The URL redirects 3 times or most. It\'s most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it.', $url->host)
+           msg     => $c->l('The URL redirects %1 times or most. It\'s most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it.', $c->config('max_redir'))
        }
     }
 }

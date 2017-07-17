@@ -152,4 +152,20 @@
     # the user needs to reauthenticate
     # optional, default is 3600
     #session_duration => 3600,
+
+    # how many redirections are allowed for the shortened URL before considering it as a spam?
+    # optional, default is 2. Set to -1 to allow infinite redirections (not recommended)
+    #max_redir => 2,
+
+    # spam blacklist regex. All URLs (or redirection) whose host part matches this regex are considered as spam
+    # optional, no default
+    #spam_blacklist_regex => 'foo|bar',
+
+    # spam whitelist regex. All URLs (or redirection) whose host part matches this regex will never be considered as spam
+    # optional, no default
+    #spam_whitelist_regex => 'foo|bar',
+
+    # set to 1 to skip SpamHaus check (not recommended)
+    # optional, default is 0
+    #skip_spamhaus => 0,
 };

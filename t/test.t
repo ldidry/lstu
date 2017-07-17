@@ -29,7 +29,9 @@ BEGIN {
         {
             file    => $cfile->to_abs->to_string,
             default => {
-                dbtype => 'sqlite'
+                dbtype           => 'sqlite',
+                max_redir        => 2,
+                skip_spamhaus    => 0,
             }
         }
     );
@@ -204,6 +206,50 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->json_has('url', 'short', 'success', 'qrcode')
     ->json_is('/success' => true, '/url' => 'https://lstu.fr')
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
+
+$config_file->spurt($config_orig);
+
+# Test domain blacklisting
+Lstu::DB::Ban->new(app => $m)->delete_all;
+$config_content = $config_orig;
+$config_content =~ s/^( +)#?spam_blacklist_regex.*/$1spam_blacklist_regex => 'google\\.(fr|com)',/gm;
+$config_file->spurt($config_content);
+
+$t = Test::Mojo->new('Lstu');
+
+$t->post_ok('/a' => form => { lsturl => 'https://google.fr', format => 'json' })
+    ->status_is(200)
+    ->json_has('msg', 'success')
+    ->json_is({success => false, msg => 'The URL you want to shorten comes from a domain (google.fr) that is blacklisted on this server (usually because of spammers that use this domain).'});
+
+$t->post_ok('/a' => form => { lsturl => 'https://google.com', format => 'json' })
+    ->status_is(200)
+    ->json_has('msg', 'success')
+    ->json_is({success => false, msg => 'The URL you want to shorten comes from a domain (google.com) that is blacklisted on this server (usually because of spammers that use this domain).'});
+
+$t->post_ok('/a' => form => { lsturl => 'https://google.de', format => 'json' })
+    ->status_is(200)
+    ->json_has('url', 'short', 'success', 'qrcode')
+    ->json_is('/success' => true, '/url' => 'https://google.de')
+    ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
+
+# Test domain whitelisting
+Lstu::DB::Ban->new(app => $m)->delete_all;
+$config_content =~ s/^( +)#?spam_whitelist_regex.*/$1spam_whitelist_regex => 'google\.fr',/gm;
+$config_file->spurt($config_content);
+
+$t = Test::Mojo->new('Lstu');
+
+$t->post_ok('/a' => form => { lsturl => 'https://google.fr', format => 'json' })
+    ->status_is(200)
+    ->json_has('url', 'short', 'success', 'qrcode')
+    ->json_is('/success' => true, '/url' => 'https://google.fr')
+    ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
+
+$t->post_ok('/a' => form => { lsturl => 'https://google.com', format => 'json' })
+    ->status_is(200)
+    ->json_has('msg', 'success')
+    ->json_is({success => false, msg => 'The URL you want to shorten comes from a domain (google.com) that is blacklisted on this server (usually because of spammers that use this domain).'});
 
 $config_file->spurt($config_orig);
 

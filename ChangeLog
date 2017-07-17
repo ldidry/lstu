@@ -2,8 +2,11 @@ Revision history for Perl application Lstu
 
 0.09 ?
 	- Add QRcode generation
+	- Option to disable the spamhaus check (#29)
+	- Option to blacklist and/or whitelist domains (#30)
+	- Option to set the maximum number of redirections (#31)
 
-0.08 Wed Feb 08 18:49:00 1017 +0100
+0.08 Wed Feb 08 18:49:00 2017 +0100
 	- Add Piwik tracking option
 	- Add Minion option for async counters increasing
 	- Add LDAP and Htpasswd authentication (#8)
