@@ -144,6 +144,19 @@ sub add {
     }
 }
 
+sub fullstats {
+    my $c = shift;
+
+    my $url = Lstu::DB::URL->new(app => $c);
+    return $c->render(
+        json => {
+            empty     => $url->count_empty,
+            urls      => $url->total,
+            timestamp => time,
+        }
+    );
+}
+
 sub stats {
     my $c = shift;
     if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {

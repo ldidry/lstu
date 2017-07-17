@@ -210,7 +210,7 @@ msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted 
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:296
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:309
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL acorchada %1 existís pas"
 

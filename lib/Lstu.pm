@@ -309,6 +309,10 @@ sub startup {
         ->to('Lstu#stats')
         ->name('stats');
 
+    $r->get('/fullstats')
+        ->to('Lstu#fullstats')
+        ->name('fullstats');
+
     $r->get('/:short')
         ->to('Lstu#get')
         ->name('short');

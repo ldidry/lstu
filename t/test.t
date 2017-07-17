@@ -77,6 +77,13 @@ $t->get_ok($a.'i.json')
     ->status_is(200)
     ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
 
+# Test full stats
+$t->get_ok('/fullstats')
+    ->status_is(200)
+    ->json_has('urls', 'empty', 'timestamp')
+    ->json_is('/urls' => 2)
+    ->json_like('/empty' => qr#\d+#, '/timestamp' => qr#[0-9]{10}#);
+
 # Needed if we use Minion for increasing counters
 sleep 4;
 
@@ -185,8 +192,8 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
 $t->get_ok('/logout')
-  ->status_is(200)
-  ->content_like(qr/You have been successfully logged out\./);
+    ->status_is(200)
+    ->content_like(qr/You have been successfully logged out\./);
 
 # Test IP whitelisting
 $config_content = $config_orig;
