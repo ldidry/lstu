@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.09-2 Thu Sep 05 21:55:00 2017 +0200
+	- Handle redirections without host
+
 0.09-1 Thu Sep 05 19:29:00 2017 +0200
 	- Handle redirections without host
 
