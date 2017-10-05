@@ -6,6 +6,7 @@ Revision history for Perl application Lstu
 	- Option to blacklist and/or whitelist domains (#30)
 	- Option to set the maximum number of redirections (#31)
 	- Instance statistics available at /fullstats URL
+	- Now return 404 status for non-existent URLs
 
 0.08 Wed Feb 08 18:49:00 2017 +0100
 	- Add Piwik tracking option
