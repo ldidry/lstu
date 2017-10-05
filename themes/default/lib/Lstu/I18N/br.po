@@ -197,7 +197,7 @@ msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus
 msgstr "Ostiz an URL pe unan eus e adheñchadennoù (%1) a zo e roll du Spamhaus. Ne fell ket din e verraat."
 
 #. ($c->config('max_redir')
-#: lib/Lstu/Plugin/Helpers.pm:171
+#: lib/Lstu/Plugin/Helpers.pm:174
 msgid "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr "Adheñchet eo an URL %1 gwech pe ouzhpenn. Moarvat eo un URL arvarus (spam, phishing...). Ne fell ket din e verraat."
 

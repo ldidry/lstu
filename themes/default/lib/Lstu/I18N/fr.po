@@ -203,7 +203,7 @@ msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus
 msgstr "L'hôte de l'URL ou d'une de ses redirections (%1) est considéré comme nocif par Spamhaus. Je refuse de la raccourcir."
 
 #. ($c->config('max_redir')
-#: lib/Lstu/Plugin/Helpers.pm:171
+#: lib/Lstu/Plugin/Helpers.pm:174
 msgid "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr "L'URL redirige %1 fois ou plus vers un autre site. Il est probable qu'il s'agisse d'une URL dangereuse (pourriel, hameçonnage, etc.). Je refuse de la raccourcir."
 

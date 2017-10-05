@@ -160,7 +160,10 @@ sub _is_spam {
         } else {
             my $res = $c->ua->get($url)->res;
             if ($res->code >= 300 && $res->code < 400) {
-                return $c->is_spam(Mojo::URL->new($res->headers->location), $nb_redir);
+                my $new_url = Mojo::URL->new($res->headers->location);
+                $new_url->host($url->host)     unless $new_url->host;
+                $new_url->scheme($url->scheme) unless $new_url->scheme;
+                return $c->is_spam($new_url, $nb_redir);
             } else {
                 return { is_spam => 0 };
             }
