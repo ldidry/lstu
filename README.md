@@ -1,4 +1,4 @@
-# Lstu
+# Lstu [![pipeline status](https://framagit.org/luc/lstu/badges/master/pipeline.svg)](https://framagit.org/luc/lstu/commits/master)
 
 ## What does Lstu mean?
 
