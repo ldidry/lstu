@@ -307,13 +307,16 @@ sub get {
         });
     } else {
         my $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);
+        $c->res->code(404);
         $c->respond_to(
             json => { json => { success => Mojo::JSON->false, msg => $msg } },
             any  => sub {
                 my $c = shift;
 
-                $c->flash('msg' => $msg);
-                $c->redirect_to('index');
+                $c->render(
+                    template => 'index',
+                    msg      => $msg
+                );
             }
         );
     }

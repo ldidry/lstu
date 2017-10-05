@@ -74,7 +74,7 @@ $t->get_ok($a.'.json')
     ->json_is({success => true, url => 'https://lstu.fr'});
 
 $t->get_ok($a.'i.json')
-    ->status_is(200)
+    ->status_is(404)
     ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
 
 # Test full stats
@@ -110,7 +110,7 @@ $t->get_ok('/d/'.$b)
     ->status_is(200);
 
 $t->get_ok($a.'i.json')
-    ->status_is(200)
+    ->status_is(404)
     ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
 
 $a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
