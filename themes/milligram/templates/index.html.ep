@@ -60,5 +60,8 @@
 % end
 % }
 % if (defined(flash('msg'))) {
-    <h3 class="alert alert-danger"><%= flash('msg') %><h3>
+    <h3 class="alert alert-danger"><%= flash('msg') %></h3>
+% }
+% if (defined(stash('msg'))) {
+    <h3 class="alert alert-danger"><%= stash('msg') %></h3>
 % }
