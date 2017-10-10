@@ -59,6 +59,9 @@ sub startup {
     # Piwik
     $self->plugin('Piwik');
 
+    # Cache
+    $self->plugin('StaticCache' => { even_in_dev => 1, max_age => 2592000 });
+
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');
 
@@ -161,11 +164,6 @@ sub startup {
             }
         }
     );
-
-    $self->hook(after_static => sub {
-        my $c = shift;
-        $c->res->headers->cache_control('max-age=2592000, must-revalidate');
-    });
 
     # Minion
     if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {

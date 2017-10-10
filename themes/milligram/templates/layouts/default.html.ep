@@ -15,18 +15,7 @@
         <link rel="apple-touch-icon" sizes="76x76" href="<%= url_for('/img/lstu76.png') %>">
         <link rel="apple-touch-icon" sizes="120x120" href="<%= url_for('/img/lstu120.png') %>">
         <link rel="apple-touch-icon" sizes="152x152" href="<%= url_for('/img/lstu152.png') %>">
-        <link rel="apple-touch-icon-precomposed" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
-        %= stylesheet '/css/milligram.min.css'
-        %= stylesheet '/css/fontelico.css'
-        %= stylesheet '/css/lstu.css'
-        %= stylesheet begin
-            @font-face {
-                font-family: 'Henny_Penny';
-                font-style: normal;
-                font-weight: 400;
-                src: local('Henny Penny'), local('HennyPenny-Regular'), url(<%= url_for('/font/hennypenny.ttf') %>) format('truetype');
-            }
-        % end
+        <link rel="apple-touch-icon" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
     </head>
     <body>
         <div class="container">
@@ -54,5 +43,8 @@
             </p>
             <%= content %>
         </div>
+        %= stylesheet '/css/milligram.min.css'
+        %= stylesheet '/css/fontelico.min.css'
+        %= stylesheet '/css/lstu.min.css'
     </body>
 </html>
