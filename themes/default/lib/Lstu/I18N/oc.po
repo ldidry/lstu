@@ -154,7 +154,7 @@ msgstr "Paramètres :"
 msgid "Password"
 msgstr "Senhal"
 
-#: lib/Lstu.pm:248 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:246 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
 msgstr "Mercés de verificar vòstres identificants : fracàs de l’autentificacion."
 
@@ -249,11 +249,11 @@ msgstr "URL per acorchar"
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Avètz demandat d’acorchar tròp d’URL en pauc de temps. Sètz bandit per %1 ora(s)."
 
-#: lib/Lstu.pm:239 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:237 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
 msgstr "Sètz ben estat·ada connectat·ada."
 
-#: lib/Lstu.pm:278 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:276 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr "Sètz ben estat·ada desconnectat·ada."
 

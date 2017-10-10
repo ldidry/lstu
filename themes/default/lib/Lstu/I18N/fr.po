@@ -157,7 +157,7 @@ msgstr "Paramètres :"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: lib/Lstu.pm:248 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:246 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
 msgstr "Impossible de s’authentifier, veuillez vérifier vos identifiants"
 
@@ -252,11 +252,11 @@ msgstr "URL à raccourcir"
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr "Vous avez demandé à réduire trop d’URLs en trop peu de temps. Vous êtes banni pour %1 heure(s)."
 
-#: lib/Lstu.pm:239 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:237 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
 msgstr "Vous avez été connecté·e avec succès."
 
-#: lib/Lstu.pm:278 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:276 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr "Vous avez été déconnecté·e avec succès."
 
