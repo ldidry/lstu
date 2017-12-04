@@ -17,8 +17,6 @@ sqlite1:
       - local
   script:
     - MOJO_CONFIG=t/sqlite1.conf make test
-  tags:
-    - Debian
 sqlite2:
   stage: sqlite
   cache:
@@ -28,8 +26,6 @@ sqlite2:
       - local
   script:
     - MOJO_CONFIG=t/sqlite2.conf make test
-  tags:
-    - Debian
 sqlite3:
   stage: sqlite
   cache:
@@ -41,8 +37,6 @@ sqlite3:
     - MOJO_CONFIG=t/sqlite3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/sqlite3.conf make test
-  tags:
-    - Debian
 postgresql1:
   stage: postgresql
   cache:
@@ -55,8 +49,6 @@ postgresql1:
     - sleep 10
     - service postgresql status
     - MOJO_CONFIG=t/postgresql1.conf make test
-  tags:
-    - Debian
 postgresql2:
   stage: postgresql
   cache:
@@ -69,8 +61,6 @@ postgresql2:
     - sleep 10
     - service postgresql status
     - MOJO_CONFIG=t/postgresql2.conf make test
-  tags:
-    - Debian
 postgresql3:
   stage: postgresql
   cache:
@@ -86,8 +76,6 @@ postgresql3:
     - MOJO_CONFIG=t/postgresql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/postgresql3.conf make test
-  tags:
-    - Debian
 mysql1:
   stage: mysql
   cache:
@@ -101,8 +89,6 @@ mysql1:
     - service mysql status
     - mysql -u root < t/test_mysql.sql
     - MOJO_CONFIG=t/mysql1.conf make test
-  tags:
-    - Debian
 mysql2:
   stage: mysql
   cache:
@@ -116,8 +102,6 @@ mysql2:
     - service mysql status
     - mysql -u root < t/test_mysql.sql
     - MOJO_CONFIG=t/mysql2.conf make test
-  tags:
-    - Debian
 mysql3:
   stage: mysql
   cache:
@@ -133,5 +117,3 @@ mysql3:
     - MOJO_CONFIG=t/mysql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/mysql3.conf make test
-  tags:
-    - Debian
