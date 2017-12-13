@@ -6,14 +6,14 @@
 %     if (!flash('banned')) {
 <form class="form" role="form" method="POST" action="<%== url_for 'stats' %>">
 %         if (defined(stash('admin'))) {
-    <input type="hidden" value="logout" name="action"></input>
+    <input type="hidden" value="logout" name="action" />
     <%= submit_button l('Logout from admin stats'), class => 'btn btn-default btn-primary' %>
 %         } else {
     <div class="form-group">
         <label class="sr-only" for="adminpwd"><%= l('Admin password') %></label>
-        <input type="password" name="adminpwd" id="adminpwd" class="form-control" placeholder="<%= l('Admin password') %>" required></input>
+        <input type="password" name="adminpwd" id="adminpwd" class="form-control" placeholder="<%= l('Admin password') %>" required />
     </div>
-    <input type="hidden" value="0" name="page"></input>
+    <input type="hidden" value="0" name="page" />
     <%= submit_button l('Go!'), class => 'btn btn-default btn-primary' %>
 %         }
 </form>
