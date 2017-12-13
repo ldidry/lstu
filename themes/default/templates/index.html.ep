@@ -3,11 +3,11 @@
 <form class="form" method="POST" action="<%== url_for 'add' %>">
     <div class="form-group">
         <label class="sr-only" for="lsturl"><%= l('URL to shorten') %></label>
-        <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%= l('URL to shorten') %>" required>
+        <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%= l('URL to shorten') %>" required />
     </div>
     <div class="form-group">
         <label class="sr-only" for="lsturl-custom"><%= l('Custom shortened text') %></label>
-        <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%= l('Custom shortened text') %>">
+        <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%= l('Custom shortened text') %>" />
     </div>
     <%= submit_button l('Go!'), class => 'btn btn-default btn-primary' %>
 </form>

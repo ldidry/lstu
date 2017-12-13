@@ -7,12 +7,12 @@
 <form class="form" method="POST" action="<%== url_for 'stats' %>">
     <fieldset>
 %         if (defined(stash('admin'))) {
-        <input type="hidden" value="logout" name="action">
+        <input type="hidden" value="logout" name="action" />
         <%= submit_button l('Logout from admin stats'), class => 'button' %>
 %         } else {
         <label class="sr-only" for="adminpwd"><%= l('Admin password') %></label>
-        <input type="password" name="adminpwd" id="adminpwd" class="form-control" placeholder="<%= l('Admin password') %>" required>
-        <input type="hidden" value="0" name="page">
+        <input type="password" name="adminpwd" id="adminpwd" class="form-control" placeholder="<%= l('Admin password') %>" required />
+        <input type="hidden" value="0" name="page" />
         <%= submit_button l('Go!'), class => 'button' %>
 %         }
     </fieldset>
