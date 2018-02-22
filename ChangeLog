@@ -1,5 +1,11 @@
 Revision history for Perl application Lstu
 
+0.10 Thu Feb 22 12:57:00 2018 +0100
+	- Performance improvments (cache + assets minification)
+	- Add /stats/:short API endpoint
+	- Update API page
+	- Zanata integration (https://trad.framasoft.org)
+
 0.09-2 Thu Sep 05 21:55:00 2017 +0200
 	- Handle redirections without host
 
