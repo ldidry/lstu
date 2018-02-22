@@ -14,6 +14,7 @@ requires 'Minion::Backend::SQLite';
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';
 requires 'Net::Abuse::Utils::Spamhaus';
+requires 'Net::DNS', '>= 1.12';
 requires 'IO::Socket::SSL';
 requires 'Net::LDAP';
 requires 'Apache::Htpasswd';

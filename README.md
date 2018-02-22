@@ -20,6 +20,7 @@ sudo apt-get install build-essential libssl-dev
 
 ```shell
 sudo cpan Carton
+sudo cpan inc::Module::Install::DSL
 ```
 
 * Install `libpq-dev`, `libmysqld-dev` and `libpng-dev` too:
