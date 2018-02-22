@@ -9,8 +9,14 @@ use Locale::Maketext::Lexicon {
     _style  => 'gettext',
     '*' => [
         Gettext => dirname(__FILE__) . '/I18N/*.po',
-        Gettext => dirname(__FILE__) . '/../../../default/lib/Lstu/I18N/*.po',
+        Gettext => $app_dir . 'themes/default/lib/Lstu/I18N/*.po',
     ]
 };
+
+use vars qw($app_dir);
+BEGIN {
+    use Cwd;
+    my $app_dir = getcwd;
+}
 
 1;

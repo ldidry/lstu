@@ -2,6 +2,7 @@
 use Mojo::Base -strict;
 use Mojo::JSON qw(true false);
 use Mojo::File;
+use Mojo::URL;
 use Mojolicious;
 
 use Test::More;
@@ -73,8 +74,19 @@ $t->get_ok($a.'.json')
     ->status_is(200)
     ->json_is({success => true, url => 'https://lstu.fr'});
 
+my $short = Mojo::URL->new($a)->path();
+$t->get_ok('/stats'.$short)
+    ->status_is(200)
+    ->json_has('success', 'short', 'url', 'counter', 'created_at', 'timestamp')
+    ->json_is('/success' => true, '/url' => 'https://lstu.fr', '/short' => $a, '/counter' => 1)
+    ->json_like('/created_at' => qr#[0-9]{10}#, '/timestamp' => qr#[0-9]{10}#);
+
 $t->get_ok($a.'i.json')
     ->status_is(404)
+    ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
+
+$t->get_ok('/stats'.$short.'i')
+    ->status_is(200)
     ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
 
 # Test full stats

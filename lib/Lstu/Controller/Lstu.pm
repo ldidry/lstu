@@ -251,6 +251,38 @@ sub stats {
     }
 }
 
+
+sub stat_for_one_short {
+    my $c = shift;
+    my $short = $c->param('short');
+
+    my $url  = Lstu::DB::URL->new(
+        app    => $c,
+        short  => $short
+    );
+
+    if ($url->{url}) {
+        my $prefix = $c->prefix;
+
+        $c->render(
+            json => {
+                success    => Mojo::JSON->true,
+                short      => $prefix.$url->{short},
+                url        => $url->{url},
+                counter    => $url->{counter},
+                created_at => $url->{timestamp},
+                timestamp  => time
+            }
+        );
+    } else {
+        $c->render(
+            json => {
+                success => Mojo::JSON->false,
+                msg     => $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short)
+            }
+        );
+    }
+}
 sub get {
     my $c = shift;
     my $short = $c->param('short');

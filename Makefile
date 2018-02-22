@@ -1,8 +1,5 @@
 EXTRACTDIR=-D lib -D themes/default
-EN=themes/default/lib/Lstu/I18N/en.po
-FR=themes/default/lib/Lstu/I18N/fr.po
-OC=themes/default/lib/Lstu/I18N/oc.po
-BR=themes/default/lib/Lstu/I18N/br.po
+POT=themes/default/lib/Lstu/I18N/lstu.pot
 XGETTEXT=carton exec local/bin/xgettext.pl
 CARTON=carton exec
 REAL_LSTU=script/application
@@ -15,11 +12,14 @@ minify:
 	@cd ./themes/milligram/public/css/ && minify lstu.css
 
 locales:
-	$(XGETTEXT) $(EXTRACTDIR) -o $(EN) 2>/dev/null
-	$(XGETTEXT) $(EXTRACTDIR) -o $(FR) 2>/dev/null
-	$(XGETTEXT) $(EXTRACTDIR) -o $(OC) 2>/dev/null
-	$(XGETTEXT) $(EXTRACTDIR) -o $(BR) 2>/dev/null
+	$(XGETTEXT) $(EXTRACTDIR) -o $(POT) 2>/dev/null
 	cd ./themes/milligram && make locales
+
+push-locales:
+	zanata-cli push
+
+pull-locales:
+	zanata-cli pull
 
 podcheck:
 	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm

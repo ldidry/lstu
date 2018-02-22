@@ -1,6 +1,4 @@
-EN=lib/Lstu/I18N/en.po
-FR=lib/Lstu/I18N/fr.po
-OC=lib/Lstu/I18N/oc.po
+POT=lib/Lstu/I18N/milligram.pot
 SEDOPTS=-e "s@SOME DESCRIPTIVE TITLE@Lstu language file@" \
 		-e "s@YEAR THE PACKAGE'S COPYRIGHT HOLDER@2015 Luc Didry@" \
 		-e "s@CHARSET@utf8@" \
@@ -12,12 +10,6 @@ XGETTEXT=carton exec ../../local/bin/xgettext.pl
 CARTON=carton exec
 
 locales:
-		$(XGETTEXT) -D templates -D ../default/templates -o $(EN) 2>/dev/null
-		$(XGETTEXT) -D templates -D ../default/templates -o $(FR) 2>/dev/null
-		$(XGETTEXT) -D templates -D ../default/templates -o $(OC) 2>/dev/null
-		sed $(SEDOPTS) -i $(EN)
-		sed $(SEDOPTS2) -i $(EN)
-		sed $(SEDOPTS) -i $(FR)
-		sed $(SEDOPTS2) -i $(FR)
-		sed $(SEDOPTS) -i $(OC)
-		sed $(SEDOPTS2) -i $(OC)
+		$(XGETTEXT) -D templates -D ../default/templates -o $(POT) 2>/dev/null
+		sed $(SEDOPTS) -i $(POT)
+		sed $(SEDOPTS2) -i $(POT)

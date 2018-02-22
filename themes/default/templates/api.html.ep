@@ -9,7 +9,7 @@
 <h2>Lstu API</h2>
 <dl>
 % if (defined $self->config('ldap') || defined $self->config('htpasswd')) {
-    <dt>POST <%= url_for('login') %></dt>
+    <dt>POST <%= url_for('login')->to_abs %></dt>
     <dd>
         <strong><%= l('Parameters:') %></strong>
         <ul>
@@ -24,7 +24,7 @@
             <li><strong><%= l('Response for HTML format') %></strong><br><%= l('You will be redirected to the Lstu classic interface where you will be able to shorten URLs') %></li>
         </ul>
     </dd>
-    <dt>GET <%= url_for('logout') %></dt>
+    <dt>GET <%= url_for('logout')->to_abs %></dt>
     <dd>
         <p><%= l('Should always be successful') %></p>
         <strong><%= l('Parameters:') %></strong>
@@ -38,7 +38,7 @@
         </ul>
     </dd>
 % }
-    <dt>POST <%= url_for('add') %></dt>
+    <dt>POST <%= url_for('add')->to_abs %></dt>
     <dd>
 % if (defined $self->config('ldap') || defined $self->config('htpasswd')) {
         <p><%= l('You must be logged in to use it.') %></p>
@@ -59,7 +59,7 @@
             <li><strong><%= l('Response for HTML format') %></strong><br><%= l('You will be redirected to the Lstu classic interface with a message giving the shortened URL') %></li>
         </ul>
     </dd>
-    <dt>GET <%= url_for('short', short => l('shortened_url')) %></dt>
+    <dt>GET <%= url_for('short', short => l('shortened_url'))->to_abs %></dt>
     <dd>
         <strong><%= l('Response:') %></strong>
         <ul>
@@ -68,7 +68,7 @@
             </li>
         </ul>
     </dd>
-    <dt>GET <%= url_for('short', short => l('shortened_url')) %>.json</dt>
+    <dt>GET <%= url_for('short', short => l('shortened_url'))->to_abs %>.json</dt>
     <dd>
         <strong><%= l('Response:') %></strong>
         <ul>
@@ -76,7 +76,7 @@
             <li><strong><%= l('JSON: failure') %></strong><br><code>{"msg":"<%= l('Failure reason') %>","success":false}</code></li>
         </li>
     </dd>
-    <dt>GET <%= url_for('stats') %></dt>
+    <dt>GET <%= url_for('stats')->to_abs %></dt>
     <dd>
     % if (defined $self->config('ldap') || defined $self->config('htpasswd')) {
         <p><%= l('You must be logged in to use it.') %></p>
@@ -94,19 +94,24 @@
         </ul>
         <strong><%= l('Response:') %></strong><br>
         <ul>
-            <li>
-                <ul>
-                    % $u = prefix().url_for('short', short => l('shortened_url'));
-                    % $u =~ s#//#/#g;
-                    % $u = to_json $u;
-                    <li><strong><%= l('Response for JSON format') %></strong><br><code>[{"short":<%= $u %>,"url":"<%= l('URL') %>","counter":<%= l('integer, how many unique visits of the shortened URL') %>}]</code></li>
-                    <li><strong><%= l('Response for HTML format') %></strong><br><%= l('A page with a table containing the same informations that the JSON response') %></li>
-                </ul>
-            </li>
+            % $u = prefix().url_for('short', short => l('shortened_url'));
+            % $u =~ s#//#/#g;
+            % $u = to_json $u;
+            <li><strong><%= l('Response for JSON format') %></strong><br><code>[{"short":<%= $u %>,"url":"<%= l('URL') %>","counter":<%= l('integer, how many unique visits of the shortened URL') %>}]</code></li>
+            <li><strong><%= l('Response for HTML format') %></strong><br><%= l('A page with a table containing the same informations that the JSON response') %></li>
+        </ul>
+    </dd>
+    <dt>GET <%= url_for('stats/'.l('shortened_url'))->to_abs %></dt>
+    <dd>
+        <p><%= l('Get the details (visit counter, creation date, etc.) of a shortened URL.') %></p>
+        <strong><%= l('Response:') %></strong>
+        <ul>
+            <li><strong><%= l('JSON: success') %></strong><br><code>{"url":"https:\/\/fiat-tux.fr","short":<%= $u %>,"success":true,"counter":<%= l('integer, how many unique visits of the shortened URL') %>,"created_at":1519296674,"short":"<%= l('URL') %>","timestamp":1519296680}</code></li>
+            <li><strong><%= l('JSON: failure') %></strong><br><code>{"msg":"<%= l('Failure reason') %>","success":false}</code></li>
         </ul>
     </dd>
 % if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
-    <dt>POST <%= url_for('stats') %></dt>
+    <dt>POST <%= url_for('stats')->to_abs %></dt>
     <dd>
         <strong><%= l('Parameters:') %></strong>
         <ul>
@@ -132,7 +137,7 @@
             </li>
         </ul>
     </dd>
-    <dt>GET <%= url_for('delete', short => l('shortened_url')) %></dt>
+    <dt>GET <%= url_for('delete', short => l('shortened_url'))->to_abs %></dt>
     <dd>
         <p><%= l('You must be logged in as admin ("adminpwd" or "hashed_adminpwd" setting) to use it.') %></p>
         <strong><%= l('Parameters:') %></strong>
