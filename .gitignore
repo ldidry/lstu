@@ -1,3 +1,6 @@
+.cpan
+.cpanm
+.*_history
 local/*
 cover_db/*
 .tx/*

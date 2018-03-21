@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+    app:
+        build: .
+        ports:
+            - 8080:8080
+        configs:
+            - source: lstu.conf
+              target: /home/lstu/lstu.conf
+              uid: '1000'
+              gid: '1000'
+              mode: 0440
+    db:
+        image: mariadb:10.2
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: lstu
+    # cache:
+        # image: memcached:1.5-alpine
+
+configs:
+    lstu.conf:
+        file: ./lstu.conf
