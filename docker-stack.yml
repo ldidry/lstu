@@ -1,0 +1,38 @@
+version: '3.3'
+
+services:
+    app:
+        image: aquinum/lstu
+        configs:
+            - source: lstu.conf
+              target: /home/lstu/lstu.conf
+              uid: '1000'
+              gid: '1000'
+              mode: 0440
+        deploy:
+            replicas: 1
+    db:
+        image: mariadb:10.2
+        environment:
+            MYSQL_ROOT_PASSWORD: <changeme>
+            MYSQL_DATABASE: lstu
+    cache:
+        image: memcached:1.5-alpine
+    minion:
+        image: aquinum/lstu
+        command: minion
+        configs:
+            - source: lstu.conf
+              target: /home/lstu/lstu.conf
+              uid: '1000'
+              gid: '1000'
+              mode: 0440
+    minion_db:
+        image: mariadb:10.2
+        environment:
+            MYSQL_ROOT_PASSWORD: <changeme>
+            MYSQL_DATABASE: lstu_minion
+
+configs:
+    lstu.conf:
+        file: ./lstu.conf

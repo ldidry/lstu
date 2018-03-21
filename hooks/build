@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# https://medium.com/microscaling-systems/labelling-automated-builds-on-docker-hub-f3d073fb8e1#.yldbwesu7
+
+if [ -z "${IMAGE_NAME}" ]; then
+    echo ! "IMAGE_NAME" variable missing.
+    echo eg. IMAGE_NAME="aquinum/lstu:local" sh $0
+    exit 1
+fi
+
+function evil_git_dirty {
+    [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "-dirty"
+}
+
+function last_tag {
+    git describe --abbrev=0
+}
+
+function version_number_plus {
+    [[ $(git rev-list --count ${1}..HEAD) -gt 0 ]] && echo "+"
+}
+
+VERSION=$(last_tag)
+VERSION=${VERSION}$(version_number_plus ${VERSION})
+VCS_REF=$(git rev-parse --short HEAD)$(evil_git_dirty)
+BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+docker build --build-arg VCS_REF=${VCS_REF} \
+             --build-arg BUILD_DATE=${BUILD_DATE} \
+             --build-arg VERSION=${VERSION} \
+             -t $IMAGE_NAME .

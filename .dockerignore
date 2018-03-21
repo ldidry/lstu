@@ -1,0 +1,8 @@
+.cpan
+.cpanm
+.git
+docker-compose.yml
+local
+log/*
+lstu.conf
+lstu.db
