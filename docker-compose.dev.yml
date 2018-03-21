@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+    app_dev:
+        build: .
+        ports:
+            - 8080:8080
+        volumes:
+            - .:/home/lstu
+        command: dev
+    mariadb_dev:
+        image: mariadb:10.2
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: lstu
+    postgres_dev:
+        image: postgres:10.3-alpine
+        environment:
+            POSTGRES_PASSWORD: password
+            POSTGRES_USER: lstu
+            POSTGRES_DB: lstu
