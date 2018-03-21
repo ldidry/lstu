@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+    app:
+        image: aquinum/lstu
+        configs:
+            - source: lstu.conf
+              target: /home/lstu/lstu.conf
+              uid: '1000'
+              gid: '1000'
+        ports:
+            - 80:8080
+    db:
+        image: mariadb:latest
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=lstu
+
+configs:
+    lstu.conf:
+        external: true
