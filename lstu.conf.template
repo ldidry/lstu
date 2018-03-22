@@ -161,6 +161,10 @@
     # optional, no default
     #spam_blacklist_regex => 'foo|bar',
 
+    # spam path blacklist regex. All URLs (or redirection) whose path part matches this regex are considered as spam
+    # optional, no default
+    #spam_path_blacklist_regex => 'foo|bar',
+
     # spam whitelist regex. All URLs (or redirection) whose host part matches this regex will never be considered as spam
     # optional, no default
     #spam_whitelist_regex => 'foo|bar',

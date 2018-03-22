@@ -144,11 +144,12 @@ sub _is_spam {
     my $wl = $c->config('spam_whitelist_regex');
     return { is_spam => 0 } if (defined($wl) && $url->host =~ m/$wl/);
 
-    my $bl = $c->config('spam_blacklist_regex');
+    my $bl      = $c->config('spam_blacklist_regex');
+    my $path_bl = $c->config('spam_path_blacklist_regex');
     return {
        is_spam => 1,
        msg     => $c->l('The URL you want to shorten comes from a domain (%1) that is blacklisted on this server (usually because of spammers that use this domain).', $url->host)
-    } if (defined($bl) && $url->host =~ m/$bl/);
+    } if ((defined($bl) && $url->host =~ m/$bl/) || (defined($path_bl) && $url->path =~ m/$path_bl/));
 
     if ($nb_redir++ <= $c->config('max_redir')) {
         my $res = ($c->config('skip_spamhaus')) ? undef : check_fqdn($url->host);

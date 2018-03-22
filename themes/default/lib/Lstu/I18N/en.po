@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-02-22 11:30+0000\n"
+"PO-Revision-Date: 2018-03-22 09:33+0000\n"
 "Last-Translator: Luc Didry <luc@framasoft.org>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -85,6 +85,10 @@ msgstr "HennyPenny-Regular"
 #: themes/default/templates/index.html.ep:53
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr "Hit Enter, then Ctrl+C to copy the short link"
+
+#: themes/default/templates/stats.html.ep:74
+msgid "Home"
+msgstr "Home"
 
 #: themes/default/templates/api.html.ep:131
 msgid "If \"action\" is defined to \"logout\":"
@@ -209,7 +213,7 @@ msgid "Statistics"
 msgstr "Statistics"
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:158
+#: lib/Lstu/Plugin/Helpers.pm:159
 msgid ""
 "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I "
 "refuse to shorten it."
@@ -218,7 +222,7 @@ msgstr ""
 "refuse to shorten it."
 
 #. ($c->config('max_redir')
-#: lib/Lstu/Plugin/Helpers.pm:174
+#: lib/Lstu/Plugin/Helpers.pm:175
 msgid ""
 "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, "
 "phishing, etc.). I refuse to shorten it."
@@ -227,7 +231,7 @@ msgstr ""
 "phishing, etc.). I refuse to shorten it."
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:150
+#: lib/Lstu/Plugin/Helpers.pm:151
 msgid ""
 "The URL you want to shorten comes from a domain (%1) that is blacklisted on "
 "this server (usually because of spammers that use this domain)."

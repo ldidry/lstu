@@ -71,3 +71,4 @@
 </nav>
 %     }
 % }
+%= link_to l('Home') => '/' => (class => 'button')

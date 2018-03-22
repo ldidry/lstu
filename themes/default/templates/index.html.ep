@@ -59,6 +59,7 @@
     var copyBtn = document.getElementById('clipboard');
 
     copyBtn.addEventListener('click', function(event) {
+        event.preventDefault();
         copyTextToClipboard('<%= flash('short') %>');
     });
 % end
