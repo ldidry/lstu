@@ -98,15 +98,15 @@ DISTRIBUTIONS
       Test::More 0.47
       Tie::Hash 0
       perl 5.006
-  DBD-mysql-4.041
-    pathname: M/MI/MICHIELB/DBD-mysql-4.041.tar.gz
+  DBD-mysql-4.046
+    pathname: C/CA/CAPTTOFU/DBD-mysql-4.046.tar.gz
     provides:
-      Bundle::DBD::mysql 4.041
-      DBD::mysql 4.041
+      Bundle::DBD::mysql 4.046
+      DBD::mysql 4.046
       DBD::mysql::GetInfo undef
-      DBD::mysql::db 4.041
-      DBD::mysql::dr 4.041
-      DBD::mysql::st 4.041
+      DBD::mysql::db 4.046
+      DBD::mysql::dr 4.046
+      DBD::mysql::st 4.046
     requirements:
       DBI 1.609
       Data::Dumper 0
@@ -447,17 +447,17 @@ DISTRIBUTIONS
       Encode 2.10
       Exporter 5.57
       ExtUtils::MakeMaker 6.30
-  IO-Socket-SSL-2.047
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.047.tar.gz
+  IO-Socket-SSL-2.056
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.056.tar.gz
     provides:
-      IO::Socket::SSL 2.047
-      IO::Socket::SSL::Intercept 2.014
-      IO::Socket::SSL::OCSP_Cache 2.047
-      IO::Socket::SSL::OCSP_Resolver 2.047
+      IO::Socket::SSL 2.056
+      IO::Socket::SSL::Intercept 2.056
+      IO::Socket::SSL::OCSP_Cache 2.056
+      IO::Socket::SSL::OCSP_Resolver 2.056
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.047
-      IO::Socket::SSL::SSL_HANDLE 2.047
-      IO::Socket::SSL::Session_Cache 2.047
+      IO::Socket::SSL::SSL_Context 2.056
+      IO::Socket::SSL::SSL_HANDLE 2.056
+      IO::Socket::SSL::Session_Cache 2.056
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
@@ -472,10 +472,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0.31
       Time::HiRes 0
-  Image-PNG-QRCode-0.07
-    pathname: B/BK/BKB/Image-PNG-QRCode-0.07.tar.gz
+  Image-PNG-QRCode-0.09
+    pathname: B/BK/BKB/Image-PNG-QRCode-0.09.tar.gz
     provides:
-      Image::PNG::QRCode 0.07
+      Image::PNG::QRCode 0.09
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006001
@@ -531,10 +531,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Test::More 0.47
       perl 5.006
-  Minion-6.02
-    pathname: S/SR/SRI/Minion-6.02.tar.gz
+  Minion-8.12
+    pathname: S/SR/SRI/Minion-8.12.tar.gz
     provides:
-      Minion 6.02
+      LinkCheck undef
+      LinkCheck::Controller::Links undef
+      LinkCheck::Task::CheckLinks undef
+      Minion 8.12
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -542,20 +545,23 @@ DISTRIBUTIONS
       Minion::Command::minion::worker undef
       Minion::Job undef
       Minion::Worker undef
+      Minion::_Guard 8.12
       Mojolicious::Plugin::Minion undef
+      Mojolicious::Plugin::Minion::Admin undef
     requirements:
       ExtUtils::MakeMaker 0
-      Mojolicious 6.0
+      Mojolicious 7.56
       perl 5.010001
-  Minion-Backend-SQLite-0.009
-    pathname: D/DB/DBOOK/Minion-Backend-SQLite-0.009.tar.gz
+  Minion-Backend-SQLite-3.003
+    pathname: D/DB/DBOOK/Minion-Backend-SQLite-3.003.tar.gz
     provides:
-      Minion::Backend::SQLite 0.009
+      Minion::Backend::SQLite 3.003
     requirements:
-      Minion 4.0
+      List::Util 0
+      Minion 8.0
       Module::Build::Tiny 0.034
-      Mojo::SQLite 1.002
-      Mojolicious 6.0
+      Mojo::SQLite 3.000
+      Mojolicious 7.29
       Sys::Hostname 0
       Time::HiRes 0
       perl 5.010001
@@ -644,30 +650,31 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojo-Pg-3.01
-    pathname: S/SR/SRI/Mojo-Pg-3.01.tar.gz
+  Mojo-Pg-4.08
+    pathname: S/SR/SRI/Mojo-Pg-4.08.tar.gz
     provides:
-      Mojo::Pg 3.01
+      Mojo::Pg 4.08
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
       Mojo::Pg::Results undef
       Mojo::Pg::Transaction undef
+      SQL::Abstract::Pg undef
     requirements:
       DBD::Pg 3.005001
       ExtUtils::MakeMaker 0
-      Mojolicious 7.15
-      SQL::Abstract 1.81
+      Mojolicious 7.53
+      SQL::Abstract 1.85
       perl 5.010001
-  Mojo-SQLite-2.000
-    pathname: D/DB/DBOOK/Mojo-SQLite-2.000.tar.gz
+  Mojo-SQLite-3.000
+    pathname: D/DB/DBOOK/Mojo-SQLite-3.000.tar.gz
     provides:
-      Mojo::SQLite 2.000
-      Mojo::SQLite::Database 2.000
-      Mojo::SQLite::Migrations 2.000
-      Mojo::SQLite::PubSub 2.000
-      Mojo::SQLite::Results 2.000
-      Mojo::SQLite::Transaction 2.000
+      Mojo::SQLite 3.000
+      Mojo::SQLite::Database 3.000
+      Mojo::SQLite::Migrations 3.000
+      Mojo::SQLite::PubSub 3.000
+      Mojo::SQLite::Results 3.000
+      Mojo::SQLite::Transaction 3.000
     requirements:
       Carp 0
       DBD::SQLite 1.50
@@ -675,33 +682,32 @@ DISTRIBUTIONS
       File::Spec::Functions 0
       File::Temp 0
       Module::Build::Tiny 0.034
-      Mojolicious 7.15
+      Mojolicious 7.32
       SQL::Abstract 1.81
       Scalar::Util 0
       URI 1.69
       URI::db 0.15
       URI::file 4.21
       perl 5.010001
-  Mojo-mysql-1.00
-    pathname: J/JH/JHTHORSEN/Mojo-mysql-1.00.tar.gz
+  Mojo-mysql-1.06
+    pathname: J/JH/JHTHORSEN/Mojo-mysql-1.06.tar.gz
     provides:
       Blog undef
       Blog::Controller::Posts undef
       Blog::Model::Posts undef
-      Mojo::mysql 1.00
+      Mojo::mysql 1.06
       Mojo::mysql::Database undef
       Mojo::mysql::Migrations undef
       Mojo::mysql::PubSub undef
       Mojo::mysql::Results undef
       Mojo::mysql::Transaction undef
     requirements:
-      DBD::mysql 4.019
+      DBD::mysql 4.042
       ExtUtils::MakeMaker 0
-      Mojolicious 7.18
+      Mojolicious 7.55
       SQL::Abstract 1.81
-      Test::More 0.90
-  Mojolicious-7.33
-    pathname: S/SR/SRI/Mojolicious-7.33.tar.gz
+  Mojolicious-7.71
+    pathname: S/SR/SRI/Mojolicious-7.71.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -743,6 +749,7 @@ DISTRIBUTIONS
       Mojo::Message::Response undef
       Mojo::Parameters undef
       Mojo::Path undef
+      Mojo::Promise undef
       Mojo::Reactor undef
       Mojo::Reactor::EV undef
       Mojo::Reactor::Poll undef
@@ -769,7 +776,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.33
+      Mojolicious 7.71
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -821,13 +828,14 @@ DISTRIBUTIONS
       Pod::Simple 3.09
       Time::Local 1.2
       perl 5.010001
-  Mojolicious-Plugin-Authentication-1.29
-    pathname: M/MA/MADCAT/Mojolicious-Plugin-Authentication-1.29.tar.gz
+  Mojolicious-Plugin-Authentication-1.32
+    pathname: J/JJ/JJATRIA/Mojolicious-Plugin-Authentication-1.32.tar.gz
     provides:
-      Mojolicious::Plugin::Authentication 1.29
+      Mojolicious::Plugin::Authentication 1.32
     requirements:
       ExtUtils::MakeMaker 0
       Mojo::Base 0
+      perl 5.010
       strict 0
       warnings 0
   Mojolicious-Plugin-DebugDumperHelper-0.03
@@ -847,19 +855,19 @@ DISTRIBUTIONS
       Mojolicious 5
       Test::More 0
       perl 5.010001
-  Mojolicious-Plugin-Piwik-0.19
-    pathname: A/AK/AKRON/Mojolicious-Plugin-Piwik-0.19.tar.gz
+  Mojolicious-Plugin-Piwik-0.20
+    pathname: A/AK/AKRON/Mojolicious-Plugin-Piwik-0.20.tar.gz
     provides:
-      Mojolicious::Plugin::Piwik 0.19
+      Mojolicious::Plugin::Piwik 0.20
     requirements:
       ExtUtils::MakeMaker 0
       Mojolicious 4.88
       Test::More 0
       perl 5.010001
-  Mojolicious-Plugin-StaticCache-0.01
-    pathname: L/LD/LDIDRY/Mojolicious-Plugin-StaticCache-0.01.tar.gz
+  Mojolicious-Plugin-StaticCache-0.02
+    pathname: L/LD/LDIDRY/Mojolicious-Plugin-StaticCache-0.02.tar.gz
     provides:
-      Mojolicious::Plugin::StaticCache 0.01
+      Mojolicious::Plugin::StaticCache 0.02
     requirements:
       ExtUtils::MakeMaker 0
       Mojolicious 7.33
@@ -1116,25 +1124,21 @@ DISTRIBUTIONS
     requirements:
       Exporter 5.57
       perl 5.006
-  SQL-Abstract-1.81
-    pathname: R/RI/RIBASUSHI/SQL-Abstract-1.81.tar.gz
+  SQL-Abstract-1.85
+    pathname: I/IL/ILMARI/SQL-Abstract-1.85.tar.gz
     provides:
-      SQL::Abstract 1.81
+      SQL::Abstract 1.85
       SQL::Abstract::Test undef
       SQL::Abstract::Tree undef
     requirements:
       Exporter 5.57
-      ExtUtils::MakeMaker 6.59
+      ExtUtils::MakeMaker 0
       Hash::Merge 0.12
       List::Util 0
       MRO::Compat 0.12
-      Moo 1.004002
+      Moo 2.000001
       Scalar::Util 0
-      Storable 0
-      Test::Deep 0.101
-      Test::Exception 0.31
-      Test::More 0.88
-      Test::Warn 0
+      Sub::Quote 2.000001
       Text::Balanced 2.00
       perl 5.006
   Sub-Exporter-Progressive-0.001013
