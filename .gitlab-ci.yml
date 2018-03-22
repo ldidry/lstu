@@ -4,8 +4,7 @@ stages:
   - postgresql
   - mysql
 before_script:
-  - apt-get install -y libpng-dev
-  - carton install
+  - carton install --deployment; cat ~/.cpanm/latest-build/build.log
   - rm -f *db
   - make podcheck
 sqlite1:
