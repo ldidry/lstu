@@ -909,107 +909,119 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Net::DNS 0.74
       perl 5.008008
-  Net-DNS-1.07
-    pathname: N/NL/NLNETLABS/Net-DNS-1.07.tar.gz
+  Net-DNS-1.15
+    pathname: N/NL/NLNETLABS/Net-DNS-1.15.tar.gz
     provides:
-      Net::DNS 1.07
-      Net::DNS::Domain 1456
-      Net::DNS::DomainName 1456
-      Net::DNS::DomainName1035 1456
-      Net::DNS::DomainName2535 1456
-      Net::DNS::Header 1381
-      Net::DNS::Mailbox 1406
-      Net::DNS::Mailbox1035 1406
-      Net::DNS::Mailbox2535 1406
-      Net::DNS::Nameserver 1493
-      Net::DNS::Packet 1523
-      Net::DNS::Parameters 1521
-      Net::DNS::Question 1381
-      Net::DNS::RR 1519
-      Net::DNS::RR::A 1388
-      Net::DNS::RR::AAAA 1491
-      Net::DNS::RR::AFSDB 1406
-      Net::DNS::RR::APL 1390
-      Net::DNS::RR::APL::Item 1390
-      Net::DNS::RR::CAA 1406
-      Net::DNS::RR::CDNSKEY 1339
-      Net::DNS::RR::CDS 1517
-      Net::DNS::RR::CERT 1390
-      Net::DNS::RR::CNAME 1406
-      Net::DNS::RR::CSYNC 1390
-      Net::DNS::RR::DHCID 1390
-      Net::DNS::RR::DLV 1339
-      Net::DNS::RR::DNAME 1456
-      Net::DNS::RR::DNSKEY 1490
-      Net::DNS::RR::DS 1488
-      Net::DNS::RR::EUI48 1390
-      Net::DNS::RR::EUI64 1390
-      Net::DNS::RR::GPOS 1382
-      Net::DNS::RR::HINFO 1406
-      Net::DNS::RR::HIP 1512
-      Net::DNS::RR::IPSECKEY 1491
-      Net::DNS::RR::ISDN 1406
-      Net::DNS::RR::KEY 1381
-      Net::DNS::RR::KX 1406
-      Net::DNS::RR::L32 1408
-      Net::DNS::RR::L64 1408
-      Net::DNS::RR::LOC 1390
-      Net::DNS::RR::LP 1406
-      Net::DNS::RR::MB 1406
-      Net::DNS::RR::MG 1406
-      Net::DNS::RR::MINFO 1406
-      Net::DNS::RR::MR 1406
-      Net::DNS::RR::MX 1406
-      Net::DNS::RR::NAPTR 1406
-      Net::DNS::RR::NID 1408
-      Net::DNS::RR::NS 1406
-      Net::DNS::RR::NSEC 1406
-      Net::DNS::RR::NSEC3 1456
-      Net::DNS::RR::NSEC3PARAM 1390
-      Net::DNS::RR::NULL 1348
-      Net::DNS::RR::OPENPGPKEY 1499
-      Net::DNS::RR::OPT 1474
-      Net::DNS::RR::PTR 1406
-      Net::DNS::RR::PX 1406
-      Net::DNS::RR::RP 1406
-      Net::DNS::RR::RRSIG 1505
-      Net::DNS::RR::RT 1406
-      Net::DNS::RR::SIG 1505
-      Net::DNS::RR::SMIMEA 1488
-      Net::DNS::RR::SOA 1488
-      Net::DNS::RR::SPF 1382
-      Net::DNS::RR::SRV 1406
-      Net::DNS::RR::SSHFP 1488
-      Net::DNS::RR::TKEY 1406
-      Net::DNS::RR::TLSA 1488
-      Net::DNS::RR::TSIG 1508
-      Net::DNS::RR::TXT 1520
-      Net::DNS::RR::URI 1406
-      Net::DNS::RR::X25 1406
-      Net::DNS::Resolver 1508
-      Net::DNS::Resolver::Base 1512
-      Net::DNS::Resolver::MSWin32 1486
-      Net::DNS::Resolver::Recurse 1523
-      Net::DNS::Resolver::UNIX 1408
-      Net::DNS::Resolver::android 1406
-      Net::DNS::Resolver::cygwin 1406
-      Net::DNS::Resolver::os2 1406
-      Net::DNS::Text 1406
-      Net::DNS::Update 1455
-      Net::DNS::ZoneFile 1510
-      Net::DNS::ZoneFile::Generator 1510
-      Net::DNS::ZoneFile::Text 1510
+      Net::DNS 1.15
+      Net::DNS::Domain 1611
+      Net::DNS::DomainName 1605
+      Net::DNS::DomainName1035 1605
+      Net::DNS::DomainName2535 1605
+      Net::DNS::Header 1527
+      Net::DNS::Mailbox 1605
+      Net::DNS::Mailbox1035 1605
+      Net::DNS::Mailbox2535 1605
+      Net::DNS::Nameserver 1608
+      Net::DNS::Packet 1584
+      Net::DNS::Parameters 1623
+      Net::DNS::Question 1530
+      Net::DNS::RR 1611
+      Net::DNS::RR::A 1597
+      Net::DNS::RR::AAAA 1597
+      Net::DNS::RR::AFSDB 1597
+      Net::DNS::RR::APL 1597
+      Net::DNS::RR::APL::Item 1597
+      Net::DNS::RR::CAA 1597
+      Net::DNS::RR::CDNSKEY 1586
+      Net::DNS::RR::CDS 1586
+      Net::DNS::RR::CERT 1597
+      Net::DNS::RR::CNAME 1597
+      Net::DNS::RR::CSYNC 1597
+      Net::DNS::RR::DHCID 1597
+      Net::DNS::RR::DLV 1528
+      Net::DNS::RR::DNAME 1597
+      Net::DNS::RR::DNSKEY 1597
+      Net::DNS::RR::DS 1597
+      Net::DNS::RR::EUI48 1597
+      Net::DNS::RR::EUI64 1597
+      Net::DNS::RR::GPOS 1528
+      Net::DNS::RR::HINFO 1597
+      Net::DNS::RR::HIP 1597
+      Net::DNS::RR::IPSECKEY 1597
+      Net::DNS::RR::ISDN 1597
+      Net::DNS::RR::KEY 1528
+      Net::DNS::RR::KX 1597
+      Net::DNS::RR::L32 1597
+      Net::DNS::RR::L64 1597
+      Net::DNS::RR::LOC 1597
+      Net::DNS::RR::LP 1597
+      Net::DNS::RR::MB 1528
+      Net::DNS::RR::MG 1528
+      Net::DNS::RR::MINFO 1597
+      Net::DNS::RR::MR 1528
+      Net::DNS::RR::MX 1597
+      Net::DNS::RR::NAPTR 1597
+      Net::DNS::RR::NID 1597
+      Net::DNS::RR::NS 1597
+      Net::DNS::RR::NSEC 1597
+      Net::DNS::RR::NSEC3 1597
+      Net::DNS::RR::NSEC3PARAM 1597
+      Net::DNS::RR::NULL 1528
+      Net::DNS::RR::OPENPGPKEY 1597
+      Net::DNS::RR::OPT 1605
+      Net::DNS::RR::OPT::CHAIN 1605
+      Net::DNS::RR::OPT::CLIENT_SUBNET 1605
+      Net::DNS::RR::OPT::COOKIE 1605
+      Net::DNS::RR::OPT::DAU 1605
+      Net::DNS::RR::OPT::DHU 1605
+      Net::DNS::RR::OPT::EXPIRE 1605
+      Net::DNS::RR::OPT::KEY_TAG 1605
+      Net::DNS::RR::OPT::N3U 1605
+      Net::DNS::RR::OPT::PADDING 1605
+      Net::DNS::RR::OPT::TCP_KEEPALIVE 1605
+      Net::DNS::RR::PTR 1597
+      Net::DNS::RR::PX 1597
+      Net::DNS::RR::RP 1597
+      Net::DNS::RR::RRSIG 1623
+      Net::DNS::RR::RT 1597
+      Net::DNS::RR::SIG 1611
+      Net::DNS::RR::SMIMEA 1597
+      Net::DNS::RR::SOA 1597
+      Net::DNS::RR::SPF 1593
+      Net::DNS::RR::SRV 1597
+      Net::DNS::RR::SSHFP 1597
+      Net::DNS::RR::TKEY 1528
+      Net::DNS::RR::TLSA 1597
+      Net::DNS::RR::TSIG 1597
+      Net::DNS::RR::TXT 1597
+      Net::DNS::RR::URI 1597
+      Net::DNS::RR::X25 1597
+      Net::DNS::Resolver 1598
+      Net::DNS::Resolver::Base 1608
+      Net::DNS::Resolver::MSWin32 1568
+      Net::DNS::Resolver::Recurse 1623
+      Net::DNS::Resolver::UNIX 1573
+      Net::DNS::Resolver::android 1568
+      Net::DNS::Resolver::cygwin 1568
+      Net::DNS::Resolver::os2 1568
+      Net::DNS::Resolver::os390 1579
+      Net::DNS::Text 1601
+      Net::DNS::Update 1571
+      Net::DNS::ZoneFile 1623
+      Net::DNS::ZoneFile::Generator 1623
+      Net::DNS::ZoneFile::Text 1623
     requirements:
       Digest::HMAC 1.03
       Digest::MD5 2.13
       Digest::SHA 5.23
       ExtUtils::MakeMaker 0
       File::Spec 0.86
+      IO::File 1.08
       IO::Socket 1.16
       MIME::Base64 2.11
       Test::More 0.52
       Time::Local 1.19
-      perl 5.00404
+      perl 5.006
   Net-Domain-TLD-1.75
     pathname: A/AL/ALEXP/Net-Domain-TLD-1.75.tar.gz
     provides:
@@ -1037,10 +1049,10 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Net-SSLeay-1.80
-    pathname: M/MI/MIKEM/Net-SSLeay-1.80.tar.gz
+  Net-SSLeay-1.85
+    pathname: M/MI/MIKEM/Net-SSLeay-1.85.tar.gz
     provides:
-      Net::SSLeay 1.80
+      Net::SSLeay 1.85
       Net::SSLeay::Handle 0.61
     requirements:
       ExtUtils::MakeMaker 6.36
