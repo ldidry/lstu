@@ -1,5 +1,9 @@
 Revision history for Perl application Lstu
 
+0.11-2 2018-03-22
+	- Update packages dependencies in README
+	- Fix CI
+
 0.11-1 2018-03-22
 	- Update dependencies
 

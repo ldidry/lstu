@@ -23,10 +23,10 @@ sudo cpan Carton
 sudo cpan inc::Module::Install::DSL
 ```
 
-* Install `libpq-dev`, `libmysqld-dev` and `libpng-dev` too:
+* Install `libpq-dev`, `libmysqld-dev`, `libmariadbclient-dev` and `libpng-dev` too:
 
 ```shell
-sudo apt-get install libpq-dev libmysqld-dev libpng-dev
+sudo apt-get install libpq-dev libmysqld-dev libmariadbclient-dev libpng-dev
 ```
 
 ## Installation
