@@ -215,7 +215,7 @@ msgid "Statistics"
 msgstr "Stadegoù"
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:158
+#: lib/Lstu/Plugin/Helpers.pm:159
 msgid ""
 "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I "
 "refuse to shorten it."
@@ -224,7 +224,7 @@ msgstr ""
 "fell ket din e verraat."
 
 #. ($c->config('max_redir')
-#: lib/Lstu/Plugin/Helpers.pm:174
+#: lib/Lstu/Plugin/Helpers.pm:175
 msgid ""
 "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, "
 "phishing, etc.). I refuse to shorten it."
@@ -233,7 +233,7 @@ msgstr ""
 "phishing...). Ne fell ket din e verraat."
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:150
+#: lib/Lstu/Plugin/Helpers.pm:151
 msgid ""
 "The URL you want to shorten comes from a domain (%1) that is blacklisted on "
 "this server (usually because of spammers that use this domain)."
