@@ -96,6 +96,10 @@ msgstr "HennyPenny-Regular"
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr "Picatz sus Entrada puèi fasètz Ctrl+C per copiar lo ligam"
 
+#: themes/default/templates/stats.html.ep:74
+msgid "Home"
+msgstr ""
+
 #: themes/default/templates/api.html.ep:131
 msgid "If \"action\" is defined to \"logout\":"
 msgstr "Se \"action\" es definit coma \"logout\" :"

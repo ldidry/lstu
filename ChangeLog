@@ -1,5 +1,9 @@
 Revision history for Perl application Lstu
 
+???
+	- Add home link to stats page
+	- Fix copy-to-clipboard button
+
 0.10 Thu Feb 22 12:57:00 2018 +0100
 	- Performance improvments (cache + assets minification)
 	- Add /stats/:short API endpoint
