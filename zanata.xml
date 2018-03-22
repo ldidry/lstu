@@ -2,8 +2,8 @@
 <config xmlns="http://zanata.org/namespace/config/">
   <url>https://trad.framasoft.org/zanata/</url>
   <project>lstu</project>
-  <project-version>master</project-version>
   <project-type>gettext</project-type>
+  <project-version>master</project-version>
   <src-dir>themes/default/lib/Lstu/I18N/</src-dir>
   <trans-dir>themes/default/lib/Lstu/I18N/</trans-dir>
 </config>
