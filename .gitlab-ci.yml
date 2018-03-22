@@ -5,7 +5,7 @@ stages:
   - mysql
 before_script:
   - apt-get install -y libpng-dev
-  - carton install
+  - carton install --deployment
   - rm -f *db
   - make podcheck
 sqlite1:
