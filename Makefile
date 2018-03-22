@@ -16,10 +16,13 @@ locales:
 	cd ./themes/milligram && make locales
 
 push-locales:
-	zanata-cli push
+	zanata-cli -q -B push
 
 pull-locales:
-	zanata-cli pull
+	zanata-cli -q -B pull
+
+stats-locales:
+	zanata-cli -q stats
 
 podcheck:
 	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm
