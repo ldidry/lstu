@@ -82,15 +82,25 @@ sub startup {
 
                     if (defined($c->config('ldap'))) {
                         my $ldap = Net::LDAP->new($c->config->{ldap}->{uri});
-                        my $mesg = $ldap->bind($c->config->{ldap}->{bind_user}.$c->config->{ldap}->{bind_dn},
+
+                        # connect to the ldap server using the search credentials
+                        my $mesg = $ldap->bind($c->config->{ldap}->{bind_dn},
                             password => $c->config->{ldap}->{bind_pwd}
                         );
 
-                        $mesg->code && die $mesg->error;
+                        if ($mesg->code) {
+                            $c->app->log->info("[LDAP search authentication failed] login: ".$c->config->{ldap}->{bind_dn});
+                            $c->app->log->error("[LDAP search authentication failed] ".$mesg->error);
+                            return undef;
+                        }
 
+                        my $ldap_user_attr = $c->config->{ldap}->{user_attr};
+                        my $ldap_user_filter = $c->config->{ldap}->{user_filter};
+
+                        # search the ldap database for the user who is trying to login
                         $mesg = $ldap->search(
                             base   => $c->config->{ldap}->{user_tree},
-                            filter => "(&(uid=$username)".$c->config->{ldap}->{user_filter}.")"
+                            filter => "(&($ldap_user_attr=$username)$ldap_user_filter)"
                         );
 
                         if ($mesg->code) {
@@ -98,8 +108,18 @@ sub startup {
                             return undef;
                         }
 
+                        # check to make sure that the ldap search returned at least one entry
+                        if (scalar $mesg->entries <= 0) {
+                            $c->app->log->error("[LDAP search] no results returned for search");
+                            return undef;
+                        }
+
+                        # retrieve the first user returned by the search
+                        my $ldap_userdn = $mesg->entry(0)->{asn}->{objectName};
+                        $c->app->log->debug("[LDAP search] found user dn: ".$ldap_userdn);
+
                         # Now we know that the user exists
-                        $mesg = $ldap->bind('uid='.$username.$c->config->{ldap}->{bind_dn},
+                        $mesg = $ldap->bind($ldap_userdn,
                             password => $password
                         );
 
