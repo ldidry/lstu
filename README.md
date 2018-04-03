@@ -108,6 +108,10 @@ update-rc.d lstu defaults
 service lstu start
 ```
 
+### Docker
+
+See the [DOCKER_HOWTO.md](DOCKER_HOWTO.md) file.
+
 ## Other options
 
 There is the `contact` option (mandatory), where you have to put some way for the users to contact you, and the `secret` where you have to put a random string in order to protect your Mojolicious cookies (not really useful and optional).
