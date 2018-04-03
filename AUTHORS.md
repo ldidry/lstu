@@ -12,3 +12,4 @@
 * Phyks (Lucas Verney)
 * Pierre Rudloff
 * Belvar (Gwenn M) (breton translation)
+* Ira W. Snyder
