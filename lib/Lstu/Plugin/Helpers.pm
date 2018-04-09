@@ -61,7 +61,7 @@ sub _mysql {
 
     my $addr  = 'mysql://';
     $addr    .= $c->config->{mysqldb}->{host};
-    $addr    .= ':'.$c->config->{mysqldb}->{port} if defined $c->config->{pgdb}->{port};
+    $addr    .= ':'.$c->config->{mysqldb}->{port} if defined $c->config->{mysqldb}->{port};
     $addr    .= '/'.$c->config->{mysqldb}->{database};
     state $mysql = Mojo::mysql->new($addr);
     $mysql->password($c->config->{mysqldb}->{pwd});
