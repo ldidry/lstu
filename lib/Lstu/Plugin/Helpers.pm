@@ -53,6 +53,7 @@ sub _pg {
     state $pg = Mojo::Pg->new($addr);
     $pg->password($c->config->{pgdb}->{pwd});
     $pg->username($c->config->{pgdb}->{user});
+    $pg->max_connections($c->config->{pgdb}->{max_connections}) if defined $c->config->{pgdb}->{max_connections};
     return $pg;
 }
 
@@ -66,6 +67,7 @@ sub _mysql {
     state $mysql = Mojo::mysql->new($addr);
     $mysql->password($c->config->{mysqldb}->{pwd});
     $mysql->username($c->config->{mysqldb}->{user});
+    $mysql->max_connections($c->config->{mysqldb}->{max_connections}) if defined $c->config->{mysqldb}->{max_connections};
     return $mysql;
 }
 
