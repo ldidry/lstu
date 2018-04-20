@@ -84,8 +84,12 @@
     #pgdb => {
     #    database => 'lstu',
     #    host     => 'localhost',
+    #    # optional, default is 5432
+    #    #port     => 5432,
     #    #user     => 'DBUSER',
-    #    #pwd      => 'DBPASSWORD'
+    #    #pwd      => 'DBPASSWORD',
+    #    # optional, default is 1
+    #    #max_connections => 1,
     #},
 
     # MySQL ONLY - only used if dbtype is set to mysql
@@ -94,8 +98,12 @@
     #mysqldb => {
     #    database => 'lstu',
     #    host     => 'localhost',
+    #    # optional, default is 3306
+    #    #port     => 3306,
     #    #user     => 'DBUSER',
-    #    #pwd      => 'DBPASSWORD'
+    #    #pwd      => 'DBPASSWORD',
+    #    # optional, default is 5 (set to 0 to disable persistent connections)
+    #    #max_connections => 5,
     #},
 
     # Rate-limiting for the API
