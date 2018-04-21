@@ -19,6 +19,7 @@ requires 'IO::Socket::SSL';
 requires 'Net::LDAP';
 requires 'Apache::Htpasswd';
 requires 'Image::PNG::QRCode';
+requires 'Cpanel::JSON::XS';
 feature 'sqlite', 'SQLite support' => sub {
     requires 'ORLite';
 };

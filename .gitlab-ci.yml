@@ -1,4 +1,4 @@
-image: hatsoftwares/test-ci:latest
+image: hatsoftwares/lstu-test-ci:latest
 stages:
   - sqlite
   - postgresql
@@ -25,6 +25,8 @@ sqlite2:
     policy: pull
     paths:
       - local/
+  dependencies:
+    - sqlite1
   script:
     - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite2.conf make test
@@ -37,6 +39,8 @@ sqlite3:
     policy: pull
     paths:
       - local/
+  dependencies:
+    - sqlite1
   script:
     - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite3.conf make minion &
@@ -50,6 +54,8 @@ postgresql1:
     untracked: true
     paths:
       - local/
+  services:
+    - postgres:9.6
   script:
     - carton install --deployment --without=sqlite --without=mysql
     - service postgresql restart
@@ -65,6 +71,10 @@ postgresql2:
     policy: pull
     paths:
       - local/
+  services:
+    - postgres:9.6
+  dependencies:
+    - postgresql1
   script:
     - carton install --deployment --without=sqlite --without=mysql
     - service postgresql restart
@@ -80,6 +90,10 @@ postgresql3:
     policy: pull
     paths:
       - local/
+  services:
+    - postgres:9.6
+  dependencies:
+    - postgresql1
   script:
     - carton install --deployment --without=sqlite --without=mysql
     - service postgresql restart
@@ -97,6 +111,8 @@ mysql1:
     untracked: true
     paths:
       - local/
+  services:
+    - mariadb:20.1
   script:
     - carton install --deployment --without=sqlite --without=postgresql
     - service postgresql restart
@@ -113,6 +129,10 @@ mysql2:
     policy: pull
     paths:
       - local/
+  services:
+    - mariadb:20.1
+  dependencies:
+    - mysql1
   script:
     - carton install --deployment --without=sqlite --without=postgresql
     - service mysql restart
@@ -129,6 +149,10 @@ mysql3:
     policy: pull
     paths:
       - local/
+  services:
+    - mariadb:20.1
+  dependencies:
+    - mysql1
   script:
     - carton install --deployment --without=sqlite --without=postgresql
     - service mysql restart
@@ -139,3 +163,11 @@ mysql3:
     - sleep 5
     - MOJO_CONFIG=t/mysql3.conf make test
   when: always
+
+variables:
+  POSTGRES_DB: lstu
+  POSTGRES_USER: lstu
+  POSTGRES_PASSWORD: lstu
+  MYSQL_DATABASE: lstu
+  MYSQL_USER: lstu
+  MYSQL_PASSWORD: lstu
