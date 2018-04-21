@@ -10,7 +10,7 @@ sub register {
     my ($self, $app) = @_;
 
     if ($app->config('dbtype') eq 'postgresql') {
-        use Mojo::Pg;
+        require Mojo::Pg;
         $app->helper(pg => \&_pg);
 
         # Database migration
@@ -21,7 +21,7 @@ sub register {
             $migrations->from_file('utilities/migrations.sql')->migrate(1);
         }
     } elsif ($app->config('dbtype') eq 'mysql') {
-        use Mojo::mysql;
+        require Mojo::mysql;
         $app->helper(mysql => \&_mysql);
 
         # Database migration
