@@ -1,11 +1,10 @@
 Revision history for Perl application Lstu
 
 0.12 ????-??-??
-	- Improve LDAP User Authentication Support (beware of configuration
-	  changes!) <Ira W.  Snyder>
-	- Allow users to configure maximum number of database connections
-	  <Ira W.  Snyder>
+	- Improve LDAP User Authentication Support (beware of configuration changes!) <Ira W.  Snyder>
+	- Allow users to configure maximum number of database connections <Ira W.  Snyder>
 	- Use CHI for cache system
+	- Move some tasks to recurring instead of being in after_dispatch hook
 	- Put documentation on the wiki (https://framagit.org/luc/lstu/wikis/home)
 	- Update dependencies
 	- Fix bugs
