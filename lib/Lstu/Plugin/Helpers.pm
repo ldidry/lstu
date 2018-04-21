@@ -33,8 +33,6 @@ sub register {
         }
     }
 
-    $app->helper(cache => \&_cache);
-    $app->helper(clear_cache => \&_clear_cache);
     $app->helper(ip => \&_ip);
     $app->helper(provisioning => \&_provisioning);
     $app->helper(prefix => \&_prefix);
@@ -69,22 +67,6 @@ sub _mysql {
     $mysql->username($c->config->{mysqldb}->{user});
     $mysql->max_connections($c->config->{mysqldb}->{max_connections}) if defined $c->config->{mysqldb}->{max_connections};
     return $mysql;
-}
-
-sub _cache {
-    my $c        = shift;
-
-    state $cache = {};
-}
-
-sub _clear_cache {
-    my $c     = shift;
-
-    my $cache = $c->cache;
-    my @keys  = keys %{$cache};
-
-    my $limit = ($c->app->mode eq 'production') ? 500 : 1;
-    map {delete $cache->{$_};} @keys if (scalar(@keys) > $limit);
 }
 
 sub _ip {

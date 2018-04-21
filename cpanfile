@@ -21,3 +21,5 @@ requires 'IO::Socket::SSL';
 requires 'Net::LDAP';
 requires 'Apache::Htpasswd';
 requires 'Image::PNG::QRCode';
+requires 'CHI';
+requires 'Data::Serializer';

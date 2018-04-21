@@ -5,6 +5,7 @@ use Mojo::JSON;
 use Net::LDAP;
 use Apache::Htpasswd;
 use Lstu::DB::URL;
+use CHI;
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
 
@@ -30,6 +31,7 @@ sub startup {
             dbtype           => 'sqlite',
             max_redir        => 2,
             skip_spamhaus    => 0,
+            cache_max_size   => 2,
         }
     });
 
@@ -52,6 +54,16 @@ sub startup {
     my $lib = $self->home->rel_file('themes/'.$config->{theme}.'/lib');
     eval qq(use lib "$lib");
     $self->plugin('I18N');
+
+    # Cache
+    my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
+    $self->{urls_cache} = CHI->new(
+        driver        => 'Memory',
+        global        => 1,
+        is_size_aware => 1,
+        max_size      => $cache_max_size,
+        expires_in    => '1 day'
+    );
 
     # Debug
     $self->plugin('DebugDumperHelper');

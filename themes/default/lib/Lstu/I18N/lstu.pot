@@ -154,7 +154,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: lib/Lstu.pm:275 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:287 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
@@ -195,22 +195,22 @@ msgid "Statistics"
 msgstr ""
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:161
+#: lib/Lstu/Plugin/Helpers.pm:143
 msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr ""
 
 #. ($c->config('max_redir')
-#: lib/Lstu/Plugin/Helpers.pm:177
+#: lib/Lstu/Plugin/Helpers.pm:159
 msgid "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr ""
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:153
+#: lib/Lstu/Plugin/Helpers.pm:135
 msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted on this server (usually because of spammers that use this domain)."
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:281 lib/Lstu/Controller/Lstu.pm:341
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:281 lib/Lstu/Controller/Lstu.pm:325
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
@@ -249,11 +249,11 @@ msgstr ""
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr ""
 
-#: lib/Lstu.pm:266 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:126 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:278 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:126 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
 msgstr ""
 
-#: lib/Lstu.pm:305 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:134 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:317 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:134 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr ""
 

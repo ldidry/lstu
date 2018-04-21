@@ -3,8 +3,9 @@ Revision history for Perl application Lstu
 0.12 ????-??-??
 	- Improve LDAP User Authentication Support (beware of configuration
 	  changes!) <Ira W.  Snyder>
-	  - Allow users to configure maximum number of database connections
+	- Allow users to configure maximum number of database connections
 	  <Ira W.  Snyder>
+	- Use CHI for cache system
 	- Update dependencies
 	- Fix bugs
 
