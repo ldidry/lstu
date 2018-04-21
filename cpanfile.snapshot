@@ -146,6 +146,14 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       Math::BigInt 1.997
       Test::More 0.90
+  Cpanel-JSON-XS-4.02
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.02.tar.gz
+    provides:
+      Cpanel::JSON::XS 4.02
+      Cpanel::JSON::XS::Type undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      Pod::Text 2.08
   Crypt-PasswdMD5-1.40
     pathname: R/RS/RSAVAGE/Crypt-PasswdMD5-1.40.tgz
     provides:
