@@ -20,13 +20,12 @@ sudo apt-get install build-essential libssl-dev
 
 ```shell
 sudo cpan Carton
-sudo cpan inc::Module::Install::DSL
 ```
 
-* Install `libpq-dev`, `libmysqld-dev`, `libmariadbclient-dev` and `libpng-dev` too:
+* Install `libpq-dev`, `libmariadbd-dev` (`libmysqld-dev` if you use Debian Jessie) and `libpng-dev` too:
 
 ```shell
-sudo apt-get install libpq-dev libmysqld-dev libmariadbclient-dev libpng-dev
+sudo apt-get install libpq-dev libmariadbd-dev libpng-dev
 ```
 
 ## Installation
