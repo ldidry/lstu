@@ -1,118 +1,156 @@
-image: hatsoftwares/test-ci:latest
+image: hatsoftwares/lstu-test-ci:latest
 stages:
+  - podcheck
+  - carton_sqlite
+  - carton_postgresql
+  - carton_mysql
   - sqlite
   - postgresql
   - mysql
 before_script:
-  - carton install --deployment; cat ~/.cpanm/latest-build/build.log
   - rm -f *db
-  - make podcheck
+variables:
+  POSTGRES_DB: lstu
+  POSTGRES_USER: lstu
+  POSTGRES_PASSWORD: lstu
+  MYSQL_DATABASE: lstu
+  MYSQL_USER: lstu
+  MYSQL_PASSWORD: lstu
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - ~/.cpanm/
+
+podcheck:
+  stage: podcheck
+  cache:
+    key: none
+    paths:
+      - local/
+  script:
+    - make podcheck
+
+carton:sqlite:
+  stage: carton_sqlite
+  artifacts:
+    paths:
+      - local/
+  dependencies: []
+  script:
+    - carton install --verbose --deployment --without=postgresql --without=mysql
+  when: always
+  retry: 2
+carton:postgresql:
+  stage: carton_postgresql
+  artifacts:
+    paths:
+      - local/
+  dependencies: []
+  script:
+    - carton install --verbose --deployment --without=sqlite --without=mysql
+  when: always
+  retry: 2
+carton:mysql:
+  stage: carton_mysql
+  artifacts:
+    paths:
+      - local/
+  dependencies: []
+  script:
+    - carton install --verbose --deployment --without=sqlite --without=postgresql
+  when: always
+  retry: 2
+
 sqlite1:
   stage: sqlite
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - local
+  dependencies:
+    - carton:sqlite
   script:
+    - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite1.conf make test
+  retry: 2
 sqlite2:
   stage: sqlite
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - local
+  dependencies:
+    - carton:sqlite
   script:
+    - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite2.conf make test
+  retry: 2
 sqlite3:
   stage: sqlite
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - local
+  dependencies:
+    - carton:sqlite
   script:
+    - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/sqlite3.conf make test
+  retry: 2
+
 postgresql1:
   stage: postgresql
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
+  artifacts:
     paths:
-      - local
+      - local/
+  services:
+    - postgres:9.6
   script:
-    - service postgresql restart
-    - sleep 10
-    - service postgresql status
+    - carton install --deployment --without=sqlite --without=mysql
     - MOJO_CONFIG=t/postgresql1.conf make test
+  retry: 2
 postgresql2:
   stage: postgresql
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - local
+  dependencies:
+    - carton:postgresql
+  services:
+    - postgres:9.6
   script:
-    - service postgresql restart
-    - sleep 10
-    - service postgresql status
+    - carton install --deployment --without=sqlite --without=mysql
     - MOJO_CONFIG=t/postgresql2.conf make test
+  retry: 2
 postgresql3:
   stage: postgresql
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - local
+  dependencies:
+    - carton:postgresql
+  services:
+    - postgres:9.6
   script:
-    - service postgresql restart
-    - sleep 10
-    - service postgresql status
-    - su -c "psql -f t/test.sql" postgres
+    - carton install --deployment --without=sqlite --without=mysql
     - MOJO_CONFIG=t/postgresql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/postgresql3.conf make test
+  retry: 2
+
 mysql1:
   stage: mysql
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - local
+  dependencies:
+    - carton:mysql
+  services:
+    - mariadb:10.1
   script:
-    - service mysql restart
-    - sleep 10
-    - service mysql status
-    - mysql -u root < t/test_mysql.sql
+    - carton install --deployment --without=sqlite --without=postgresql
     - MOJO_CONFIG=t/mysql1.conf make test
+  retry: 2
 mysql2:
   stage: mysql
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - local
+  dependencies:
+    - carton:mysql
+  services:
+    - mariadb:10.1
   script:
-    - service mysql restart
-    - sleep 10
-    - service mysql status
-    - mysql -u root < t/test_mysql.sql
+    - carton install --deployment --without=sqlite --without=postgresql
     - MOJO_CONFIG=t/mysql2.conf make test
+  retry: 2
 mysql3:
   stage: mysql
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - local
+  dependencies:
+    - carton:mysql
+  services:
+      - mariadb:10.1
   script:
-    - service mysql restart
-    - sleep 10
-    - service mysql status
-    - mysql -u root < t/test_mysql.sql
+    - carton install --deployment --without=sqlite --without=postgresql
     - MOJO_CONFIG=t/mysql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/mysql3.conf make test
+  retry: 2
