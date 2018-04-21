@@ -83,18 +83,25 @@ sub startup {
                     if (defined($c->config('ldap'))) {
                         my $ldap = Net::LDAP->new($c->config->{ldap}->{uri});
 
-                        # connect to the ldap server using the search credentials
-                        my $mesg = $ldap->bind($c->config->{ldap}->{bind_dn},
-                            password => $c->config->{ldap}->{bind_pwd}
-                        );
+                        my $mesg;
+                        if (defined($c->config->{ldap}->{bind_dn}) && defined($c->config->{ldap}->{bind_pwd})) {
+                            # connect to the ldap server using the bind credentials
+                            $mesg = $ldap->bind(
+                                $c->config->{ldap}->{bind_dn},
+                                password => $c->config->{ldap}->{bind_pwd}
+                            );
+                        } else {
+                            # anonymous bind
+                            $mesg = $ldap->bind
+                        }
 
                         if ($mesg->code) {
-                            $c->app->log->info("[LDAP search authentication failed] login: ".$c->config->{ldap}->{bind_dn});
-                            $c->app->log->error("[LDAP search authentication failed] ".$mesg->error);
+                            $c->app->log->info('[LDAP INFO] Authenticated bind failed - Login: '.$c->config->{ldap}->{bind_dn}) if defined($c->config->{ldap}->{bind_dn});
+                            $c->app->log->error('[LDAP ERROR] Error on bind: '.$mesg->error);
                             return undef;
                         }
 
-                        my $ldap_user_attr = $c->config->{ldap}->{user_attr};
+                        my $ldap_user_attr   = $c->config->{ldap}->{user_attr};
                         my $ldap_user_filter = $c->config->{ldap}->{user_filter};
 
                         # search the ldap database for the user who is trying to login
@@ -104,32 +111,34 @@ sub startup {
                         );
 
                         if ($mesg->code) {
-                            $c->app->log->error($mesg->error);
+                            $c->app->log->error('[LDAP ERROR] Error on search: '.$mesg->error);
                             return undef;
                         }
 
                         # check to make sure that the ldap search returned at least one entry
-                        if (scalar $mesg->entries <= 0) {
-                            $c->app->log->error("[LDAP search] no results returned for search");
+                        my @entries = $mesg->entries;
+                        my $entry   = $entries[0];
+
+                        if (defined $entry) {
+                            $c->app->log->info("[LDAP INFO] Authentication failed - User $username filtered out, IP: ".$c->ip);
                             return undef;
                         }
 
                         # retrieve the first user returned by the search
-                        my $ldap_userdn = $mesg->entry(0)->{asn}->{objectName};
-                        $c->app->log->debug("[LDAP search] found user dn: ".$ldap_userdn);
+                        $c->app->log->debug("[LDAP DEBUG] Found user dn: ".$entry->dn);
 
                         # Now we know that the user exists
-                        $mesg = $ldap->bind($ldap_userdn,
+                        $mesg = $ldap->bind($entry->dn,
                             password => $password
                         );
 
                         if ($mesg->code) {
-                            $c->app->log->info("[LDAP authentication failed] login: $username, IP: ".$c->ip);
-                            $c->app->log->error("[LDAP authentication failed] ".$mesg->error);
+                            $c->app->log->info("[LDAP INFO] Authentication failed - Login: $username, IP: ".$c->ip);
+                            $c->app->log->error('[LDAP ERROR] Authentication failed '.$mesg->error);
                             return undef;
                         }
 
-                        $c->app->log->info("[LDAP authentication successful] login: $username, IP: ".$c->ip);
+                        $c->app->log->info("[LDAP INFO] Authentication successful - Login: $username, IP: ".$c->ip);
                     } elsif (defined($c->config('htpasswd'))) {
                         my $htpasswd = new Apache::Htpasswd(
                             {
