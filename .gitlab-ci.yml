@@ -1,135 +1,12 @@
 image: hatsoftwares/lstu-test-ci:latest
 stages:
+  - podcheck
+  - carton
   - sqlite
   - postgresql
   - mysql
 before_script:
   - rm -f *db
-sqlite1:
-  stage: sqlite
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    paths:
-      - local/
-  script:
-    - make podcheck
-    - carton install --deployment --without=postgresql --without=mysql
-    - MOJO_CONFIG=t/sqlite1.conf make test
-  when: always
-sqlite2:
-  stage: sqlite
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
-  script:
-    - carton install --deployment --without=postgresql --without=mysql
-    - MOJO_CONFIG=t/sqlite2.conf make test
-  when: always
-sqlite3:
-  stage: sqlite
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
-  script:
-    - carton install --deployment --without=postgresql --without=mysql
-    - MOJO_CONFIG=t/sqlite3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/sqlite3.conf make test
-  when: always
-postgresql1:
-  stage: postgresql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    paths:
-      - local/
-  services:
-    - postgres:9.6
-  script:
-    - carton install --deployment --without=sqlite --without=mysql
-    - MOJO_CONFIG=t/postgresql1.conf make test
-  when: always
-postgresql2:
-  stage: postgresql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
-  services:
-    - postgres:9.6
-  script:
-    - carton install --deployment --without=sqlite --without=mysql
-    - MOJO_CONFIG=t/postgresql2.conf make test
-  when: always
-postgresql3:
-  stage: postgresql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
-  services:
-    - postgres:9.6
-  script:
-    - carton install --deployment --without=sqlite --without=mysql
-    - MOJO_CONFIG=t/postgresql3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/postgresql3.conf make test
-  when: always
-mysql1:
-  stage: mysql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    paths:
-      - local/
-  services:
-    - mariadb:20.1
-  script:
-    - carton install --deployment --without=sqlite --without=postgresql
-    - MOJO_CONFIG=t/mysql1.conf make test
-  when: always
-mysql2:
-  stage: mysql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
-  services:
-    - mariadb:10.1
-  script:
-    - carton install --deployment --without=sqlite --without=postgresql
-    - MOJO_CONFIG=t/mysql2.conf make test
-  when: always
-mysql3:
-  stage: mysql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
-  services:
-      - mariadb:10.1
-  script:
-    - carton install --deployment --without=sqlite --without=postgresql
-    - MOJO_CONFIG=t/mysql3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/mysql3.conf make test
-  when: always
-
 variables:
   POSTGRES_DB: lstu
   POSTGRES_USER: lstu
@@ -137,3 +14,118 @@ variables:
   MYSQL_DATABASE: lstu
   MYSQL_USER: lstu
   MYSQL_PASSWORD: lstu
+
+podcheck:
+  stage: podcheck
+  script:
+    - make podcheck
+
+carton:sqlite:
+  stage: carton
+  artifacts:
+    paths:
+      - local/
+  script:
+    - carton install --deployment --without=postgresql --without=mysql
+  when: always
+carton:postgresql:
+  stage: carton
+  artifacts:
+    paths:
+      - local/
+  script:
+    - carton install --deployment --without=sqlite --without=mysql
+  when: always
+carton:mysql:
+  stage: carton
+  artifacts:
+    paths:
+      - local/
+  script:
+    - carton install --deployment --without=sqlite --without=postgresql
+  when: always
+
+sqlite1:
+  stage: sqlite
+  dependencies:
+    - carton:sqlite
+  script:
+    - carton install --deployment --without=postgresql --without=mysql
+    - MOJO_CONFIG=t/sqlite1.conf make test
+sqlite2:
+  stage: sqlite
+  dependencies:
+    - carton:sqlite
+  script:
+    - carton install --deployment --without=postgresql --without=mysql
+    - MOJO_CONFIG=t/sqlite2.conf make test
+sqlite3:
+  stage: sqlite
+  dependencies:
+    - carton:sqlite
+  script:
+    - carton install --deployment --without=postgresql --without=mysql
+    - MOJO_CONFIG=t/sqlite3.conf make minion &
+    - sleep 5
+    - MOJO_CONFIG=t/sqlite3.conf make test
+
+postgresql1:
+  stage: postgresql
+  artifacts:
+    paths:
+      - local/
+  services:
+    - postgres:9.6
+  script:
+    - carton install --deployment --without=sqlite --without=mysql
+    - MOJO_CONFIG=t/postgresql1.conf make test
+postgresql2:
+  stage: postgresql
+  dependencies:
+    - carton:postgresql
+  services:
+    - postgres:9.6
+  script:
+    - carton install --deployment --without=sqlite --without=mysql
+    - MOJO_CONFIG=t/postgresql2.conf make test
+postgresql3:
+  stage: postgresql
+  dependencies:
+    - carton:postgresql
+  services:
+    - postgres:9.6
+  script:
+    - carton install --deployment --without=sqlite --without=mysql
+    - MOJO_CONFIG=t/postgresql3.conf make minion &
+    - sleep 5
+    - MOJO_CONFIG=t/postgresql3.conf make test
+
+mysql1:
+  stage: mysql
+  dependencies:
+    - carton:mysql
+  services:
+    - mariadb:10.1
+  script:
+    - carton install --deployment --without=sqlite --without=postgresql
+    - MOJO_CONFIG=t/mysql1.conf make test
+mysql2:
+  stage: mysql
+  dependencies:
+    - carton:mysql
+  services:
+    - mariadb:10.1
+  script:
+    - carton install --deployment --without=sqlite --without=postgresql
+    - MOJO_CONFIG=t/mysql2.conf make test
+mysql3:
+  stage: mysql
+  dependencies:
+    - carton:mysql
+  services:
+      - mariadb:10.1
+  script:
+    - carton install --deployment --without=sqlite --without=postgresql
+    - MOJO_CONFIG=t/mysql3.conf make minion &
+    - sleep 5
+    - MOJO_CONFIG=t/mysql3.conf make test
