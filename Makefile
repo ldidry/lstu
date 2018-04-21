@@ -27,12 +27,19 @@ stats-locales:
 podcheck:
 	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm
 
-test: podcheck
-	$(CARTON) $(REAL_LSTU) test
+cover:
+	PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) cover --ignore_re '^local'
 
-test-sqlite:
-	MOJO_CONFIG=t/sqlite1.conf $(CARTON) $(REAL_LSTU) test
-	MOJO_CONFIG=t/sqlite2.conf $(CARTON) $(REAL_LSTU) test
+test:
+	@rm -rf test1.db test1.db-journal cover_db/
+	@echo 'MOJO_CONFIG=t/sqlite1.conf'
+	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' MOJO_CONFIG=t/sqlite1.conf $(CARTON) $(REAL_LSTU) test
+
+test-sqlite: test cover
+	@rm -rf test2.db test2.db-journal cover_db/
+	@echo 'MOJO_CONFIG=t/sqlite2.conf'
+	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' MOJO_CONFIG=t/sqlite2.conf $(CARTON) $(REAL_LSTU) test
+	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) $(REAL_LSTU) cover --ignore_re '^local'
 
 dev: minify
 	$(CARTON) morbo $(LSTU) --listen http://0.0.0.0:3000 --watch lib/ --watch script/ --watch themes/ --watch lstu.conf

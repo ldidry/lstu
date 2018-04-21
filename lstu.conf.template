@@ -184,10 +184,6 @@
     # maximum size (in MB) of memory allowed for the URL cache
     # Lstu has a built-in memory-based URL cache to accelerate responses to often-viewed URL.
     # This setting makes the cache remove oldest viewed image if the cache size is over it.
-    # WARNING: a cache is created for each hypnotoad worker, which by default is twice the number of
-    # CPUs you have. See http://mojolicious.org/perldoc/Mojo/Server/Hypnotoad#workers for details
-    # So, if you have 4 workers and set cache_max_size to 10, the real maximum size of RAM used for
-    # cache is 40MB.
     # If set to 0, the cache is disabled
     # optional, default is 2
     #cache_max_size => 2,
