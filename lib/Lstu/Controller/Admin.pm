@@ -120,6 +120,7 @@ sub delete {
         );
         if ($db_url->url) {
             my $deleted = $db_url->delete;
+            $c->chi('lstu_urls_cache')->delete($short) if $c->chi('lstu_urls_cache')->is_valid($short);
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->true, deleted => $deleted } },
                 any  => sub {
