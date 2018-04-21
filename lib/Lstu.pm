@@ -67,13 +67,16 @@ sub startup {
     my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
     $self->plugin(CHI => {
         lstu_urls_cache => {
-            driver        => 'Memory',
+            driver        => 'SharedMem',
             global        => 1,
             is_size_aware => 1,
             max_size      => $cache_max_size,
-            expires_in    => '1 day'
+            expires_in    => '1 day',
+            shmkey        => 1782340321,
         }
     });
+    # Clean cache at startup
+    $self->chi('lstu_urls_cache')->clear();
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');

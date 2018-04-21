@@ -57,13 +57,13 @@ sub new {
     if (ref($c) eq 'Lstu::DB::Session') {
         my $dbtype = $c->app->config('dbtype');
         if ($dbtype eq 'sqlite') {
-            use Lstu::DB::Session::SQLite;
+            require Lstu::DB::Session::SQLite;
             $c = Lstu::DB::Session::SQLite->new(@_);
         } elsif ($dbtype eq 'postgresql') {
-            use Lstu::DB::Session::Pg;
+            require Lstu::DB::Session::Pg;
             $c = Lstu::DB::Session::Pg->new(@_);
         } elsif ($dbtype eq 'mysql') {
-            use Lstu::DB::Session::MySQL;
+            require Lstu::DB::Session::MySQL;
             $c = Lstu::DB::Session::MySQL->new(@_);
         }
     }

@@ -48,21 +48,25 @@ my $t = Test::Mojo->new('Lstu');
 # Give time to provision some short URLs
 sleep 3;
 
+# Home page
 $t->get_ok('/')
   ->status_is(200)
   ->content_like(qr/Lstu/i);
 
+# Create short URL
 $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->status_is(200)
     ->json_has('url', 'short', 'success', 'qrcode')
     ->json_is('/success' => true, '/url' => 'https://lstu.fr')
     ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
 
+# Create short URL with a .onion URL
 $t->post_ok('/a' => form => { lsturl => 'http://lstupiioqgxmq66f.onion', 'lsturl-custom' => 'onion', format => 'json' })
     ->status_is(200)
     ->json_has('url', 'short', 'success', 'qrcode')
     ->json_is('/success' => true, '/url' => 'https://lstu.fr', '/short' => 'http://127.0.0.1/onion');
 
+# Create short URL, with invalid argument
 $t->post_ok('/a' => form => { lsturl => 'truc', format => 'json' })
     ->status_is(200)
     ->json_has('msg', 'success')
@@ -73,26 +77,34 @@ Lstu::DB::Ban->new(app => $m)->delete_all; # prevents ban
 # Give time to provision some short URLs
 sleep 5;
 
+# Create short URL
 my $a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
 
+# Test redirection
 $t->get_ok($a)
     ->status_is(301);
 
+# Test JSON answer
 $t->get_ok($a.'.json')
     ->status_is(200)
     ->json_is({success => true, url => 'https://lstu.fr'});
 
+# Extract the path of the short URL
 my $short = Mojo::URL->new($a)->path();
+
+# Get stats about the short URL
 $t->get_ok('/stats'.$short)
     ->status_is(200)
     ->json_has('success', 'short', 'url', 'counter', 'created_at', 'timestamp')
     ->json_is('/success' => true, '/url' => 'https://lstu.fr', '/short' => $a, '/counter' => 1)
     ->json_like('/created_at' => qr#[0-9]{10}#, '/timestamp' => qr#[0-9]{10}#);
 
+# Test JSON answer on invalid short URL
 $t->get_ok($a.'i.json')
     ->status_is(404)
     ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
 
+# Get stats about an invalid short URL
 $t->get_ok('/stats'.$short.'i')
     ->status_is(200)
     ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
@@ -107,6 +119,7 @@ $t->get_ok('/fullstats')
 # Needed if we use Minion for increasing counters
 sleep 4;
 
+# Get stats in JSON format
 $t->get_ok('/stats.json')
     ->status_is(200)
     ->json_has('/0/created_at', '/0/counter', '/0/short', '/0/url', '/0/qrcode')
@@ -114,43 +127,57 @@ $t->get_ok('/stats.json')
     ->json_is('/0/counter' => 2)
     ->json_like('/0/created_at' => qr#\d+#);
 
+# Extract the path of the short URL
 my $b = $a;
-$b =~ s#http://127\.0\.0\.1:\d+/##;
+$b = Mojo::URL->new($a)->path();
 
 $t->ua->max_redirects(1);
-$t->get_ok('/d/'.$b)
+
+# Try to delete short URL while not admin
+$t->get_ok('/d'.$b)
     ->status_is(200)
     ->content_like(qr/You&#39;re not authenticated as the admin/);
 
+# Login as admin
 $t->post_ok('/stats' => form => { adminpwd => 'toto', page => 0 })
     ->status_is(200)
     ->content_like(qr/$a/);
 
-$t->get_ok('/d/'.$b)
-    ->status_is(200);
+# Delete short URL while admin
+$t->get_ok('/d'.$b)
+    ->status_is(200)
+    ->content_like(qr/WTFPL/);
 
-$t->get_ok($a.'i.json')
+# Verify that short URL does not exists anymore
+$t->get_ok($a.'.json')
     ->status_is(404)
-    ->json_is({success => false, msg => 'The shortened URL '.$a.'i doesn\'t exist.'});
+    ->json_is({success => false, msg => 'The shortened URL '.$a.' doesn\'t exist.'});
 
+# Create short URL
 $a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
-$a =~ s#http://127\.0\.0\.1:\d+/##;
 
-$t->get_ok('/d/'.$a.'?format=json')
+# Extract the path of the short URL
+$a = Mojo::URL->new($a)->path();
+
+# Delete short URL while admin, JSON format
+$t->get_ok('/d'.$a.'?format=json')
     ->status_is(200)
     ->json_is({success => true, deleted => 1});
 
+# Logout
 $t->post_ok('/stats' => form => { adminpwd => 'toto', action => 'logout' })
     ->status_is(200);
 
 # Test admin ban
 Lstu::DB::Ban->new(app => $m)->delete_all;
 for my $i (1..3) {
+    # Login three times with a bad password
     $t->post_ok('/stats' => form => { adminpwd => 'totoi' })
         ->status_is(200)
         ->content_like(qr/Bad password/);
 }
 
+# Login with a bad password, should be banned now
 $t->post_ok('/stats' => form => { adminpwd => 'totoi' })
     ->status_is(200)
     ->content_like(qr/Too many bad passwords\./);
@@ -175,6 +202,7 @@ Lstu::DB::Ban->new(app => $m)->delete_all; # reset ban
 # Give time to provision some short URLs
 sleep 3;
 
+# Create short URL, JSON format
 $t->post_ok('/a' => form => { lsturl => ' https://fiat-tux.fr', format => 'json' })
     ->status_is(200)
     ->json_has('url', 'short', 'success', 'qrcode')

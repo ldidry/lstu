@@ -5,6 +5,8 @@ Revision history for Perl application Lstu
 	- Allow users to configure maximum number of database connections <Ira W.  Snyder>
 	- Use CHI for cache system
 	- Move some tasks to recurring instead of being in after_dispatch hook
+	- Allow to install only deps related to one DB instead of all supported DBs
+	- Better CI
 	- Put documentation on the wiki (https://framagit.org/luc/lstu/wikis/home)
 	- Update dependencies
 	- Fix bugs
