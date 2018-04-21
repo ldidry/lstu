@@ -181,12 +181,6 @@ sub startup {
 
     # Hooks
     $self->hook(
-        after_dispatch => sub {
-            shift->provisioning();
-        }
-    );
-
-    $self->hook(
         before_dispatch => sub {
             my $c = shift;
 
@@ -205,6 +199,13 @@ sub startup {
             }
         }
     );
+
+    # Recurrent tasks
+    Mojo::IOLoop->recurring(5 => sub {
+        my $loop = shift;
+
+        $self->provisioning();
+    });
 
     # Minion
     if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {
