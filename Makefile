@@ -7,9 +7,9 @@ LSTU=script/lstu
 
 minify:
 	@echo "Minification of fontelico.css"
-	@cd ./themes/default/public/css/ && minify fontelico.css
+	@cd ./themes/default/public/css/ && minify fontelico.css > fontelico.min.css
 	@echo "Minification of lstu.css"
-	@cd ./themes/milligram/public/css/ && minify lstu.css
+	@cd ./themes/milligram/public/css/ && minify lstu.css > lstu.min.css
 
 locales:
 	$(XGETTEXT) $(EXTRACTDIR) -o $(POT) 2>/dev/null
