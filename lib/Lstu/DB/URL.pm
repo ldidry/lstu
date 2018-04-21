@@ -63,13 +63,13 @@ sub new {
     if (ref($c) eq 'Lstu::DB::URL') {
         my $dbtype = $c->app->config('dbtype');
         if ($dbtype eq 'sqlite') {
-            use Lstu::DB::URL::SQLite;
+            require Lstu::DB::URL::SQLite;
             $c = Lstu::DB::URL::SQLite->new(@_);
         } elsif ($dbtype eq 'postgresql') {
-            use Lstu::DB::URL::Pg;
+            require Lstu::DB::URL::Pg;
             $c = Lstu::DB::URL::Pg->new(@_);
         } elsif ($dbtype eq 'mysql') {
-            use Lstu::DB::URL::MySQL;
+            require Lstu::DB::URL::MySQL;
             $c = Lstu::DB::URL::MySQL->new(@_);
         }
     }
