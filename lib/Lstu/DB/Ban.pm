@@ -60,13 +60,13 @@ sub new {
     if (ref($c) eq 'Lstu::DB::Ban') {
         my $dbtype = $c->app->config('dbtype');
         if ($dbtype eq 'sqlite') {
-            use Lstu::DB::Ban::SQLite;
+            require Lstu::DB::Ban::SQLite;
             $c = Lstu::DB::Ban::SQLite->new(@_);
         } elsif ($dbtype eq 'postgresql') {
-            use Lstu::DB::Ban::Pg;
+            require Lstu::DB::Ban::Pg;
             $c = Lstu::DB::Ban::Pg->new(@_);
         } elsif ($dbtype eq 'mysql') {
-            use Lstu::DB::Ban::MySQL;
+            require Lstu::DB::Ban::MySQL;
             $c = Lstu::DB::Ban::MySQL->new(@_);
         }
     }

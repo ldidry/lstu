@@ -40,7 +40,6 @@ sub delete {
     my $c = shift;
 
     my $h = $c->app->pg->db->query('DELETE FROM lstu WHERE short = ? RETURNING *', $c->short)->hashes;
-    $c->app->debug($h->size);
     if ($h->size) {
         $c = Lstu::DB::URL->new(app => $c->app);
     }
