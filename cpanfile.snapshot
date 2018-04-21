@@ -531,13 +531,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Test::More 0.47
       perl 5.006
-  Minion-8.12
-    pathname: S/SR/SRI/Minion-8.12.tar.gz
+  Minion-9.03
+    pathname: S/SR/SRI/Minion-9.03.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 8.12
+      Minion 9.03
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -545,20 +545,20 @@ DISTRIBUTIONS
       Minion::Command::minion::worker undef
       Minion::Job undef
       Minion::Worker undef
-      Minion::_Guard 8.12
+      Minion::_Guard 9.03
       Mojolicious::Plugin::Minion undef
       Mojolicious::Plugin::Minion::Admin undef
     requirements:
       ExtUtils::MakeMaker 0
       Mojolicious 7.56
       perl 5.010001
-  Minion-Backend-SQLite-3.003
-    pathname: D/DB/DBOOK/Minion-Backend-SQLite-3.003.tar.gz
+  Minion-Backend-SQLite-4.000
+    pathname: D/DB/DBOOK/Minion-Backend-SQLite-4.000.tar.gz
     provides:
-      Minion::Backend::SQLite 3.003
+      Minion::Backend::SQLite 4.000
     requirements:
       List::Util 0
-      Minion 8.0
+      Minion 9.0
       Module::Build::Tiny 0.034
       Mojo::SQLite 3.000
       Mojolicious 7.29
@@ -640,6 +640,62 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Module-Install-1.19
+    pathname: E/ET/ETHER/Module-Install-1.19.tar.gz
+    provides:
+      Module::AutoInstall 1.19
+      Module::Install 1.19
+      Module::Install::Admin 1.19
+      Module::Install::Admin::Bundle 1.19
+      Module::Install::Admin::Compiler 1.19
+      Module::Install::Admin::Find 1.19
+      Module::Install::Admin::Include 1.19
+      Module::Install::Admin::Makefile 1.19
+      Module::Install::Admin::Manifest 1.19
+      Module::Install::Admin::Metadata 1.19
+      Module::Install::Admin::ScanDeps 1.19
+      Module::Install::Admin::WriteAll 1.19
+      Module::Install::AutoInstall 1.19
+      Module::Install::Base 1.19
+      Module::Install::Base::FakeAdmin 1.19
+      Module::Install::Bundle 1.19
+      Module::Install::Can 1.19
+      Module::Install::Compiler 1.19
+      Module::Install::DSL 1.19
+      Module::Install::Deprecated 1.19
+      Module::Install::External 1.19
+      Module::Install::Fetch 1.19
+      Module::Install::Include 1.19
+      Module::Install::Inline 1.19
+      Module::Install::MakeMaker 1.19
+      Module::Install::Makefile 1.19
+      Module::Install::Metadata 1.19
+      Module::Install::PAR 1.19
+      Module::Install::Run 1.19
+      Module::Install::Scripts 1.19
+      Module::Install::Share 1.19
+      Module::Install::Win32 1.19
+      Module::Install::With 1.19
+      Module::Install::WriteAll 1.19
+      inc::Module::Install 1.19
+      inc::Module::Install::DSL 1.19
+    requirements:
+      Devel::PPPort 3.16
+      ExtUtils::Install 1.52
+      ExtUtils::MakeMaker 6.59
+      ExtUtils::ParseXS 2.19
+      File::Path 0
+      File::Remove 1.42
+      File::Spec 3.28
+      Module::Build 0.29
+      Module::CoreList 2.17
+      Module::ScanDeps 1.09
+      Parse::CPAN::Meta 1.4413
+      Test::Harness 3.13
+      Test::More 0.86
+      YAML::Tiny 1.38
+      autodie 0
+      perl 5.006
   Module-Runtime-0.014
     pathname: Z/ZE/ZEFRAM/Module-Runtime-0.014.tar.gz
     provides:
@@ -650,6 +706,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Module-ScanDeps-1.24
+    pathname: R/RS/RSCHUPP/Module-ScanDeps-1.24.tar.gz
+    provides:
+      Module::ScanDeps 1.24
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      File::Temp 0
+      Getopt::Long 0
+      Module::Metadata 0
+      Text::ParseWords 0
+      perl 5.008001
+      version 0
   Mojo-Pg-4.08
     pathname: S/SR/SRI/Mojo-Pg-4.08.tar.gz
     provides:
@@ -706,8 +775,8 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 7.55
       SQL::Abstract 1.81
-  Mojolicious-7.71
-    pathname: S/SR/SRI/Mojolicious-7.71.tar.gz
+  Mojolicious-7.75
+    pathname: S/SR/SRI/Mojolicious-7.75.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -776,7 +845,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.71
+      Mojolicious 7.75
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -1156,92 +1225,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Sub-Uplevel-0.2600
-    pathname: D/DA/DAGOLDEN/Sub-Uplevel-0.2600.tar.gz
-    provides:
-      Sub::Uplevel 0.2600
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      constant 0
-      perl 5.006
-      strict 0
-      warnings 0
-  Test-Deep-1.126
-    pathname: R/RJ/RJBS/Test-Deep-1.126.tar.gz
-    provides:
-      Test::Deep 1.126
-      Test::Deep::All undef
-      Test::Deep::Any undef
-      Test::Deep::Array undef
-      Test::Deep::ArrayEach undef
-      Test::Deep::ArrayElementsOnly undef
-      Test::Deep::ArrayLength undef
-      Test::Deep::ArrayLengthOnly undef
-      Test::Deep::Blessed undef
-      Test::Deep::Boolean undef
-      Test::Deep::Cache undef
-      Test::Deep::Cache::Simple undef
-      Test::Deep::Class undef
-      Test::Deep::Cmp undef
-      Test::Deep::Code undef
-      Test::Deep::Hash undef
-      Test::Deep::HashEach undef
-      Test::Deep::HashElements undef
-      Test::Deep::HashKeys undef
-      Test::Deep::HashKeysOnly undef
-      Test::Deep::Ignore undef
-      Test::Deep::Isa undef
-      Test::Deep::ListMethods undef
-      Test::Deep::MM undef
-      Test::Deep::Methods undef
-      Test::Deep::NoTest undef
-      Test::Deep::None undef
-      Test::Deep::Number undef
-      Test::Deep::Obj undef
-      Test::Deep::Ref undef
-      Test::Deep::RefType undef
-      Test::Deep::Regexp undef
-      Test::Deep::RegexpMatches undef
-      Test::Deep::RegexpOnly undef
-      Test::Deep::RegexpRef undef
-      Test::Deep::RegexpRefOnly undef
-      Test::Deep::RegexpVersion undef
-      Test::Deep::ScalarRef undef
-      Test::Deep::ScalarRefOnly undef
-      Test::Deep::Set undef
-      Test::Deep::Shallow undef
-      Test::Deep::Stack undef
-      Test::Deep::String undef
-      Test::Deep::SubHash undef
-      Test::Deep::SubHashElements undef
-      Test::Deep::SubHashKeys undef
-      Test::Deep::SubHashKeysOnly undef
-      Test::Deep::SuperHash undef
-      Test::Deep::SuperHashElements undef
-      Test::Deep::SuperHashKeys undef
-      Test::Deep::SuperHashKeysOnly undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      List::Util 1.09
-      Scalar::Util 1.09
-      Test::Builder 0
-  Test-Exception-0.43
-    pathname: E/EX/EXODIST/Test-Exception-0.43.tar.gz
-    provides:
-      Test::Exception 0.43
-    requirements:
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      Sub::Uplevel 0.18
-      Test::Builder 0.7
-      Test::Builder::Tester 1.07
-      Test::Harness 2.03
-      base 0
-      perl 5.006001
-      strict 0
-      warnings 0
   Test-Script-1.15
     pathname: P/PL/PLICEASE/Test-Script-1.15.tar.gz
     provides:
@@ -1253,18 +1236,6 @@ DISTRIBUTIONS
       Probe::Perl 0.01
       Test::Builder 0.32
       Test::More 0.96
-      perl 5.006
-  Test-Warn-0.32
-    pathname: B/BI/BIGJ/Test-Warn-0.32.tar.gz
-    provides:
-      Test::Warn 0.32
-      Test::Warn::Categorization 0.32
-    requirements:
-      Carp 1.22
-      ExtUtils::MakeMaker 0
-      Sub::Uplevel 0.12
-      Test::Builder 0.13
-      Test::Builder::Tester 1.02
       perl 5.006
   Text-Soundex-3.05
     pathname: R/RJ/RJBS/Text-Soundex-3.05.tar.gz
@@ -1417,15 +1388,20 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
-  XML-SAX-Base-1.09
-    pathname: G/GR/GRANTM/XML-SAX-Base-1.09.tar.gz
+  YAML-Tiny-1.73
+    pathname: E/ET/ETHER/YAML-Tiny-1.73.tar.gz
     provides:
-      XML::SAX::Base 1.09
-      XML::SAX::Base::NoHandler 1.09
-      XML::SAX::Exception 1.09
+      YAML::Tiny 1.73
     requirements:
+      B 0
+      Carp 0
+      Exporter 0
       ExtUtils::MakeMaker 0
-      perl 5.008
+      Fcntl 0
+      Scalar::Util 0
+      perl 5.008001
+      strict 0
+      warnings 0
   libwww-perl-6.19
     pathname: O/OA/OALDERS/libwww-perl-6.19.tar.gz
     provides:
@@ -1564,5 +1540,4 @@ DISTRIBUTIONS
       Text::Soundex 0
       Time::Local 0
       URI::ldap 1.1
-      XML::SAX::Base 0
       perl 5.008001
