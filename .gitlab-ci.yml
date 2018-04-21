@@ -7,9 +7,7 @@ before_script:
   - rm -f *db
 sqlite1:
   stage: sqlite
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
+  artifacts:
     paths:
       - local/
   script:
@@ -19,24 +17,16 @@ sqlite1:
   when: always
 sqlite2:
   stage: sqlite
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
+  dependencies:
+    - sqlite1
   script:
     - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite2.conf make test
   when: always
 sqlite3:
   stage: sqlite
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
+  dependencies:
+    - sqlite1
   script:
     - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite3.conf make minion &
@@ -45,9 +35,7 @@ sqlite3:
   when: always
 postgresql1:
   stage: postgresql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
+  artifacts:
     paths:
       - local/
   services:
@@ -58,12 +46,8 @@ postgresql1:
   when: always
 postgresql2:
   stage: postgresql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
+  dependencies:
+    - postgresql1
   services:
     - postgres:9.6
   script:
@@ -72,12 +56,8 @@ postgresql2:
   when: always
 postgresql3:
   stage: postgresql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
+  dependencies:
+    - postgresql1
   services:
     - postgres:9.6
   script:
@@ -88,9 +68,7 @@ postgresql3:
   when: always
 mysql1:
   stage: mysql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
+  artifacts:
     paths:
       - local/
   services:
@@ -101,12 +79,8 @@ mysql1:
   when: always
 mysql2:
   stage: mysql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
+  dependencies:
+    - mysql1
   services:
     - mariadb:10.1
   script:
@@ -115,12 +89,8 @@ mysql2:
   when: always
 mysql3:
   stage: mysql
-  cache:
-    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
-    untracked: true
-    policy: pull
-    paths:
-      - local/
+  dependencies:
+    - mysql1
   services:
       - mariadb:10.1
   script:
