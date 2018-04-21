@@ -4,70 +4,84 @@ stages:
   - postgresql
   - mysql
 before_script:
-  - carton install --deployment; cat ~/.cpanm/latest-build/build.log
   - rm -f *db
   - make podcheck
 sqlite1:
   stage: sqlite
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
     paths:
-      - local
+      - local/
   script:
+    - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite1.conf make test
+  when: always
 sqlite2:
   stage: sqlite
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
+    policy: pull
     paths:
-      - local
+      - local/
   script:
+    - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite2.conf make test
+  when: always
 sqlite3:
   stage: sqlite
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
+    policy: pull
     paths:
-      - local
+      - local/
   script:
+    - carton install --deployment --without=postgresql --without=mysql
     - MOJO_CONFIG=t/sqlite3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/sqlite3.conf make test
+  when: always
 postgresql1:
   stage: postgresql
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
     paths:
-      - local
+      - local/
   script:
+    - carton install --deployment --without=sqlite --without=mysql
     - service postgresql restart
     - sleep 10
     - service postgresql status
     - MOJO_CONFIG=t/postgresql1.conf make test
+  when: always
 postgresql2:
   stage: postgresql
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
+    policy: pull
     paths:
-      - local
+      - local/
   script:
+    - carton install --deployment --without=sqlite --without=mysql
     - service postgresql restart
     - sleep 10
     - service postgresql status
     - MOJO_CONFIG=t/postgresql2.conf make test
+  when: always
 postgresql3:
   stage: postgresql
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
+    policy: pull
     paths:
-      - local
+      - local/
   script:
+    - carton install --deployment --without=sqlite --without=mysql
     - service postgresql restart
     - sleep 10
     - service postgresql status
@@ -75,40 +89,48 @@ postgresql3:
     - MOJO_CONFIG=t/postgresql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/postgresql3.conf make test
+  when: always
 mysql1:
   stage: mysql
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
     paths:
-      - local
+      - local/
   script:
-    - service mysql restart
+    - carton install --deployment --without=sqlite --without=postgresql
+    - service postgresql restart
     - sleep 10
-    - service mysql status
-    - mysql -u root < t/test_mysql.sql
-    - MOJO_CONFIG=t/mysql1.conf make test
+    - service postgresql status
+    - postgresql -u root < t/test_mysql.sql
+    - MOJO_CONFIG=t/postgresql1.conf make test
+  when: always
 mysql2:
   stage: mysql
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
+    policy: pull
     paths:
-      - local
+      - local/
   script:
+    - carton install --deployment --without=sqlite --without=postgresql
     - service mysql restart
     - sleep 10
     - service mysql status
     - mysql -u root < t/test_mysql.sql
     - MOJO_CONFIG=t/mysql2.conf make test
+  when: always
 mysql3:
   stage: mysql
   cache:
-    key: "$CI_BUILD_REF_NAME"
+    key: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     untracked: true
+    policy: pull
     paths:
-      - local
+      - local/
   script:
+    - carton install --deployment --without=sqlite --without=postgresql
     - service mysql restart
     - sleep 10
     - service mysql status
@@ -116,3 +138,4 @@ mysql3:
     - MOJO_CONFIG=t/mysql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/mysql3.conf make test
+  when: always

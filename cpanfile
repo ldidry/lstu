@@ -1,8 +1,5 @@
 requires 'inc::Module::Install::DSL';
 requires 'Mojolicious', '>= 7.33';
-requires 'ORLite';
-requires 'Mojo::mysql';
-requires 'Mojo::Pg';
 requires 'Data::Validate::URI';
 requires 'Net::Domain::TLD', '>= 1.74';
 requires 'Mojolicious::Plugin::I18N';
@@ -23,3 +20,12 @@ requires 'Apache::Htpasswd';
 requires 'Image::PNG::QRCode';
 requires 'CHI';
 requires 'Data::Serializer';
+feature 'sqlite', 'SQLite support' => sub {
+    requires 'ORLite';
+};
+feature 'postgresql', 'PostgreSQL support' => sub {
+    requires 'Mojo::Pg';
+};
+feature 'mysql', 'MySQL support' => sub {
+    requires 'Mojo::mysql';
+};
