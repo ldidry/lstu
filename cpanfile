@@ -1,3 +1,4 @@
+requires 'inc::Module::Install::DSL';
 requires 'Mojolicious', '>= 7.33';
 requires 'ORLite';
 requires 'Mojo::mysql';
