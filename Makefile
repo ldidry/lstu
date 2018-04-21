@@ -27,7 +27,7 @@ stats-locales:
 podcheck:
 	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm
 
-test: podcheck
+test:
 	$(CARTON) $(REAL_LSTU) test
 
 test-sqlite:
