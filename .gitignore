@@ -1,4 +1,5 @@
 local/*
+cover_db/*
 .tx/*
 *.db
 *.db-shm
