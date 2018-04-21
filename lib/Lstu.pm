@@ -5,7 +5,6 @@ use Mojo::JSON;
 use Net::LDAP;
 use Apache::Htpasswd;
 use Lstu::DB::URL;
-use CHI;
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
 
@@ -55,24 +54,26 @@ sub startup {
     eval qq(use lib "$lib");
     $self->plugin('I18N');
 
-    # Cache
-    my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
-    $self->{urls_cache} = CHI->new(
-        driver        => 'Memory',
-        global        => 1,
-        is_size_aware => 1,
-        max_size      => $cache_max_size,
-        expires_in    => '1 day'
-    );
-
     # Debug
     $self->plugin('DebugDumperHelper');
 
     # Piwik
     $self->plugin('Piwik');
 
-    # Cache
+    # Assets Cache headers
     $self->plugin('StaticCache' => { even_in_dev => 1, max_age => 2592000 });
+
+    # URL cache
+    my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
+    $self->plugin(CHI => {
+        lstu_urls_cache => {
+            driver        => 'Memory',
+            global        => 1,
+            is_size_aware => 1,
+            max_size      => $cache_max_size,
+            expires_in    => '1 day'
+        }
+    });
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');

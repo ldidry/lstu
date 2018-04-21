@@ -10,6 +10,7 @@ requires 'Mojolicious::Plugin::DebugDumperHelper';
 requires 'Mojolicious::Plugin::Piwik';
 requires 'Mojolicious::Plugin::Authentication';
 requires 'Mojolicious::Plugin::StaticCache';
+requires 'Mojolicious::Plugin::CHI';
 requires 'Minion';
 requires 'Minion::Backend::SQLite';
 requires 'Locale::Maketext';
