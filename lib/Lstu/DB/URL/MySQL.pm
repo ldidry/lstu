@@ -42,12 +42,14 @@ sub delete {
 
     $c->app->mysql->db->query('DELETE FROM lstu WHERE short = ?', $c->short);
     my $h = $c->app->mysql->db->query('SELECT * FROM lstu WHERE short = ?', $c->short)->hashes;
-    $c->app->debug($h->size);
     if ($h->size) {
         $c = Lstu::DB::URL->new(app => $c->app);
+        # We found the URL, it hasn't been deleted
+        return 0;
+    } else {
+        # We didn't found the URL, it has been deleted
+        return 1;
     }
-
-    return $h->size;
 }
 
 sub exist {
