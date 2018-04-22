@@ -74,7 +74,7 @@ sub _pg {
     my $pgdb  = $c->config('pgdb');
     my $port  = (defined $pgdb->{port}) ? $pgdb->{port}: 5432;
     my $addr  = $c->pg_url({
-        host => $pgdb->{host}, port => $port, database => $pgdb->{database}, user => $pgdb->{user}, pwd => $pgdb->{user}
+        host => $pgdb->{host}, port => $port, database => $pgdb->{database}, user => $pgdb->{user}, pwd => $pgdb->{pwd}
     });
     state $pg = Mojo::Pg->new($addr);
     $pg->max_connections($pgdb->{max_connections}) if defined $pgdb->{max_connections};
@@ -87,7 +87,7 @@ sub _mysql {
     my $mysqldb  = $c->config('mysqldb');
     my $port  = (defined $mysqldb->{port}) ? $mysqldb->{port}: 3306;
     my $addr  = $c->pg_url({
-        host => $mysqldb->{host}, port => $port, database => $mysqldb->{database}, user => $mysqldb->{user}, pwd => $mysqldb->{user}
+        host => $mysqldb->{host}, port => $port, database => $mysqldb->{database}, user => $mysqldb->{user}, pwd => $mysqldb->{pwd}
     });
     $addr =~ s/postgresql/mysql/;
     state $mysql = Mojo::mysql->new($addr);

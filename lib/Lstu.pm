@@ -186,7 +186,7 @@ sub startup {
             my $pgdb  = $config->{minion}->{pgdb};
             my $port  = (defined $pgdb->{port}) ? $pgdb->{port}: 5432;
             my $addr  = $self->pg_url({
-                host => $pgdb->{host}, port => $port, database => $pgdb->{database}, user => $pgdb->{user}, pwd => $pgdb->{user}
+                host => $pgdb->{host}, port => $port, database => $pgdb->{database}, user => $pgdb->{user}, pwd => $pgdb->{pwd}
             });
 
             $self->plugin('Minion' => { Pg => $addr });
@@ -194,7 +194,7 @@ sub startup {
             my $mysqldb = $config->{minion}->{mysqldb};
             my $port    = (defined $mysqldb->{port}) ? $mysqldb->{port}: 3306;
             my $addr    = $self->pg_url({
-                host => $mysqldb->{host}, port => $port, database => $mysqldb->{database}, user => $mysqldb->{user}, pwd => $mysqldb->{user}
+                host => $mysqldb->{host}, port => $port, database => $mysqldb->{database}, user => $mysqldb->{user}, pwd => $mysqldb->{pwd}
             });
 
             $addr =~ s/postgresql/mysql/;

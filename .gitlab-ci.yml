@@ -7,12 +7,12 @@ stages:
 before_script:
   - rm -f *db
 variables:
-  POSTGRES_DB: lstu
+  POSTGRES_DB: lstu_db
   POSTGRES_USER: lstu
-  POSTGRES_PASSWORD: lstu
-  MYSQL_DATABASE: lstu
+  POSTGRES_PASSWORD: lstu_pwd
+  MYSQL_DATABASE: lstu_db
   MYSQL_USER: lstu
-  MYSQL_PASSWORD: lstu
+  MYSQL_PASSWORD: lstu_pwd
   MYSQL_ROOT_PASSWORD: root
 
 ### Jobs templates
