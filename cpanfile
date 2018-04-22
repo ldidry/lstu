@@ -9,7 +9,7 @@ requires 'Mojolicious::Plugin::Authentication';
 requires 'Mojolicious::Plugin::StaticCache';
 requires 'Mojolicious::Plugin::CHI';
 requires 'Minion';
-requires 'Minion::Backend::SQLite';
+requires 'Minion::Backend::SQLite', '>= 4.001';
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';
 requires 'Net::Abuse::Utils::Spamhaus';
@@ -25,7 +25,7 @@ feature 'test' => sub {
     requires 'Devel::Cover';
 };
 feature 'sqlite', 'SQLite support' => sub {
-    requires 'Mojo::SQLite';
+    requires 'Mojo::SQLite', '>= 3.000';
 };
 feature 'postgresql', 'PostgreSQL support' => sub {
     requires 'Mojo::Pg';

@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.12-1 2018-04-22
+	- Force Mojo::SQLite version
+
 0.12 2018-04-22
 	- Improve LDAP User Authentication Support (beware of configuration changes!) <Ira W.  Snyder>
 	- Allow users to configure maximum number of database connections <Ira W.  Snyder>
