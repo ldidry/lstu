@@ -1,6 +1,6 @@
 Revision history for Perl application Lstu
 
-0.13 ????-??-??
+0.13 2018-04-22
 	- Gzip static assets with Mojolicious::Plugin::GzipStatic (increase page load speed)
 	- Other page load speed improvements
 
