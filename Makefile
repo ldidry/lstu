@@ -6,12 +6,8 @@ REAL_LSTU=script/application
 LSTU=script/lstu
 
 minify:
-	@echo "Minification of fontelico.css"
-	@cd ./themes/default/public/css/ && minify fontelico.css > fontelico.min.css
-	@echo "Minification of lstu.css"
-	@cd ./themes/milligram/public/css/ && minify lstu.css > lstu.min.css
-	@echo "Concatenation of lstu.min.css and milligram.min.css"
-	@cd ./themes/milligram/public/css/ && cat milligram.min.css lstu.min.css > milli-lstu.min.css
+	@echo "CSS concatenation"
+	@cd ./themes/milligram/public/css/ && cat milligram.min.css lstu.css ../../../default/public/css/fontelico.css | csso > milli-lstu.min.css
 
 locales:
 	$(XGETTEXT) $(EXTRACTDIR) -o $(POT) 2>/dev/null
