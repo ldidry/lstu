@@ -132,6 +132,7 @@ postgresql3:
   <<: *pg_definition
   script:
     - carton install --deployment --without=sqlite --without=mysql
+    - export PGPASSWORD=lstu; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu
     - MOJO_CONFIG=t/postgresql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/postgresql3.conf make test
@@ -156,6 +157,7 @@ mysql3:
   <<: *mysql_definition
   script:
     - carton install --deployment --without=sqlite --without=postgresql
+    - "CREATE DATABASE lstu_minion; GRANT ALL ON lstu_minion.* TO lstu@'%'; FLUSH PRIVILEGES;" |mysql -h mariadb -u root -proot
     - MOJO_CONFIG=t/mysql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/mysql3.conf make test

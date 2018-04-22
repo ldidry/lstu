@@ -179,8 +179,28 @@ sub startup {
     }
 
     # Minion
-    if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {
-        $self->plugin('Minion' => { SQLite => 'sqlite:'.$config->{minion}->{db_path} });
+    if ($config->{minion}->{enabled}) {
+        if ($config->{dbtype} eq 'sqlite') {
+            $self->plugin('Minion' => { SQLite => 'sqlite:'.$config->{minion}->{db_path} }) if $config->{minion}->{db_path};
+        } elsif ($config->{dbtype} eq 'postgresql') {
+            my $pgdb  = $config->{minion}->{pgdb};
+            my $port  = (defined $pgdb->{port}) ? $pgdb->{port}: 5432;
+            my $addr  = $self->pg_url({
+                host => $pgdb->{host}, port => $port, database => $pgdb->{database}, user => $pgdb->{user}, pwd => $pgdb->{user}
+            });
+
+            $self->plugin('Minion' => { Pg => $addr });
+        } elsif ($config->{dbtype} eq 'mysql') {
+            my $mysqldb = $config->{minion}->{mysqldb};
+            my $port    = (defined $mysqldb->{port}) ? $mysqldb->{port}: 3306;
+            my $addr    = $self->pg_url({
+                host => $mysqldb->{host}, port => $port, database => $mysqldb->{database}, user => $mysqldb->{user}, pwd => $mysqldb->{user}
+            });
+
+            $addr =~ s/postgresql/mysql/;
+
+            $self->plugin('Minion' => { mysql => $addr });
+        }
     }
 
     # Secrets
@@ -215,7 +235,7 @@ sub startup {
     });
 
     # Minion
-    if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {
+    if ($config->{minion}->{enabled}) {
         $self->app->minion->add_task(
             increase_counter => sub {
                 my $job   = shift;

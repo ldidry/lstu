@@ -9,6 +9,12 @@ use Lstu::DB::Session;
 sub register {
     my ($self, $app) = @_;
 
+    # PgURL helper
+    if ($app->config('dbtype') eq 'postgresql' || $app->config('dbtype') eq 'mysql') {
+        $app->plugin('PgURLHelper');
+    }
+
+    # DB migrations
     if ($app->config('dbtype') eq 'sqlite') {
         require Mojo::SQLite;
         $app->helper(sqlite => \&_sqlite);
@@ -46,6 +52,7 @@ sub register {
         }
     }
 
+    # Helpers
     $app->helper(ip => \&_ip);
     $app->helper(provisioning => \&_provisioning);
     $app->helper(prefix => \&_prefix);
@@ -64,28 +71,27 @@ sub _sqlite {
 sub _pg {
     my $c     = shift;
 
-    my $addr  = 'postgresql://';
-    $addr    .= $c->config->{pgdb}->{host};
-    $addr    .= ':'.$c->config->{pgdb}->{port} if defined $c->config->{pgdb}->{port};
-    $addr    .= '/'.$c->config->{pgdb}->{database};
+    my $pgdb  = $c->config('pgdb');
+    my $port  = (defined $pgdb->{port}) ? $pgdb->{port}: 5432;
+    my $addr  = $c->pg_url({
+        host => $pgdb->{host}, port => $port, database => $pgdb->{database}, user => $pgdb->{user}, pwd => $pgdb->{user}
+    });
     state $pg = Mojo::Pg->new($addr);
-    $pg->password($c->config->{pgdb}->{pwd});
-    $pg->username($c->config->{pgdb}->{user});
-    $pg->max_connections($c->config->{pgdb}->{max_connections}) if defined $c->config->{pgdb}->{max_connections};
+    $pg->max_connections($pgdb->{max_connections}) if defined $pgdb->{max_connections};
     return $pg;
 }
 
 sub _mysql {
     my $c     = shift;
 
-    my $addr  = 'mysql://';
-    $addr    .= $c->config->{mysqldb}->{host};
-    $addr    .= ':'.$c->config->{mysqldb}->{port} if defined $c->config->{mysqldb}->{port};
-    $addr    .= '/'.$c->config->{mysqldb}->{database};
+    my $mysqldb  = $c->config('mysqldb');
+    my $port  = (defined $mysqldb->{port}) ? $mysqldb->{port}: 3306;
+    my $addr  = $c->pg_url({
+        host => $mysqldb->{host}, port => $port, database => $mysqldb->{database}, user => $mysqldb->{user}, pwd => $mysqldb->{user}
+    });
+    $addr =~ s/postgresql/mysql/;
     state $mysql = Mojo::mysql->new($addr);
-    $mysql->password($c->config->{mysqldb}->{pwd});
-    $mysql->username($c->config->{mysqldb}->{user});
-    $mysql->max_connections($c->config->{mysqldb}->{max_connections}) if defined $c->config->{mysqldb}->{max_connections};
+    $mysql->max_connections($mysqldb->{max_connections}) if defined $mysqldb->{max_connections};
     return $mysql;
 }
 
