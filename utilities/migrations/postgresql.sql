@@ -18,3 +18,7 @@ CREATE TABLE IF NOT EXISTS ban (
 DROP TABLE ban;
 DROP TABLE sessions;
 DROP TABLE lstu;
+-- 2 up
+CREATE INDEX IF NOT EXISTS empty_short_idx ON lstu (short) WHERE url IS NULL;
+-- 2 down
+DROP INDEX empty_short_idx;

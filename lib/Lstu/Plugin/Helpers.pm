@@ -9,16 +9,29 @@ use Lstu::DB::Session;
 sub register {
     my ($self, $app) = @_;
 
-    if ($app->config('dbtype') eq 'postgresql') {
+    if ($app->config('dbtype') eq 'sqlite') {
+        require Mojo::SQLite;
+        $app->helper(sqlite => \&_sqlite);
+
+        # Database migration
+        # Have to create $sql before using its migrations attribute, otherwise, it won't work
+        my $sql        = Mojo::SQLite->new('sqlite:'.$app->config('db_path'));
+        my $migrations = $sql->migrations;
+        if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
+            $migrations->from_file('utilities/migrations/sqlite.sql')->migrate(0)->migrate(1);
+        } else {
+            $migrations->from_file('utilities/migrations/sqlite.sql')->migrate(1);
+        }
+    } elsif ($app->config('dbtype') eq 'postgresql') {
         require Mojo::Pg;
         $app->helper(pg => \&_pg);
 
         # Database migration
         my $migrations = Mojo::Pg::Migrations->new(pg => $app->pg);
         if ($app->mode eq 'development') {
-            $migrations->from_file('utilities/migrations.sql')->migrate(0)->migrate(1);
+            $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(0)->migrate(2);
         } else {
-            $migrations->from_file('utilities/migrations.sql')->migrate(1);
+            $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(2);
         }
     } elsif ($app->config('dbtype') eq 'mysql') {
         require Mojo::mysql;
@@ -27,9 +40,9 @@ sub register {
         # Database migration
         my $migrations = Mojo::mysql::Migrations->new(mysql => $app->mysql);
         if ($app->mode eq 'development') {
-            $migrations->from_file('utilities/migrations_mysql.sql')->migrate(0)->migrate(1);
+            $migrations->from_file('utilities/migrations/mysql.sql')->migrate(0)->migrate(1);
         } else {
-            $migrations->from_file('utilities/migrations_mysql.sql')->migrate(1);
+            $migrations->from_file('utilities/migrations/mysql.sql')->migrate(1);
         }
     }
 
@@ -39,6 +52,13 @@ sub register {
     $app->helper(shortener => \&_shortener);
     $app->helper(is_spam => \&_is_spam);
     $app->helper(cleaning => \&_cleaning);
+}
+
+sub _sqlite {
+    my $c = shift;
+
+    state $sqlite = Mojo::SQLite->new('sqlite:'.$c->app->config('db_path'));
+    return $sqlite;
 }
 
 sub _pg {
