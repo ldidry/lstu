@@ -1,4 +1,6 @@
 % # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+% my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+% $year += 1900;
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,9 +26,9 @@
             </div>
             <%= link_to url_for('/') => (class => 'link_nocol') => begin %><h1 class="hennypenny">Let's Shorten That Url</h1><% end %>
             <p>
-                <small>&copy; 2013 — 2017 <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> —
+                <small>&copy; 2013 — <%= $year %> <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> —
                     <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> —
-                    <%= link_to l('About') => 'https://framagit.org/luc/lstu#tab-readme' %> —
+                    <%= link_to l('About') => 'https://framagit.org/luc/lstu/blob/master/README.md' %> —
                     <%= link_to 'API' => url_for('api') %> —
             % if (defined(config('ldap')) || defined(config('htpasswd'))) {
                 % if (is_user_authenticated()) {
