@@ -2,7 +2,7 @@
     font-family: 'Henny_Penny';
     font-style: normal;
     font-weight: 400;
-    src: local('Henny Penny'), local('HennyPenny-Regular'), url('../font/hennypenny.ttf') format('truetype');
+    src: local('Henny Penny'), local('HennyPenny-Regular'), url('../font/hennypenny.woff2') format('woff2');
 }
 body {
     padding-top: 40px;

@@ -45,8 +45,7 @@
             </p>
             <%= content %>
         </div>
-        %= stylesheet '/css/milligram.min.css'
+        %= stylesheet '/css/milli-lstu.min.css'
         %= stylesheet '/css/fontelico.min.css'
-        %= stylesheet '/css/lstu.min.css'
     </body>
 </html>
