@@ -24,7 +24,7 @@ msgstr ""
 msgid "A page with a table containing the same informations that the JSON response"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:57
+#: themes/default/templates/layouts/default.html.ep:59
 msgid "About"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr ""
 msgid "Bad password"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:69
+#: themes/default/templates/layouts/default.html.ep:71
 msgid "Browser extensions"
 msgstr ""
 
@@ -72,11 +72,11 @@ msgstr ""
 msgid "Go!"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:36
+#: themes/default/templates/layouts/default.html.ep:38
 msgid "Henny Penny"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:36
+#: themes/default/templates/layouts/default.html.ep:38
 msgid "HennyPenny-Regular"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr ""
 msgid "JSON: success"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:56
+#: themes/default/templates/layouts/default.html.ep:58
 msgid "License:"
 msgstr ""
 
@@ -129,7 +129,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:62
+#: themes/default/templates/layouts/default.html.ep:64
 msgid "Logout"
 msgstr ""
 
@@ -154,7 +154,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: lib/Lstu.pm:292 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:295 themes/default/templates/api.html.ep:23
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
@@ -186,11 +186,11 @@ msgstr ""
 msgid "Should always be successful"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:64 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
+#: themes/default/templates/layouts/default.html.ep:66 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:61 themes/default/templates/layouts/default.html.ep:67 themes/default/templates/stats.html.ep:4
+#: themes/default/templates/layouts/default.html.ep:63 themes/default/templates/layouts/default.html.ep:69 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
 msgstr ""
 
@@ -249,11 +249,11 @@ msgstr ""
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr ""
 
-#: lib/Lstu.pm:283 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:126 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:286 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:126 themes/default/templates/api.html.ep:22
 msgid "You have been successfully logged in."
 msgstr ""
 
-#: lib/Lstu.pm:322 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:134 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:325 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:134 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr ""
 

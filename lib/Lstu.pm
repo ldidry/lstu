@@ -63,6 +63,9 @@ sub startup {
     # Assets Cache headers
     $self->plugin('StaticCache' => { even_in_dev => 1, max_age => 2592000 });
 
+    # Static assets gzipping
+    $self->plugin('GzipStatic');
+
     # URL cache
     my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
     $self->plugin(CHI => {

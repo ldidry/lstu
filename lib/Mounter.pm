@@ -38,6 +38,9 @@ sub startup {
     # Cache
     $self->plugin('StaticCache' => { even_in_dev => 1, max_age => 2592000 });
 
+    # Static assets gzipping
+    $self->plugin('GzipStatic');
+
     $self->plugin('Mount' => {$config->{prefix} => File::Spec->catfile($Bin, '..', 'script', 'application')});
 }
 
