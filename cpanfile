@@ -10,7 +10,6 @@ requires 'Mojolicious::Plugin::StaticCache';
 requires 'Mojolicious::Plugin::CHI';
 requires 'Mojolicious::Plugin::GzipStatic';
 requires 'Minion';
-requires 'Minion::Backend::SQLite', '>= 4.001';
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';
 requires 'Net::Abuse::Utils::Spamhaus';
@@ -27,10 +26,14 @@ feature 'test' => sub {
 };
 feature 'sqlite', 'SQLite support' => sub {
     requires 'Mojo::SQLite', '>= 3.000';
+    requires 'Minion::Backend::SQLite', '>= 4.001';
 };
 feature 'postgresql', 'PostgreSQL support' => sub {
     requires 'Mojo::Pg';
+    requires 'Mojolicious::Plugin::PgURLHelper';
 };
 feature 'mysql', 'MySQL support' => sub {
     requires 'Mojo::mysql';
+    requires 'Minion::Backend::mysql';
+    requires 'Mojolicious::Plugin::PgURLHelper';
 };

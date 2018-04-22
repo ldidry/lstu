@@ -86,8 +86,8 @@
     #    host     => 'localhost',
     #    # optional, default is 5432
     #    #port     => 5432,
-    #    #user     => 'DBUSER',
-    #    #pwd      => 'DBPASSWORD',
+    #    user     => 'DBUSER',
+    #    pwd      => 'DBPASSWORD',
     #    # optional, default is 1
     #    #max_connections => 1,
     #},
@@ -100,8 +100,8 @@
     #    host     => 'localhost',
     #    # optional, default is 3306
     #    #port     => 3306,
-    #    #user     => 'DBUSER',
-    #    #pwd      => 'DBPASSWORD',
+    #    user     => 'DBUSER',
+    #    pwd      => 'DBPASSWORD',
     #    # optional, default is 5 (set to 0 to disable persistent connections)
     #    #max_connections => 5,
     #},
@@ -133,9 +133,38 @@
     # use Minion instead of directly increase counters
     # need to launch a minion worker service if enabled
     # optional, Minion is disabled by default
+    # It will use the same DB type as Lstu: sqlite if you choose sqlite for `dbtype`,
+    # postgresql for postgresql, etc.
     #minion => {
     #    enabled => 0,
-    #    db_path => 'minion.db' # you can define it relative to lstu directory or set an absolute path
+    #    # SQLite ONLY - only used if if you choose sqlite as DB type,
+    #    # define the path to the minion database
+    #    # you can define it relative to lstu directory or set an absolute path
+    #    # remember that it has to be in a directory writable by Lutim user
+    #    # optional, default is minion.db
+    #    db_path => 'minion.db',
+    #    # PostgreSQL ONLY - only used if you choose postgresql as DB type
+    #    # these are the credentials to access the Minion's PostgreSQL database
+    #    # mandatory if you choosed postgresql as DB type, no default
+    #    pgdb => {
+    #        database => 'lstu_minion',
+    #        host     => 'localhost',
+    #        # optional, default is 5432
+    #        #port     => 5432,
+    #        user     => 'DBUSER',
+    #        pwd      => 'DBPASSWORD'
+    #    },
+    #    # MySQL ONLY - only used if you choose mysql as DB type
+    #    # these are the credentials to access the Minion's MySQL database
+    #    # mandatory if you choosed mysql as DB type, no default
+    #    mysqldb => {
+    #        database => 'lstu_minion',
+    #        host     => 'localhost',
+    #        # optional, default is 3306
+    #        #port     => 3306,
+    #        user     => 'DBUSER',
+    #        pwd      => 'DBPASSWORD',
+    #    },
     #},
 
     # set `ldap` if you want that only authenticated users can shorten URLs

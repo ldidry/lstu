@@ -961,6 +961,16 @@ DISTRIBUTIONS
       Sys::Hostname 0
       Time::HiRes 0
       perl 5.010001
+  Minion-Backend-mysql-0.13
+    pathname: P/PR/PREACTION/Minion-Backend-mysql-0.13.tar.gz
+    provides:
+      Minion::Backend::mysql 0.13
+    requirements:
+      ExtUtils::MakeMaker 0
+      Minion 8
+      Mojo::mysql 1.04
+      Mojolicious 0
+      perl 5.010
   Module-Build-0.4224
     pathname: L/LE/LEONT/Module-Build-0.4224.tar.gz
     provides:
@@ -1363,6 +1373,13 @@ DISTRIBUTIONS
       Mojolicious 5
       Test::More 0
       perl 5.010001
+  Mojolicious-Plugin-PgURLHelper-0.03
+    pathname: L/LD/LDIDRY/Mojolicious-Plugin-PgURLHelper-0.03.tar.gz
+    provides:
+      Mojolicious::Plugin::PgURLHelper 0.03
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mojolicious 7.23
   Mojolicious-Plugin-Piwik-0.20
     pathname: A/AK/AKRON/Mojolicious-Plugin-Piwik-0.20.tar.gz
     provides:
