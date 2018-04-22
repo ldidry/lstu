@@ -25,7 +25,7 @@ feature 'test' => sub {
     requires 'Devel::Cover';
 };
 feature 'sqlite', 'SQLite support' => sub {
-    requires 'ORLite';
+    requires 'Mojo::SQLite';
 };
 feature 'postgresql', 'PostgreSQL support' => sub {
     requires 'Mojo::Pg';

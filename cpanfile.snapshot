@@ -98,10 +98,10 @@ DISTRIBUTIONS
       Test::Most 0
       Test::NoWarnings 0
       Test::Warn 0
-  Capture-Tiny-0.46
-    pathname: D/DA/DAGOLDEN/Capture-Tiny-0.46.tar.gz
+  Capture-Tiny-0.48
+    pathname: D/DA/DAGOLDEN/Capture-Tiny-0.48.tar.gz
     provides:
-      Capture::Tiny 0.46
+      Capture::Tiny 0.48
     requirements:
       Carp 0
       Exporter 0
@@ -824,7 +824,6 @@ DISTRIBUTIONS
       JSON::MaybeXS 1.004000
     requirements:
       Carp 0
-      Cpanel::JSON::XS 2.3310
       ExtUtils::MakeMaker 0
       JSON::PP 2.27300
       Scalar::Util 0
@@ -949,10 +948,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 7.56
       perl 5.010001
-  Minion-Backend-SQLite-4.000
-    pathname: D/DB/DBOOK/Minion-Backend-SQLite-4.000.tar.gz
+  Minion-Backend-SQLite-4.001
+    pathname: D/DB/DBOOK/Minion-Backend-SQLite-4.001.tar.gz
     provides:
-      Minion::Backend::SQLite 4.000
+      Minion::Backend::SQLite 4.001
     requirements:
       List::Util 0
       Minion 9.0
@@ -1316,10 +1315,10 @@ DISTRIBUTIONS
       Pod::Simple 3.09
       Time::Local 1.2
       perl 5.010001
-  Mojolicious-Plugin-Authentication-1.32
-    pathname: J/JJ/JJATRIA/Mojolicious-Plugin-Authentication-1.32.tar.gz
+  Mojolicious-Plugin-Authentication-1.33
+    pathname: J/JJ/JJATRIA/Mojolicious-Plugin-Authentication-1.33.tar.gz
     provides:
-      Mojolicious::Plugin::Authentication 1.32
+      Mojolicious::Plugin::Authentication 1.33
     requirements:
       ExtUtils::MakeMaker 0
       Mojo::Base 0
@@ -1976,22 +1975,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  ORLite-1.98
-    pathname: A/AD/ADAMK/ORLite-1.98.tar.gz
-    provides:
-      ORLite 1.98
-    requirements:
-      DBD::SQLite 1.27
-      DBI 1.607
-      ExtUtils::MakeMaker 6.59
-      File::Path 2.08
-      File::Remove 1.40
-      File::Spec 0.80
-      File::Temp 0.20
-      Params::Util 1.00
-      Test::More 0.47
-      Test::Script 1.06
-      perl 5.006
   Package-DeprecationManager-0.17
     pathname: D/DR/DROLSKY/Package-DeprecationManager-0.17.tar.gz
     provides:
@@ -2047,15 +2030,6 @@ DISTRIBUTIONS
       Scalar::Util 1.18
       Test::More 0.42
       perl 5.00503
-  Probe-Perl-0.03
-    pathname: K/KW/KWILLIAMS/Probe-Perl-0.03.tar.gz
-    provides:
-      Probe::Perl 0.03
-    requirements:
-      Config 0
-      ExtUtils::MakeMaker 6.30
-      File::Spec 0
-      strict 0
   Role-Tiny-2.000006
     pathname: H/HA/HAARG/Role-Tiny-2.000006.tar.gz
     provides:
@@ -2335,18 +2309,6 @@ DISTRIBUTIONS
       File::Spec::Functions 0
       File::Temp 0.17
       perl 5.008
-  Test-Script-1.23
-    pathname: P/PL/PLICEASE/Test-Script-1.23.tar.gz
-    provides:
-      Test::Script 1.23
-    requirements:
-      Capture::Tiny 0
-      ExtUtils::MakeMaker 0
-      File::Spec 0.80
-      IO::Handle 0
-      Probe::Perl 0.01
-      Test2::API 1.302015
-      perl 5.008001
   Test-Simple-1.302136
     pathname: E/EX/EXODIST/Test-Simple-1.302136.tar.gz
     provides:
@@ -2758,6 +2720,7 @@ DISTRIBUTIONS
     requirements:
       Authen::SASL 2.00
       Convert::ASN1 0.2
+      Digest::HMAC_MD5 0
       Digest::MD5 0
       ExtUtils::MakeMaker 6.42
       File::Basename 0

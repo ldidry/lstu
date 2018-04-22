@@ -1,9 +1,8 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu::DB::Session::SQLite;
 use Mojo::Base 'Lstu::DB::Session';
-use Lstu::DB::SQLite;
 
-has 'record';
+has 'record' => 0;
 
 sub new {
     my $c = shift;
@@ -18,32 +17,26 @@ sub new {
 sub delete {
     my $c = shift;
 
-    if (Lstu::DB::SQLite->begin) {
-        $c->record->delete;
-        $c->record(undef);
-        Lstu::DB::SQLite->commit;
+    $c->app->sqlite->db->query('DELETE FROM sessions WHERE token = ?', $c->token);
+    my $h = $c->app->sqlite->db->query('SELECT * FROM sessions WHERE token = ?', $c->token)->hashes;
+    if ($h->size) {
+        # We found the session, it hasn't been deleted
+        return 0;
+    } else {
+        $c = Lstu::DB::Session->new(app => $c->app);
+        # We didn't found the session, it has been deleted
+        return 1;
     }
-
-    return $c;
 }
 
 sub write {
     my $c     = shift;
 
-    if (Lstu::DB::SQLite->begin) {
-        if (defined $c->record) {
-            $c->record->update(
-                token => $c->token,
-                until => $c->until,
-            );
-        } else {
-            my $record = Lstu::DB::SQLite::Sessions->create(
-                token => $c->token,
-                until => $c->until,
-            );
-            $c->record($record);
-        }
-        Lstu::DB::SQLite->commit;
+    if ($c->record) {
+        $c->app->sqlite->db->query('UPDATE sessions SET until = ? WHERE token = ?', $c->until, $c->token);
+    } else {
+        $c->app->sqlite->db->query('INSERT INTO sessions (token, until) VALUES (?, ?)', $c->token, $c->until);
+        $c->record(1);
     }
 
     return $c;
@@ -52,24 +45,23 @@ sub write {
 sub clear {
     my $c = shift;
 
-    Lstu::DB::SQLite::Sessions->delete_where('until < ?', time);
+    $c->app->sqlite->db->query('DELETE FROM sessions WHERE until < ?', time);
 }
 
 sub delete_all {
     my $c = shift;
 
-    # Rotten syntax, but prevents "Static Lstu::DB::SQLite->delete has been deprecated"
-    Lstu::DB::SQLite::Sessions->delete_where('1 = 1');
+    $c->app->sqlite->db->query('DELETE FROM sessions');
 }
 
 sub _slurp {
     my $c = shift;
 
-    my @sessions = Lstu::DB::SQLite::Sessions->select('WHERE token = ?', $c->token);
-    if (scalar @sessions) {
-        $c->token($sessions[0]->token);
-        $c->until($sessions[0]->until);
-        $c->record($sessions[0]);
+    my $h = $c->app->sqlite->db->query('SELECT * FROM sessions WHERE token = ?', $c->token)->hashes;
+    if ($h->size) {
+        $c->token($h->first->{token});
+        $c->until($h->first->{until});
+        $c->record(1);
     }
 
     return $c;

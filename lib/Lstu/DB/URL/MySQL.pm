@@ -43,10 +43,10 @@ sub delete {
     $c->app->mysql->db->query('DELETE FROM lstu WHERE short = ?', $c->short);
     my $h = $c->app->mysql->db->query('SELECT * FROM lstu WHERE short = ?', $c->short)->hashes;
     if ($h->size) {
-        $c = Lstu::DB::URL->new(app => $c->app);
         # We found the URL, it hasn't been deleted
         return 0;
     } else {
+        $c = Lstu::DB::URL->new(app => $c->app);
         # We didn't found the URL, it has been deleted
         return 1;
     }
@@ -64,7 +64,7 @@ sub exist {
 sub choose_empty {
     my $c = shift;
 
-    my $h = $c->app->mysql->db->query('SELECT * FROM lstu WHERE url IS NULL LIMIT 1')->hashes;
+    my $h = $c->app->mysql->db->query('SELECT * FROM lstu WHERE url IS NULL')->hashes->shuffle;
 
     if ($h->size) {
         $c->short($h->first->{short});
@@ -93,8 +93,8 @@ sub get_a_lot {
     my $c = shift;
     my $u = shift;
 
-    my $p = join ",", (('?') x @{$u});
-    if ($p ne "") {
+    if (scalar @{$u}) {
+        my $p = join ",", (('?') x @{$u});
         return @{$c->app->mysql->db->query('SELECT * FROM lstu WHERE short IN ('.$p.') ORDER BY counter DESC', @{$u})->hashes->to_array};
     } else {
         return ();

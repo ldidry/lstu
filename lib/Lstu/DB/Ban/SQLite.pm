@@ -1,9 +1,8 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu::DB::Ban::SQLite;
 use Mojo::Base 'Lstu::DB::Ban';
-use Lstu::DB::SQLite;
 
-has 'record';
+has 'record' => 0;
 
 sub new {
     my $c = shift;
@@ -21,13 +20,12 @@ sub is_banned {
 
     return undef if $c->is_whitelisted;
 
-    my @banned = Lstu::DB::SQLite::Ban->select('WHERE ip = ? AND until > ? AND strike >= ?', $c->ip, time, $ban_min_strike);
+    my $h = $c->app->sqlite->db->query('SELECT * FROM ban WHERE ip = ? AND until > ? AND strike >= ?', $c->ip, time, $ban_min_strike)->hashes;
 
-    if (scalar @banned) {
-        $c->record($banned[0]);
-
-        $c->until($banned[0]->until);
-        $c->strike($banned[0]->strike);
+    if ($h->size) {
+        $c->until($h->first->{until});
+        $c->strike($h->first->{strike});
+        $c->record(1);
 
         return $c;
     } else {
@@ -41,22 +39,18 @@ sub increment_ban_delay {
 
     my $until = time + $penalty;
 
-    if (defined $c->record) {
-        $c->record->update(
-            strike => $c->strike + 1,
-            until  => $until
-        );
+    my $h = {
+        strike => 1
+    };
+    if ($c->record) {
+        $c->app->sqlite->db->query('UPDATE ban SET until = ?, strike = strike + 1 WHERE ip = ?', $until, $c->ip)->hashes->first;
+        $h = $c->app->sqlite->db->query('SELECT strike FROM ban WHERE ip = ?', $c->ip)->hashes->first;
     } else {
-        my $record = Lstu::DB::SQLite::Ban->create(
-            ip     => $c->ip,
-            strike => 1,
-            until  => $until
-        );
-
-        $c->record($record);
+        $c->app->sqlite->db->query('INSERT INTO ban (ip, until, strike) VALUES (?, ?, 1)', $c->ip, $until);
+        $c->record(1);
     }
 
-    $c->strike($c->strike + 1);
+    $c->strike($h->{strike});
     $c->until($until);
 
     return $c;
@@ -65,24 +59,23 @@ sub increment_ban_delay {
 sub clear {
     my $c = shift;
 
-    Lstu::DB::SQLite::Ban->delete_where('until < ?', time);
+    $c->app->sqlite->db->query('DELETE FROM ban WHERE until < ?', time);
 }
 
 sub delete_all {
     my $c = shift;
 
-    # Rotten syntax, but prevents "Static Lstu::DB::SQLite->delete has been deprecated"
-    Lstu::DB::SQLite::Ban->delete_where('1 = 1');
+    $c->app->sqlite->db->query('DELETE FROM ban');
 }
 
 sub _slurp {
     my $c = shift;
 
-    my @banned = Lstu::DB::SQLite::Ban->select('WHERE ip = ?', $c->ip);
-    if (scalar @banned) {
-        $c->until($banned[0]->until);
-        $c->strike($banned[0]->strike);
-        $c->record($banned[0]);
+    my $h = $c->app->sqlite->db->query('SELECT * FROM ban WHERE ip = ?', $c->ip)->hashes;
+    if ($h->size) {
+        $c->until($h->first->{until});
+        $c->strike($h->first->{strike});
+        $c->record(1);
     }
 
     return $c;
