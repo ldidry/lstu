@@ -7,9 +7,9 @@ LSTU=script/lstu
 
 minify:
 	@echo "Minification of fontelico.css"
-	@cd ./themes/default/public/css/ && minify fontelico.css
+	@cd ./themes/default/public/css/ && minify fontelico.css > fontelico.min.css
 	@echo "Minification of lstu.css"
-	@cd ./themes/milligram/public/css/ && minify lstu.css
+	@cd ./themes/milligram/public/css/ && minify lstu.css > lstu.min.css
 
 locales:
 	$(XGETTEXT) $(EXTRACTDIR) -o $(POT) 2>/dev/null
@@ -27,12 +27,17 @@ stats-locales:
 podcheck:
 	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm
 
-test: podcheck
-	$(CARTON) $(REAL_LSTU) test
+cover:
+	PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) cover --ignore_re '^local'
+
+test:
+	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) $(REAL_LSTU) test
 
 test-sqlite:
-	MOJO_CONFIG=t/sqlite1.conf $(CARTON) $(REAL_LSTU) test
-	MOJO_CONFIG=t/sqlite2.conf $(CARTON) $(REAL_LSTU) test
+	@rm -rf test1.db test1.db-journal cover_db/
+	@echo 'MOJO_CONFIG=t/sqlite1.conf'
+	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' MOJO_CONFIG=t/sqlite1.conf $(CARTON) $(REAL_LSTU) test
+	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) cover --ignore_re '^local'
 
 dev: minify
 	$(CARTON) morbo $(LSTU) --listen http://0.0.0.0:3000 --watch lib/ --watch script/ --watch themes/ --watch lstu.conf

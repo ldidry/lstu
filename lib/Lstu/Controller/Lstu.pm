@@ -287,16 +287,10 @@ sub get {
     my $c = shift;
     my $short = $c->param('short');
 
-    my ($url, $db_url);
-    if (defined $c->cache->{$short}) {
-        $url = $c->cache->{$short}->{url};
-    } else {
-        $db_url = Lstu::DB::URL->new(
-            app    => $c,
-            short  => $short
-        );
-        $url = $db_url->url;
-    }
+    my $url = $c->chi('lstu_urls_cache')->compute($short, undef, sub {
+        return Lstu::DB::URL->new(app => $c, short => $short)->url;
+    });
+
     if ($url) {
         $c->respond_to(
             json => { json => { success => Mojo::JSON->true, url => $url } },
@@ -308,20 +302,10 @@ sub get {
         );
         # Update counter
         $c->on(finish => sub {
-            $c->cache->{$short} = {
-                last_used => time,
-                url       => $url
-            };
-
             if ($c->config('minion')->{enabled} && $c->config('minion')->{db_path}) {
                 $c->app->minion->enqueue(increase_counter => [$short, $c->{url}]);
             } else {
-                $db_url = Lstu::DB::URL->new(
-                    app    => $c,
-                    short  => $short
-                ) if (defined $c->cache->{$short});
-
-                $db_url->increment_counter;
+                Lstu::DB::URL->new(app => $c, short => $short)->increment_counter;
 
                 my $piwik = $c->config('piwik');
                 if (defined($piwik) && $piwik->{idsite} && $piwik->{url}) {
@@ -335,7 +319,6 @@ sub get {
                 }
 
             }
-            $c->clear_cache;
         });
     } else {
         my $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);

@@ -30,6 +30,7 @@ sub startup {
             dbtype           => 'sqlite',
             max_redir        => 2,
             skip_spamhaus    => 0,
+            cache_max_size   => 2,
         }
     });
 
@@ -59,8 +60,23 @@ sub startup {
     # Piwik
     $self->plugin('Piwik');
 
-    # Cache
+    # Assets Cache headers
     $self->plugin('StaticCache' => { even_in_dev => 1, max_age => 2592000 });
+
+    # URL cache
+    my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
+    $self->plugin(CHI => {
+        lstu_urls_cache => {
+            driver        => 'SharedMem',
+            global        => 1,
+            is_size_aware => 1,
+            max_size      => $cache_max_size,
+            expires_in    => '1 day',
+            shmkey        => 1782340321,
+        }
+    });
+    # Clean cache at startup
+    $self->chi('lstu_urls_cache')->clear();
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');
@@ -82,34 +98,63 @@ sub startup {
 
                     if (defined($c->config('ldap'))) {
                         my $ldap = Net::LDAP->new($c->config->{ldap}->{uri});
-                        my $mesg = $ldap->bind($c->config->{ldap}->{bind_user}.$c->config->{ldap}->{bind_dn},
-                            password => $c->config->{ldap}->{bind_pwd}
-                        );
 
-                        $mesg->code && die $mesg->error;
-
-                        $mesg = $ldap->search(
-                            base   => $c->config->{ldap}->{user_tree},
-                            filter => "(&(uid=$username)".$c->config->{ldap}->{user_filter}.")"
-                        );
+                        my $mesg;
+                        if (defined($c->config->{ldap}->{bind_dn}) && defined($c->config->{ldap}->{bind_pwd})) {
+                            # connect to the ldap server using the bind credentials
+                            $mesg = $ldap->bind(
+                                $c->config->{ldap}->{bind_dn},
+                                password => $c->config->{ldap}->{bind_pwd}
+                            );
+                        } else {
+                            # anonymous bind
+                            $mesg = $ldap->bind
+                        }
 
                         if ($mesg->code) {
-                            $c->app->log->error($mesg->error);
+                            $c->app->log->info('[LDAP INFO] Authenticated bind failed - Login: '.$c->config->{ldap}->{bind_dn}) if defined($c->config->{ldap}->{bind_dn});
+                            $c->app->log->error('[LDAP ERROR] Error on bind: '.$mesg->error);
                             return undef;
                         }
 
+                        my $ldap_user_attr   = $c->config->{ldap}->{user_attr};
+                        my $ldap_user_filter = $c->config->{ldap}->{user_filter};
+
+                        # search the ldap database for the user who is trying to login
+                        $mesg = $ldap->search(
+                            base   => $c->config->{ldap}->{user_tree},
+                            filter => "(&($ldap_user_attr=$username)$ldap_user_filter)"
+                        );
+
+                        if ($mesg->code) {
+                            $c->app->log->error('[LDAP ERROR] Error on search: '.$mesg->error);
+                            return undef;
+                        }
+
+                        # check to make sure that the ldap search returned at least one entry
+                        my @entries = $mesg->entries;
+                        my $entry   = $entries[0];
+
+                        if (defined $entry) {
+                            $c->app->log->info("[LDAP INFO] Authentication failed - User $username filtered out, IP: ".$c->ip);
+                            return undef;
+                        }
+
+                        # retrieve the first user returned by the search
+                        $c->app->log->debug("[LDAP DEBUG] Found user dn: ".$entry->dn);
+
                         # Now we know that the user exists
-                        $mesg = $ldap->bind('uid='.$username.$c->config->{ldap}->{bind_dn},
+                        $mesg = $ldap->bind($entry->dn,
                             password => $password
                         );
 
                         if ($mesg->code) {
-                            $c->app->log->info("[LDAP authentication failed] login: $username, IP: ".$c->ip);
-                            $c->app->log->error("[LDAP authentication failed] ".$mesg->error);
+                            $c->app->log->info("[LDAP INFO] Authentication failed - Login: $username, IP: ".$c->ip);
+                            $c->app->log->error('[LDAP ERROR] Authentication failed '.$mesg->error);
                             return undef;
                         }
 
-                        $c->app->log->info("[LDAP authentication successful] login: $username, IP: ".$c->ip);
+                        $c->app->log->info("[LDAP INFO] Authentication successful - Login: $username, IP: ".$c->ip);
                     } elsif (defined($c->config('htpasswd'))) {
                         my $htpasswd = new Apache::Htpasswd(
                             {
@@ -140,12 +185,6 @@ sub startup {
 
     # Hooks
     $self->hook(
-        after_dispatch => sub {
-            shift->provisioning();
-        }
-    );
-
-    $self->hook(
         before_dispatch => sub {
             my $c = shift;
 
@@ -164,6 +203,13 @@ sub startup {
             }
         }
     );
+
+    # Recurrent tasks
+    Mojo::IOLoop->recurring(2 => sub {
+        my $loop = shift;
+
+        $self->provisioning();
+    });
 
     # Minion
     if ($config->{minion}->{enabled} && $config->{minion}->{db_path}) {

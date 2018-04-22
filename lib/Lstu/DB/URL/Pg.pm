@@ -40,7 +40,9 @@ sub delete {
     my $c = shift;
 
     my $h = $c->app->pg->db->query('DELETE FROM lstu WHERE short = ? RETURNING *', $c->short)->hashes;
-    $c->app->debug($h->size);
+    # $h->size is the number of deleted rows
+    # 0 means failure
+    # 1 means success
     if ($h->size) {
         $c = Lstu::DB::URL->new(app => $c->app);
     }
@@ -60,7 +62,7 @@ sub exist {
 sub choose_empty {
     my $c = shift;
 
-    my $h = $c->app->pg->db->query('SELECT * FROM lstu WHERE url IS NULL LIMIT 1')->hashes;
+    my $h = $c->app->pg->db->query('SELECT * FROM lstu WHERE url IS NULL')->hashes->shuffle;
 
     if ($h->size) {
         $c->short($h->first->{short});
@@ -89,8 +91,12 @@ sub get_a_lot {
     my $c = shift;
     my $u = shift;
 
-    my $p = join ",", (('?') x @{$u});
-    return @{$c->app->pg->db->query('SELECT * FROM lstu WHERE short IN ('.$p.') ORDER BY counter DESC', @{$u})->hashes->to_array};
+    if (scalar @{$u}) {
+        my $p = join ",", (('?') x @{$u});
+        return @{$c->app->pg->db->query('SELECT * FROM lstu WHERE short IN ('.$p.') ORDER BY counter DESC', @{$u})->hashes->to_array};
+    } else {
+        return ();
+    }
 }
 
 sub total {
