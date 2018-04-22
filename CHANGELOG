@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.14 ????-??-??
+	- Use same DB backend for Minion than db_type
+
 0.13-1 2018-04-22
 	- Better CSS minification
 
