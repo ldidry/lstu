@@ -1,11 +1,6 @@
 % # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
 % title 'Lstu API';
 % use Mojo::JSON qw(to_json);
-%= stylesheet begin
-    dd > strong {
-        padding-left: 15px;
-    }
-% end
 <h2>Lstu API</h2>
 <dl>
 % if (defined $self->config('ldap') || defined $self->config('htpasswd')) {

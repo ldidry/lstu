@@ -9,6 +9,7 @@ requires 'Mojolicious::Plugin::Authentication';
 requires 'Mojolicious::Plugin::StaticCache';
 requires 'Mojolicious::Plugin::CHI';
 requires 'Mojolicious::Plugin::GzipStatic';
+requires 'Mojolicious::Plugin::CSPHeader';
 requires 'Minion';
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';

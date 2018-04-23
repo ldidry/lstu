@@ -39,6 +39,7 @@ sub startup {
                 max_redir        => 2,
                 skip_spamhaus    => 0,
                 cache_max_size   => 2,
+                csp              => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
             }
         }
     );
@@ -56,6 +57,9 @@ sub startup {
 
     # Static assets gzipping
     $self->plugin('GzipStatic');
+
+    # Add CSP Header
+    $self->plugin('CSPHeader', csp => $config->{'csp'}) if $config->{'csp'};
 
     # Helpers
     $self->plugin('Lstu::Plugin::Helpers');

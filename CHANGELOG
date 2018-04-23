@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.16 ????-??-??
+	- Add Content-Security-Policy header
+
 0.15-2 2018-04-23
 	- Update Mojolicious::Plugin::GzipStatic
 

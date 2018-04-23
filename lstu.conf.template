@@ -216,4 +216,12 @@
     # If set to 0, the cache is disabled
     # optional, default is 2
     #cache_max_size => 2,
+
+    # Content-Security-Policy header that will be sent by Lstu
+    # Set to '' to disable CSP header
+    # https://content-security-policy.com/ provides a good documentation about CSP.
+    # https://report-uri.com/home/generate provides a tool to generate a CSP header.
+    # optional, default is "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'"
+    # the default value is good for `default` and `milligram` themes
+    #csp => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
 };

@@ -32,6 +32,7 @@ sub startup {
             max_redir        => 2,
             skip_spamhaus    => 0,
             cache_max_size   => 2,
+            csp              => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
         }
     });
 
@@ -66,6 +67,9 @@ sub startup {
 
     # Static assets gzipping
     $self->plugin('GzipStatic');
+
+    # Add CSP Header
+    $self->plugin('CSPHeader', csp => $config->{'csp'}) if $config->{'csp'};
 
     # URL cache
     my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
@@ -355,6 +359,14 @@ sub startup {
     $r->get('/api' => sub {
         shift->render(template => 'api');
     })->name('api');
+
+    $r->get('/partial/lstu.js' => sub {
+        my $c = shift;
+        $c->render(
+            template => 'partial/lstu',
+            format   => 'js'
+        );
+    })->name('lstu.js');
 
     $r->get('/extensions' => sub {
         shift->render(template => 'extensions');

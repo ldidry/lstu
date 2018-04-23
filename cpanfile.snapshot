@@ -1348,6 +1348,13 @@ DISTRIBUTIONS
       Test::More 0
       Test::Output 1
       perl 5.010001
+  Mojolicious-Plugin-CSPHeader-0.02
+    pathname: L/LD/LDIDRY/Mojolicious-Plugin-CSPHeader-0.02.tar.gz
+    provides:
+      Mojolicious::Plugin::CSPHeader 0.02
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mojolicious 7.75
   Mojolicious-Plugin-DebugDumperHelper-0.03
     pathname: L/LD/LDIDRY/Mojolicious-Plugin-DebugDumperHelper-0.03.tar.gz
     provides:
