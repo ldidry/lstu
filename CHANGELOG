@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.15 ????-??-??
+	- Add CLI command to search and delete url
+
 0.14-1 2018-04-23
 	- Fix for PostgreSQL and MySQL connections
 
