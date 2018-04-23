@@ -135,10 +135,10 @@ Lstu::Command::url - Manage URL in Lstu's database
 =head1 SYNOPSIS
 
   Usage:
-      script/lstu url --info <short>           Print infos about the URL
-      script/lstu url --remove <short> [--yes] Remove URL (ask for confirmation unless --yes is given)
+      carton exec script/lstu url --info <short>           Print infos about the URL
+      carton exec script/lstu url --remove <short> [--yes] Remove URL (ask for confirmation unless --yes is given)
                                                Will print infos about URL before confirmation
-      script/lstu url --url <url>              Search URL by its true URL (like match)
+      carton exec script/lstu url --search <url>           Search URL by its true URL (LIKE match)
 
 =cut
 
