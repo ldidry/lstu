@@ -325,4 +325,23 @@ $t->post_ok('/a' => form => { lsturl => 'https://google.com', format => 'json' }
 
 $config_file->spurt($config_orig);
 
+# Test command
+my $help = `carton exec script/lstu help url`;
+like($help, qr/Print infos about the URL/m, 'Test help url command');
+
+# Create short URL
+$a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
+
+# Extract the path of the short URL
+$a =~ s#.*/##;
+
+my $info = `carton exec script/lstu url --info $a`;
+like($info, qr/lstu\.fr/m, 'Test url --info command');
+
+my $search = `carton exec script/lstu url --search lstu.fr`;
+like($search, qr/$a/m, 'Test url --search command');
+
+my $remove = `carton exec script/lstu url --remove $a --yes`;
+like($remove, qr/Success/m, 'Test url --remove command');
+
 done_testing();

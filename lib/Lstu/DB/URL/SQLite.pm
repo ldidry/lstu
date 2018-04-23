@@ -113,6 +113,13 @@ sub delete_all {
     $c->app->sqlite->db->query('DELETE FROM lstu');
 }
 
+sub search_url {
+    my $c = shift;
+    my $s = shift;
+
+    $c->app->sqlite->db->select('lstu', undef, { url => {-like => '%'.$s.'%'}})->hashes;
+}
+
 sub _slurp {
     my $c = shift;
 
