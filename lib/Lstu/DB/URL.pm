@@ -126,7 +126,7 @@ sub to_hash {
 
 =item B<Purpose>   : delete the URL record from the database
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : 1 for success, 0 for failure
 
 =back
 
@@ -243,6 +243,21 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 =item B<Returns>   : nothing is expected
 
 =back
+
+=head2 search_url
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>search_url($string)>
+
+=item B<Arguments> : string, part of URL to search
+
+=item B<Purpose>   : search records which real url matches the given string
+
+=item B<Returns>   : a Mojo::Collection containing hashes of the matching records
+
+=back
+
 
 =cut
 

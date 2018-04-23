@@ -14,6 +14,7 @@ sub startup {
 
     my $config = $self->plugin('Config' => {
         default =>  {
+            prefix           => '/',
             provisioning     => 100,
             provis_step      => 5,
             length           => 8,
@@ -78,8 +79,6 @@ sub startup {
             shmkey        => 1782340321,
         }
     });
-    # Clean cache at startup
-    $self->chi('lstu_urls_cache')->clear();
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');
