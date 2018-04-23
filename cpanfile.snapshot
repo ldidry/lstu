@@ -1355,10 +1355,10 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Mojolicious 6.11
-  Mojolicious-Plugin-GzipStatic-0.03
-    pathname: L/LD/LDIDRY/Mojolicious-Plugin-GzipStatic-0.03.tar.gz
+  Mojolicious-Plugin-GzipStatic-0.04
+    pathname: L/LD/LDIDRY/Mojolicious-Plugin-GzipStatic-0.04.tar.gz
     provides:
-      Mojolicious::Plugin::GzipStatic 0.03
+      Mojolicious::Plugin::GzipStatic 0.04
     requirements:
       ExtUtils::MakeMaker 0
       IO::Compress::Gzip 0
