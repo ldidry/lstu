@@ -20,9 +20,25 @@ sub startup {
     my $config = $self->plugin('Config' =>
         {
             file    => $cfile,
-            default => {
-                prefix => '/',
-                theme  => 'default',
+            default =>  {
+                prefix           => '/',
+                provisioning     => 100,
+                provis_step      => 5,
+                length           => 8,
+                secret           => ['hfudsifdsih'],
+                page_offset      => 10,
+                theme            => 'default',
+                ban_min_strike   => 3,
+                ban_whitelist    => [],
+                minion           => {
+                    enabled => 0,
+                    db_path => 'minion.db'
+                },
+                session_duration => 3600,
+                dbtype           => 'sqlite',
+                max_redir        => 2,
+                skip_spamhaus    => 0,
+                cache_max_size   => 2,
             }
         }
     );
@@ -40,6 +56,9 @@ sub startup {
 
     # Static assets gzipping
     $self->plugin('GzipStatic');
+
+    # Helpers
+    $self->plugin('Lstu::Plugin::Helpers');
 
     $self->plugin('Mount' => {$config->{prefix} => File::Spec->catfile($Bin, '..', 'script', 'application')});
 }
