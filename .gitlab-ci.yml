@@ -132,7 +132,7 @@ postgresql3:
   <<: *pg_definition
   script:
     - carton install --deployment --without=sqlite --without=mysql
-    - export PGPASSWORD=lstu; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu
+    - export PGPASSWORD=lstu_pwd; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu lstu_db
     - MOJO_CONFIG=t/postgresql3.conf make minion &
     - sleep 5
     - MOJO_CONFIG=t/postgresql3.conf make test

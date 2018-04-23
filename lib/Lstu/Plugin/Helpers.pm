@@ -34,7 +34,7 @@ sub register {
 
         # Database migration
         my $migrations = Mojo::Pg::Migrations->new(pg => $app->pg);
-        if ($app->mode eq 'development') {
+        if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
             $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(0)->migrate(2);
         } else {
             $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(2);
@@ -45,7 +45,7 @@ sub register {
 
         # Database migration
         my $migrations = Mojo::mysql::Migrations->new(mysql => $app->mysql);
-        if ($app->mode eq 'development') {
+        if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
             $migrations->from_file('utilities/migrations/mysql.sql')->migrate(0)->migrate(1);
         } else {
             $migrations->from_file('utilities/migrations/mysql.sql')->migrate(1);
