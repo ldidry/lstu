@@ -93,6 +93,7 @@ sub run {
             my ($e, $num) = @_;
             print_infos($e);
         });
+        say sprintf('%d matching URLs', $u->size);
     }
 }
 
