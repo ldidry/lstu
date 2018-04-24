@@ -287,9 +287,14 @@ sub get {
     my $c = shift;
     my $short = $c->param('short');
 
-    my $url = $c->chi('lstu_urls_cache')->compute($short, undef, sub {
-        return Lstu::DB::URL->new(app => $c, short => $short)->url;
-    });
+    my $url;
+    if (scalar(@{$c->config('memcached_servers')})) {
+        $url = $c->chi('lstu_urls_cache')->compute($short, undef, sub {
+            return Lstu::DB::URL->new(app => $c, short => $short)->url;
+        });
+    } else {
+        $url = Lstu::DB::URL->new(app => $c, short => $short)->url;
+    }
 
     if ($url) {
         $c->respond_to(

@@ -23,37 +23,38 @@ sub run {
     my $config = $c->app->plugin('Config', {
         file    => $cfile,
         default =>  {
-            provisioning     => 100,
-            provis_step      => 5,
-            length           => 8,
-            secret           => ['hfudsifdsih'],
-            page_offset      => 10,
-            theme            => 'default',
-            ban_min_strike   => 3,
-            ban_whitelist    => [],
-            minion           => {
+            prefix            => '/',
+            provisioning      => 100,
+            provis_step       => 5,
+            length            => 8,
+            secret            => ['hfudsifdsih'],
+            page_offset       => 10,
+            theme             => 'default',
+            ban_min_strike    => 3,
+            ban_whitelist     => [],
+            minion            => {
                 enabled => 0,
                 db_path => 'minion.db'
             },
-            session_duration => 3600,
-            dbtype           => 'sqlite',
-            max_redir        => 2,
-            skip_spamhaus    => 0,
-            cache_max_size   => 2,
+            session_duration  => 3600,
+            dbtype            => 'sqlite',
+            max_redir         => 2,
+            skip_spamhaus     => 0,
+            memcached_servers => [],
+            csp               => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
         }
     });
 
-    my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
-    $c->app->plugin(CHI => {
-        lstu_urls_cache => {
-            driver        => 'SharedMem',
-            global        => 1,
-            is_size_aware => 1,
-            max_size      => $cache_max_size,
-            expires_in    => '1 day',
-            shmkey        => 1782340321,
-        }
-    });
+    if (scalar(@{$config->{memcached_servers}})) {
+        $c->app->plugin(CHI => {
+            lstu_urls_cache => {
+                driver             => 'Memcached',
+                servers            => $config->{memcached_servers},
+                expires_in         => '1 day',
+                expires_on_backend => 1,
+            }
+        });
+    }
 
     getopt \@args,
       'i|info=s'   => \my $info,
@@ -77,7 +78,9 @@ sub run {
             }
             if ($confirm =~ m/^y(es)?$/i) {
                 if ($u->delete) {
-                    $c->app->chi('lstu_urls_cache')->remove($remove);
+                    if (scalar(@{$config->{memcached_servers}})) {
+                        $c->app->chi('lstu_urls_cache')->remove($remove);
+                    }
                     say sprintf('Success: %s URL has been removed', $remove);
                 } else {
                     say sprintf('Failure: %s URL has not been removed', $remove);

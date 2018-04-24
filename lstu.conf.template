@@ -210,12 +210,10 @@
     # optional, default is 0
     #skip_spamhaus => 0,
 
-    # maximum size (in MB) of memory allowed for the URL cache
-    # Lstu has a built-in memory-based URL cache to accelerate responses to often-viewed URL.
-    # This setting makes the cache remove oldest viewed image if the cache size is over it.
-    # If set to 0, the cache is disabled
-    # optional, default is 2
-    #cache_max_size => 2,
+    # array of memcached servers to cache URL in order to accelerate responses to often-viewed URL.
+    # If set to [], the cache is disabled
+    # optional, default is []
+    #memcached_servers => [],
 
     # Content-Security-Policy header that will be sent by Lstu
     # Set to '' to disable CSP header
