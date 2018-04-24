@@ -21,24 +21,25 @@ sub startup {
         {
             file    => $cfile,
             default =>  {
-                prefix           => '/',
-                provisioning     => 100,
-                provis_step      => 5,
-                length           => 8,
-                secret           => ['hfudsifdsih'],
-                page_offset      => 10,
-                theme            => 'default',
-                ban_min_strike   => 3,
-                ban_whitelist    => [],
-                minion           => {
+                prefix            => '/',
+                provisioning      => 100,
+                provis_step       => 5,
+                length            => 8,
+                secret            => ['hfudsifdsih'],
+                page_offset       => 10,
+                theme             => 'default',
+                ban_min_strike    => 3,
+                ban_whitelist     => [],
+                minion            => {
                     enabled => 0,
                     db_path => 'minion.db'
                 },
-                session_duration => 3600,
-                dbtype           => 'sqlite',
-                max_redir        => 2,
-                skip_spamhaus    => 0,
-                cache_max_size   => 2,
+                session_duration  => 3600,
+                dbtype            => 'sqlite',
+                max_redir         => 2,
+                skip_spamhaus     => 0,
+                memcached_servers => [],
+                csp               => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
             }
         }
     );
@@ -56,6 +57,9 @@ sub startup {
 
     # Static assets gzipping
     $self->plugin('GzipStatic');
+
+    # Add CSP Header
+    $self->plugin('CSPHeader', csp => $config->{'csp'}) if $config->{'csp'};
 
     # Helpers
     $self->plugin('Lstu::Plugin::Helpers');

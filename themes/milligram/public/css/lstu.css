@@ -48,3 +48,6 @@ ul.pager li {
 .qrcode-result {
     float: right;
 }
+dd > strong {
+    padding-left: 15px;
+}

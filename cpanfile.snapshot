@@ -1,12 +1,5 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  Algorithm-Diff-1.1903
-    pathname: T/TY/TYEMQ/Algorithm-Diff-1.1903.tar.gz
-    provides:
-      Algorithm::Diff 1.1903
-      Algorithm::Diff::_impl 1.1903
-    requirements:
-      ExtUtils::MakeMaker 0
   Apache-Htpasswd-1.9
     pathname: K/KM/KMELTZ/Apache-Htpasswd-1.9.tar.gz
     provides:
@@ -78,26 +71,28 @@ DISTRIBUTIONS
       Time::Duration::Parse 0.03
       Time::HiRes 1.30
       Try::Tiny 0.05
-  CHI-Driver-SharedMem-0.14
-    pathname: N/NH/NHORNE/CHI-Driver-SharedMem-0.14.tar.gz
+  CHI-Driver-Memcached-0.16
+    pathname: J/JS/JSWARTZ/CHI-Driver-Memcached-0.16.tar.gz
     provides:
-      CHI::Driver::SharedMem 0.14
-      CHI::Driver::SharedMem::t::CHIDriverTests 0.14
+      CHI::Driver::Memcached 0.16
+      CHI::Driver::Memcached::Base 0.16
+      CHI::Driver::Memcached::Fast 0.16
+      CHI::Driver::Memcached::libmemcached 0.16
     requirements:
-      CHI 0.54
-      CHI::Test 0
-      CHI::Test::Util 0
-      Config 0
+      CHI 0.33
       ExtUtils::MakeMaker 0
-      Fcntl 0
-      IPC::SharedMem 0
-      IPC::SysV 0
-      Moose 0
+      Moose 0.66
+  Cache-Memcached-1.30
+    pathname: D/DO/DORMANDO/Cache-Memcached-1.30.tar.gz
+    provides:
+      Cache::Memcached 1.30
+      Cache::Memcached::GetParser undef
+    requirements:
+      Encode 0
+      ExtUtils::MakeMaker 0
       Storable 0
-      Test::Class 0
-      Test::Most 0
-      Test::NoWarnings 0
-      Test::Warn 0
+      String::CRC32 0
+      Time::HiRes 0
   Capture-Tiny-0.48
     pathname: D/DA/DAGOLDEN/Capture-Tiny-0.48.tar.gz
     provides:
@@ -125,12 +120,6 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Class-Data-Inheritable-0.08
-    pathname: T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz
-    provides:
-      Class::Data::Inheritable 0.08
-    requirements:
-      ExtUtils::MakeMaker 0
   Class-Load-0.24
     pathname: E/ET/ETHER/Class-Load-0.24.tar.gz
     provides:
@@ -553,21 +542,6 @@ DISTRIBUTIONS
       Scalar::Util 0
       constant 0
       overload 0
-      strict 0
-      warnings 0
-  Exception-Class-1.44
-    pathname: D/DR/DROLSKY/Exception-Class-1.44.tar.gz
-    provides:
-      Exception::Class 1.44
-      Exception::Class::Base 1.44
-    requirements:
-      Class::Data::Inheritable 0.02
-      Devel::StackTrace 2.00
-      ExtUtils::MakeMaker 0
-      Scalar::Util 0
-      base 0
-      overload 0
-      perl 5.008001
       strict 0
       warnings 0
   Exporter-Lite-0.08
@@ -1348,6 +1322,13 @@ DISTRIBUTIONS
       Test::More 0
       Test::Output 1
       perl 5.010001
+  Mojolicious-Plugin-CSPHeader-0.02
+    pathname: L/LD/LDIDRY/Mojolicious-Plugin-CSPHeader-0.02.tar.gz
+    provides:
+      Mojolicious::Plugin::CSPHeader 0.02
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mojolicious 7.75
   Mojolicious-Plugin-DebugDumperHelper-0.03
     pathname: L/LD/LDIDRY/Mojolicious-Plugin-DebugDumperHelper-0.03.tar.gz
     provides:
@@ -2091,6 +2072,12 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.006
+  String-CRC32-1.6
+    pathname: L/LE/LEEJO/String-CRC32-1.6.tar.gz
+    provides:
+      String::CRC32 1.6
+    requirements:
+      ExtUtils::MakeMaker 0
   String-RewritePrefix-0.007
     pathname: R/RJ/RJBS/String-RewritePrefix-0.007.tar.gz
     provides:
@@ -2158,17 +2145,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Sub-Uplevel-0.2800
-    pathname: D/DA/DAGOLDEN/Sub-Uplevel-0.2800.tar.gz
-    provides:
-      Sub::Uplevel 0.2800
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      constant 0
-      perl 5.006
-      strict 0
-      warnings 0
   Task-Weaken-1.06
     pathname: E/ET/ETHER/Task-Weaken-1.06.tar.gz
     provides:
@@ -2180,113 +2156,6 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       perl 5.006
       strict 0
-  Test-Class-0.50
-    pathname: E/ET/ETHER/Test-Class-0.50.tar.gz
-    provides:
-      Test::Class 0.50
-      Test::Class::Load 0.50
-      Test::Class::MethodInfo 0.50
-    requirements:
-      Attribute::Handlers 0.77
-      Carp 0
-      ExtUtils::MakeMaker 0
-      File::Find 0
-      File::Spec 0
-      MRO::Compat 0.11
-      Module::Runtime 0
-      Storable 2.04
-      Test::Builder 0.78
-      Test::Builder::Tester 1.02
-      Test::Simple 0.78
-      Try::Tiny 0
-      constant 0
-      perl 5.008001
-      strict 0
-      warnings 0
-  Test-Deep-1.128
-    pathname: R/RJ/RJBS/Test-Deep-1.128.tar.gz
-    provides:
-      Test::Deep 1.128
-      Test::Deep::All undef
-      Test::Deep::Any undef
-      Test::Deep::Array undef
-      Test::Deep::ArrayEach undef
-      Test::Deep::ArrayElementsOnly undef
-      Test::Deep::ArrayLength undef
-      Test::Deep::ArrayLengthOnly undef
-      Test::Deep::Blessed undef
-      Test::Deep::Boolean undef
-      Test::Deep::Cache undef
-      Test::Deep::Cache::Simple undef
-      Test::Deep::Class undef
-      Test::Deep::Cmp undef
-      Test::Deep::Code undef
-      Test::Deep::Hash undef
-      Test::Deep::HashEach undef
-      Test::Deep::HashElements undef
-      Test::Deep::HashKeys undef
-      Test::Deep::HashKeysOnly undef
-      Test::Deep::Ignore undef
-      Test::Deep::Isa undef
-      Test::Deep::ListMethods undef
-      Test::Deep::MM undef
-      Test::Deep::Methods undef
-      Test::Deep::NoTest undef
-      Test::Deep::None undef
-      Test::Deep::Number undef
-      Test::Deep::Obj undef
-      Test::Deep::Ref undef
-      Test::Deep::RefType undef
-      Test::Deep::Regexp undef
-      Test::Deep::RegexpMatches undef
-      Test::Deep::RegexpOnly undef
-      Test::Deep::RegexpRef undef
-      Test::Deep::RegexpRefOnly undef
-      Test::Deep::RegexpVersion undef
-      Test::Deep::ScalarRef undef
-      Test::Deep::ScalarRefOnly undef
-      Test::Deep::Set undef
-      Test::Deep::Shallow undef
-      Test::Deep::Stack undef
-      Test::Deep::String undef
-      Test::Deep::SubHash undef
-      Test::Deep::SubHashElements undef
-      Test::Deep::SubHashKeys undef
-      Test::Deep::SubHashKeysOnly undef
-      Test::Deep::SuperHash undef
-      Test::Deep::SuperHashElements undef
-      Test::Deep::SuperHashKeys undef
-      Test::Deep::SuperHashKeysOnly undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      List::Util 1.09
-      Scalar::Util 1.09
-      Test::Builder 0
-  Test-Differences-0.64
-    pathname: D/DC/DCANTRELL/Test-Differences-0.64.tar.gz
-    provides:
-      Test::Differences 0.64
-    requirements:
-      Capture::Tiny 0.24
-      Data::Dumper 2.126
-      Test::More 0.88
-      Text::Diff 0.35
-  Test-Exception-0.43
-    pathname: E/EX/EXODIST/Test-Exception-0.43.tar.gz
-    provides:
-      Test::Exception 0.43
-    requirements:
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      Sub::Uplevel 0.18
-      Test::Builder 0.7
-      Test::Builder::Tester 1.07
-      Test::Harness 2.03
-      base 0
-      perl 5.006001
-      strict 0
-      warnings 0
   Test-Fatal-0.014
     pathname: R/RJ/RJBS/Test-Fatal-0.014.tar.gz
     provides:
@@ -2299,31 +2168,6 @@ DISTRIBUTIONS
       Try::Tiny 0.07
       strict 0
       warnings 0
-  Test-Most-0.35
-    pathname: O/OV/OVID/Test-Most-0.35.tar.gz
-    provides:
-      Test::Most 0.35
-      Test::Most::Exception 0.35
-    requirements:
-      Exception::Class 1.14
-      ExtUtils::MakeMaker 0
-      Test::Deep 0.119
-      Test::Differences 0.64
-      Test::Exception 0.43
-      Test::Harness 3.35
-      Test::More 1.302047
-      Test::Warn 0.30
-  Test-NoWarnings-1.04
-    pathname: A/AD/ADAMK/Test-NoWarnings-1.04.tar.gz
-    provides:
-      Test::NoWarnings 1.04
-      Test::NoWarnings::Warning 1.04
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::Builder 0.86
-      Test::More 0.47
-      Test::Tester 0.107
-      perl 5.006
   Test-Output-1.031
     pathname: B/BD/BDFOY/Test-Output-1.031.tar.gz
     provides:
@@ -2334,107 +2178,6 @@ DISTRIBUTIONS
       File::Spec::Functions 0
       File::Temp 0.17
       perl 5.008
-  Test-Simple-1.302136
-    pathname: E/EX/EXODIST/Test-Simple-1.302136.tar.gz
-    provides:
-      Test2 1.302136
-      Test2::API 1.302136
-      Test2::API::Breakage 1.302136
-      Test2::API::Context 1.302136
-      Test2::API::Instance 1.302136
-      Test2::API::Stack 1.302136
-      Test2::Event 1.302136
-      Test2::Event::Bail 1.302136
-      Test2::Event::Diag 1.302136
-      Test2::Event::Encoding 1.302136
-      Test2::Event::Exception 1.302136
-      Test2::Event::Fail 1.302136
-      Test2::Event::Generic 1.302136
-      Test2::Event::Note 1.302136
-      Test2::Event::Ok 1.302136
-      Test2::Event::Pass 1.302136
-      Test2::Event::Plan 1.302136
-      Test2::Event::Skip 1.302136
-      Test2::Event::Subtest 1.302136
-      Test2::Event::TAP::Version 1.302136
-      Test2::Event::V2 1.302136
-      Test2::Event::Waiting 1.302136
-      Test2::EventFacet 1.302136
-      Test2::EventFacet::About 1.302136
-      Test2::EventFacet::Amnesty 1.302136
-      Test2::EventFacet::Assert 1.302136
-      Test2::EventFacet::Control 1.302136
-      Test2::EventFacet::Error 1.302136
-      Test2::EventFacet::Hub 1.302136
-      Test2::EventFacet::Info 1.302136
-      Test2::EventFacet::Meta 1.302136
-      Test2::EventFacet::Parent 1.302136
-      Test2::EventFacet::Plan 1.302136
-      Test2::EventFacet::Render 1.302136
-      Test2::EventFacet::Trace 1.302136
-      Test2::Formatter 1.302136
-      Test2::Formatter::TAP 1.302136
-      Test2::Hub 1.302136
-      Test2::Hub::Interceptor 1.302136
-      Test2::Hub::Interceptor::Terminator 1.302136
-      Test2::Hub::Subtest 1.302136
-      Test2::IPC 1.302136
-      Test2::IPC::Driver 1.302136
-      Test2::IPC::Driver::Files 1.302136
-      Test2::Tools::Tiny 1.302136
-      Test2::Util 1.302136
-      Test2::Util::ExternalMeta 1.302136
-      Test2::Util::Facets2Legacy 1.302136
-      Test2::Util::HashBase 1.302136
-      Test2::Util::Trace 1.302136
-      Test::Builder 1.302136
-      Test::Builder::Formatter 1.302136
-      Test::Builder::IO::Scalar 2.114
-      Test::Builder::Module 1.302136
-      Test::Builder::Tester 1.302136
-      Test::Builder::Tester::Color 1.302136
-      Test::Builder::Tester::Tie 1.302136
-      Test::Builder::TodoDiag 1.302136
-      Test::More 1.302136
-      Test::Simple 1.302136
-      Test::Tester 1.302136
-      Test::Tester::Capture 1.302136
-      Test::Tester::CaptureRunner 1.302136
-      Test::Tester::Delegate 1.302136
-      Test::use::ok 1.302136
-      ok 1.302136
-    requirements:
-      ExtUtils::MakeMaker 0
-      File::Spec 0
-      File::Temp 0
-      Scalar::Util 1.13
-      Storable 0
-      perl 5.006002
-      utf8 0
-  Test-Warn-0.32
-    pathname: B/BI/BIGJ/Test-Warn-0.32.tar.gz
-    provides:
-      Test::Warn 0.32
-      Test::Warn::Categorization 0.32
-    requirements:
-      Carp 1.22
-      ExtUtils::MakeMaker 0
-      Sub::Uplevel 0.12
-      Test::Builder 0.13
-      Test::Builder::Tester 1.02
-      perl 5.006
-  Text-Diff-1.45
-    pathname: N/NE/NEILB/Text-Diff-1.45.tar.gz
-    provides:
-      Text::Diff 1.45
-      Text::Diff::Base 1.45
-      Text::Diff::Config 1.44
-      Text::Diff::Table 1.44
-    requirements:
-      Algorithm::Diff 1.19
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      perl 5.006
   Text-Soundex-3.05
     pathname: R/RJ/RJBS/Text-Soundex-3.05.tar.gz
     provides:
@@ -2476,52 +2219,52 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  URI-1.73
-    pathname: E/ET/ETHER/URI-1.73.tar.gz
+  URI-1.74
+    pathname: E/ET/ETHER/URI-1.74.tar.gz
     provides:
-      URI 1.73
+      URI 1.74
       URI::Escape 3.31
       URI::Heuristic 4.20
-      URI::IRI 1.73
-      URI::QueryParam 1.73
-      URI::Split 1.73
+      URI::IRI 1.74
+      URI::QueryParam 1.74
+      URI::Split 1.74
       URI::URL 5.04
       URI::WithBase 2.20
-      URI::data 1.73
+      URI::data 1.74
       URI::file 4.21
-      URI::file::Base 1.73
-      URI::file::FAT 1.73
-      URI::file::Mac 1.73
-      URI::file::OS2 1.73
-      URI::file::QNX 1.73
-      URI::file::Unix 1.73
-      URI::file::Win32 1.73
-      URI::ftp 1.73
-      URI::gopher 1.73
-      URI::http 1.73
-      URI::https 1.73
-      URI::ldap 1.73
-      URI::ldapi 1.73
-      URI::ldaps 1.73
-      URI::mailto 1.73
-      URI::mms 1.73
-      URI::news 1.73
-      URI::nntp 1.73
-      URI::pop 1.73
-      URI::rlogin 1.73
-      URI::rsync 1.73
-      URI::rtsp 1.73
-      URI::rtspu 1.73
-      URI::sftp 1.73
-      URI::sip 1.73
-      URI::sips 1.73
-      URI::snews 1.73
-      URI::ssh 1.73
-      URI::telnet 1.73
-      URI::tn3270 1.73
-      URI::urn 1.73
-      URI::urn::isbn 1.73
-      URI::urn::oid 1.73
+      URI::file::Base 1.74
+      URI::file::FAT 1.74
+      URI::file::Mac 1.74
+      URI::file::OS2 1.74
+      URI::file::QNX 1.74
+      URI::file::Unix 1.74
+      URI::file::Win32 1.74
+      URI::ftp 1.74
+      URI::gopher 1.74
+      URI::http 1.74
+      URI::https 1.74
+      URI::ldap 1.74
+      URI::ldapi 1.74
+      URI::ldaps 1.74
+      URI::mailto 1.74
+      URI::mms 1.74
+      URI::news 1.74
+      URI::nntp 1.74
+      URI::pop 1.74
+      URI::rlogin 1.74
+      URI::rsync 1.74
+      URI::rtsp 1.74
+      URI::rtspu 1.74
+      URI::sftp 1.74
+      URI::sip 1.74
+      URI::sips 1.74
+      URI::snews 1.74
+      URI::ssh 1.74
+      URI::telnet 1.74
+      URI::tn3270 1.74
+      URI::urn 1.74
+      URI::urn::isbn 1.74
+      URI::urn::oid 1.74
     requirements:
       Carp 0
       Cwd 0

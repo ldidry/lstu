@@ -7,8 +7,8 @@ requires 'Mojolicious::Plugin::DebugDumperHelper';
 requires 'Mojolicious::Plugin::Piwik';
 requires 'Mojolicious::Plugin::Authentication';
 requires 'Mojolicious::Plugin::StaticCache';
-requires 'Mojolicious::Plugin::CHI';
 requires 'Mojolicious::Plugin::GzipStatic';
+requires 'Mojolicious::Plugin::CSPHeader';
 requires 'Minion';
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';
@@ -20,7 +20,11 @@ requires 'Net::LDAP';
 requires 'Apache::Htpasswd';
 requires 'Image::PNG::QRCode';
 requires 'Cpanel::JSON::XS';
-requires 'CHI::Driver::SharedMem';
+feature 'cache', 'URL cache system' => sub {
+    requires 'Mojolicious::Plugin::CHI';
+    requires 'CHI::Driver::Memcached';
+    requires 'Cache::Memcached';
+};
 feature 'test' => sub {
     requires 'Devel::Cover';
 };

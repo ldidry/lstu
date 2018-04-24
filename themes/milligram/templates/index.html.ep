@@ -15,49 +15,8 @@
             <img class="qrcode-result" alt="QRCode" src="data:image/png;base64,<%= flash('qrcode') %>">
             <label><%= link_to flash('url') => begin %><h4><%= flash('url') %></h4><%= end %></label>
             ⟹ <input id="input-short" value="<%== flash('short') %>" class="form-control">
-            <span id="js" class="hidden"><a href="#" id="clipboard" class="button button-clear" title="<%= l('Copy to clipboard') %>"><h5><span class="icon icon-clipboard"></span></h5></a><span>
+            <span id="js" class="hidden"><a href="#" id="clipboard" class="button button-clear" title="<%= l('Copy to clipboard') %>" data-short="<%== flash('short') %>"><h5><span class="icon icon-clipboard"></span></h5></a><span>
         </fieldset>
-%= javascript begin
-    var j = document.getElementById('js');
-    j.classList.remove('hidden');
-    // Code from http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
-    function copyTextToClipboard(text) {
-        var textArea              = document.createElement("textarea");
-        textArea.style.position   = 'fixed';
-        textArea.style.top        = 0;
-        textArea.style.left       = 0;
-        textArea.style.width      = '2em';
-        textArea.style.height     = '2em';
-        textArea.style.padding    = 0;
-        textArea.style.border     = 'none';
-        textArea.style.outline    = 'none';
-        textArea.style.boxShadow  = 'none';
-        textArea.style.background = 'transparent';
-        textArea.value            = text;
-
-        document.body.appendChild(textArea);
-        textArea.select();
-
-        try {
-          var successful = document.execCommand('copy');
-          var msg = successful ? 'successful' : 'unsuccessful';
-          console.log('Copying text command was ' + msg);
-        } catch (err) {
-          var myInput = document.getElementById('input-short');
-          myInput.focus();
-          myInput.setSelectionRange(0, 9999);
-          alert('<%= l('Hit Enter, then Ctrl+C to copy the short link') %>');
-        }
-
-        document.body.removeChild(textArea);
-    }
-
-    var copyBtn = document.getElementById('clipboard');
-
-    copyBtn.addEventListener('click', function(event) {
-        copyTextToClipboard('<%= flash('short') %>');
-    });
-% end
 % }
 % if (defined(flash('msg'))) {
     <h3 class="alert alert-danger"><%= flash('msg') %></h3>

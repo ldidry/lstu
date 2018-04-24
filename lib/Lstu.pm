@@ -14,24 +14,25 @@ sub startup {
 
     my $config = $self->plugin('Config' => {
         default =>  {
-            prefix           => '/',
-            provisioning     => 100,
-            provis_step      => 5,
-            length           => 8,
-            secret           => ['hfudsifdsih'],
-            page_offset      => 10,
-            theme            => 'default',
-            ban_min_strike   => 3,
-            ban_whitelist    => [],
-            minion           => {
+            prefix            => '/',
+            provisioning      => 100,
+            provis_step       => 5,
+            length            => 8,
+            secret            => ['hfudsifdsih'],
+            page_offset       => 10,
+            theme             => 'default',
+            ban_min_strike    => 3,
+            ban_whitelist     => [],
+            minion            => {
                 enabled => 0,
                 db_path => 'minion.db'
             },
-            session_duration => 3600,
-            dbtype           => 'sqlite',
-            max_redir        => 2,
-            skip_spamhaus    => 0,
-            cache_max_size   => 2,
+            session_duration  => 3600,
+            dbtype            => 'sqlite',
+            max_redir         => 2,
+            skip_spamhaus     => 0,
+            memcached_servers => [],
+            csp               => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
         }
     });
 
@@ -67,18 +68,20 @@ sub startup {
     # Static assets gzipping
     $self->plugin('GzipStatic');
 
+    # Add CSP Header
+    $self->plugin('CSPHeader', csp => $config->{'csp'}) if $config->{'csp'};
+
     # URL cache
-    my $cache_max_size = ($config->{cache_max_size} > 0) ? 8 * 1024 * 1024 * $config->{cache_max_size} : 1;
-    $self->plugin(CHI => {
-        lstu_urls_cache => {
-            driver        => 'SharedMem',
-            global        => 1,
-            is_size_aware => 1,
-            max_size      => $cache_max_size,
-            expires_in    => '1 day',
-            shmkey        => 1782340321,
-        }
-    });
+    if (scalar(@{$config->{memcached_servers}})) {
+        $self->plugin(CHI => {
+            lstu_urls_cache => {
+                driver             => 'Memcached',
+                servers            => $config->{memcached_servers},
+                expires_in         => '1 day',
+                expires_on_backend => 1,
+            }
+        });
+    }
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');
@@ -355,6 +358,14 @@ sub startup {
     $r->get('/api' => sub {
         shift->render(template => 'api');
     })->name('api');
+
+    $r->get('/partial/lstu.js' => sub {
+        my $c = shift;
+        $c->render(
+            template => 'partial/lstu',
+            format   => 'js'
+        );
+    })->name('lstu.js');
 
     $r->get('/extensions' => sub {
         shift->render(template => 'extensions');

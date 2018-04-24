@@ -323,7 +323,18 @@ $t->post_ok('/a' => form => { lsturl => 'https://google.com', format => 'json' }
     ->json_has('msg', 'success')
     ->json_is({success => false, msg => 'The URL you want to shorten comes from a domain (google.com) that is blacklisted on this server (usually because of spammers that use this domain).'});
 
-$config_file->spurt($config_orig);
+# Test Cache system
+$config_content =~ s/^( +)#?memcached_servers => \[\],/memcached_servers => ['127.0.0.1:11211'],/gm;
+$config_file->spurt($config_content);
+
+$t = Test::Mojo->new('Lstu');
+
+# Give time to provision some short URLs
+sleep 3;
+
+$a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
+$t->get_ok($a)
+    ->status_is(301);
 
 # Test command
 my $help = `carton exec script/lstu help url`;
@@ -343,5 +354,8 @@ like($search, qr/$a/m, 'Test url --search command');
 
 my $remove = `MOJO_CONFIG=$cfile carton exec script/lstu url --remove $a --yes`;
 like($remove, qr/Success/m, 'Test url --remove command');
+
+# Restore configuration
+$config_file->spurt($config_orig);
 
 done_testing();

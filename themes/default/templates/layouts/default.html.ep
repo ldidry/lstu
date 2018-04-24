@@ -18,34 +18,7 @@
         <link rel="apple-touch-icon" sizes="120x120" href="<%= url_for('/img/lstu120.png') %>">
         <link rel="apple-touch-icon" sizes="152x152" href="<%= url_for('/img/lstu152.png') %>">
         <link rel="apple-touch-icon-precomposed" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
-        %= stylesheet '/css/bootstrap.min.css', media => 'screen'
-        %= stylesheet '/css/fontelico.min.css'
-        %= stylesheet begin
-            body {
-                padding-top: 40px;
-                padding-bottom: 40px;
-                background-color: #eee;
-            }
-
-            .container {
-                padding: 15px;
-                margin: 0 auto;
-            }
-            @font-face {
-                font-family: 'Henny_Penny';
-                font-style: normal;
-                font-weight: 400;
-                src: local('Henny Penny'), local('HennyPenny-Regular'), url(<%= url_for('/font/hennypenny.woff2') %>) format('woff2');
-            }
-            .hennypenny {
-                font-family: 'Henny_Penny', cursive;
-                font-size: 42px;
-            }
-            .link_nocol, .link_nocol:hover {
-                color: #000;
-                text-decoration: none;
-            }
-        % end
+        %= stylesheet '/css/bootstrap-lstu.min.css'
     </head>
     <body>
         <div class="container">
@@ -73,5 +46,8 @@
             </p>
             <%= content %>
         </div>
+% if (defined(flash('short')) && defined(flash('url'))) {
+        %= javascript url_for('lstu.js')
+% }
     </body>
 </html>

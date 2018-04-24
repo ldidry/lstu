@@ -46,5 +46,8 @@
             <%= content %>
         </div>
         %= stylesheet '/css/milli-lstu.min.css'
+% if (defined(flash('short')) && defined(flash('url'))) {
+        %= javascript url_for('lstu.js')
+% }
     </body>
 </html>

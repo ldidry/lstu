@@ -120,7 +120,9 @@ sub delete {
         );
         if ($db_url->url) {
             my $deleted = $db_url->delete;
-            $c->chi('lstu_urls_cache')->remove($short);
+            if (scalar(@{$c->config('memcached_servers')})) {
+                $c->chi('lstu_urls_cache')->remove($short);
+            }
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->true, deleted => $deleted } },
                 any  => sub {

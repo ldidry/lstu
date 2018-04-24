@@ -7,6 +7,7 @@ LSTU=script/lstu
 
 minify:
 	@echo "CSS concatenation"
+	@cd ./themes/default/public/css/   && cat bootstrap.min.css lstu.css fontelico.css | csso > bootstrap-lstu.min.css
 	@cd ./themes/milligram/public/css/ && cat milligram.min.css lstu.css ../../../default/public/css/fontelico.css | csso > milli-lstu.min.css
 
 locales:
