@@ -120,7 +120,13 @@ sub add {
                 @{$u} = keys %k;
                 # And set the cookie
                 my $cookie = to_json($u);
-                $c->cookie('url' => $cookie, {expires => time + 142560000}); # expires in 10 years
+                $c->cookie(
+                    'url' => $cookie,
+                    {
+                        path => $c->config('prefix'),
+                        expires => time + 142560000
+                    }
+                ); # expires in 10 years
 
                 my $prefix = $c->prefix;
 
@@ -142,6 +148,46 @@ sub add {
     } else {
         $c->redirect_to('login');
     }
+}
+
+sub export_cookie {
+    my $c = shift;
+
+    my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
+
+    $c->res->headers->add('Content-Disposition' => 'attachment;filename=lstu_export.json');
+    return $c->render(json => $u);
+}
+
+sub import_cookie {
+    my $c    = shift;
+    my $file = $c->param('file');
+
+    my $json = decode_json($file->slurp);
+
+    if (ref($json) eq 'ARRAY') {
+        # Get URLs from cookie
+        my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
+        # Add the new URL
+        push @{$u}, @{$json};
+        # Make the array contain only unique URLs
+        my %k = map { $_, 1 } @{$u};
+        @{$u} = keys %k;
+        # And set the cookie
+        my $cookie = to_json($u);
+        $c->cookie(
+            'url' => $cookie,
+            {
+                path => $c->config('prefix'),
+                expires => time + 142560000
+            }
+        ); # expires in 10 years
+
+        $c->flash(success_msg => $c->l('File imported'));
+    } else {
+        $c->flash(msg => $c->l('Sorry, unable to parse the provided file'));
+    }
+    return $c->redirect_to('stats');
 }
 
 sub fullstats {

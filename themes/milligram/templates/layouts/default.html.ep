@@ -45,7 +45,13 @@
             </p>
             <%= content %>
         </div>
+    % if ($self->app->mode eq 'production') {
         %= stylesheet '/css/milli-lstu.min.css'
+    % } else {
+        %= stylesheet '/css/milligram.min.css'
+        %= stylesheet '/css/lstu.css'
+        %= stylesheet '/css/fontelico.css'
+    % }
 % if (defined(flash('short')) && defined(flash('url'))) {
         %= javascript url_for('lstu.js')
 % }
