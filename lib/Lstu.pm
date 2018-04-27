@@ -382,6 +382,14 @@ sub startup {
         ->to('Lstu#add')
         ->name('add');
 
+    $r->get('/cookie')
+        ->to('Lstu#export_cookie')
+        ->name('export_cookie');
+
+    $r->post('/cookie')
+        ->to('Lstu#import_cookie')
+        ->name('import_cookie');
+
     $r->get('/stats')
         ->to('Lstu#stats')
         ->name('stats');

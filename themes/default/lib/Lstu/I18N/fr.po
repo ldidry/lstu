@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-03-22 09:33+0000\n"
+"PO-Revision-Date: 2018-04-27 04:54+0000\n"
 "Last-Translator: Luc Didry <luc@framasoft.org>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/lstu/language/fr/"
 ")\n"
@@ -27,13 +27,13 @@ msgstr ""
 msgid "%1 is not a valid URL."
 msgstr "%1 n’est pas une URL valide."
 
-#: themes/default/templates/api.html.ep:101
+#: themes/default/templates/api.html.ep:96
 msgid ""
 "A page with a table containing the same informations that the JSON response"
 msgstr ""
 "Une page avec un tableau contenant les mêmes information que le message JSON"
 
-#: themes/default/templates/layouts/default.html.ep:57
+#: themes/default/templates/layouts/default.html.ep:38
 msgid "About"
 msgstr "À propos"
 
@@ -41,11 +41,11 @@ msgstr "À propos"
 msgid "Admin password"
 msgstr "Mot de passe administrateur"
 
-#: lib/Lstu/Controller/Admin.pm:87 themes/default/templates/api.html.ep:127
+#: lib/Lstu/Controller/Admin.pm:87 themes/default/templates/api.html.ep:122
 msgid "Bad password"
 msgstr "Mot de passe incorrect"
 
-#: themes/default/templates/layouts/default.html.ep:69
+#: themes/default/templates/layouts/default.html.ep:50
 msgid "Browser extensions"
 msgstr "Extensions navigateur"
 
@@ -53,27 +53,35 @@ msgstr "Extensions navigateur"
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papier"
 
-#: themes/default/templates/stats.html.ep:31
+#: themes/default/templates/stats.html.ep:46
 msgid "Counter"
 msgstr "Compteur"
 
-#: themes/default/templates/stats.html.ep:32
+#: themes/default/templates/stats.html.ep:47
 msgid "Created"
 msgstr "Créé le"
 
-#: themes/default/templates/api.html.ep:49 themes/default/templates/index.html.ep:10 themes/default/templates/index.html.ep:9
+#: themes/default/templates/api.html.ep:44 themes/default/templates/index.html.ep:10 themes/default/templates/index.html.ep:9
 msgid "Custom shortened text"
 msgstr "Texte du raccourci personnalisé"
 
-#: themes/default/templates/stats.html.ep:37
+#: themes/default/templates/stats.html.ep:52
 msgid "Delete"
 msgstr "Supprimer"
 
-#: themes/default/templates/api.html.ep:110 themes/default/templates/api.html.ep:150 themes/default/templates/api.html.ep:58 themes/default/templates/api.html.ep:76
+#: themes/default/templates/stats.html.ep:36
+msgid "Export your URLs"
+msgstr "Exporter vos URL"
+
+#: themes/default/templates/api.html.ep:105 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:71
 msgid "Failure reason"
 msgstr "Raison de l’échec"
 
-#: themes/default/templates/api.html.ep:106
+#: lib/Lstu/Controller/Lstu.pm:186
+msgid "File imported"
+msgstr "Fichier importé"
+
+#: themes/default/templates/api.html.ep:101
 msgid ""
 "Get the details (visit counter, creation date, etc.) of a shortened URL."
 msgstr ""
@@ -84,31 +92,31 @@ msgstr ""
 msgid "Go!"
 msgstr "Allons-y !"
 
-#: themes/default/templates/layouts/default.html.ep:36
+#: themes/default/public/css/bootstrap-lstu.min.css:13 themes/default/public/css/lstu.css:15
 msgid "Henny Penny"
 msgstr "Henny Penny"
 
-#: themes/default/templates/layouts/default.html.ep:36
+#: themes/default/public/css/bootstrap-lstu.min.css:13 themes/default/public/css/lstu.css:15
 msgid "HennyPenny-Regular"
 msgstr "HennyPenny-Regular"
 
-#: themes/default/templates/index.html.ep:53
+#: themes/default/templates/partial/lstu.js.ep:30
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr "Appuyez sur Entrée puis faites Ctrl+C pour copier le lien"
 
-#: themes/default/templates/stats.html.ep:74
+#: themes/default/templates/stats.html.ep:89
 msgid "Home"
 msgstr "Accueil"
 
-#: themes/default/templates/api.html.ep:131
+#: themes/default/templates/api.html.ep:126
 msgid "If \"action\" is defined to \"logout\":"
 msgstr "Si \"action\" est définie à \"logout\" :"
 
-#: themes/default/templates/api.html.ep:124
+#: themes/default/templates/api.html.ep:119
 msgid "If \"adminpwd\" is defined:"
 msgstr "Si \"adminpwd\" est défini :"
 
-#: themes/default/templates/api.html.ep:120 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:32 themes/default/templates/api.html.ep:50 themes/default/templates/api.html.ep:93
+#: themes/default/templates/api.html.ep:115 themes/default/templates/api.html.ep:13 themes/default/templates/api.html.ep:140 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:45 themes/default/templates/api.html.ep:88
 msgid ""
 "If equal to \"json\", response will be in JSON format, HTML format otherwise"
 msgstr ""
@@ -116,7 +124,7 @@ msgstr ""
 "réponse en HTML"
 
 #. (config('page_offset')
-#: themes/default/templates/api.html.ep:86
+#: themes/default/templates/api.html.ep:81
 msgid ""
 "If you are logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting), "
 "it will give you statistics for all URLs, sorted by the most visited first, "
@@ -127,13 +135,17 @@ msgstr ""
 "URL, triées selon le nombre de visites en ordre décroissant, de façon "
 "paginée avec des pages contenant %1 enregistrements."
 
-#: themes/default/templates/api.html.ep:91
+#: themes/default/templates/api.html.ep:86
 msgid "If you are logged in as admin, you can provide a \"page\" parameter"
 msgstr ""
 "Si vous êtes connecté·e en tant qu’admin, vous pouvez fournir un paramètre "
 "\"page\""
 
-#: themes/default/templates/api.html.ep:84
+#: themes/default/templates/stats.html.ep:32 themes/default/templates/stats.html.ep:35
+msgid "Import URLs"
+msgstr "Importer des URL"
+
+#: themes/default/templates/api.html.ep:79
 msgid ""
 "It will use Lstu's cookies to know which shortened URL it will return "
 "statistics for."
@@ -141,15 +153,15 @@ msgstr ""
 "Cela utilisera les cookies de Lstu pour savoir quelles sont les URL dont il "
 "faut fournir les statistiques."
 
-#: themes/default/templates/api.html.ep:110 themes/default/templates/api.html.ep:127 themes/default/templates/api.html.ep:150 themes/default/templates/api.html.ep:23 themes/default/templates/api.html.ep:58 themes/default/templates/api.html.ep:76
+#: themes/default/templates/api.html.ep:105 themes/default/templates/api.html.ep:122 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:71
 msgid "JSON: failure"
 msgstr "JSON : échec"
 
-#: themes/default/templates/api.html.ep:109 themes/default/templates/api.html.ep:126 themes/default/templates/api.html.ep:134 themes/default/templates/api.html.ep:149 themes/default/templates/api.html.ep:22 themes/default/templates/api.html.ep:36 themes/default/templates/api.html.ep:57 themes/default/templates/api.html.ep:75
+#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:144 themes/default/templates/api.html.ep:17 themes/default/templates/api.html.ep:31 themes/default/templates/api.html.ep:52 themes/default/templates/api.html.ep:70
 msgid "JSON: success"
 msgstr "JSON : succès"
 
-#: themes/default/templates/layouts/default.html.ep:56
+#: themes/default/templates/layouts/default.html.ep:37
 msgid "License:"
 msgstr "Licence :"
 
@@ -157,7 +169,7 @@ msgstr "Licence :"
 msgid "Login"
 msgstr "Connexion"
 
-#: themes/default/templates/layouts/default.html.ep:62
+#: themes/default/templates/layouts/default.html.ep:43
 msgid "Logout"
 msgstr "Déconnexion"
 
@@ -165,7 +177,7 @@ msgstr "Déconnexion"
 msgid "Logout from admin stats"
 msgstr "Déconnexion des stats admin"
 
-#: themes/default/templates/stats.html.ep:69
+#: themes/default/templates/stats.html.ep:84
 msgid "Next"
 msgstr "Suivant"
 
@@ -178,7 +190,7 @@ msgstr ""
 "Il n’y a plus d’URL raccourcie disponible. Veuillez réessayer ou contactez "
 "l’administrateur sur %1. Rappel de l’URL à raccourcir : %2"
 
-#: themes/default/templates/api.html.ep:116 themes/default/templates/api.html.ep:14 themes/default/templates/api.html.ep:143 themes/default/templates/api.html.ep:30 themes/default/templates/api.html.ep:46 themes/default/templates/api.html.ep:88
+#: themes/default/templates/api.html.ep:111 themes/default/templates/api.html.ep:138 themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:41 themes/default/templates/api.html.ep:83 themes/default/templates/api.html.ep:9
 msgid "Parameters:"
 msgstr "Paramètres :"
 
@@ -186,48 +198,52 @@ msgstr "Paramètres :"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: lib/Lstu.pm:246 themes/default/templates/api.html.ep:23
+#: lib/Lstu.pm:317 themes/default/templates/api.html.ep:18
 msgid "Please, check your credentials: unable to authenticate."
 msgstr "Impossible de s’authentifier, veuillez vérifier vos identifiants"
 
-#: themes/default/templates/stats.html.ep:67
+#: themes/default/templates/stats.html.ep:82
 msgid "Previous"
 msgstr "Précédent"
 
-#: themes/default/templates/stats.html.ep:35
+#: themes/default/templates/stats.html.ep:50
 msgid "QRCode"
 msgstr "QRCode"
 
-#: themes/default/templates/api.html.ep:101 themes/default/templates/api.html.ep:128 themes/default/templates/api.html.ep:135 themes/default/templates/api.html.ep:151 themes/default/templates/api.html.ep:24 themes/default/templates/api.html.ep:37 themes/default/templates/api.html.ep:59
+#: themes/default/templates/api.html.ep:123 themes/default/templates/api.html.ep:130 themes/default/templates/api.html.ep:146 themes/default/templates/api.html.ep:19 themes/default/templates/api.html.ep:32 themes/default/templates/api.html.ep:54 themes/default/templates/api.html.ep:96
 msgid "Response for HTML format"
 msgstr "Réponse pour le format HTML"
 
-#: themes/default/templates/api.html.ep:100
+#: themes/default/templates/api.html.ep:95
 msgid "Response for JSON format"
 msgstr "Réponse pour le format JSON"
 
-#: themes/default/templates/api.html.ep:107 themes/default/templates/api.html.ep:122 themes/default/templates/api.html.ep:147 themes/default/templates/api.html.ep:20 themes/default/templates/api.html.ep:34 themes/default/templates/api.html.ep:52 themes/default/templates/api.html.ep:64 themes/default/templates/api.html.ep:73 themes/default/templates/api.html.ep:95
+#: themes/default/templates/api.html.ep:102 themes/default/templates/api.html.ep:117 themes/default/templates/api.html.ep:142 themes/default/templates/api.html.ep:15 themes/default/templates/api.html.ep:29 themes/default/templates/api.html.ep:47 themes/default/templates/api.html.ep:59 themes/default/templates/api.html.ep:68 themes/default/templates/api.html.ep:90
 msgid "Response:"
 msgstr "Réponse :"
 
-#: themes/default/templates/stats.html.ep:30
+#: themes/default/templates/stats.html.ep:45
 msgid "Shortened URL"
 msgstr "URL raccourcie"
 
-#: themes/default/templates/api.html.ep:132 themes/default/templates/api.html.ep:29
+#: themes/default/templates/api.html.ep:127 themes/default/templates/api.html.ep:24
 msgid "Should always be successful"
 msgstr "Devrait toujours retourner un succès"
 
-#: themes/default/templates/layouts/default.html.ep:64 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
+#: themes/default/templates/layouts/default.html.ep:45 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
 msgstr "Connexion"
 
-#: themes/default/templates/layouts/default.html.ep:61 themes/default/templates/layouts/default.html.ep:67 themes/default/templates/stats.html.ep:4
+#: lib/Lstu/Controller/Lstu.pm:188
+msgid "Sorry, unable to parse the provided file"
+msgstr "Désolé, impossible d’analyser le fichier fourni "
+
+#: themes/default/templates/layouts/default.html.ep:42 themes/default/templates/layouts/default.html.ep:48 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
 msgstr "Statistiques"
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:159
+#: lib/Lstu/Plugin/Helpers.pm:169
 msgid ""
 "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I "
 "refuse to shorten it."
@@ -236,7 +252,7 @@ msgstr ""
 "par Spamhaus. Je refuse de la raccourcir."
 
 #. ($c->config('max_redir')
-#: lib/Lstu/Plugin/Helpers.pm:175
+#: lib/Lstu/Plugin/Helpers.pm:185
 msgid ""
 "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, "
 "phishing, etc.). I refuse to shorten it."
@@ -246,7 +262,7 @@ msgstr ""
 "raccourcir."
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:151
+#: lib/Lstu/Plugin/Helpers.pm:161
 msgid ""
 "The URL you want to shorten comes from a domain (%1) that is blacklisted on "
 "this server (usually because of spammers that use this domain)."
@@ -256,7 +272,7 @@ msgstr ""
 "domaine)."
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Lstu.pm:281 lib/Lstu/Controller/Lstu.pm:341
+#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Lstu.pm:327 lib/Lstu/Controller/Lstu.pm:375
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL raccourcie %1 n’existe pas"
 
@@ -277,7 +293,7 @@ msgstr ""
 "caractères - et _, ne peut être \"a\", \"api\", \"d\" ou \"stats\" ou se "
 "terminer par \".json\". Rappel de l’URL à raccourcir : %1"
 
-#: themes/default/templates/api.html.ep:118
+#: themes/default/templates/api.html.ep:113
 msgid ""
 "To do an admin login, set it to the password defined in the settings "
 "(\"adminpwd\" or \"hashed_adminpwd\")"
@@ -285,7 +301,7 @@ msgstr ""
 "Pour se connecter en tant qu’admin, mettez le mot de passe défini dans les "
 "paramètres de configuration (\"adminpwd\" ou \"hashed_adminpwd\")"
 
-#: themes/default/templates/api.html.ep:119
+#: themes/default/templates/api.html.ep:114
 msgid "To do an admin logout, set it to \"logout\"."
 msgstr ""
 "Pour se déconnecter de l’administration, définissez ce paramètre à "
@@ -295,11 +311,11 @@ msgstr ""
 msgid "Too many bad passwords. You're banned."
 msgstr "Trop de mauvais mots de passe. Vous êtes banni."
 
-#: themes/default/templates/api.html.ep:100 themes/default/templates/api.html.ep:109 themes/default/templates/stats.html.ep:29
+#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:95 themes/default/templates/stats.html.ep:44
 msgid "URL"
 msgstr "URL"
 
-#: themes/default/templates/api.html.ep:48 themes/default/templates/index.html.ep:5 themes/default/templates/index.html.ep:6
+#: themes/default/templates/api.html.ep:43 themes/default/templates/index.html.ep:5 themes/default/templates/index.html.ep:6
 msgid "URL to shorten"
 msgstr "URL à raccourcir"
 
@@ -312,15 +328,15 @@ msgstr ""
 "Vous avez demandé à réduire trop d’URLs en trop peu de temps. Vous êtes "
 "banni pour %1 heure(s)."
 
-#: lib/Lstu.pm:237 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:126 themes/default/templates/api.html.ep:22
+#: lib/Lstu.pm:308 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
 msgid "You have been successfully logged in."
 msgstr "Vous avez été connecté·e avec succès."
 
-#: lib/Lstu.pm:276 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:134 themes/default/templates/api.html.ep:36 themes/default/templates/logout.html.ep:3
+#: lib/Lstu.pm:347 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr "Vous avez été déconnecté·e avec succès."
 
-#: themes/default/templates/api.html.ep:142
+#: themes/default/templates/api.html.ep:137
 msgid ""
 "You must be logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting) "
 "to use it."
@@ -328,15 +344,15 @@ msgstr ""
 "Vous devez être connecté·e en tant qu’admin (paramètre \"adminpwd\" ou "
 "\"hashed_adminpwd\") pour l'utiliser."
 
-#: themes/default/templates/api.html.ep:44 themes/default/templates/api.html.ep:82
+#: themes/default/templates/api.html.ep:39 themes/default/templates/api.html.ep:77
 msgid "You must be logged in to use it."
 msgstr "Vous devez être connecté·e pour l’utiliser"
 
-#: themes/default/templates/api.html.ep:135
+#: themes/default/templates/api.html.ep:130
 msgid "You will be redirected to Lstu statistics page"
 msgstr "Vous serez redirigé·e vers la page de statistiques de Lstu"
 
-#: themes/default/templates/api.html.ep:151
+#: themes/default/templates/api.html.ep:146
 msgid ""
 "You will be redirected to Lstu statistics page with a message in case of "
 "failure"
@@ -344,11 +360,11 @@ msgstr ""
 "Vous serez redirigé·e vers la page de statistiques de Lstu avec un message "
 "en cas d’échec"
 
-#: themes/default/templates/api.html.ep:37
+#: themes/default/templates/api.html.ep:32
 msgid "You will be redirected to Lstu successfully logged out interface"
 msgstr "Vous serez redirigé vers l’interface de déconnexion réussie de Lstu"
 
-#: themes/default/templates/api.html.ep:24
+#: themes/default/templates/api.html.ep:19
 msgid ""
 "You will be redirected to the Lstu classic interface where you will be able "
 "to shorten URLs"
@@ -356,7 +372,7 @@ msgstr ""
 "Vous serez redirigé vers l’interface normale de Lstu où vous pourrez "
 "raccourcirs des URL"
 
-#: themes/default/templates/api.html.ep:59
+#: themes/default/templates/api.html.ep:54
 msgid ""
 "You will be redirected to the Lstu classic interface with a message giving "
 "the shortened URL"
@@ -364,7 +380,7 @@ msgstr ""
 "Vous aurez l’interface normale de Lstu avec un message indiquant l’URL "
 "raccourcie"
 
-#: themes/default/templates/api.html.ep:67
+#: themes/default/templates/api.html.ep:62
 msgid ""
 "You will be redirected to the targeted URL or to the Lstu interface with a "
 "message giving the failure reason"
@@ -372,7 +388,7 @@ msgstr ""
 "Vous serez redirigé vers l’URL cible ou vers la page d’accueil de Lstu avec "
 "un message indiquant la raison de l’échec"
 
-#: themes/default/templates/api.html.ep:128
+#: themes/default/templates/api.html.ep:123
 msgid ""
 "You will have the statistics page with the admin stats if you're succesfully "
 "logged in, or your stats and a failure message otherwise"
@@ -381,30 +397,30 @@ msgstr ""
 "êtes connecté·e avec succès, ou sinon vos statistiques avec un message "
 "d’échec"
 
-#: lib/Lstu/Controller/Admin.pm:142
+#: lib/Lstu/Controller/Admin.pm:145
 msgid "You're not authenticated as the admin"
 msgstr "Vous n’êtes pas authentifié·e en tant qu’admin"
 
-#: themes/default/templates/api.html.ep:16
+#: themes/default/templates/api.html.ep:11
 msgid "Your login"
 msgstr "Votre identifiant"
 
-#: themes/default/templates/api.html.ep:17
+#: themes/default/templates/api.html.ep:12
 msgid "Your password"
 msgstr "Votre mot de passe"
 
-#: themes/default/templates/api.html.ep:100 themes/default/templates/api.html.ep:109
+#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:95
 msgid "integer, how many unique visits of the shortened URL"
 msgstr "entier, combien de visites uniques a reçu l'URL raccourcie"
 
-#: themes/default/templates/api.html.ep:16 themes/default/templates/api.html.ep:17 themes/default/templates/api.html.ep:48
+#: themes/default/templates/api.html.ep:11 themes/default/templates/api.html.ep:12 themes/default/templates/api.html.ep:43
 msgid "mandatory"
 msgstr "obligatoire"
 
-#: themes/default/templates/api.html.ep:118 themes/default/templates/api.html.ep:119 themes/default/templates/api.html.ep:120 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:32 themes/default/templates/api.html.ep:49 themes/default/templates/api.html.ep:50 themes/default/templates/api.html.ep:91 themes/default/templates/api.html.ep:93
+#: themes/default/templates/api.html.ep:113 themes/default/templates/api.html.ep:114 themes/default/templates/api.html.ep:115 themes/default/templates/api.html.ep:13 themes/default/templates/api.html.ep:140 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:44 themes/default/templates/api.html.ep:45 themes/default/templates/api.html.ep:86 themes/default/templates/api.html.ep:88
 msgid "optional"
 msgstr "facultatif"
 
-#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:140 themes/default/templates/api.html.ep:62 themes/default/templates/api.html.ep:71 themes/default/templates/api.html.ep:97
+#: themes/default/templates/api.html.ep:135 themes/default/templates/api.html.ep:57 themes/default/templates/api.html.ep:66 themes/default/templates/api.html.ep:92 themes/default/templates/api.html.ep:99
 msgid "shortened_url"
 msgstr "url_raccourcie"
