@@ -18,7 +18,7 @@ push-locales:
 	zanata-cli -q -B push
 
 pull-locales:
-	zanata-cli -q -B pull
+	zanata-cli -q -B pull --min-doc-percent 40
 
 stats-locales:
 	zanata-cli -q stats
