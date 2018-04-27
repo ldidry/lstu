@@ -2,6 +2,7 @@ Revision history for Perl application Lstu
 
 0.17 ????-??-??
 	- Import URL into cookie by JSON upload
+	- More dependencies become optional to install
 	- Some refactoring
 	- Add LDAP tests to test suite
 
