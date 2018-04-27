@@ -31,6 +31,9 @@ variables:
   retry: 2
   dependencies:
     - carton_sqlite
+  services:
+    - name: rroemhild/test-openldap
+      alias: rroemhild-test-openldap
   coverage: '/Total .*\d+\.\d+$/'
 .pg_template: &pg_definition
   stage: tests
@@ -40,6 +43,8 @@ variables:
   services:
     - name: postgres:9.6
       alias: postgres
+    - name: rroemhild/test-openldap
+      alias: rroemhild-test-openldap
   coverage: '/Total .*\d+\.\d+$/'
 .mysql_template: &mysql_definition
   stage: tests
@@ -49,6 +54,8 @@ variables:
   services:
     - name: mariadb:10.1
       alias: mariadb
+    - name: rroemhild/test-openldap
+      alias: rroemhild-test-openldap
   coverage: '/Total .*\d+\.\d+$/'
 
 ### Podcheck

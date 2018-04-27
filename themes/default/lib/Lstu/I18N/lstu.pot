@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:101
+#: lib/Lstu/Controller/URL.pm:100
 msgid "%1 is not a valid URL."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Failure reason"
 msgstr ""
 
-#: lib/Lstu/Controller/Lstu.pm:186
+#: lib/Lstu/Controller/Stats.pm:43
 msgid "File imported"
 msgstr ""
 
@@ -154,7 +154,7 @@ msgid "Next"
 msgstr ""
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:95
+#: lib/Lstu/Controller/URL.pm:94
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
@@ -166,7 +166,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: lib/Lstu.pm:317 themes/default/templates/api.html.ep:18
+#: lib/Lstu/Controller/Authent.pm:35 themes/default/templates/api.html.ep:18
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
@@ -202,7 +202,7 @@ msgstr ""
 msgid "Signin"
 msgstr ""
 
-#: lib/Lstu/Controller/Lstu.pm:188
+#: lib/Lstu/Controller/Stats.pm:45
 msgid "Sorry, unable to parse the provided file"
 msgstr ""
 
@@ -226,17 +226,17 @@ msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted 
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Lstu.pm:327 lib/Lstu/Controller/Lstu.pm:375
+#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:195
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:58
+#: lib/Lstu/Controller/URL.pm:57
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:56
+#: lib/Lstu/Controller/URL.pm:55
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
 
@@ -261,15 +261,15 @@ msgid "URL to shorten"
 msgstr ""
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:32
+#: lib/Lstu/Controller/URL.pm:31
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr ""
 
-#: lib/Lstu.pm:308 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
+#: lib/Lstu/Controller/Admin.pm:52 lib/Lstu/Controller/Authent.pm:26 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
 msgid "You have been successfully logged in."
 msgstr ""
 
-#: lib/Lstu.pm:347 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
+#: lib/Lstu/Controller/Admin.pm:73 lib/Lstu/Controller/Authent.pm:65 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr ""
 
