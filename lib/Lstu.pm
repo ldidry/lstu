@@ -140,7 +140,7 @@ sub startup {
                         my @entries = $mesg->entries;
                         my $entry   = $entries[0];
 
-                        if (defined $entry) {
+                        unless (defined $entry) {
                             $c->app->log->info("[LDAP INFO] Authentication failed - User $username filtered out, IP: ".$c->ip);
                             return undef;
                         }
