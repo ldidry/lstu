@@ -1,6 +1,6 @@
 Revision history for Perl application Lstu
 
-0.17 ????-??-??
+0.17 2018-04-28
 	- Import URL into cookie by JSON upload
 	- Add X-Content-Type-Options, X-XSS-Protection and X-Frame-Options headers
 	- More dependencies become optional to install
