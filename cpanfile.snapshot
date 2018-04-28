@@ -1177,8 +1177,8 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 7.55
       SQL::Abstract 1.81
-  Mojolicious-7.75
-    pathname: S/SR/SRI/Mojolicious-7.75.tar.gz
+  Mojolicious-7.76
+    pathname: S/SR/SRI/Mojolicious-7.76.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1247,7 +1247,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.75
+      Mojolicious 7.76
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
