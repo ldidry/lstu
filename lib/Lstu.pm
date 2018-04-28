@@ -14,25 +14,27 @@ sub startup {
 
     my $config = $self->plugin('Config' => {
         default =>  {
-            prefix            => '/',
-            provisioning      => 100,
-            provis_step       => 5,
-            length            => 8,
-            secret            => ['hfudsifdsih'],
-            page_offset       => 10,
-            theme             => 'default',
-            ban_min_strike    => 3,
-            ban_whitelist     => [],
-            minion            => {
+            prefix                 => '/',
+            provisioning           => 100,
+            provis_step            => 5,
+            length                 => 8,
+            secret                 => ['hfudsifdsih'],
+            page_offset            => 10,
+            theme                  => 'default',
+            ban_min_strike         => 3,
+            ban_whitelist          => [],
+            minion                 => {
                 enabled => 0,
                 db_path => 'minion.db'
             },
-            session_duration  => 3600,
-            dbtype            => 'sqlite',
-            max_redir         => 2,
-            skip_spamhaus     => 0,
-            memcached_servers => [],
-            csp               => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
+            session_duration       => 3600,
+            dbtype                 => 'sqlite',
+            max_redir              => 2,
+            skip_spamhaus          => 0,
+            memcached_servers      => [],
+            x_frame_options        => 'DENY',
+            x_content_type_options => 'nosniff',
+            x_xss_protection       => '1; mode=block',
         }
     });
 
@@ -62,14 +64,8 @@ sub startup {
     # Piwik
     $self->plugin('Piwik');
 
-    # Assets Cache headers
-    $self->plugin('StaticCache' => { even_in_dev => 1, max_age => 2592000 });
-
     # Static assets gzipping
     $self->plugin('GzipStatic');
-
-    # Add CSP Header
-    $self->plugin('CSPHeader', csp => $config->{'csp'}) if $config->{'csp'};
 
     # URL cache
     if (scalar(@{$config->{memcached_servers}})) {
@@ -82,6 +78,9 @@ sub startup {
             }
         });
     }
+
+    # Headers
+    $self->plugin('Lstu::Plugin::Headers');
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');

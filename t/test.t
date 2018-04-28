@@ -51,6 +51,10 @@ sleep 3;
 # Home page
 $t->get_ok('/')
     ->status_is(200)
+    ->header_is('X-Frame-Options' => 'DENY')
+    ->header_is('X-XSS-Protection' => '1; mode=block')
+    ->header_is('X-Content-Type-Options' => 'nosniff')
+    ->header_is('Content-Security-Policy' => "base-uri 'self'; default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; script-src 'self'; style-src 'self'")
     ->content_like(qr/Lstu/i);
 
 # Create short URL
@@ -409,6 +413,26 @@ $t->get_ok('/login')
 # Test redirection
 $t->get_ok($a)
     ->status_is(301);
+
+# Restore configuration
+$config_file->spurt($config_orig);
+
+## Test headers modifications
+$config_content = $config_orig;
+$config_content =~ s/^( +)#?x_frame_options => 'DENY',/$1x_frame_options => 'SAMEORIGIN',/gm;
+$config_content =~ s/^( +)#?x_xss_protection => '1; mode=block',/$1x_xss_protection => '1',/gm;
+$config_content =~ s/^( +)#?x_content_type_options => 'nosniff',/$1x_content_type_options => '',/gm;
+$config_file->spurt($config_content);
+
+$t = Test::Mojo->new('Lstu');
+
+# Home page
+$t->get_ok('/')
+    ->status_is(200)
+    ->header_is('X-Frame-Options' => 'SAMEORIGIN')
+    ->header_is('X-XSS-Protection' => '1')
+    ->header_isnt('X-Content-Type-Options' => 'nosniff')
+    ->header_is('Content-Security-Policy' => "base-uri 'self'; default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'");
 
 # Restore configuration
 $config_file->spurt($config_orig);
