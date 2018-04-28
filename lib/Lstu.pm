@@ -2,8 +2,6 @@
 package Lstu;
 use Mojo::Base 'Mojolicious';
 use Mojo::JSON;
-use Net::LDAP;
-use Apache::Htpasswd;
 use Lstu::DB::URL;
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
@@ -87,6 +85,12 @@ sub startup {
 
     # Authentication (if configured)
     if (defined($self->config('ldap')) || defined($self->config('htpasswd'))) {
+        if (defined($self->config('ldap'))) {
+            require Net::LDAP;
+        }
+        if (defined($self->config('htpasswd'))) {
+            require Apache::Htpasswd;
+        }
         die 'Unable to read '.$self->config('htpasswd') if (defined($self->config('htpasswd')) && !-r $self->config('htpasswd'));
         $self->plugin('Authentication' =>
             {
