@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:101
+#: lib/Lstu/Controller/URL.pm:100
 msgid "%1 is not a valid URL."
 msgstr ""
 
@@ -24,7 +24,7 @@ msgstr ""
 msgid "A page with a table containing the same informations that the JSON response"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:32
+#: themes/default/templates/layouts/default.html.ep:38
 msgid "About"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr ""
 msgid "Bad password"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:44
+#: themes/default/templates/layouts/default.html.ep:50
 msgid "Browser extensions"
 msgstr ""
 
@@ -44,11 +44,11 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:31
+#: themes/default/templates/stats.html.ep:46
 msgid "Counter"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:32
+#: themes/default/templates/stats.html.ep:47
 msgid "Created"
 msgstr ""
 
@@ -56,12 +56,20 @@ msgstr ""
 msgid "Custom shortened text"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:37
+#: themes/default/templates/stats.html.ep:52
 msgid "Delete"
+msgstr ""
+
+#: themes/default/templates/stats.html.ep:36
+msgid "Export your URLs"
 msgstr ""
 
 #: themes/default/templates/api.html.ep:105 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:71
 msgid "Failure reason"
+msgstr ""
+
+#: lib/Lstu/Controller/Stats.pm:43
+msgid "File imported"
 msgstr ""
 
 #: themes/default/templates/api.html.ep:101
@@ -84,7 +92,7 @@ msgstr ""
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:74
+#: themes/default/templates/stats.html.ep:89
 msgid "Home"
 msgstr ""
 
@@ -109,6 +117,10 @@ msgstr ""
 msgid "If you are logged in as admin, you can provide a \"page\" parameter"
 msgstr ""
 
+#: themes/default/templates/stats.html.ep:32 themes/default/templates/stats.html.ep:35
+msgid "Import URLs"
+msgstr ""
+
 #: themes/default/templates/api.html.ep:79
 msgid "It will use Lstu's cookies to know which shortened URL it will return statistics for."
 msgstr ""
@@ -121,7 +133,7 @@ msgstr ""
 msgid "JSON: success"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:31
+#: themes/default/templates/layouts/default.html.ep:37
 msgid "License:"
 msgstr ""
 
@@ -129,7 +141,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:37
+#: themes/default/templates/layouts/default.html.ep:43
 msgid "Logout"
 msgstr ""
 
@@ -137,12 +149,12 @@ msgstr ""
 msgid "Logout from admin stats"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:69
+#: themes/default/templates/stats.html.ep:84
 msgid "Next"
 msgstr ""
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:95
+#: lib/Lstu/Controller/URL.pm:94
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
@@ -154,15 +166,15 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: lib/Lstu.pm:317 themes/default/templates/api.html.ep:18
+#: lib/Lstu/Controller/Authent.pm:35 themes/default/templates/api.html.ep:18
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:67
+#: themes/default/templates/stats.html.ep:82
 msgid "Previous"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:35
+#: themes/default/templates/stats.html.ep:50
 msgid "QRCode"
 msgstr ""
 
@@ -178,7 +190,7 @@ msgstr ""
 msgid "Response:"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:30
+#: themes/default/templates/stats.html.ep:45
 msgid "Shortened URL"
 msgstr ""
 
@@ -186,11 +198,15 @@ msgstr ""
 msgid "Should always be successful"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:39 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
+#: themes/default/templates/layouts/default.html.ep:45 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:36 themes/default/templates/layouts/default.html.ep:42 themes/default/templates/stats.html.ep:4
+#: lib/Lstu/Controller/Stats.pm:45
+msgid "Sorry, unable to parse the provided file"
+msgstr ""
+
+#: themes/default/templates/layouts/default.html.ep:42 themes/default/templates/layouts/default.html.ep:48 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
 msgstr ""
 
@@ -210,17 +226,17 @@ msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted 
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Lstu.pm:281 lib/Lstu/Controller/Lstu.pm:329
+#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:195
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:58
+#: lib/Lstu/Controller/URL.pm:57
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:56
+#: lib/Lstu/Controller/URL.pm:55
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
 
@@ -236,7 +252,7 @@ msgstr ""
 msgid "Too many bad passwords. You're banned."
 msgstr ""
 
-#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:95 themes/default/templates/stats.html.ep:29
+#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:95 themes/default/templates/stats.html.ep:44
 msgid "URL"
 msgstr ""
 
@@ -245,15 +261,15 @@ msgid "URL to shorten"
 msgstr ""
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:32
+#: lib/Lstu/Controller/URL.pm:31
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr ""
 
-#: lib/Lstu.pm:308 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
+#: lib/Lstu/Controller/Admin.pm:52 lib/Lstu/Controller/Authent.pm:26 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
 msgid "You have been successfully logged in."
 msgstr ""
 
-#: lib/Lstu.pm:347 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
+#: lib/Lstu/Controller/Admin.pm:73 lib/Lstu/Controller/Authent.pm:65 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr ""
 

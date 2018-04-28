@@ -114,7 +114,7 @@ sub _provisioning {
              my $short;
              do {
                  $short = $c->shortener($c->config('length'));
-             } while ($db_url->exist($short));
+             } while ($db_url->exist($short) || $short =~ m#^(a|d|cookie|stats|fullstats|login|logout|api)$#);
 
              $db_url->short($short)->write;
          }

@@ -50,8 +50,12 @@ sleep 3;
 
 # Home page
 $t->get_ok('/')
-  ->status_is(200)
-  ->content_like(qr/Lstu/i);
+    ->status_is(200)
+    ->header_is('X-Frame-Options' => 'DENY')
+    ->header_is('X-XSS-Protection' => '1; mode=block')
+    ->header_is('X-Content-Type-Options' => 'nosniff')
+    ->header_is('Content-Security-Policy' => "base-uri 'self'; default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; script-src 'self'; style-src 'self'")
+    ->content_like(qr/Lstu/i);
 
 # Create short URL
 $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
@@ -354,6 +358,81 @@ like($search, qr/$a/m, 'Test url --search command');
 
 my $remove = `MOJO_CONFIG=$cfile carton exec script/lstu url --remove $a --yes`;
 like($remove, qr/Success/m, 'Test url --remove command');
+
+# Restore configuration
+$config_file->spurt($config_orig);
+
+## Test LDAP
+$config_content = $config_orig;
+$config_content =~ s/^( +)#?ldap => \{ uri/$1ldap => { uri/gm;
+$config_file->spurt($config_content);
+
+Lstu::DB::URL->new(app => $m)->delete_all;
+$t = Test::Mojo->new('Lstu');
+
+# Give time to provision some short URLs
+sleep 3;
+
+$t->get_ok('/')
+    ->status_is(302);
+
+$t->get_ok('/login')
+    ->status_is(200)
+    ->content_like(qr/Signin/i);
+
+$t->post_ok('/a' => form => { lsturl => 'https://google.com', format => 'json' })
+    ->status_is(302);
+
+$t->post_ok('/login' => form => { login => 'zoidberg', password => 'zoidberg' })
+    ->status_is(302);
+#
+# Create short URL
+$t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
+    ->status_is(200)
+    ->json_has('url', 'short', 'success', 'qrcode')
+    ->json_is('/success' => true, '/url' => 'https://lstu.fr')
+    ->json_like('/short' => qr#http://127\.0\.0\.1:\d+/[-_a-zA-Z0-9]{8}#);
+
+$a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');
+
+# Test redirection
+$t->get_ok($a)
+    ->status_is(301);
+
+$t->get_ok('/logout')
+    ->status_is(200)
+    ->content_like(qr/You have been successfully logged out\./);
+
+$t->get_ok('/')
+    ->status_is(302);
+
+$t->get_ok('/login')
+    ->status_is(200)
+    ->content_like(qr/Signin/i);
+
+# Test redirection
+$t->get_ok($a)
+    ->status_is(301);
+
+# Restore configuration
+$config_file->spurt($config_orig);
+
+## Test headers modifications
+$config_content = $config_orig;
+$config_content =~ s/^( +)#?x_frame_options => 'DENY',/$1x_frame_options => 'SAMEORIGIN',/gm;
+$config_content =~ s/^( +)#?x_xss_protection => '1; mode=block',/$1x_xss_protection => '1',/gm;
+$config_content =~ s/^( +)#?x_content_type_options => 'nosniff',/$1x_content_type_options => '',/gm;
+$config_file->spurt($config_content);
+
+$t = Test::Mojo->new('Lstu');
+
+# Home page
+$t->get_ok('/')
+    ->status_is(200)
+    ->header_is('X-Frame-Options' => 'SAMEORIGIN')
+    ->header_is('X-XSS-Protection' => '1')
+    ->header_isnt('X-Content-Type-Options' => 'nosniff')
+    ->header_is('Content-Security-Policy' => "base-uri 'self'; default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'");
 
 # Restore configuration
 $config_file->spurt($config_orig);

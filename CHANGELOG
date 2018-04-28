@@ -1,5 +1,12 @@
 Revision history for Perl application Lstu
 
+0.17 ????-??-??
+	- Import URL into cookie by JSON upload
+	- Add X-Content-Type-Options, X-XSS-Protection and X-Frame-Options headers
+	- More dependencies become optional to install
+	- Some refactoring
+	- Add LDAP tests to test suite
+
 0.16-1 2018-04-27
 	- Fix bug in LDAP authentication
 

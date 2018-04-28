@@ -14,25 +14,27 @@ sub startup {
 
     my $config = $self->plugin('Config' => {
         default =>  {
-            prefix            => '/',
-            provisioning      => 100,
-            provis_step       => 5,
-            length            => 8,
-            secret            => ['hfudsifdsih'],
-            page_offset       => 10,
-            theme             => 'default',
-            ban_min_strike    => 3,
-            ban_whitelist     => [],
-            minion            => {
+            prefix                 => '/',
+            provisioning           => 100,
+            provis_step            => 5,
+            length                 => 8,
+            secret                 => ['hfudsifdsih'],
+            page_offset            => 10,
+            theme                  => 'default',
+            ban_min_strike         => 3,
+            ban_whitelist          => [],
+            minion                 => {
                 enabled => 0,
                 db_path => 'minion.db'
             },
-            session_duration  => 3600,
-            dbtype            => 'sqlite',
-            max_redir         => 2,
-            skip_spamhaus     => 0,
-            memcached_servers => [],
-            csp               => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
+            session_duration       => 3600,
+            dbtype                 => 'sqlite',
+            max_redir              => 2,
+            skip_spamhaus          => 0,
+            memcached_servers      => [],
+            x_frame_options        => 'DENY',
+            x_content_type_options => 'nosniff',
+            x_xss_protection       => '1; mode=block',
         }
     });
 
@@ -62,14 +64,8 @@ sub startup {
     # Piwik
     $self->plugin('Piwik');
 
-    # Assets Cache headers
-    $self->plugin('StaticCache' => { even_in_dev => 1, max_age => 2592000 });
-
     # Static assets gzipping
     $self->plugin('GzipStatic');
-
-    # Add CSP Header
-    $self->plugin('CSPHeader', csp => $config->{'csp'}) if $config->{'csp'};
 
     # URL cache
     if (scalar(@{$config->{memcached_servers}})) {
@@ -82,6 +78,9 @@ sub startup {
             }
         });
     }
+
+    # Headers
+    $self->plugin('Lstu::Plugin::Headers');
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');
@@ -284,75 +283,18 @@ sub startup {
 
     if (defined $self->config('ldap') || defined $self->config('htpasswd')) {
         # Login page
-        $r->get('/login' => sub {
-            my $c = shift;
-            if ($c->is_user_authenticated) {
-                $c->redirect_to('index');
-            } else {
-                $c->render(template => 'login');
-            }
-        });
-        # Authentication
-        $r->post('/login' => sub {
-            my $c = shift;
-            my $login = $c->param('login');
-            my $pwd   = $c->param('password');
+        $r->get('/login')
+            ->to('Authent#index')
+            ->name('login');
 
-            if($c->authenticate($login, $pwd)) {
-                $c->respond_to(
-                    json => sub {
-                        my $c = shift;
-                        $c->render(
-                            json => {
-                                success => Mojo::JSON->true,
-                                msg     => $c->l('You have been successfully logged in.')
-                            }
-                        );
-                    },
-                    any => sub {
-                        $c->redirect_to('index');
-                    }
-                );
-            } else {
-                my $msg = $c->l('Please, check your credentials: unable to authenticate.');
-                $c->respond_to(
-                    json => sub {
-                        my $c = shift;
-                        $c->render(
-                            json => {
-                                success => Mojo::JSON->false,
-                                msg     => $msg
-                            }
-                        );
-                    },
-                    any => sub {
-                        $c->stash(msg => $msg);
-                        $c->render(template => 'login')
-                    }
-                );
-            }
-        });
+        # Authentication
+        $r->post('/login')
+            ->to('Authent#login');
+
         # Logout page
-        $r->get('/logout' => sub {
-            my $c = shift;
-            if ($c->is_user_authenticated) {
-                $c->logout;
-            }
-            $c->respond_to(
-                json => sub {
-                    my $c = shift;
-                    $c->render(
-                        json => {
-                            success => Mojo::JSON->true,
-                            msg     => $c->l('You have been successfully logged out.')
-                        }
-                    );
-                },
-                any => sub {
-                    $c->render(template => 'logout');
-                }
-            );
-        })->name('logout');
+        $r->get('/logout')
+            ->to('Authent#log_out')
+            ->name('logout');
     }
 
     $r->get('/api' => sub {
@@ -379,23 +321,31 @@ sub startup {
         ->name('delete');
 
     $r->post('/a')
-        ->to('Lstu#add')
+        ->to('URL#add')
         ->name('add');
 
+    $r->get('/cookie')
+        ->to('Stats#export_cookie')
+        ->name('export_cookie');
+
+    $r->post('/cookie')
+        ->to('Stats#import_cookie')
+        ->name('import_cookie');
+
     $r->get('/stats')
-        ->to('Lstu#stats')
+        ->to('Stats#stats')
         ->name('stats');
 
     $r->get('/stats/:short')
-        ->to('Lstu#stat_for_one_short')
+        ->to('Stats#stat_for_one_short')
         ->name('stat_for_one_short');
 
     $r->get('/fullstats')
-        ->to('Lstu#fullstats')
+        ->to('Stats#fullstats')
         ->name('fullstats');
 
     $r->get('/:short')
-        ->to('Lstu#get')
+        ->to('URL#get')
         ->name('short');
 }
 

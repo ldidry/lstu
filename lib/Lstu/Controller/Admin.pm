@@ -1,7 +1,7 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu::Controller::Admin;
-use Digest::SHA qw(sha256_hex);
 use Mojo::Base 'Mojolicious::Controller';
+use Digest::SHA qw(sha256_hex);
 use Lstu::DB::URL;
 use Lstu::DB::Ban;
 use Lstu::DB::Session;

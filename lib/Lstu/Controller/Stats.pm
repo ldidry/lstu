@@ -2,11 +2,8 @@
 package Lstu::Controller::Stats;
 use Mojo::Base 'Mojolicious::Controller';
 use Lstu::DB::URL;
-use Lstu::DB::Ban;
 use Lstu::DB::Session;
-use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
-use Mojo::URL;
 use Mojo::Util qw(b64_encode);
 use Image::PNG::QRCode 'qrpng';
 

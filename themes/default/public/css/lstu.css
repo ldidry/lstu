@@ -12,7 +12,7 @@ body {
     font-family: 'Henny_Penny';
     font-style: normal;
     font-weight: 400;
-    src: local('Henny Penny'), local('HennyPenny-Regular'), url(<%= url_for('/font/hennypenny.woff2') %>) format('woff2');
+    src: local('Henny Penny'), local('HennyPenny-Regular'), url('../font/hennypenny.woff2') format('woff2');
 }
 .hennypenny {
     font-family: 'Henny_Penny', cursive;

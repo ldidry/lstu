@@ -1,10 +1,6 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu::Controller::Authent;
-use Digest::SHA qw(sha256_hex);
 use Mojo::Base 'Mojolicious::Controller';
-use Lstu::DB::URL;
-use Lstu::DB::Ban;
-use Lstu::DB::Session;
 
 sub index {
     my $c = shift;
@@ -55,7 +51,7 @@ sub login {
     }
 }
 
-sub logout {
+sub log_out {
     my $c = shift;
     if ($c->is_user_authenticated) {
         $c->logout;

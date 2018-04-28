@@ -18,7 +18,13 @@
         <link rel="apple-touch-icon" sizes="120x120" href="<%= url_for('/img/lstu120.png') %>">
         <link rel="apple-touch-icon" sizes="152x152" href="<%= url_for('/img/lstu152.png') %>">
         <link rel="apple-touch-icon-precomposed" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
+    % if ($self->app->mode eq 'production') {
         %= stylesheet '/css/bootstrap-lstu.min.css'
+    % } else {
+        %= stylesheet '/css/bootstrap.min.css'
+        %= stylesheet '/css/lstu.css'
+        %= stylesheet '/css/fontelico.css'
+    % }
     </head>
     <body>
         <div class="container">

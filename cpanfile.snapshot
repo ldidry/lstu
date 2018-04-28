@@ -1177,8 +1177,8 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 7.55
       SQL::Abstract 1.81
-  Mojolicious-7.75
-    pathname: S/SR/SRI/Mojolicious-7.75.tar.gz
+  Mojolicious-7.76
+    pathname: S/SR/SRI/Mojolicious-7.76.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1247,7 +1247,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.75
+      Mojolicious 7.76
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -1322,10 +1322,10 @@ DISTRIBUTIONS
       Test::More 0
       Test::Output 1
       perl 5.010001
-  Mojolicious-Plugin-CSPHeader-0.02
-    pathname: L/LD/LDIDRY/Mojolicious-Plugin-CSPHeader-0.02.tar.gz
+  Mojolicious-Plugin-CSPHeader-0.03
+    pathname: L/LD/LDIDRY/Mojolicious-Plugin-CSPHeader-0.03.tar.gz
     provides:
-      Mojolicious::Plugin::CSPHeader 0.02
+      Mojolicious::Plugin::CSPHeader 0.03
     requirements:
       ExtUtils::MakeMaker 0
       Mojolicious 7.75

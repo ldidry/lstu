@@ -21,8 +21,20 @@
 %     if (defined(flash('msg'))) {
     <h3 class="alert alert-danger"><%= flash('msg') %></h3>
 %     }
-<br>
 % }
+
+% if (defined(flash('success_msg'))) {
+    <h3 class="alert alert-success"><%= flash('success_msg') %></h3>
+% }
+<form class="form" method="POST" action="<%== url_for 'import_cookie' %>" enctype="multipart/form-data">
+    <fieldset>
+        <label for="file"><%= l('Import URLs') %></label>
+        <input type="file" name="file" id="file" required>
+    </fieldset>
+    <%= submit_button l('Import URLs'), class => 'button' %>
+    <a href="<%= url_for 'export_cookie' %>" class="button button-outline"><%= l('Export your URLs') %></a>
+</form>
+
 <table class="table table-striped">
     <tr>
         <th>#</th>
