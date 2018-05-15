@@ -153,6 +153,15 @@ sub get {
     my $c = shift;
     my $short = $c->param('short');
 
+    if (defined($c->stash('format')) && $short eq 'robots' && $c->stash('format') eq 'txt') {
+        if ($c->app->static->file('robots.txt')) {
+            $c->res->headers->content_type('text/plain');
+            return $c->reply->static('robots.txt');
+        } else {
+            return $c->reply->not_found;
+        }
+    }
+
     my $url;
     if (scalar(@{$c->config('memcached_servers')})) {
         $url = $c->chi('lstu_urls_cache')->compute($short, undef, sub {

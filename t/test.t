@@ -57,6 +57,13 @@ $t->get_ok('/')
     ->header_is('Content-Security-Policy' => "base-uri 'self'; default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; script-src 'self'; style-src 'self'")
     ->content_like(qr/Lstu/i);
 
+# Test robots.txt
+$t->get_ok('/robots.txt')
+    ->status_is(404);
+$t->get_ok('/robots')
+    ->status_is(404);
+
+
 # Create short URL
 $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
     ->status_is(200)
@@ -68,8 +75,23 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
 $t->post_ok('/a' => form => { lsturl => 'http://lstupiioqgxmq66f.onion', 'lsturl-custom' => 'onion', format => 'json' })
     ->status_is(200)
     ->json_has('url', 'short', 'success', 'qrcode')
-    ->json_is('/success' => true, '/url' => 'https://lstu.fr', '/short' => 'http://127.0.0.1/onion');
+    ->json_is('/success' => true, '/url' => 'https://lstupiioqgxmq66f.onion', '/short' => 'http://127.0.0.1/onion');
 
+Lstu::DB::Ban->new(app => $m)->delete_all; # prevents ban
+
+# Create short URL with robots custom short
+$t->post_ok('/a' => form => { lsturl => 'http://robots-txt.com/', 'lsturl-custom' => 'robots', format => 'json' })
+    ->status_is(200)
+    ->json_has('url', 'short', 'success', 'qrcode')
+    ->json_is('/success' => true, '/url' => 'https://lstu.fr', '/short' => 'http://127.0.0.1/robots');
+
+# Test robots.txt even after creating a robots short URL
+$t->get_ok('/robots.txt')
+    ->status_is(404);
+$t->get_ok('/robots')
+    ->status_is(301);
+
+# Create short URL, with invalid argument
 # Create short URL, with invalid argument
 $t->post_ok('/a' => form => { lsturl => 'truc', format => 'json' })
     ->status_is(200)
@@ -117,7 +139,7 @@ $t->get_ok('/stats'.$short.'i')
 $t->get_ok('/fullstats')
     ->status_is(200)
     ->json_has('urls', 'empty', 'timestamp')
-    ->json_is('/urls' => 2)
+    ->json_is('/urls' => 3)
     ->json_like('/empty' => qr#\d+#, '/timestamp' => qr#[0-9]{10}#);
 
 # Needed if we use Minion for increasing counters

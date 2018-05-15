@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.17-2 2018-05-15
+	- Add ability to respond to /robots.txt either by sending the file if it exists or by answering 404
+
 0.17-1 2018-04-28
 	- Fix bug in making LDAP and Htpasswd dependencies optional
 

@@ -10,6 +10,8 @@ lstu.conf
 script/hypnotoad.pid
 .zanata-cache/*
 themes/*
+themes/default/public/robots.txt
+themes/milligram/public/robots.txt
 !themes/default
 !themes/default/*
 !themes/milligram
