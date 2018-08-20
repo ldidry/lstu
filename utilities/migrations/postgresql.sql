@@ -22,3 +22,7 @@ DROP TABLE lstu;
 CREATE INDEX IF NOT EXISTS empty_short_idx ON lstu (short) WHERE url IS NULL;
 -- 2 down
 DROP INDEX empty_short_idx;
+-- 3 up
+ALTER TABLE lstu ADD COLUMN created_by text;
+-- 3 down
+ALTER TABLE lstu DROP COLUMN created_by;

@@ -20,3 +20,17 @@ DROP TABLE lstu;
 DROP TABLE sessions;
 DROP TABLE ban;
 DROP INDEX empty_short_idx;
+-- 2 up
+ALTER TABLE lstu ADD COLUMN created_by TEXT;
+-- 2 down
+BEGIN TRANSACTION;
+    CREATE TABLE lstu_backup(
+        short     TEXT PRIMARY KEY,
+        url       TEXT,
+        counter   INTEGER,
+        timestamp INTEGER
+    );
+    INSERT INTO lstu_backup SELECT short, url, counter, timestamp FROM lstu;
+    DROP TABLE lstu;
+    ALTER TABLE lstu_backup RENAME TO lstu;
+COMMIT;
