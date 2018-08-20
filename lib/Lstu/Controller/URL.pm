@@ -14,14 +14,18 @@ sub add {
 
     $c->cleaning;
 
+    # Is the user allowed to create a short URL?
     if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {
         my $ip = $c->ip;
 
+        # Check banning
         my $banned = Lstu::DB::Ban->new(
             app    => $c,
-            ip     => $c->ip
+            ip     => $ip
         )->is_banned($c->config('ban_min_strike'));
+
         if (defined $banned) {
+            # Increase ban delay if necessary
             my $penalty = 3600;
             if ($banned->strike >= 2 * $c->config('ban_min_strike')) {
                 $penalty = 3600 * 24 * 30; # 30 days of banishing
@@ -49,26 +53,32 @@ sub add {
             $custom_url = undef if (defined($custom_url) && $custom_url eq '');
 
             my ($msg, $short);
-            if (defined($custom_url) && ($custom_url =~ m#^(a|d|cookie|stats|fullstats|login|logout|api)$# ||
-                $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/))
-            {
+            if (defined($custom_url) &&
+                (
+                    $custom_url =~ m#^(a|d|cookie|stats|fullstats|login|logout|api)$# ||
+                    $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/
+                )) {
                 $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api", "d" or "stats" or end with ".json". Your URL to shorten: %1', $url);
             } elsif (defined($custom_url) && Lstu::DB::URL->new(app => $c)->exist($custom_url) > 0) {
                 $msg = $c->l('The shortened text (%1) is already used. Please choose another one.', $custom_url);
             } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string) || (defined($url->host) && $url->host =~ m/\.onion$/)) {
                 my $res = ($url->host =~ m/\.onion$/) ? {} : $c->is_spam($url, 0);
+
+                # Check if spam
                 if ($res->{is_spam}) {
                     $msg = $res->{msg};
                 } else {
-                    my $db_url = Lstu::DB::URL->new(
-                        app    => $c,
-                        url    => $url
-                    );
+                    # Not spam, let's go
 
                     Lstu::DB::Ban->new(
                         app    => $c,
                         ip     => $ip
                     )->increment_ban_delay(1);
+
+                    my $db_url = Lstu::DB::URL->new(
+                        app    => $c,
+                        url    => $url
+                    );
 
                     if ($db_url->short && !defined($custom_url)) {
                         # Already got this URL
@@ -76,17 +86,22 @@ sub add {
                     } else {
                         if (defined($custom_url)) {
                             Lstu::DB::URL->new(
-                                app       => $c,
-                                short     => $custom_url,
-                                url       => $url,
-                                timestamp => time()
+                                app        => $c,
+                                short      => $custom_url,
+                                url        => $url,
+                                timestamp  => time(),
+                                created_by => ($c->config('log_creator_ip')) ? $ip : undef
                             )->write;
 
                             $short = $custom_url;
                         } else {
                             $db_url = Lstu::DB::URL->new(app => $c)->choose_empty;
                             if (defined $db_url) {
-                                $db_url->url($url)->timestamp(time)->write;
+                                $db_url->url($url)->timestamp(time);
+
+                                $db_url->created_by($ip) if $c->config('log_creator_ip');
+
+                                $db_url->write;
 
                                 $short = $db_url->short;
                             } else {
@@ -112,11 +127,14 @@ sub add {
             } else {
                 # Get URLs from cookie
                 my $u = (defined($c->cookie('url'))) ? decode_json $c->cookie('url') : [];
+
                 # Add the new URL
                 push @{$u}, $short;
+
                 # Make the array contain only unique URLs
                 my %k = map { $_, 1 } @{$u};
                 @{$u} = keys %k;
+
                 # And set the cookie
                 my $cookie = to_json($u);
                 $c->cookie(
@@ -145,6 +163,7 @@ sub add {
             }
         }
     } else {
+        # Not authorized
         $c->redirect_to('login');
     }
 }

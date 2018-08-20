@@ -104,7 +104,30 @@ sub is_whitelisted {
     my $c = shift;
 
     my $ip = $c->ip;
-    return scalar(grep {/$ip/} @{$c->app->config('ban_whitelist')});
+    return scalar(grep(sub { $_ eq $ip }, @{$c->app->config('ban_whitelist')}));
+}
+
+=head2 is_blacklisted
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>is_blacklisted>
+
+=item B<Arguments> : none
+
+=item B<Purpose>   : tells you if the current object is in the configured blacklisted IPs
+
+=item B<Returns>   : boolean
+
+=back
+
+=cut
+
+sub is_blacklisted {
+    my $c = shift;
+
+    my $ip = $c->ip;
+    return scalar(grep(sub { $_ eq $ip }, @{$c->app->config('ban_blacklist')}));
 }
 
 =head2 is_banned

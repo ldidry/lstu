@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ($url)
-#: lib/Lstu/Controller/URL.pm:100
+#: lib/Lstu/Controller/URL.pm:115
 msgid "%1 is not a valid URL."
 msgstr ""
 
@@ -154,7 +154,7 @@ msgid "Next"
 msgstr ""
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/URL.pm:94
+#: lib/Lstu/Controller/URL.pm:109
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
@@ -226,17 +226,17 @@ msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted 
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:204
+#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:223
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
 #. ($custom_url)
-#: lib/Lstu/Controller/URL.pm:57
+#: lib/Lstu/Controller/URL.pm:63
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
 
 #. ($url)
-#: lib/Lstu/Controller/URL.pm:55
+#: lib/Lstu/Controller/URL.pm:61
 msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgid "URL to shorten"
 msgstr ""
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/URL.pm:31
+#: lib/Lstu/Controller/URL.pm:35
 msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr ""
 
