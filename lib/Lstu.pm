@@ -27,6 +27,7 @@ sub startup {
             },
             session_duration       => 3600,
             dbtype                 => 'sqlite',
+            db_path                => 'lstu.db',
             max_redir              => 2,
             skip_spamhaus          => 0,
             memcached_servers      => [],

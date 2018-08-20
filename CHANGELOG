@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.17-3 2018-08-20
+	- Fix missing default db_path
+
 0.17-2 2018-05-15
 	- Add ability to respond to /robots.txt either by sending the file if it exists or by answering 404
 
