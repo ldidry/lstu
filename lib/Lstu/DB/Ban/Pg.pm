@@ -20,6 +20,12 @@ sub is_banned {
 
     return undef if $c->is_whitelisted;
 
+    if ($c->is_blacklisted) {
+        $c->until(time + 3600);
+        $c->strike(1 + $c->app->config('ban_min_strike'));
+        return $c;
+    }
+
     my $h = $c->app->pg->db->query('SELECT * FROM ban WHERE ip = ? AND until > ? AND strike >= ?', $c->ip, time, $ban_min_strike)->hashes;
 
     if ($h->size) {

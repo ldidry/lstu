@@ -1,5 +1,11 @@
 Revision history for Perl application Lstu
 
+0.18-0 2018-??-??
+	- Add option to store IP address of URL creator
+	- Add command to search URL with the IP address of its creator
+	- Add option to blacklist IP address
+	- Allow to remove multiple URLs at once with the CLI
+
 0.17-3 2018-08-20
 	- Fix missing default db_path
 

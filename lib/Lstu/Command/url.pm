@@ -2,6 +2,7 @@
 package Lstu::Command::url;
 use Mojo::Base 'Mojolicious::Command';
 use Mojo::Util qw(getopt);
+use Mojo::Collection 'c';
 use Lstu::DB::URL;
 use FindBin qw($Bin);
 use File::Spec qw(catfile);
@@ -32,6 +33,7 @@ sub run {
             theme                  => 'default',
             ban_min_strike         => 3,
             ban_whitelist          => [],
+            ban_blacklist          => [],
             minion                 => {
                 enabled => 0,
                 db_path => 'minion.db'
@@ -45,6 +47,7 @@ sub run {
             x_frame_options        => 'DENY',
             x_content_type_options => 'nosniff',
             x_xss_protection       => '1; mode=block',
+            log_creator_ip         => 0,
         }
     });
 
@@ -60,46 +63,71 @@ sub run {
     }
 
     getopt \@args,
-      'i|info=s'   => \my $info,
-      'r|remove=s' => \my $remove,
-      's|search=s' => \my $search,
-      'y|yes'      => \my $yes;
+      'i|info=s{1,}'   => \my @info,
+      'r|remove=s{1,}' => \my @remove,
+      's|search=s'     => \my $search,
+      'ip=s'           => \my $ip,
+      'y|yes'          => \my $yes;
 
-    if ($info) {
-        my $u = get_short($c, $info);
-        print_infos($u->to_hash) if $u;
+    if (scalar @info) {
+        c(@info)->each(
+            sub {
+                my ($e, $num) = @_;
+                my $u = get_short($c, $e);
+                print_infos($u->to_hash) if $u;
+            }
+        );
     }
-    if ($remove) {
-        my $u = get_short($c, $remove);
-        if ($u) {
-            print_infos($u->to_hash);
-            my $confirm = ($yes) ? 'yes' : undef;
-            unless (defined $confirm) {
-                say 'Are you sure you want to remove this URL? [N/y]';
-                $confirm = <STDIN>;
-                chomp $confirm;
-            }
-            if ($confirm =~ m/^y(es)?$/i) {
-                if ($u->delete) {
-                    if (scalar(@{$config->{memcached_servers}})) {
-                        $c->app->chi('lstu_urls_cache')->remove($remove);
+    if (scalar @remove) {
+        c(@remove)->each(
+            sub {
+                my ($e, $num) = @_;
+                my $u = get_short($c, $e);
+                if ($u) {
+                    print_infos($u->to_hash);
+                    my $confirm = ($yes) ? 'yes' : undef;
+                    unless (defined $confirm) {
+                        printf('Are you sure you want to remove this URL (%s)? [N/y] ', $e);
+                        $confirm = <STDIN>;
+                        chomp $confirm;
                     }
-                    say sprintf('Success: %s URL has been removed', $remove);
-                } else {
-                    say sprintf('Failure: %s URL has not been removed', $remove);
+                    if ($confirm =~ m/^y(es)?$/i) {
+                        if ($u->delete) {
+                            if (scalar(@{$config->{memcached_servers}})) {
+                                $c->app->chi('lstu_urls_cache')->remove($e);
+                            }
+                            say sprintf('Success: %s URL has been removed', $e);
+                        } else {
+                            say sprintf('Failure: %s URL has not been removed', $e);
+                        }
+                    } else {
+                        say 'Answer was not "y" or "yes". Aborting deletion.';
+                    }
                 }
-            } else {
-                say 'Answer was not "y" or "yes". Aborting deletion.';
             }
-        }
+        );
     }
     if ($search) {
         my $u = Lstu::DB::URL->new(app => $c->app)->search_url($search);
+        my @shorts;
         $u->each(sub {
             my ($e, $num) = @_;
+            push @shorts, $e->{short};
             print_infos($e);
         });
         say sprintf('%d matching URLs', $u->size);
+        say sprintf("If you want to delete those URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @shorts)) if @shorts;
+    }
+    if ($ip) {
+        my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
+        my @shorts;
+        $u->each(sub {
+            my ($e, $num) = @_;
+            push @shorts, $e->{short};
+            print_infos($e);
+        });
+        say sprintf('%d matching URLs', $u->size);
+        say sprintf("If you want to delete those URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @shorts)) if @shorts;
     }
 }
 
@@ -129,7 +157,12 @@ sub print_infos {
 EOF
         my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime($u->{timestamp});
         my $timestamp = sprintf('%d-%d-%d %d:%d:%d GMT', $year + 1900, ++$mon, $mday, $hour, $min, $sec);
-        say sprintf($msg, $u->{short}, $u->{url}, $u->{counter}, $timestamp, $u->{timestamp});
+        if ($u->{created_by}) {
+            $msg .= '    created_by : %s';
+            say sprintf($msg, $u->{short}, $u->{url}, $u->{counter}, $timestamp, $u->{timestamp}, $u->{created_by});
+        } else {
+            say sprintf($msg, $u->{short}, $u->{url}, $u->{counter}, $timestamp, $u->{timestamp});
+        }
     }
 }
 
@@ -146,6 +179,7 @@ Lstu::Command::url - Manage URL in Lstu's database
       carton exec script/lstu url --remove <short> [--yes] Remove URL (ask for confirmation unless --yes is given)
                                                Will print infos about URL before confirmation
       carton exec script/lstu url --search <url>           Search URL by its true URL (LIKE match)
+      carton exec script/lstu url --ip <ip address>        Search URL by the IP address of its creator (exact match)
 
 =cut
 

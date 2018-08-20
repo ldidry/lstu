@@ -18,3 +18,7 @@ CREATE TABLE IF NOT EXISTS ban (
 DROP TABLE ban;
 DROP TABLE sessions;
 DROP TABLE lstu;
+-- 2 up
+ALTER TABLE lstu ADD created_by text;
+-- 2 down
+ALTER TABLE lstu DROP COLUMN created_by;

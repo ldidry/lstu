@@ -28,9 +28,9 @@ sub write {
     my $c     = shift;
 
     if ($c->record) {
-        $c->app->mysql->db->query('UPDATE lstu SET url = ?, counter = ?, timestamp = ? WHERE short = ?', $c->url, $c->counter, $c->timestamp, $c->short);
+        $c->app->mysql->db->query('UPDATE lstu SET url = ?, counter = ?, timestamp = ?, created_by = ? WHERE short = ?', $c->url, $c->counter, $c->timestamp, $c->created_by, $c->short);
     } else {
-        $c->app->mysql->db->query('INSERT INTO lstu (short, url, counter, timestamp) VALUES (?, ?, ?, ?)', $c->short, $c->url, $c->counter, $c->timestamp);
+        $c->app->mysql->db->query('INSERT INTO lstu (short, url, counter, timestamp, created_by) VALUES (?, ?, ?, ?, ?)', $c->short, $c->url, $c->counter, $c->timestamp, $c->created_by);
         $c->record(1);
     }
 
@@ -120,6 +120,13 @@ sub search_url {
     $c->app->mysql->db->select('lstu', undef, { url => {-like => '%'.$s.'%'}})->hashes;
 }
 
+sub search_creator {
+    my $c = shift;
+    my $s = shift;
+
+    $c->app->mysql->db->select('lstu', undef, { created_by => $s })->hashes;
+}
+
 sub _slurp {
     my $c = shift;
 
@@ -134,6 +141,7 @@ sub _slurp {
         $c->short($h->first->{short});
         $c->counter($h->first->{counter});
         $c->timestamp($h->first->{timestamp});
+        $c->created_by($h->first->{created_by});
         $c->record(1);
     }
 

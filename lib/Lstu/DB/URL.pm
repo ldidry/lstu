@@ -6,6 +6,7 @@ has 'short';
 has 'url';
 has 'counter' => 0;
 has 'timestamp';
+has 'created_by';
 has 'app';
 
 =head1 NAME
@@ -23,15 +24,17 @@ Have a look at Lstu::DB::URL::SQLite's code: it's simple and may be more underst
 
 =over 1
 
-=item B<short>     : random string
+=item B<short>      : random string
 
-=item B<url>       : string, valid URL
+=item B<url>        : string, valid URL
 
-=item B<counter>   : integer
+=item B<counter>    : integer
 
-=item B<timestamp> : unix timestamp
+=item B<timestamp>  : unix timestamp
 
-=item B<app>       : a mojolicious object
+=item B<created_by> : the IP address of the creator
+
+=item B<app>        : a mojolicious object
 
 =back
 
@@ -81,10 +84,11 @@ sub to_hash {
     my $c = shift;
 
     return {
-        short     => $c->short,
-        url       => $c->url,
-        counter   => $c->counter,
-        timestamp => $c->timestamp
+        short      => $c->short,
+        url        => $c->url,
+        counter    => $c->counter,
+        timestamp  => $c->timestamp,
+        created_by => $c->created_by
     };
 }
 
@@ -258,6 +262,19 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 
 =back
 
+=head2 search_creator
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>search_creator($string)>
+
+=item B<Arguments> : string, IP address to search
+
+=item B<Purpose>   : search records which creator's IP address matches the given string
+
+=item B<Returns>   : a Mojo::Collection containing hashes of the matching records
+
+=back
 
 =cut
 

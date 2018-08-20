@@ -122,6 +122,14 @@
     # optional, default is an empty array
     #ban_whitelist => [],
 
+    # Ban blacklist
+    # You can blacklist IP addresses to always ban those IP addresses
+    # Be careful, the IP addresses are compared as string, not as IP addresses
+    # a network range will not work
+    # Example of valid input: ban_blacklist => ['198.51.100.42', '2001:0DB8::42'],¬
+    # optional, default is an empty array
+    #ban_blacklist => [],
+
     # define an URL to the Piwik instance and the ID of a website to track
     # set if you want to track views in Piwik
     # optional, Piwik tracking is disabled by default
@@ -243,4 +251,9 @@
     # Set to '' to disable X-XSS-Protection header
     # optional, default is '1; mode=block'
     #x_xss_protection => '1; mode=block',
+
+    # Log creator's IP address
+    # Set to 1 if you want to register the IP addresses of URL creators
+    # optional, default is 0
+    #log_creator_ip => 0,
 };
