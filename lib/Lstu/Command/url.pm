@@ -23,25 +23,29 @@ sub run {
     my $config = $c->app->plugin('Config', {
         file    => $cfile,
         default =>  {
-            prefix            => '/',
-            provisioning      => 100,
-            provis_step       => 5,
-            length            => 8,
-            secret            => ['hfudsifdsih'],
-            page_offset       => 10,
-            theme             => 'default',
-            ban_min_strike    => 3,
-            ban_whitelist     => [],
-            minion            => {
+            prefix                 => '/',
+            provisioning           => 100,
+            provis_step            => 5,
+            length                 => 8,
+            secret                 => ['hfudsifdsih'],
+            page_offset            => 10,
+            theme                  => 'default',
+            ban_min_strike         => 3,
+            ban_whitelist          => [],
+            ban_blacklist          => [],
+            minion                 => {
                 enabled => 0,
                 db_path => 'minion.db'
             },
-            session_duration  => 3600,
-            dbtype            => 'sqlite',
-            max_redir         => 2,
-            skip_spamhaus     => 0,
-            memcached_servers => [],
-            csp               => "default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' data: ; font-src 'self'",
+            session_duration       => 3600,
+            dbtype                 => 'sqlite',
+            max_redir              => 2,
+            skip_spamhaus          => 0,
+            memcached_servers      => [],
+            x_frame_options        => 'DENY',
+            x_content_type_options => 'nosniff',
+            x_xss_protection       => '1; mode=block',
+            log_creator_ip         => 0,
         }
     });
 
@@ -60,6 +64,7 @@ sub run {
       'i|info=s'   => \my $info,
       'r|remove=s' => \my $remove,
       's|search=s' => \my $search,
+      'ip=s'       => \my $ip,
       'y|yes'      => \my $yes;
 
     if ($info) {
@@ -72,7 +77,7 @@ sub run {
             print_infos($u->to_hash);
             my $confirm = ($yes) ? 'yes' : undef;
             unless (defined $confirm) {
-                say 'Are you sure you want to remove this URL? [N/y]';
+                print 'Are you sure you want to remove this URL? [N/y] ';
                 $confirm = <STDIN>;
                 chomp $confirm;
             }
@@ -92,6 +97,14 @@ sub run {
     }
     if ($search) {
         my $u = Lstu::DB::URL->new(app => $c->app)->search_url($search);
+        $u->each(sub {
+            my ($e, $num) = @_;
+            print_infos($e);
+        });
+        say sprintf('%d matching URLs', $u->size);
+    }
+    if ($ip) {
+        my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
         $u->each(sub {
             my ($e, $num) = @_;
             print_infos($e);
@@ -143,6 +156,7 @@ Lstu::Command::url - Manage URL in Lstu's database
       carton exec script/lstu url --remove <short> [--yes] Remove URL (ask for confirmation unless --yes is given)
                                                Will print infos about URL before confirmation
       carton exec script/lstu url --search <url>           Search URL by its true URL (LIKE match)
+      carton exec script/lstu url --ip <ip address>        Search URL by the IP address of its creator (exact match)
 
 =cut
 

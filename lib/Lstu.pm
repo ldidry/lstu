@@ -21,6 +21,7 @@ sub startup {
             theme                  => 'default',
             ban_min_strike         => 3,
             ban_whitelist          => [],
+            ban_blacklist          => [],
             minion                 => {
                 enabled => 0,
                 db_path => 'minion.db'
@@ -33,6 +34,7 @@ sub startup {
             x_frame_options        => 'DENY',
             x_content_type_options => 'nosniff',
             x_xss_protection       => '1; mode=block',
+            log_creator_ip         => 0,
         }
     });
 
