@@ -170,7 +170,7 @@ sub _is_spam {
            }
         } else {
             my $res = $c->ua->get($url)->res;
-            if ($res->code >= 300 && $res->code < 400) {
+            if (defined($res->code) && $res->code >= 300 && $res->code < 400) {
                 my $new_url = Mojo::URL->new($res->headers->location);
                 $new_url->host($url->host)     unless $new_url->host;
                 $new_url->scheme($url->scheme) unless $new_url->scheme;

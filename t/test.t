@@ -364,7 +364,7 @@ $t->get_ok($a)
 
 # Test command
 my $help = `carton exec script/lstu help url`;
-like($help, qr/Print infos about the URL/m, 'Test help url command');
+like($help, qr/Print infos about the space-separated URLs/m, 'Test help url command');
 
 # Create short URL
 $a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');

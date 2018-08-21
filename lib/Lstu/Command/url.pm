@@ -175,11 +175,11 @@ Lstu::Command::url - Manage URL in Lstu's database
 =head1 SYNOPSIS
 
   Usage:
-      carton exec script/lstu url --info <short>           Print infos about the URL
-      carton exec script/lstu url --remove <short> [--yes] Remove URL (ask for confirmation unless --yes is given)
-                                               Will print infos about URL before confirmation
-      carton exec script/lstu url --search <url>           Search URL by its true URL (LIKE match)
-      carton exec script/lstu url --ip <ip address>        Search URL by the IP address of its creator (exact match)
+      carton exec script/lstu url --info <short> <short>           Print infos about the space-separated URLs
+      carton exec script/lstu url --remove <short> <short> [--yes] Remove the space-separated URLs (ask for confirmation unless --yes is given)
+                                                                   Will print infos about URL before confirmation
+      carton exec script/lstu url --search <url>                   Search URLs by its true URL (LIKE match)
+      carton exec script/lstu url --ip <ip address>                Search URLs by the IP address of its creator (exact match)
 
 =cut
 
