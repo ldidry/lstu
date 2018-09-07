@@ -1,5 +1,6 @@
 local/*
 cover_db/*
+safebrowsing_db/*
 .tx/*
 *.db
 *.db-shm

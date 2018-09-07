@@ -31,6 +31,7 @@ sub startup {
             db_path                => 'lstu.db',
             max_redir              => 2,
             skip_spamhaus          => 0,
+            safebrowsing_api_key   => '',
             memcached_servers      => [],
             x_frame_options        => 'DENY',
             x_content_type_options => 'nosniff',
@@ -241,6 +242,13 @@ sub startup {
 
         $self->provisioning();
     });
+    if ($self->stash('gsb')) {
+        Mojo::IOLoop->recurring(86400 => sub {
+            my $loop = shift;
+
+            $self->gsb_update();
+        });
+    }
 
     # Minion
     if ($config->{minion}->{enabled}) {

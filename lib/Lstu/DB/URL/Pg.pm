@@ -125,6 +125,12 @@ sub search_creator {
     $c->app->pg->db->select('lstu', undef, { created_by => $s })->hashes;
 }
 
+sub get_all_urls {
+    my $c = shift;
+
+    $c->app->pg->db->select('lstu', undef, { url => { '!=', undef } })->hashes;
+}
+
 sub _slurp {
     my $c = shift;
 

@@ -5,6 +5,7 @@ use Net::Abuse::Utils::Spamhaus qw(check_fqdn);
 use Lstu::DB::URL;
 use Lstu::DB::Ban;
 use Lstu::DB::Session;
+use FindBin qw($Bin);
 
 sub register {
     my ($self, $app) = @_;
@@ -59,6 +60,8 @@ sub register {
     $app->helper(shortener    => \&_shortener);
     $app->helper(is_spam      => \&_is_spam);
     $app->helper(cleaning     => \&_cleaning);
+    $app->helper(gsb          => \&_gsb);
+    $app->helper(gsb_update   => \&_gsb_update);
 }
 
 sub _sqlite {
@@ -169,6 +172,12 @@ sub _is_spam {
                msg     => $c->l('The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it.', $url->host)
            }
         } else {
+            if ($c->config('safebrowsing_api_key') && scalar($c->gsb->lookup(url => $url->to_string))) {
+                return {
+                    is_spam => 1,
+                    msg     => $c->l('The URL or one of its redirection(s) (%1) is blacklisted in Google Safe Browsing database. I refuse to shorten it.', $url)
+                }
+            }
             my $res = $c->ua->get($url)->res;
             if (defined($res->code) && $res->code >= 300 && $res->code < 400) {
                 my $new_url = Mojo::URL->new($res->headers->location);
@@ -194,6 +203,42 @@ sub _cleaning {
     Lstu::DB::Session->new(app => $c)->clear();
     # Delete old bans
     Lstu::DB::Ban->new(app => $c)->clear();
+}
+
+sub _gsb {
+    my $c = shift;
+
+    # Google safebrowsing (if configured)
+    if ($c->config('safebrowsing_api_key')) {
+        use Net::Google::SafeBrowsing4;
+        use Net::Google::SafeBrowsing4::Storage::File;
+
+        my $force_update = (!-e Mojo::File->new($Bin, '..' , 'safebrowsing_db'));
+
+        my $storage = Net::Google::SafeBrowsing4::Storage::File->new(path => Mojo::File->new($Bin, '..' , 'safebrowsing_db'));
+
+        state $gsb = Net::Google::SafeBrowsing4->new(
+            key     => $c->config('safebrowsing_api_key'),
+            storage => $storage,
+        );
+
+        $c->gsb_update($force_update);
+
+        return $gsb;
+    } else {
+        return undef;
+    }
+}
+
+sub _gsb_update {
+    my $c            = shift;
+    my $force_update = shift;
+
+    return $c->gsb->update() if $force_update;
+
+    my $update = Mojo::File->new($Bin, '..' , 'safebrowsing_db')->to_string;
+    my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($update);
+    $c->gsb->update() if ($mtime < time - 86400);
 }
 
 1;
