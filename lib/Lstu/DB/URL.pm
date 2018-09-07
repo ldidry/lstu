@@ -48,9 +48,9 @@ Have a look at Lstu::DB::URL::SQLite's code: it's simple and may be more underst
 
 =item B<Arguments> : any of the attribute above
 
-=item B<Purpose>   : construct a new db accessor object. If the C<short> or the C<url> attribute is provided, it have to load the informations from the database. In the case of multiple records for the same C<url>, choose the first.
+=item B<Purpose>   : construct a new Lstu::DB::URL object. If the C<short> or the C<url> attribute is provided, it have to load the informations from the database. In the case of multiple records for the same C<url>, choose the first.
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : the Lstu::DB::URL object
 
 =item B<Info>      : the app argument is used by Lstu::DB::URL to choose which db accessor will be used, you don't need to use it in new(), but you can use it to access helpers or configuration settings in the other subroutines
 
@@ -100,9 +100,9 @@ sub to_hash {
 
 =item B<Arguments> : none
 
-=item B<Purpose>   : increment the C<counter> attribute of the db accessor object and update the database record
+=item B<Purpose>   : increment the C<counter> attribute of the Lstu::DB::URL object and update the database record
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : the Lstu::DB::URL object
 
 =back
 
@@ -116,9 +116,24 @@ sub to_hash {
 
 =item B<Purpose>   : create or update the object in the database
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : the Lstu::DB::URL object
 
 =back
+
+=cut
+
+sub write {
+    my $c     = shift;
+
+    if ($c->record) {
+        $c->app->dbi->db->query('UPDATE lstu SET url = ?, counter = ?, timestamp = ?, created_by = ? WHERE short = ?', $c->url, $c->counter, $c->timestamp, $c->created_by, $c->short);
+    } else {
+        $c->app->dbi->db->query('INSERT INTO lstu (short, url, counter, timestamp, created_by) VALUES (?, ?, ?, ?, ?)', $c->short, $c->url, $c->counter, $c->timestamp, $c->created_by);
+        $c->record(1);
+    }
+
+    return $c;
+}
 
 =head2 delete
 
@@ -150,6 +165,17 @@ eg: COUNT(short) WHERE short = ?, $argument
 
 =back
 
+=cut
+
+sub exist {
+    my $c     = shift;
+    my $short = shift;
+
+    return undef unless $short;
+
+    return $c->app->dbi->db->query('SELECT count(short) AS count FROM lstu WHERE short = ?', $short)->hashes->first->{count};
+}
+
 =head2 choose_empty
 
 =over 1
@@ -163,6 +189,22 @@ eg: COUNT(short) WHERE short = ?, $argument
 =item B<Returns>   : string, an unassigned short string
 
 =back
+
+=cut
+
+sub choose_empty {
+    my $c = shift;
+
+    my $h = $c->app->dbi->db->query('SELECT * FROM lstu WHERE url IS NULL')->hashes->shuffle;
+
+    if ($h->size) {
+        $c->short($h->first->{short});
+        $c->record(1);
+        return $c;
+    } else {
+        return undef;
+    }
+}
 
 =head2 count_empty
 
@@ -179,6 +221,14 @@ eg: C<COUNT(short) WHERE url IS NULL>
 =item B<Returns>   : integer
 
 =back
+
+=cut
+
+sub count_empty {
+    my $c = shift;
+
+    return $c->app->dbi->db->query('SELECT count(short) AS count FROM lstu WHERE url IS NULL')->hashes->first->{count};
+}
 
 =head2 paginate
 
@@ -204,6 +254,16 @@ eg: SELECT * WHERE url IS NOT NULL ORDER BY counter DESC LIMIT ? OFFSET ?, $page
 
 =back
 
+=cut
+
+sub paginate {
+    my $c           = shift;
+    my $page        = shift;
+    my $page_offset = shift;
+
+    return @{$c->app->dbi->db->query('SELECT * FROM lstu WHERE url IS NOT NULL ORDER BY counter DESC LIMIT ? offset ?', $page_offset, $page * $page_offset)->hashes->to_array};
+}
+
 =head2 get_a_lot
 
 =over 1
@@ -217,6 +277,20 @@ eg: SELECT * WHERE url IS NOT NULL ORDER BY counter DESC LIMIT ? OFFSET ?, $page
 =item B<Returns>   : an array of hash references, containing all the Lstu::DB::URL attributes, except C<dbtype>
 
 =back
+
+=cut
+
+sub get_a_lot {
+    my $c = shift;
+    my $u = shift;
+
+    if (scalar @{$u}) {
+        my $p = join ",", (('?') x @{$u});
+        return @{$c->app->dbi->db->query('SELECT * FROM lstu WHERE short IN ('.$p.') ORDER BY counter DESC', @{$u})->hashes->to_array};
+    } else {
+        return ();
+    }
+}
 
 =head2 total
 
@@ -234,6 +308,14 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 
 =back
 
+=cut
+
+sub total {
+    my $c = shift;
+
+    return $c->app->dbi->db->query('SELECT count(short) AS count FROM lstu WHERE url IS NOT NULL')->hashes->first->{count};
+}
+
 =head2 delete_all
 
 =over 1
@@ -247,6 +329,14 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 =item B<Returns>   : nothing is expected
 
 =back
+
+=cut
+
+sub delete_all {
+    my $c = shift;
+
+    $c->app->dbi->db->query('DELETE FROM lstu');
+}
 
 =head2 search_url
 
@@ -262,6 +352,15 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 
 =back
 
+=cut
+
+sub search_url {
+    my $c = shift;
+    my $s = shift;
+
+    $c->app->dbi->db->select('lstu', undef, { url => {-like => '%'.$s.'%'}})->hashes;
+}
+
 =head2 search_creator
 
 =over 1
@@ -276,6 +375,14 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 
 =back
 
+=cut
+
+sub search_creator {
+    my $c = shift;
+    my $s = shift;
+
+    $c->app->dbi->db->select('lstu', undef, { created_by => $s })->hashes;
+}
 
 =head2 get_all_urls
 
@@ -292,5 +399,48 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 =back
 
 =cut
+
+sub get_all_urls {
+    my $c = shift;
+
+    $c->app->dbi->db->select('lstu', undef, { url => { '!=', undef } })->hashes;
+}
+
+=head2 _slurp
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>_slurp>
+
+=item B<Arguments> : none
+
+=item B<Purpose>   : put a database record's columns into the Lstu::DB::URL object's attributes
+
+=item B<Returns>   : the Lstu::DB::URL object
+
+=back
+
+=cut
+
+sub _slurp {
+    my $c = shift;
+
+    my $h;
+    if ($c->short) {
+       $h = $c->app->dbi->db->query('SELECT * FROM lstu WHERE short = ?', $c->short)->hashes;
+   } else {
+       $h = $c->app->dbi->db->query('SELECT * FROM lstu WHERE url = ?', $c->url)->hashes;
+   }
+    if ($h->size) {
+        $c->url($h->first->{url});
+        $c->short($h->first->{short});
+        $c->counter($h->first->{counter});
+        $c->timestamp($h->first->{timestamp});
+        $c->created_by($h->first->{created_by});
+        $c->record(1);
+    }
+
+    return $c;
+}
 
 1;

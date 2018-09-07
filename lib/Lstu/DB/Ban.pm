@@ -42,9 +42,9 @@ Have a look at Lstu::DB::Ban::SQLite's code: it's simple and may be more underst
 
 =item B<Arguments> : any of the attribute above
 
-=item B<Purpose>   : construct a new db accessor object. If the C<ip> attribute is provided, it have to load the informations from the database
+=item B<Purpose>   : construct a new Lstu::DB::Ban object. If the C<ip> attribute is provided, it have to load the informations from the database
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : the Lstu::DB::Ban object
 
 =item B<Info>      : the app argument is used by Lstu::DB::Ban to choose which db accessor will be used, you don't need to use it in new(), but you can use it to access helpers or configuration settings in the other subroutines
 
@@ -142,11 +142,38 @@ sub is_blacklisted {
 
 eg: C<WHERE ip = ? AND until E<gt> ? AND strike E<gt>= ?', $c->ip, time, $argument>
 
-=item B<Returns>   : the db accessor object if the ip is banned, undef otherwise
+=item B<Returns>   : the Lstu::DB::Ban object if the ip is banned, undef otherwise
 
 =item B<Info>      : if the IP is whitelisted (see C<is_whitelisted> above), it must return undef
 
 =back
+
+=cut
+
+sub is_banned {
+    my $c              = shift;
+    my $ban_min_strike = shift;
+
+    return undef if $c->is_whitelisted;
+
+    if ($c->is_blacklisted) {
+        $c->until(time + 3600);
+        $c->strike(1 + $c->app->config('ban_min_strike'));
+        return $c;
+    }
+
+    my $h = $c->app->dbi->db->query('SELECT * FROM ban WHERE ip = ? AND until > ? AND strike >= ?', $c->ip, time, $ban_min_strike)->hashes;
+
+    if ($h->size) {
+        $c->until($h->first->{until});
+        $c->strike($h->first->{strike});
+        $c->record(1);
+
+        return $c;
+    } else {
+        return undef;
+    }
+}
 
 =head2 increment_ban_delay
 
@@ -154,12 +181,12 @@ eg: C<WHERE ip = ? AND until E<gt> ? AND strike E<gt>= ?', $c->ip, time, $argume
 
 =item B<Usage>     : C<$c-E<gt>increment_ban_delay(3600)>
 
-=item B<Arguments> : an integer. This number is a penalty (in second) that will be added to the C<until> attribute of the db accessor object
+=item B<Arguments> : an integer. This number is a penalty (in second) that will be added to the C<until> attribute of the Lstu::DB::Ban object
 
-=item B<Purpose>   : add penalty to the C<until> attribute of the db accessor object, increment the C<strike> attribute by one and write the db accessor object's attribute to the database.
+=item B<Purpose>   : add penalty to the C<until> attribute of the Lstu::DB::Ban object, increment the C<strike> attribute by one and write the Lstu::DB::Ban object's attribute to the database.
 Update the database record if one already exists, create one otherwise.
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : the Lstu::DB::Ban object
 
 =back
 
@@ -179,6 +206,14 @@ eg: C<WHERE until E<lt> ?, time>
 
 =back
 
+=cut
+
+sub clear {
+    my $c = shift;
+
+    $c->app->dbi->db->query('DELETE FROM ban WHERE until < ?', time);
+}
+
 =head2 delete_all
 
 =over 1
@@ -194,5 +229,40 @@ eg: C<WHERE until E<lt> ?, time>
 =back
 
 =cut
+
+sub delete_all {
+    my $c = shift;
+
+    $c->app->dbi->db->query('DELETE FROM ban');
+}
+
+=head2 _slurp
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>_slurp>
+
+=item B<Arguments> : none
+
+=item B<Purpose>   : put a database record's columns into the Lstu::DB::Ban object's attributes
+
+=item B<Returns>   : the Lstu::DB::Ban object
+
+=back
+
+=cut
+
+sub _slurp {
+    my $c = shift;
+
+    my $h = $c->app->dbi->db->query('SELECT * FROM ban WHERE ip = ?', $c->ip)->hashes;
+    if ($h->size) {
+        $c->until($h->first->{until});
+        $c->strike($h->first->{strike});
+        $c->record(1);
+    }
+
+    return $c;
+}
 
 1;

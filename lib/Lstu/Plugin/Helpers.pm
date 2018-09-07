@@ -18,7 +18,7 @@ sub register {
     # DB migrations
     if ($app->config('dbtype') eq 'sqlite') {
         require Mojo::SQLite;
-        $app->helper(sqlite => \&_sqlite);
+        $app->helper(dbi => \&_sqlite);
 
         # Database migration
         # Have to create $sql before using its migrations attribute, otherwise, it won't work
@@ -31,10 +31,10 @@ sub register {
         }
     } elsif ($app->config('dbtype') eq 'postgresql') {
         require Mojo::Pg;
-        $app->helper(pg => \&_pg);
+        $app->helper(dbi => \&_pg);
 
         # Database migration
-        my $migrations = Mojo::Pg::Migrations->new(pg => $app->pg);
+        my $migrations = Mojo::Pg::Migrations->new(pg => $app->dbi);
         if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
             $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(0)->migrate(3);
         } else {
@@ -42,10 +42,10 @@ sub register {
         }
     } elsif ($app->config('dbtype') eq 'mysql') {
         require Mojo::mysql;
-        $app->helper(mysql => \&_mysql);
+        $app->helper(dbi => \&_mysql);
 
         # Database migration
-        my $migrations = Mojo::mysql::Migrations->new(mysql => $app->mysql);
+        my $migrations = Mojo::mysql::Migrations->new(mysql => $app->dbi);
         if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
             $migrations->from_file('utilities/migrations/mysql.sql')->migrate(0)->migrate(2);
         } else {
