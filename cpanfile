@@ -47,3 +47,8 @@ feature 'mysql', 'MySQL support' => sub {
     requires 'Minion::Backend::mysql';
     requires 'Mojolicious::Plugin::PgURLHelper';
 };
+
+feature 'safebrowsing', 'Check URLs against Google safebrowsing database' => sub {
+    requires 'Net::Google::SafeBrowsing4';
+    requires 'Term::ProgressBar::Quiet';
+};

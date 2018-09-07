@@ -276,6 +276,21 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 
 =back
 
+
+=head2 get_all_urls
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>get_all_urls()>
+
+=item B<Arguments> : none
+
+=item B<Purpose>   : return all non-empty records
+
+=item B<Returns>   : a Mojo::Collection containing hashes of all non-empty records
+
+=back
+
 =cut
 
 1;
