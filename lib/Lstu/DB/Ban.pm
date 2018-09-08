@@ -1,6 +1,7 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package Lstu::DB::Ban;
 use Mojo::Base -base;
+use Mojo::Collection 'c';
 
 has 'ip';
 has 'until';
@@ -104,7 +105,7 @@ sub is_whitelisted {
     my $c = shift;
 
     my $ip = $c->ip;
-    return scalar(grep(sub { $_ eq $ip }, @{$c->app->config('ban_whitelist')}));
+    return c(@{$c->app->config('ban_whitelist')})->grep(sub { $_ eq $ip })->size;
 }
 
 =head2 is_blacklisted
@@ -127,7 +128,7 @@ sub is_blacklisted {
     my $c = shift;
 
     my $ip = $c->ip;
-    return scalar(grep(sub { $_ eq $ip }, @{$c->app->config('ban_blacklist')}));
+    return c(@{$c->app->config('ban_blacklist')})->grep(sub { $_ eq $ip })->size;
 }
 
 =head2 is_banned

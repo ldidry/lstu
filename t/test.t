@@ -301,6 +301,30 @@ $t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
 
 $config_file->spurt($config_orig);
 
+# Test IP blacklisting
+$config_content = $config_orig;
+$config_content =~ s/^( +)#?ban_blacklist.*/$1ban_blacklist => ['::1', '127.0.0.1'],/gm;
+$config_file->spurt($config_content);
+
+$t = Test::Mojo->new('Lstu');
+
+# Give time to provision some short URLs
+sleep 3;
+
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+$t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' });
+
+$t->post_ok('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })
+    ->status_is(200)
+    ->json_has('msg', 'success')
+    ->json_is('/success' => false)
+    ->json_like('/msg' => qr#You asked to shorten too many URLs too quickly\. You're banned for \d+ hour\(s\)\.#);
+
+$config_file->spurt($config_orig);
+
 # Test domain blacklisting
 Lstu::DB::Ban->new(app => $m)->delete_all;
 $config_content = $config_orig;
