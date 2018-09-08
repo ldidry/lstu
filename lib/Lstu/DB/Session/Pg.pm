@@ -17,50 +17,12 @@ sub new {
 sub delete {
     my $c = shift;
 
-    my $h = $c->app->pg->db->query('DELETE FROM sessions WHERE token = ? RETURNING *', $c->token)->hashes;
+    my $h = $c->app->dbi->db->query('DELETE FROM sessions WHERE token = ? RETURNING *', $c->token)->hashes;
     if ($h->size) {
         $c = Lstu::DB::Session->new(app => $c->app);
     }
 
     return $h->size;
-}
-
-sub write {
-    my $c     = shift;
-
-    if ($c->record) {
-        $c->app->pg->db->query('UPDATE sessions SET until = ? WHERE token = ?', $c->until, $c->token);
-    } else {
-        $c->app->pg->db->query('INSERT INTO sessions (token, until) VALUES (?, ?)', $c->token, $c->until);
-        $c->record(1);
-    }
-
-    return $c;
-}
-
-sub clear {
-    my $c = shift;
-
-    $c->app->pg->db->query('DELETE FROM sessions WHERE until < ?', time);
-}
-
-sub delete_all {
-    my $c = shift;
-
-    $c->app->pg->db->query('DELETE FROM sessions');
-}
-
-sub _slurp {
-    my $c = shift;
-
-    my $h = $c->app->pg->db->query('SELECT * FROM sessions WHERE token = ?', $c->token)->hashes;
-    if ($h->size) {
-        $c->token($h->first->{token});
-        $c->until($h->first->{until});
-        $c->record(1);
-    }
-
-    return $c;
 }
 
 1;

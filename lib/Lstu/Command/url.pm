@@ -63,7 +63,7 @@ sub run {
     }
 
     getopt \@args,
-      'i|info=s{1,}'   => \my @info,
+      'info=s{1,}'   => \my @info,
       'r|remove=s{1,}' => \my @remove,
       's|search=s'     => \my $search,
       'ip=s'           => \my $ip,

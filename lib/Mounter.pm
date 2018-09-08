@@ -40,6 +40,7 @@ sub startup {
                 db_path                => 'lstu.db',
                 max_redir              => 2,
                 skip_spamhaus          => 0,
+                safebrowsing_api_key   => '',
                 memcached_servers      => [],
                 x_frame_options        => 'DENY',
                 x_content_type_options => 'nosniff',

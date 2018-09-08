@@ -39,9 +39,9 @@ Have a look at Lstu::DB::Session::SQLite's code: it's simple and may be more und
 
 =item B<Arguments> : any of the attribute above
 
-=item B<Purpose>   : construct a new db accessor object. If the C<token> attribute is provided, it have to load the informations from the database
+=item B<Purpose>   : construct a new Lstu::DB::Session object. If the C<token> attribute is provided, it have to load the informations from the database
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : the Lstu::DB::Session object
 
 =item B<Info>      : the app argument is used by Lstu::DB::Session to choose which db accessor will be used, you don't need to use it in new(), but you can use it to access helpers or configuration settings in the other subroutines
 
@@ -97,9 +97,11 @@ sub to_hash {
 
 =item B<Purpose>   : delete the session record from the database
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : the Lstu::DB::Session object
 
 =back
+
+=cut
 
 =head2 write
 
@@ -111,9 +113,24 @@ sub to_hash {
 
 =item B<Purpose>   : create or update the object in the database
 
-=item B<Returns>   : the db accessor object
+=item B<Returns>   : the Lstu::DB::Session object
 
 =back
+
+=cut
+
+sub write {
+    my $c     = shift;
+
+    if ($c->record) {
+        $c->app->dbi->db->query('UPDATE sessions SET until = ? WHERE token = ?', $c->until, $c->token);
+    } else {
+        $c->app->dbi->db->query('INSERT INTO sessions (token, until) VALUES (?, ?)', $c->token, $c->until);
+        $c->record(1);
+    }
+
+    return $c;
+}
 
 =head2 clear
 
@@ -131,6 +148,14 @@ eg: C<WHERE until E<lt> ?, time>
 
 =back
 
+=cut
+
+sub clear {
+    my $c = shift;
+
+    $c->app->dbi->db->query('DELETE FROM sessions WHERE until < ?', time);
+}
+
 =head2 delete_all
 
 =over 1
@@ -146,5 +171,40 @@ eg: C<WHERE until E<lt> ?, time>
 =back
 
 =cut
+
+sub delete_all {
+    my $c = shift;
+
+    $c->app->dbi->db->query('DELETE FROM sessions');
+}
+
+=head2 _slurp
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>_slurp>
+
+=item B<Arguments> : none
+
+=item B<Purpose>   : put a database record's columns into the Lstu::DB::Session object's attributes
+
+=item B<Returns>   : the Lstu::DB::Session object
+
+=back
+
+=cut
+
+sub _slurp {
+    my $c = shift;
+
+    my $h = $c->app->dbi->db->query('SELECT * FROM sessions WHERE token = ?', $c->token)->hashes;
+    if ($h->size) {
+        $c->token($h->first->{token});
+        $c->until($h->first->{until});
+        $c->record(1);
+    }
+
+    return $c;
+}
 
 1;

@@ -1,5 +1,11 @@
 Revision history for Perl application Lstu
 
+0.19-0 2018-??-??
+	- Allow to use Google Safe Browsing database to check if the URLs are harmless
+	  It uses a local copy of the GSB DB, so Google won't see the URLs to shorten
+	- safebrowsingcheck CLI to check all the URLs in the database against GSB DB.
+	  usage: carton exec script/lstu safebrowsingcheck
+
 0.18-1 2018-08-21
 	- Update url CLI help message
 

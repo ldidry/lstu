@@ -218,6 +218,14 @@
     # optional, default is 0
     #skip_spamhaus => 0,
 
+    # put your Google API key to enable Google safebrowsing check
+    # This will allow Lstu to download the Google safebrowsing database and use a local copy to check the URLs.
+    # Google does not get the URLs that are checked.
+    # Instructions to get a key: https://developers.google.com/safe-browsing/v4/get-started
+    # TL;DR: https://console.developers.google.com/projectselector/apis/library
+    # optional, no default
+    #safebrowsing_api_key => '',
+
     # array of memcached servers to cache URL in order to accelerate responses to often-viewed URL.
     # If set to [], the cache is disabled
     # optional, default is []

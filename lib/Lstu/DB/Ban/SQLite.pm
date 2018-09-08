@@ -14,31 +14,6 @@ sub new {
     return $c;
 }
 
-sub is_banned {
-    my $c              = shift;
-    my $ban_min_strike = shift;
-
-    return undef if $c->is_whitelisted;
-
-    if ($c->is_blacklisted) {
-        $c->until(time + 3600);
-        $c->strike(1 + $c->app->config('ban_min_strike'));
-        return $c;
-    }
-
-    my $h = $c->app->sqlite->db->query('SELECT * FROM ban WHERE ip = ? AND until > ? AND strike >= ?', $c->ip, time, $ban_min_strike)->hashes;
-
-    if ($h->size) {
-        $c->until($h->first->{until});
-        $c->strike($h->first->{strike});
-        $c->record(1);
-
-        return $c;
-    } else {
-        return undef;
-    }
-}
-
 sub increment_ban_delay {
     my $c       = shift;
     my $penalty = shift;
@@ -49,40 +24,15 @@ sub increment_ban_delay {
         strike => 1
     };
     if ($c->record) {
-        $c->app->sqlite->db->query('UPDATE ban SET until = ?, strike = strike + 1 WHERE ip = ?', $until, $c->ip)->hashes->first;
-        $h = $c->app->sqlite->db->query('SELECT strike FROM ban WHERE ip = ?', $c->ip)->hashes->first;
+        $c->app->dbi->db->query('UPDATE ban SET until = ?, strike = strike + 1 WHERE ip = ?', $until, $c->ip)->hashes->first;
+        $h = $c->app->dbi->db->query('SELECT strike FROM ban WHERE ip = ?', $c->ip)->hashes->first;
     } else {
-        $c->app->sqlite->db->query('INSERT INTO ban (ip, until, strike) VALUES (?, ?, 1)', $c->ip, $until);
+        $c->app->dbi->db->query('INSERT INTO ban (ip, until, strike) VALUES (?, ?, 1)', $c->ip, $until);
         $c->record(1);
     }
 
     $c->strike($h->{strike});
     $c->until($until);
-
-    return $c;
-}
-
-sub clear {
-    my $c = shift;
-
-    $c->app->sqlite->db->query('DELETE FROM ban WHERE until < ?', time);
-}
-
-sub delete_all {
-    my $c = shift;
-
-    $c->app->sqlite->db->query('DELETE FROM ban');
-}
-
-sub _slurp {
-    my $c = shift;
-
-    my $h = $c->app->sqlite->db->query('SELECT * FROM ban WHERE ip = ?', $c->ip)->hashes;
-    if ($h->size) {
-        $c->until($h->first->{until});
-        $c->strike($h->first->{strike});
-        $c->record(1);
-    }
 
     return $c;
 }
