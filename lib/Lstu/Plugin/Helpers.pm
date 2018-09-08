@@ -206,7 +206,8 @@ sub _cleaning {
 }
 
 sub _gsb {
-    my $c = shift;
+    my $c     = shift;
+    my $check = shift;
 
     # Google safebrowsing (if configured)
     if ($c->config('safebrowsing_api_key')) {
@@ -215,30 +216,23 @@ sub _gsb {
 
         my $force_update = (!-e Mojo::File->new($Bin, '..' , 'safebrowsing_db'));
 
-        my $storage = Net::Google::SafeBrowsing4::Storage::File->new(path => Mojo::File->new($Bin, '..' , 'safebrowsing_db'));
-
         state $gsb = Net::Google::SafeBrowsing4->new(
             key     => $c->config('safebrowsing_api_key'),
-            storage => $storage,
+            storage => Net::Google::SafeBrowsing4::Storage::File->new(path => Mojo::File->new($Bin, '..' , 'safebrowsing_db')),
         );
 
-        $c->gsb_update($force_update);
+        if ($force_update) {
+            $gsb->update();
+        } elsif ($check) {
+            my $update = Mojo::File->new($Bin, '..' , 'safebrowsing_db')->to_string;
+            my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($update);
+            $gsb->update() if $mtime < time - 86400;
+        }
 
         return $gsb;
     } else {
         return undef;
     }
-}
-
-sub _gsb_update {
-    my $c            = shift;
-    my $force_update = shift;
-
-    return $c->gsb->update() if $force_update;
-
-    my $update = Mojo::File->new($Bin, '..' , 'safebrowsing_db')->to_string;
-    my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($update);
-    $c->gsb->update() if ($mtime < time - 86400);
 }
 
 1;

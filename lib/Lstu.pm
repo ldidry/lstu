@@ -242,11 +242,12 @@ sub startup {
 
         $self->provisioning();
     });
-    if ($self->stash('gsb')) {
+    if ($self->config('safebrowsing_api_key')) {
+        $self->gsb(1);
         Mojo::IOLoop->recurring(86400 => sub {
             my $loop = shift;
 
-            $self->gsb_update();
+            $self->gsb(1);
         });
     }
 

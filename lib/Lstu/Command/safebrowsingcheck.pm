@@ -59,12 +59,13 @@ sub run {
             { name => 'Scanning '.$urls->size.' URLs', count => $urls->size, ETA => 'linear' }
         );
         my @bad;
+        my $gsb = $c->app->gsb;
         $urls->each(sub {
             my ($e, $num) = @_;
 
             $progress->update($num);
 
-            my @matches = $c->app->gsb->lookup(url => $e->{url});
+            my @matches = $gsb->lookup(url => $e->{url});
 
             if (@matches) {
                 push @bad, $e->{short};

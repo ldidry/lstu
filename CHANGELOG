@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.19-2 2018-09-08
+	- Improve GSB object creation and GSB DB update
+
 0.19-1 2018-09-08
 	- Update translations
 
