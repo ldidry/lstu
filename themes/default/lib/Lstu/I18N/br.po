@@ -18,11 +18,11 @@ msgstr ""
 "Language-Team: Breton (http://www.transifex.com/fiat-tux/lstu/language/br/)\n"
 "Language: br\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Zanata 4.3.3\n"
+"X-Generator: Zanata 4.6.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:101
+#: lib/Lstu/Controller/URL.pm:115
 msgid "%1 is not a valid URL."
 msgstr "%1 n'eo ket un URL talvoudek."
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Failure reason"
 msgstr "Abeg ar c'hwitadenn"
 
-#: lib/Lstu/Controller/Lstu.pm:186
+#: lib/Lstu/Controller/Stats.pm:43
 msgid "File imported"
 msgstr ""
 
@@ -170,7 +170,7 @@ msgid "Next"
 msgstr "Da-heul"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:95
+#: lib/Lstu/Controller/URL.pm:109
 msgid ""
 "No shortened URL available. Please retry or contact the administrator at %1. "
 "Your URL to shorten: %2"
@@ -186,7 +186,7 @@ msgstr "Arventennoù:"
 msgid "Password"
 msgstr ""
 
-#: lib/Lstu.pm:317 themes/default/templates/api.html.ep:18
+#: lib/Lstu/Controller/Authent.pm:35 themes/default/templates/api.html.ep:18
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
@@ -222,7 +222,7 @@ msgstr ""
 msgid "Signin"
 msgstr ""
 
-#: lib/Lstu/Controller/Lstu.pm:188
+#: lib/Lstu/Controller/Stats.pm:45
 msgid "Sorry, unable to parse the provided file"
 msgstr ""
 
@@ -231,7 +231,7 @@ msgid "Statistics"
 msgstr "Stadegoù"
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:169
+#: lib/Lstu/Plugin/Helpers.pm:172
 msgid ""
 "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I "
 "refuse to shorten it."
@@ -239,8 +239,15 @@ msgstr ""
 "Ostiz an URL pe unan eus e adheñchadennoù (%1) a zo e roll du Spamhaus. Ne "
 "fell ket din e verraat."
 
+#. ($url)
+#: lib/Lstu/Plugin/Helpers.pm:178
+msgid ""
+"The URL or one of its redirection(s) (%1) is blacklisted in Google Safe "
+"Browsing database. I refuse to shorten it."
+msgstr ""
+
 #. ($c->config('max_redir')
-#: lib/Lstu/Plugin/Helpers.pm:185
+#: lib/Lstu/Plugin/Helpers.pm:194
 msgid ""
 "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, "
 "phishing, etc.). I refuse to shorten it."
@@ -249,24 +256,24 @@ msgstr ""
 "phishing...). Ne fell ket din e verraat."
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:161
+#: lib/Lstu/Plugin/Helpers.pm:164
 msgid ""
 "The URL you want to shorten comes from a domain (%1) that is blacklisted on "
 "this server (usually because of spammers that use this domain)."
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Lstu.pm:327 lib/Lstu/Controller/Lstu.pm:375
+#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:223
 msgid "The shortened URL %1 doesn't exist."
 msgstr "N'eus ket eus an URL berraet %1."
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:58
+#: lib/Lstu/Controller/URL.pm:63
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "An destenn berraet (%1) a zo diouti endeo. Dibabit unan all mar plij."
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:56
+#: lib/Lstu/Controller/URL.pm:61
 msgid ""
 "The shortened text can contain only numbers, letters and the - and _ "
 "character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\"."
@@ -299,7 +306,7 @@ msgid "URL to shorten"
 msgstr "URL da verraat"
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:32
+#: lib/Lstu/Controller/URL.pm:35
 msgid ""
 "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 ""
@@ -307,11 +314,11 @@ msgstr ""
 "Goulennet hoc'h eus da verraat re a URLoù en un amzer re verr. Forbannet "
 "hoc'h e-pad %1 eur."
 
-#: lib/Lstu.pm:308 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
+#: lib/Lstu/Controller/Admin.pm:52 lib/Lstu/Controller/Authent.pm:26 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
 msgid "You have been successfully logged in."
 msgstr ""
 
-#: lib/Lstu.pm:347 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
+#: lib/Lstu/Controller/Admin.pm:73 lib/Lstu/Controller/Authent.pm:65 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr ""
 

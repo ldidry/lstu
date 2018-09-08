@@ -12,15 +12,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-04-27 04:52+0000\n"
-"Last-Translator: Luc Didry <luc@framasoft.org>\n"
+"PO-Revision-Date: 2018-09-08 11:06+0000\n"
+"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: English\n"
 "Language: en\n"
-"X-Generator: Zanata 4.3.3\n"
+"X-Generator: Zanata 4.6.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:101
+#: lib/Lstu/Controller/URL.pm:115
 msgid "%1 is not a valid URL."
 msgstr "%1 is not a valid URL."
 
@@ -74,7 +74,7 @@ msgstr "Export your URLs"
 msgid "Failure reason"
 msgstr "Failure reason"
 
-#: lib/Lstu/Controller/Lstu.pm:186
+#: lib/Lstu/Controller/Stats.pm:43
 msgid "File imported"
 msgstr "File imported"
 
@@ -174,7 +174,7 @@ msgid "Next"
 msgstr "Next"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/Lstu.pm:95
+#: lib/Lstu/Controller/URL.pm:109
 msgid ""
 "No shortened URL available. Please retry or contact the administrator at %1. "
 "Your URL to shorten: %2"
@@ -190,7 +190,7 @@ msgstr "Parameters:"
 msgid "Password"
 msgstr "Password"
 
-#: lib/Lstu.pm:317 themes/default/templates/api.html.ep:18
+#: lib/Lstu/Controller/Authent.pm:35 themes/default/templates/api.html.ep:18
 msgid "Please, check your credentials: unable to authenticate."
 msgstr "Please, check your credentials: unable to authenticate."
 
@@ -226,7 +226,7 @@ msgstr "Should always be successful"
 msgid "Signin"
 msgstr "Signin"
 
-#: lib/Lstu/Controller/Lstu.pm:188
+#: lib/Lstu/Controller/Stats.pm:45
 msgid "Sorry, unable to parse the provided file"
 msgstr "Sorry, unable to parse the provided file"
 
@@ -235,7 +235,7 @@ msgid "Statistics"
 msgstr "Statistics"
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:169
+#: lib/Lstu/Plugin/Helpers.pm:172
 msgid ""
 "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I "
 "refuse to shorten it."
@@ -243,8 +243,17 @@ msgstr ""
 "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I "
 "refuse to shorten it."
 
+#. ($url)
+#: lib/Lstu/Plugin/Helpers.pm:178
+msgid ""
+"The URL or one of its redirection(s) (%1) is blacklisted in Google Safe "
+"Browsing database. I refuse to shorten it."
+msgstr ""
+"The URL or one of its redirection(s) (%1) is blacklisted in Google Safe "
+"Browsing database. I refuse to shorten it."
+
 #. ($c->config('max_redir')
-#: lib/Lstu/Plugin/Helpers.pm:185
+#: lib/Lstu/Plugin/Helpers.pm:194
 msgid ""
 "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, "
 "phishing, etc.). I refuse to shorten it."
@@ -253,7 +262,7 @@ msgstr ""
 "phishing, etc.). I refuse to shorten it."
 
 #. ($url->host)
-#: lib/Lstu/Plugin/Helpers.pm:161
+#: lib/Lstu/Plugin/Helpers.pm:164
 msgid ""
 "The URL you want to shorten comes from a domain (%1) that is blacklisted on "
 "this server (usually because of spammers that use this domain)."
@@ -262,17 +271,17 @@ msgstr ""
 "this server (usually because of spammers that use this domain)."
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Lstu.pm:327 lib/Lstu/Controller/Lstu.pm:375
+#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:223
 msgid "The shortened URL %1 doesn't exist."
 msgstr "The shortened URL %1 doesn't exist."
 
 #. ($custom_url)
-#: lib/Lstu/Controller/Lstu.pm:58
+#: lib/Lstu/Controller/URL.pm:63
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr "The shortened text (%1) is already used. Please choose another one."
 
 #. ($url)
-#: lib/Lstu/Controller/Lstu.pm:56
+#: lib/Lstu/Controller/URL.pm:61
 msgid ""
 "The shortened text can contain only numbers, letters and the - and _ "
 "character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\"."
@@ -307,7 +316,7 @@ msgid "URL to shorten"
 msgstr "URL to shorten"
 
 #. ($penalty/3600)
-#: lib/Lstu/Controller/Lstu.pm:32
+#: lib/Lstu/Controller/URL.pm:35
 msgid ""
 "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 ""
@@ -315,11 +324,11 @@ msgstr ""
 "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 ""
 
-#: lib/Lstu.pm:308 lib/Lstu/Controller/Admin.pm:52 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
+#: lib/Lstu/Controller/Admin.pm:52 lib/Lstu/Controller/Authent.pm:26 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
 msgid "You have been successfully logged in."
 msgstr "You have been successfully logged in."
 
-#: lib/Lstu.pm:347 lib/Lstu/Controller/Admin.pm:73 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
+#: lib/Lstu/Controller/Admin.pm:73 lib/Lstu/Controller/Authent.pm:65 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
 msgstr "You have been successfully logged out."
 
