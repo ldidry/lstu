@@ -58,7 +58,7 @@ sub run {
         my $progress = Term::ProgressBar::Quiet->new(
             { name => 'Scanning '.$urls->size.' URLs', count => $urls->size, ETA => 'linear' }
         );
-        my @bad;
+        my (@bad, %bad_ips, @bad_from_ips);
         my $gsb = $c->app->gsb;
         $urls->each(sub {
             my ($e, $num) = @_;
@@ -69,14 +69,24 @@ sub run {
 
             if (@matches) {
                 push @bad, $e->{short};
+                $bad_ips{$e->{created_by}} = 1 if $e->{created_by};
             }
         });
 
         say sprintf('All URLs (%d) have been scanned.', $urls->size);
         say sprintf('%d bad URLs detected.', scalar(@bad));
 
-        say scalar($c->app->gsb->lookup(url => 'http://malware.testing.google.test/testing/malware/'));
         say sprintf("If you want to delete the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad)) if @bad;
+
+        for my $ip (keys %bad_ips) {
+            my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
+            $u->each(sub {
+                my ($e, $num) = @_;
+                push @bad_from_ips, $e->{short};
+            });
+        }
+        say sprintf("Bad URLs creators' IP addresses: \n  %s", join(", ", keys %bad_ips)) if (keys %bad_ips);
+        say sprintf("If you want to delete the URLs created by the same IPs than the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad_from_ips)) if @bad_from_ips;
     } else {
         say 'It seems that safebrowsing_api_key isn\'t set. Please, check your configuration';
     }
