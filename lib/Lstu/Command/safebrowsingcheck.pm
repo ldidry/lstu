@@ -136,7 +136,9 @@ Lstu::Command::safebrowsing - Checks all URLs in database against Google Safe Br
 =head1 SYNOPSIS
 
   Usage:
-      carton exec script/lstu safebrowsingcheck
+      carton exec script/lstu safebrowsingcheck                           Checks all URLs in database against Google Safe Browsing database
+      carton exec script/lstu safebrowsingcheck -u|--url <short> <short>  Checks the space-separated URLs against Google Safe Browsing database
+      carton exec script/lstu safebrowsingcheck -s|--seconds <xxx>        Checks URLs created the last xxx seconds against Google Safe Browsing database
 
 =cut
 

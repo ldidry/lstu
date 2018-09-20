@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.20-1 2018-09-20
+	- Fix safebrowsingcheck CLI help message
+
 0.20-0 2018-09-20
 	- Docker port, thanks to Arnaud de Mouhy
 	- Improve safebrowsingcheck CLI:
