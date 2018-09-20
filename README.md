@@ -12,6 +12,8 @@ Lstu is licensed under the terms of the WTFPL. See the LICENSE file.
 
 Please, see the [wiki](https://framagit.org/luc/lstu/wikis/home).
 
+Or you can see [usage with Docker](https://framagit.org/luc/lstu/wikis/usage-with-docker).
+
 ## How many URLs can it handle ?
 
 By default, there are 8 361 453 672 available combinations.
