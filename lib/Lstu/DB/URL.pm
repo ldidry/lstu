@@ -406,6 +406,29 @@ sub get_all_urls {
     $c->app->dbi->db->select('lstu', undef, { url => { '!=', undef } })->hashes;
 }
 
+=head2 get_all_urls_created_ago
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>get_all_urls_created_ago($seconds)>
+
+=item B<Arguments> : integer, number of seconds
+
+=item B<Purpose>   : return all non-empty records created less than $seconds agog
+
+=item B<Returns>   : a Mojo::Collection containing hashes of matching records
+
+=back
+
+=cut
+
+sub get_all_urls_created_ago {
+    my $c     = shift;
+    my $delay = shift;
+
+    $c->app->dbi->db->select('lstu', undef, { url => { '!=', undef }, timestamp => { '>=', time - $delay } })->hashes;
+}
+
 =head2 _slurp
 
 =over 1

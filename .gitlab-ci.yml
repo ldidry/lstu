@@ -34,7 +34,7 @@ variables:
   services:
     - name: rroemhild/test-openldap
       alias: rroemhild-test-openldap
-  coverage: '/Total .*\d+\.\d+$/'
+  coverage: '/Total .*(\d+\.\d+)$/'
 .pg_template: &pg_definition
   stage: tests
   retry: 2
@@ -45,7 +45,7 @@ variables:
       alias: postgres
     - name: rroemhild/test-openldap
       alias: rroemhild-test-openldap
-  coverage: '/Total .*\d+\.\d+$/'
+  coverage: '/Total .*(\d+\.\d+)$/'
 .mysql_template: &mysql_definition
   stage: tests
   retry: 2
@@ -56,7 +56,7 @@ variables:
       alias: mariadb
     - name: rroemhild/test-openldap
       alias: rroemhild-test-openldap
-  coverage: '/Total .*\d+\.\d+$/'
+  coverage: '/Total .*(\d+\.\d+)$/'
 
 ### Podcheck
 ##

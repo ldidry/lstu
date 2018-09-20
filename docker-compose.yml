@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+    app:
+        build: .
+        ports:
+            - 8080:8080
+        volumes:
+            - ./lstu.conf:/home/lstu/lstu.conf:ro
+    db:
+        image: mariadb:10.2
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: lstu
+    cache:
+        image: memcached:1.5-alpine
+    minion:
+        build: .
+        command: minion
+        volumes:
+            - ./lstu.conf:/home/lstu/lstu.conf:ro
+    minion_db:
+        image: mariadb:10.2
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: lstu_minion

@@ -4,6 +4,8 @@ use Mojo::Base 'Mojolicious::Command';
 use FindBin qw($Bin);
 use File::Spec qw(catfile);
 use Term::ProgressBar::Quiet;
+use Mojo::Util qw(getopt);
+use Mojo::Collection 'c';
 
 has description => 'Checks all URLs in database against Google Safe Browsing database (local copy)';
 has usage => sub { shift->extract_usage };
@@ -52,13 +54,29 @@ sub run {
 
     $c->app->plugin('Lstu::Plugin::Helpers');
 
+    getopt \@args,
+      'u|url=s{1,}' => \my @urls_to_check,
+      's|seconds=i' => \my $delay;
+
     if ($c->app->gsb) {
-        my $urls = Lstu::DB::URL->new(app => $c->app)->get_all_urls;
+        my $urls;
+        if (@urls_to_check) {
+            $urls = c(get_shorts($c, @urls_to_check));
+        } elsif ($delay) {
+            $urls = Lstu::DB::URL->new(app => $c->app)->get_all_urls_created_ago($delay);
+        } else {
+            $urls = Lstu::DB::URL->new(app => $c->app)->get_all_urls;
+        }
+
+        unless ($urls->size) {
+            say 'No URLs to check.';
+            exit;
+        }
 
         my $progress = Term::ProgressBar::Quiet->new(
             { name => 'Scanning '.$urls->size.' URLs', count => $urls->size, ETA => 'linear' }
         );
-        my @bad;
+        my (@bad, %bad_ips, @bad_from_ips);
         my $gsb = $c->app->gsb;
         $urls->each(sub {
             my ($e, $num) = @_;
@@ -69,17 +87,44 @@ sub run {
 
             if (@matches) {
                 push @bad, $e->{short};
+                $bad_ips{$e->{created_by}} = 1 if $e->{created_by};
             }
         });
 
         say sprintf('All URLs (%d) have been scanned.', $urls->size);
         say sprintf('%d bad URLs detected.', scalar(@bad));
 
-        say scalar($c->app->gsb->lookup(url => 'http://malware.testing.google.test/testing/malware/'));
         say sprintf("If you want to delete the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad)) if @bad;
+
+        for my $ip (keys %bad_ips) {
+            my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
+            $u->each(sub {
+                my ($e, $num) = @_;
+                push @bad_from_ips, $e->{short};
+            });
+        }
+        say sprintf("Bad URLs creators' IP addresses: \n  %s", join(", ", keys %bad_ips)) if (keys %bad_ips);
+        say sprintf("If you want to delete the URLs created by the same IPs than the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad_from_ips)) if @bad_from_ips;
     } else {
         say 'It seems that safebrowsing_api_key isn\'t set. Please, check your configuration';
     }
+}
+
+sub get_shorts {
+    my $c      = shift;
+    my @shorts = @_;
+
+    my @results;
+
+    for my $short (@shorts) {
+        my $u = Lstu::DB::URL->new(app => $c->app, short => $short);
+        if ($u->url) {
+            push @results, $u->to_hash;
+        } else {
+            say sprintf('Sorry, unable to find an URL with short = %s', $short);
+        }
+    }
+    return @results;
 }
 
 =encoding utf8
