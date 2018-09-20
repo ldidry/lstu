@@ -24,6 +24,7 @@ variables:
   artifacts:
     paths:
       - local/
+    expire_in: 1 week
   dependencies:
     - carton
 .sqlite_template: &sqlite_definition
@@ -74,6 +75,7 @@ carton:
   artifacts:
     paths:
       - local/
+    expire_in: 1 week
   dependencies: []
   script:
     - carton install --deployment --without=sqlite --without=postgresql --without=mysql
