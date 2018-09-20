@@ -4,6 +4,8 @@ use Mojo::Base 'Mojolicious::Command';
 use FindBin qw($Bin);
 use File::Spec qw(catfile);
 use Term::ProgressBar::Quiet;
+use Mojo::Util qw(getopt);
+use Mojo::Collection 'c';
 
 has description => 'Checks all URLs in database against Google Safe Browsing database (local copy)';
 has usage => sub { shift->extract_usage };
@@ -52,8 +54,24 @@ sub run {
 
     $c->app->plugin('Lstu::Plugin::Helpers');
 
+    getopt \@args,
+      'u|url=s{1,}' => \my @urls_to_check,
+      's|seconds=i' => \my $delay;
+
     if ($c->app->gsb) {
-        my $urls = Lstu::DB::URL->new(app => $c->app)->get_all_urls;
+        my $urls;
+        if (@urls_to_check) {
+            $urls = c(get_shorts($c, @urls_to_check));
+        } elsif ($delay) {
+            $urls = Lstu::DB::URL->new(app => $c->app)->get_all_urls_created_ago($delay);
+        } else {
+            $urls = Lstu::DB::URL->new(app => $c->app)->get_all_urls;
+        }
+
+        unless ($urls->size) {
+            say 'No URLs to check.';
+            exit;
+        }
 
         my $progress = Term::ProgressBar::Quiet->new(
             { name => 'Scanning '.$urls->size.' URLs', count => $urls->size, ETA => 'linear' }
@@ -90,6 +108,23 @@ sub run {
     } else {
         say 'It seems that safebrowsing_api_key isn\'t set. Please, check your configuration';
     }
+}
+
+sub get_shorts {
+    my $c      = shift;
+    my @shorts = @_;
+
+    my @results;
+
+    for my $short (@shorts) {
+        my $u = Lstu::DB::URL->new(app => $c->app, short => $short);
+        if ($u->url) {
+            push @results, $u->to_hash;
+        } else {
+            say sprintf('Sorry, unable to find an URL with short = %s', $short);
+        }
+    }
+    return @results;
 }
 
 =encoding utf8

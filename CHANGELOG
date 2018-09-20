@@ -1,7 +1,10 @@
 Revision history for Perl application Lstu
 
 0.20-0 2018-??-??
-	- Improve safebrowsingcheck CLI (displays creators' IP addresses + other URLs from thoses IPs)
+	- Improve safebrowsingcheck CLI:
+	  - displays creators' IP addresses + other URLs from thoses IPs
+	  - allow to specify URLs to check
+	  - allow to check URLs created <argument> seconds ago
 
 0.19-3 2018-09-08
 	- Update translations
