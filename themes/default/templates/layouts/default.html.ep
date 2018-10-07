@@ -52,7 +52,7 @@
             </p>
             <%= content %>
         </div>
-% if (defined(flash('short')) && defined(flash('url'))) {
+% if (defined(stash('short')) && defined(stash('url'))) {
         %= javascript url_for('lstu.js')
 % }
     </body>

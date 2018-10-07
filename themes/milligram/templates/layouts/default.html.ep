@@ -52,7 +52,7 @@
         %= stylesheet '/css/lstu.css'
         %= stylesheet '/css/fontelico.css'
     % }
-% if (defined(flash('short')) && defined(flash('url'))) {
+% if (defined(stash('short')) && defined(stash('url'))) {
         %= javascript url_for('lstu.js')
 % }
     </body>

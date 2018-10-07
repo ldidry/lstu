@@ -10,12 +10,12 @@
     </fieldset>
 </form>
 
-% if (defined(flash('short')) && defined(flash('url'))) {
+% if (defined(stash('short')) && defined(stash('url'))) {
         <fieldset class="result">
-            <img class="qrcode-result" alt="QRCode" src="data:image/png;base64,<%= flash('qrcode') %>">
-            <label><%= link_to flash('url') => begin %><h4><%= flash('url') %></h4><%= end %></label>
-            ⟹ <input id="input-short" value="<%== flash('short') %>" class="form-control">
-            <span id="js" class="hidden"><a href="#" id="clipboard" class="button button-clear" title="<%= l('Copy to clipboard') %>" data-short="<%== flash('short') %>"><h5><span class="icon icon-clipboard"></span></h5></a><span>
+            <img class="qrcode-result" alt="QRCode" src="data:image/png;base64,<%= stash('qrcode') %>">
+            <label><%= link_to stash('url') => begin %><h4><%= stash('url') %></h4><%= end %></label>
+            ⟹ <input id="input-short" value="<%== stash('short') %>" class="form-control">
+            <span id="js" class="hidden"><a href="#" id="clipboard" class="button button-clear" title="<%= l('Copy to clipboard') %>" data-short="<%== stash('short') %>"><h5><span class="icon icon-clipboard"></span></h5></a><span>
         </fieldset>
 % }
 % if (defined(flash('msg'))) {

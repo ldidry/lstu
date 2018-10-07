@@ -36,11 +36,11 @@ sub add {
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->false, msg => $msg } },
                 any  => sub {
-                    my $c = shift;
-
-                    $c->flash('msg' => $msg);
-                    $c->flash('banned' => 1);
-                    $c->redirect_to('index');
+                    shift->render(
+                        template => 'index',
+                        msg      => $msg,
+                        banned   => 1
+                    );
                 }
             );
         } else {
@@ -118,10 +118,10 @@ sub add {
                 $c->respond_to(
                     json => { json => { success => Mojo::JSON->false, msg => $msg } },
                     any  => sub {
-                        my $c = shift;
-
-                        $c->flash('msg' => $msg);
-                        $c->redirect_to('index');
+                        shift->render(
+                            template => 'index',
+                            msg      => $msg
+                        );
                     }
                 );
             } else {
@@ -152,12 +152,12 @@ sub add {
                 $c->respond_to(
                     json => { json => { success => Mojo::JSON->true, url => $url, short => $prefix.$short, qrcode => $qrcode } },
                     any  => sub {
-                        my $c = shift;
-
-                        $c->flash('url'    => $url);
-                        $c->flash('short'  => $prefix.$short);
-                        $c->flash('qrcode' => $qrcode);
-                        $c->redirect_to('index');
+                        shift->render(
+                            template => 'index',
+                            url      => $url,
+                            short    => $prefix.$short,
+                            qrcode   => $qrcode
+                        );
                     }
                 );
             }

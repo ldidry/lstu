@@ -12,13 +12,13 @@
     <%= submit_button l('Go!'), class => 'btn btn-default btn-primary' %>
 </form>
 
-% if (defined(flash('short')) && defined(flash('url'))) {
+% if (defined(stash('short')) && defined(stash('url'))) {
     <h3 class="alert alert-success form-inline">
-        <img alt="QRCode" src="data:image/png;base64,<%= flash('qrcode') %>">
+        <img alt="QRCode" src="data:image/png;base64,<%= stash('qrcode') %>">
         <div class="form-group">
-            <label><%= link_to flash('url') => begin %><%= flash('url') %><%= end %></a></label>
-            <br> =&gt; <input id="input-short" value="<%== flash('short') %>" class="form-control">
-            <span id="js" class="hidden"><a href="#" id="clipboard" class="btn btn-default" title="<%= l('Copy to clipboard') %>" data-short="<%== flash('short') %>"><span class="icon icon-clipboard"></span></a><span>
+            <label><%= link_to stash('url') => begin %><%= stash('url') %><%= end %></a></label>
+            <br> =&gt; <input id="input-short" value="<%== stash('short') %>" class="form-control">
+            <span id="js" class="hidden"><a href="#" id="clipboard" class="btn btn-default" title="<%= l('Copy to clipboard') %>" data-short="<%== stash('short') %>"><span class="icon icon-clipboard"></span></a><span>
         </div>
     </h3>
 % }

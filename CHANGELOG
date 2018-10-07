@@ -2,6 +2,9 @@ Revision history for Perl application Lstu
 
 0.21-0 2018-??-??
 
+0.20-2 2018-10-07
+	- Handle very long URLs
+
 0.20-1 2018-09-20
 	- Fix safebrowsingcheck CLI help message
 
