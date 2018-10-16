@@ -428,64 +428,82 @@ DISTRIBUTIONS
       Data::Validate::Domain 0
       Data::Validate::IP 0
       ExtUtils::MakeMaker 0
-  Devel-Cover-1.30
-    pathname: P/PJ/PJCJ/Devel-Cover-1.30.tar.gz
+  Devel-CheckLib-1.13
+    pathname: M/MA/MATTN/Devel-CheckLib-1.13.tar.gz
     provides:
-      Devel::Cover 1.30
-      Devel::Cover::Annotation::Git 1.30
-      Devel::Cover::Annotation::Random 1.30
-      Devel::Cover::Annotation::Svk 1.30
-      Devel::Cover::Branch 1.30
-      Devel::Cover::Collection 1.30
-      Devel::Cover::Collection::Template::Provider 1.30
-      Devel::Cover::Condition 1.30
-      Devel::Cover::Condition_and_2 1.30
-      Devel::Cover::Condition_and_3 1.30
-      Devel::Cover::Condition_or_2 1.30
-      Devel::Cover::Condition_or_3 1.30
-      Devel::Cover::Condition_xor_4 1.30
-      Devel::Cover::Criterion 1.30
-      Devel::Cover::DB 1.30
-      Devel::Cover::DB::Criterion 1.30
-      Devel::Cover::DB::Digests 1.30
-      Devel::Cover::DB::File 1.30
-      Devel::Cover::DB::IO 1.30
-      Devel::Cover::DB::IO::Base 1.30
-      Devel::Cover::DB::IO::JSON 1.30
-      Devel::Cover::DB::IO::Sereal 1.30
-      Devel::Cover::DB::IO::Storable 1.30
-      Devel::Cover::DB::Run 1.30
-      Devel::Cover::DB::Structure 1.30
-      Devel::Cover::Html_Common 1.30
-      Devel::Cover::Op 1.30
-      Devel::Cover::Pod 1.30
-      Devel::Cover::Report::Compilation 1.30
-      Devel::Cover::Report::Html 1.30
-      Devel::Cover::Report::Html_basic 1.30
-      Devel::Cover::Report::Html_basic::Template::Provider 1.30
-      Devel::Cover::Report::Html_minimal 1.30
-      Devel::Cover::Report::Html_subtle 1.30
-      Devel::Cover::Report::Html_subtle::Template::Provider 1.30
-      Devel::Cover::Report::Json 1.30
-      Devel::Cover::Report::Sort 1.30
-      Devel::Cover::Report::Text 1.30
-      Devel::Cover::Report::Text2 1.30
-      Devel::Cover::Report::Vim 1.30
-      Devel::Cover::Report::Vim::Template::Provider 1.30
-      Devel::Cover::Statement 1.30
-      Devel::Cover::Subroutine 1.30
-      Devel::Cover::Test 1.30
-      Devel::Cover::Time 1.30
-      Devel::Cover::Truth_Table 1.30
-      Devel::Cover::Truth_Table::Row 1.30
-      Devel::Cover::Util 1.30
-      Devel::Cover::Web 1.30
+      Devel::CheckLib 1.13
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      File::Temp 0.16
+      perl 5.00405
+  Devel-Cover-1.31
+    pathname: P/PJ/PJCJ/Devel-Cover-1.31.tar.gz
+    provides:
+      Devel::Cover 1.31
+      Devel::Cover::Annotation::Git 1.31
+      Devel::Cover::Annotation::Random 1.31
+      Devel::Cover::Annotation::Svk 1.31
+      Devel::Cover::Branch 1.31
+      Devel::Cover::Collection 1.31
+      Devel::Cover::Collection::Template::Provider 1.31
+      Devel::Cover::Condition 1.31
+      Devel::Cover::Condition_and_2 1.31
+      Devel::Cover::Condition_and_3 1.31
+      Devel::Cover::Condition_or_2 1.31
+      Devel::Cover::Condition_or_3 1.31
+      Devel::Cover::Condition_xor_4 1.31
+      Devel::Cover::Criterion 1.31
+      Devel::Cover::DB 1.31
+      Devel::Cover::DB::Criterion 1.31
+      Devel::Cover::DB::Digests 1.31
+      Devel::Cover::DB::File 1.31
+      Devel::Cover::DB::IO 1.31
+      Devel::Cover::DB::IO::Base 1.31
+      Devel::Cover::DB::IO::JSON 1.31
+      Devel::Cover::DB::IO::Sereal 1.31
+      Devel::Cover::DB::IO::Storable 1.31
+      Devel::Cover::DB::Run 1.31
+      Devel::Cover::DB::Structure 1.31
+      Devel::Cover::Html_Common 1.31
+      Devel::Cover::Op 1.31
+      Devel::Cover::Pod 1.31
+      Devel::Cover::Report::Compilation 1.31
+      Devel::Cover::Report::Html 1.31
+      Devel::Cover::Report::Html_basic 1.31
+      Devel::Cover::Report::Html_basic::Template::Provider 1.31
+      Devel::Cover::Report::Html_minimal 1.31
+      Devel::Cover::Report::Html_subtle 1.31
+      Devel::Cover::Report::Html_subtle::Template::Provider 1.31
+      Devel::Cover::Report::Json 1.31
+      Devel::Cover::Report::Sort 1.31
+      Devel::Cover::Report::Text 1.31
+      Devel::Cover::Report::Text2 1.31
+      Devel::Cover::Report::Vim 1.31
+      Devel::Cover::Report::Vim::Template::Provider 1.31
+      Devel::Cover::Statement 1.31
+      Devel::Cover::Subroutine 1.31
+      Devel::Cover::Test 1.31
+      Devel::Cover::Time 1.31
+      Devel::Cover::Truth_Table 1.31
+      Devel::Cover::Truth_Table::Row 1.31
+      Devel::Cover::Util 1.31
+      Devel::Cover::Web 1.31
     requirements:
       B::Debug 0
       Digest::MD5 0
       ExtUtils::MakeMaker 0
       HTML::Entities 3.69
       Storable 0
+      Test::More 0
+  Devel-Cycle-1.12
+    pathname: L/LD/LDS/Devel-Cycle-1.12.tar.gz
+    provides:
+      Devel::Cycle 1.12
+    requirements:
+      ExtUtils::MakeMaker 0
+      Scalar::Util 0
       Test::More 0
   Devel-GlobalDestruction-0.14
     pathname: H/HA/HAARG/Devel-GlobalDestruction-0.14.tar.gz
@@ -823,17 +841,17 @@ DISTRIBUTIONS
       IO::Socket 0
       Socket 1.97
       Test::More 0.88
-  IO-Socket-SSL-2.059
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.059.tar.gz
+  IO-Socket-SSL-2.060
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.060.tar.gz
     provides:
-      IO::Socket::SSL 2.059
+      IO::Socket::SSL 2.060
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.059
-      IO::Socket::SSL::OCSP_Resolver 2.059
+      IO::Socket::SSL::OCSP_Cache 2.060
+      IO::Socket::SSL::OCSP_Resolver 2.060
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.059
-      IO::Socket::SSL::SSL_HANDLE 2.059
-      IO::Socket::SSL::Session_Cache 2.059
+      IO::Socket::SSL::SSL_Context 2.060
+      IO::Socket::SSL::SSL_HANDLE 2.060
+      IO::Socket::SSL::Session_Cache 2.060
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
@@ -861,7 +879,6 @@ DISTRIBUTIONS
       JSON::MaybeXS 1.004000
     requirements:
       Carp 0
-      Cpanel::JSON::XS 2.3310
       ExtUtils::MakeMaker 0
       JSON::PP 2.27300
       Scalar::Util 0
@@ -994,13 +1011,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-9.03
-    pathname: S/SR/SRI/Minion-9.03.tar.gz
+  Minion-9.06
+    pathname: S/SR/SRI/Minion-9.06.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 9.03
+      Minion 9.06
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1008,7 +1025,7 @@ DISTRIBUTIONS
       Minion::Command::minion::worker undef
       Minion::Job undef
       Minion::Worker undef
-      Minion::_Guard 9.03
+      Minion::_Guard 9.06
       Mojolicious::Plugin::Minion undef
       Mojolicious::Plugin::Minion::Admin undef
     requirements:
@@ -1214,10 +1231,10 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.008001
       version 0
-  Mojo-Pg-4.09
-    pathname: S/SR/SRI/Mojo-Pg-4.09.tar.gz
+  Mojo-Pg-4.10
+    pathname: S/SR/SRI/Mojo-Pg-4.10.tar.gz
     provides:
-      Mojo::Pg 4.09
+      Mojo::Pg 4.10
       Mojo::Pg::Database undef
       Mojo::Pg::Migrations undef
       Mojo::Pg::PubSub undef
@@ -1270,8 +1287,8 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 7.55
       SQL::Abstract 1.81
-  Mojolicious-7.94
-    pathname: S/SR/SRI/Mojolicious-7.94.tar.gz
+  Mojolicious-8.02
+    pathname: S/SR/SRI/Mojolicious-8.02.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1340,23 +1357,22 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 7.94
+      Mojolicious 8.02
       Mojolicious::Command undef
+      Mojolicious::Command::Author::cpanify undef
+      Mojolicious::Command::Author::generate undef
+      Mojolicious::Command::Author::generate::app undef
+      Mojolicious::Command::Author::generate::lite_app undef
+      Mojolicious::Command::Author::generate::makefile undef
+      Mojolicious::Command::Author::generate::plugin undef
+      Mojolicious::Command::Author::inflate undef
       Mojolicious::Command::cgi undef
-      Mojolicious::Command::cpanify undef
       Mojolicious::Command::daemon undef
       Mojolicious::Command::eval undef
-      Mojolicious::Command::generate undef
-      Mojolicious::Command::generate::app undef
-      Mojolicious::Command::generate::lite_app undef
-      Mojolicious::Command::generate::makefile undef
-      Mojolicious::Command::generate::plugin undef
       Mojolicious::Command::get undef
-      Mojolicious::Command::inflate undef
       Mojolicious::Command::prefork undef
       Mojolicious::Command::psgi undef
       Mojolicious::Command::routes undef
-      Mojolicious::Command::test undef
       Mojolicious::Command::version undef
       Mojolicious::Commands undef
       Mojolicious::Controller undef
@@ -1402,16 +1418,17 @@ DISTRIBUTIONS
       perl 5.010
       strict 0
       warnings 0
-  Mojolicious-Plugin-CHI-0.15
-    pathname: A/AK/AKRON/Mojolicious-Plugin-CHI-0.15.tar.gz
+  Mojolicious-Plugin-CHI-0.18
+    pathname: A/AK/AKRON/Mojolicious-Plugin-CHI-0.18.tar.gz
     provides:
-      Mojolicious::Plugin::CHI 0.15
+      Mojolicious::Plugin::CHI 0.18
       Mojolicious::Plugin::CHI::chi undef
     requirements:
       CHI 0.58
       Digest::JHash 0.05
       ExtUtils::MakeMaker 0
       Mojolicious 4.77
+      Test::Memory::Cycle 1.06
       Test::More 0
       Test::Output 1
       perl 5.010001
@@ -1911,23 +1928,23 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Net::DNS 0.74
       perl 5.008008
-  Net-DNS-1.17
-    pathname: N/NL/NLNETLABS/Net-DNS-1.17.tar.gz
+  Net-DNS-1.18
+    pathname: N/NL/NLNETLABS/Net-DNS-1.18.tar.gz
     provides:
-      Net::DNS 1.17
+      Net::DNS 1.18
       Net::DNS::Domain 1698
       Net::DNS::DomainName 1605
       Net::DNS::DomainName1035 1605
       Net::DNS::DomainName2535 1605
-      Net::DNS::Header 1527
+      Net::DNS::Header 1709
       Net::DNS::Mailbox 1605
       Net::DNS::Mailbox1035 1605
       Net::DNS::Mailbox2535 1605
       Net::DNS::Nameserver 1692
-      Net::DNS::Packet 1584
-      Net::DNS::Parameters 1623
-      Net::DNS::Question 1530
-      Net::DNS::RR 1696
+      Net::DNS::Packet 1714
+      Net::DNS::Parameters 1714
+      Net::DNS::Question 1714
+      Net::DNS::RR 1714
       Net::DNS::RR::A 1597
       Net::DNS::RR::AAAA 1597
       Net::DNS::RR::AFSDB 1597
@@ -1984,9 +2001,9 @@ DISTRIBUTIONS
       Net::DNS::RR::PTR 1597
       Net::DNS::RR::PX 1597
       Net::DNS::RR::RP 1597
-      Net::DNS::RR::RRSIG 1690
+      Net::DNS::RR::RRSIG 1709
       Net::DNS::RR::RT 1597
-      Net::DNS::RR::SIG 1690
+      Net::DNS::RR::SIG 1709
       Net::DNS::RR::SMIMEA 1597
       Net::DNS::RR::SOA 1597
       Net::DNS::RR::SPF 1593
@@ -1998,20 +2015,20 @@ DISTRIBUTIONS
       Net::DNS::RR::TXT 1597
       Net::DNS::RR::URI 1597
       Net::DNS::RR::X25 1597
-      Net::DNS::Resolver 1598
-      Net::DNS::Resolver::Base 1698
+      Net::DNS::Resolver 1714
+      Net::DNS::Resolver::Base 1709
       Net::DNS::Resolver::MSWin32 1568
-      Net::DNS::Resolver::Recurse 1623
+      Net::DNS::Resolver::Recurse 1709
       Net::DNS::Resolver::UNIX 1573
       Net::DNS::Resolver::android 1568
       Net::DNS::Resolver::cygwin 1568
       Net::DNS::Resolver::os2 1568
       Net::DNS::Resolver::os390 1579
       Net::DNS::Text 1698
-      Net::DNS::Update 1571
-      Net::DNS::ZoneFile 1623
-      Net::DNS::ZoneFile::Generator 1623
-      Net::DNS::ZoneFile::Text 1623
+      Net::DNS::Update 1714
+      Net::DNS::ZoneFile 1709
+      Net::DNS::ZoneFile::Generator 1709
+      Net::DNS::ZoneFile::Text 1709
     requirements:
       Digest::HMAC 1.03
       Digest::MD5 2.13
@@ -2019,9 +2036,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       File::Spec 0.86
       IO::File 1.08
-      IO::Socket 1.16
+      IO::Select 1.14
       IO::Socket::IP 0.38
       MIME::Base64 2.11
+      PerlIO 1.05
+      Scalar::Util 1.25
       Test::More 0.52
       Time::Local 1.19
       perl 5.006
@@ -2033,12 +2052,12 @@ DISTRIBUTIONS
       Carp 0
       ExtUtils::MakeMaker 0
       Storable 0
-  Net-Google-SafeBrowsing4-0.7
-    pathname: J/JS/JSOBRIER/Net-Google-SafeBrowsing4-0.7.tar.gz
+  Net-Google-SafeBrowsing4-0.8
+    pathname: J/JS/JSOBRIER/Net-Google-SafeBrowsing4-0.8.tar.gz
     provides:
-      Net::Google::SafeBrowsing4 0.7
+      Net::Google::SafeBrowsing4 0.8
       Net::Google::SafeBrowsing4::Storage 0.3
-      Net::Google::SafeBrowsing4::Storage::File 0.3
+      Net::Google::SafeBrowsing4::Storage::File 0.4
       Net::Google::SafeBrowsing4::URI undef
     requirements:
       Carp 0
@@ -2156,6 +2175,13 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
+  PadWalker-2.3
+    pathname: R/RO/ROBIN/PadWalker-2.3.tar.gz
+    provides:
+      PadWalker 2.3
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.008001
   Params-Util-1.07
     pathname: A/AD/ADAMK/Params-Util-1.07.tar.gz
     provides:
@@ -2433,6 +2459,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Test-Memory-Cycle-1.06
+    pathname: P/PE/PETDANCE/Test-Memory-Cycle-1.06.tar.gz
+    provides:
+      Test::Memory::Cycle 1.06
+    requirements:
+      Devel::Cycle 1.07
+      ExtUtils::MakeMaker 0
+      Getopt::Long 0
+      PadWalker 0
+      Test::Builder 0
+      Test::Builder::Tester 0
+      Test::More 0
+      Test::Simple 0.62
   Test-MockObject-1.20180705
     pathname: C/CH/CHROMATIC/Test-MockObject-1.20180705.tar.gz
     provides:
