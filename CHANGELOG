@@ -1,6 +1,7 @@
 Revision history for Perl application Lstu
 
 0.21-0 2018-??-??
+	- Allow to delete URLs and ban IPs from safebrowsingcheck
 
 0.20-2 2018-10-07
 	- Handle very long URLs

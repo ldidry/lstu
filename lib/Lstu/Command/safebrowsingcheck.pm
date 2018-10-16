@@ -6,6 +6,8 @@ use File::Spec qw(catfile);
 use Term::ProgressBar::Quiet;
 use Mojo::Util qw(getopt);
 use Mojo::Collection 'c';
+use Lstu::DB::URL;
+use Lstu::DB::Ban;
 
 has description => 'Checks all URLs in database against Google Safe Browsing database (local copy)';
 has usage => sub { shift->extract_usage };
@@ -56,7 +58,10 @@ sub run {
 
     getopt \@args,
       'u|url=s{1,}' => \my @urls_to_check,
-      's|seconds=i' => \my $delay;
+      's|seconds=i' => \my $delay,
+      'r|remove'    => \my $remove,
+      'a|all'       => \my $all,
+      'b|ban'       => \my $ban;
 
     if ($c->app->gsb) {
         my $urls;
@@ -77,7 +82,8 @@ sub run {
             { name => 'Scanning '.$urls->size.' URLs', count => $urls->size, ETA => 'linear' }
         );
         my (@bad, %bad_ips, @bad_from_ips);
-        my $gsb = $c->app->gsb;
+        my $gsb     = $c->app->gsb;
+        my $deleted = 0;
         $urls->each(sub {
             my ($e, $num) = @_;
 
@@ -88,23 +94,52 @@ sub run {
             if (@matches) {
                 push @bad, $e->{short};
                 $bad_ips{$e->{created_by}} = 1 if $e->{created_by};
+                $deleted += Lstu::DB::URL->new(
+                    app => $c->app,
+                    short => $e->{short}
+                )->delete if $remove;
             }
         });
 
         say sprintf('All URLs (%d) have been scanned.', $urls->size);
         say sprintf('%d bad URLs detected.', scalar(@bad));
 
-        say sprintf("If you want to delete the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad)) if @bad;
+        if ($remove) {
+            say sprintf('%d bad URLs deleted.', $deleted) if $deleted;
+        } else {
+            say sprintf("If you want to delete the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad)) if @bad;
+        }
 
+        $deleted = 0;
         for my $ip (keys %bad_ips) {
             my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
             $u->each(sub {
                 my ($e, $num) = @_;
                 push @bad_from_ips, $e->{short};
+                $deleted += Lstu::DB::URL->new(
+                    app => $c->app,
+                    short => $e->{short}
+                )->delete if ($remove && $all);
             });
         }
-        say sprintf("Bad URLs creators' IP addresses: \n  %s", join(", ", keys %bad_ips)) if (keys %bad_ips);
-        say sprintf("If you want to delete the URLs created by the same IPs than the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad_from_ips)) if @bad_from_ips;
+        my @ips = keys %bad_ips;
+        say sprintf("Bad URLs creators' IP addresses: \n  %s", join(", ", @ips)) if (@ips);
+
+        if ($ban) {
+            for my $ip (@ips) {
+                Lstu::DB::Ban->new(
+                    app    => $c->app,
+                    ip     => $ip
+                )->ban_ten_years;
+            }
+            say sprintf("%d banned IP addresses", scalar(@ips)) if (@ips);
+        }
+
+        if ($remove && $all) {
+            say sprintf('%d URLs from same IPs deleted.', $deleted) if $deleted;
+        } else {
+            say sprintf("If you want to delete the URLs created by the same IPs than the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad_from_ips)) if @bad_from_ips;
+        }
     } else {
         say 'It seems that safebrowsing_api_key isn\'t set. Please, check your configuration';
     }
@@ -139,6 +174,11 @@ Lstu::Command::safebrowsing - Checks all URLs in database against Google Safe Br
       carton exec script/lstu safebrowsingcheck                           Checks all URLs in database against Google Safe Browsing database
       carton exec script/lstu safebrowsingcheck -u|--url <short> <short>  Checks the space-separated URLs against Google Safe Browsing database
       carton exec script/lstu safebrowsingcheck -s|--seconds <xxx>        Checks URLs created the last xxx seconds against Google Safe Browsing database
+
+  Options (available with all commands):
+      -r|--remove  Remove bad URLs that have been found
+      -a|--all     Remove all URLs created by the same IP addresses that created bad URLs (only in combination with the `-r|--remove` option)
+      -b|--ban     Ban IP addresses that created bad URLs
 
 =cut
 

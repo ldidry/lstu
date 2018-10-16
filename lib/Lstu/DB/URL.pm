@@ -7,6 +7,7 @@ has 'url';
 has 'counter' => 0;
 has 'timestamp';
 has 'created_by';
+has 'record' => 0;
 has 'app';
 
 =head1 NAME
@@ -106,6 +107,18 @@ sub to_hash {
 
 =back
 
+=cut
+
+sub increment_counter {
+    my $c = shift;
+
+    $c->app->dbi->db->query('UPDATE lstu SET counter = counter + 1 WHERE short = ?', $c->short);
+    my $h = $c->app->dbi->db->query('SELECT counter FROM lstu WHERE short = ?', $c->short)->hashes->first;
+    $c->counter($h->{counter});
+
+    return $c;
+}
+
 =head2 write
 
 =over 1
@@ -148,6 +161,23 @@ sub write {
 =item B<Returns>   : 1 for success, 0 for failure
 
 =back
+
+=cut
+
+sub delete {
+    my $c = shift;
+
+    $c->app->dbi->db->query('DELETE FROM lstu WHERE short = ?', $c->short);
+    my $h = $c->app->dbi->db->query('SELECT * FROM lstu WHERE short = ?', $c->short)->hashes;
+    if ($h->size) {
+        # We found the URL, it hasn't been deleted
+        return 0;
+    } else {
+        $c = Lstu::DB::URL->new(app => $c->app);
+        # We didn't found the URL, it has been deleted
+        return 1;
+    }
+}
 
 =head2 exist
 

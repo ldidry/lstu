@@ -6,6 +6,7 @@ use Mojo::Collection 'c';
 has 'ip';
 has 'until';
 has 'strike' => 0;
+has 'record' => 0;
 has 'app';
 
 =head1 NAME
@@ -191,6 +192,31 @@ Update the database record if one already exists, create one otherwise.
 
 =back
 
+=cut
+
+sub increment_ban_delay {
+    my $c       = shift;
+    my $penalty = shift;
+
+    my $until = time + $penalty;
+
+    my $h = {
+        strike => 1
+    };
+    if ($c->record) {
+        $c->app->dbi->db->query('UPDATE ban SET until = ?, strike = strike + 1 WHERE ip = ?', $until, $c->ip);
+        $h = $c->app->dbi->db->query('SELECT strike FROM ban WHERE ip = ?', $c->ip)->hashes->first;
+    } else {
+        $c->app->dbi->db->query('INSERT INTO ban (ip, until, strike) VALUES (?, ?, 1)', $c->ip, $until);
+        $c->record(1);
+    }
+
+    $c->strike($h->{strike});
+    $c->until($until);
+
+    return $c;
+}
+
 =head2 clear
 
 =over 1
@@ -235,6 +261,44 @@ sub delete_all {
     my $c = shift;
 
     $c->app->dbi->db->query('DELETE FROM ban');
+}
+
+=head2 ban_ten_years
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>ban_ten_years>
+
+=item B<Arguments> : none
+
+=item B<Purpose>   : ban an IP address forever
+
+=item B<Returns>   : nothing is expected
+
+=back
+
+=cut
+
+sub ban_ten_years {
+    my $c       = shift;
+
+    my $until = time + 315360000;
+
+    my $h = {
+        strike => time
+    };
+    if ($c->record) {
+        $c->app->dbi->db->query('UPDATE ban SET until = ?, strike = ? WHERE ip = ?', $until, time, $c->ip);
+        $h = $c->app->dbi->db->query('SELECT strike FROM ban WHERE ip = ?', $c->ip)->hashes->first;
+    } else {
+        $c->app->dbi->db->query('INSERT INTO ban (ip, until, strike) VALUES (?, ?, 1)', $c->ip, $until);
+        $c->record(1);
+    }
+
+    $c->strike($h->{strike});
+    $c->until($until);
+
+    return $c;
 }
 
 =head2 _slurp
