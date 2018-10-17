@@ -24,18 +24,18 @@ stats-locales:
 	zanata-cli -q stats
 
 podcheck:
-	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm
+	podchecker lib/Lstu/DB/*pm lib/Lstu/Command/*pm
 
 cover:
 	PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) cover --ignore_re '^local'
 
 test:
-	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) $(REAL_LSTU) test
+	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) prove -l -f -o
 
 test-sqlite:
 	@rm -rf test1.db test1.db-journal cover_db/
 	@echo 'MOJO_CONFIG=t/sqlite1.conf'
-	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' MOJO_CONFIG=t/sqlite1.conf $(CARTON) $(REAL_LSTU) test
+	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' MOJO_CONFIG=t/sqlite1.conf $(CARTON) prove -l -f -o
 	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) cover --ignore_re '^local'
 
 dev: minify

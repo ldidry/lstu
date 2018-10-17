@@ -2,8 +2,6 @@
 package Lstu::DB::URL::Pg;
 use Mojo::Base 'Lstu::DB::URL';
 
-has 'record' => 0;
-
 sub new {
     my $c = shift;
 

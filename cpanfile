@@ -49,6 +49,6 @@ feature 'mysql', 'MySQL support' => sub {
 };
 
 feature 'safebrowsing', 'Check URLs against Google safebrowsing database' => sub {
-    requires 'Net::Google::SafeBrowsing4';
+    requires 'Net::Google::SafeBrowsing4', '>= 0.8';
     requires 'Term::ProgressBar::Quiet';
 };
