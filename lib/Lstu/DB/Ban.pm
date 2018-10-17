@@ -241,6 +241,30 @@ sub clear {
     $c->app->dbi->db->query('DELETE FROM ban WHERE until < ?', time);
 }
 
+=head2 unban
+
+=over 1
+
+=item B<Usage>     : C<$c-E<gt>unban>
+
+=item B<Arguments> : none
+
+=item B<Purpose>   : unban IP address
+
+=item B<Returns>   : the Lstu::DB::Ban object
+
+=back
+
+=cut
+
+sub unban {
+    my $c       = shift;
+
+    $c->app->dbi->db->query('DELETE from ban WHERE ip = ?', $c->ip);
+
+    return $c;
+}
+
 =head2 delete_all
 
 =over 1
