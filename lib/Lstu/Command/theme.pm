@@ -96,6 +96,7 @@ Lstu::Command::theme - Create new theme skeleton.
   Usage: script/lstu theme THEME_NAME
 
   Your new theme will be available in the themes directory.
+
 =cut
 
 1;

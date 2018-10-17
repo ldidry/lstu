@@ -24,7 +24,7 @@ stats-locales:
 	zanata-cli -q stats
 
 podcheck:
-	podchecker lib/Lstu/DB/Ban.pm lib/Lstu/DB/Session.pm lib/Lstu/DB/URL.pm
+	podchecker lib/Lstu/DB/*pm lib/Lstu/Command/*pm
 
 cover:
 	PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='-MDevel::Cover' $(CARTON) cover --ignore_re '^local'
