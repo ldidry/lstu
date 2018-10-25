@@ -67,6 +67,18 @@ sub startup {
     # Helpers
     $self->plugin('Lstu::Plugin::Helpers');
 
+    # URL cache
+    if (scalar(@{$config->{memcached_servers}})) {
+        $self->plugin(CHI => {
+            lstu_urls_cache => {
+                driver             => 'Memcached',
+                servers            => $config->{memcached_servers},
+                expires_in         => '1 day',
+                expires_on_backend => 1,
+            }
+        });
+    }
+
     $self->plugin('Mount' => {$config->{prefix} => File::Spec->catfile($Bin, '..', 'script', 'application')});
 }
 

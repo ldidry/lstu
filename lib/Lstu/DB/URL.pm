@@ -173,7 +173,11 @@ sub delete {
         # We found the URL, it hasn't been deleted
         return 0;
     } else {
+        if (scalar(@{$c->app->config('memcached_servers')})) {
+            $c->app->chi('lstu_urls_cache')->remove($c->short);
+        }
         $c = Lstu::DB::URL->new(app => $c->app);
+
         # We didn't found the URL, it has been deleted
         return 1;
     }

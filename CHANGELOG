@@ -1,5 +1,8 @@
 Revision history for Perl application Lstu
 
+0.21-1 2018-10-17
+	- Fix URL removal in memcached from safebrowsingcheck command
+
 0.21-0 2018-10-17
 	- Allow to delete URLs and ban IPs from safebrowsingcheck
 	- Add ban CLI tool for banning and unbanning IP addresses

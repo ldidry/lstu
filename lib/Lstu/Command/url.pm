@@ -51,17 +51,6 @@ sub run {
         }
     });
 
-    if (scalar(@{$config->{memcached_servers}})) {
-        $c->app->plugin(CHI => {
-            lstu_urls_cache => {
-                driver             => 'Memcached',
-                servers            => $config->{memcached_servers},
-                expires_in         => '1 day',
-                expires_on_backend => 1,
-            }
-        });
-    }
-
     getopt \@args,
       'info=s{1,}'   => \my @info,
       'r|remove=s{1,}' => \my @remove,
@@ -93,9 +82,6 @@ sub run {
                     }
                     if ($confirm =~ m/^y(es)?$/i) {
                         if ($u->delete) {
-                            if (scalar(@{$config->{memcached_servers}})) {
-                                $c->app->chi('lstu_urls_cache')->remove($e);
-                            }
                             say sprintf('Success: %s URL has been removed', $e);
                         } else {
                             say sprintf('Failure: %s URL has not been removed', $e);
