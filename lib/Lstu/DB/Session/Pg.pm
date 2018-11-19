@@ -12,7 +12,7 @@ sub new {
     return $c;
 }
 
-sub delete {
+sub remove {
     my $c = shift;
 
     my $h = $c->app->dbi->db->query('DELETE FROM sessions WHERE token = ? RETURNING *', $c->token)->hashes;

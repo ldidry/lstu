@@ -21,7 +21,7 @@ sub increment_counter {
     return $c;
 }
 
-sub delete {
+sub remove {
     my $c = shift;
 
     my $h = $c->app->dbi->db->query('DELETE FROM lstu WHERE short = ? RETURNING *', $c->short)->hashes;
@@ -29,6 +29,9 @@ sub delete {
     # 0 means failure
     # 1 means success
     if ($h->size) {
+        if (scalar(@{$c->app->config('memcached_servers')})) {
+            $c->app->chi('lstu_urls_cache')->remove($c->short);
+        }
         $c = Lstu::DB::URL->new(app => $c->app);
     }
 
