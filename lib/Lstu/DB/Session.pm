@@ -88,15 +88,15 @@ sub to_hash {
     }
 }
 
-=head2 delete
+=head2 remove
 
 =over 1
 
-=item B<Usage>     : C<$c-E<gt>delete>
+=item B<Usage>     : C<$c-E<gt>remove>
 
 =item B<Arguments> : none
 
-=item B<Purpose>   : delete the session record from the database
+=item B<Purpose>   : remove the session record from the database
 
 =item B<Returns>   : the Lstu::DB::Session object
 
@@ -104,17 +104,17 @@ sub to_hash {
 
 =cut
 
-sub delete {
+sub remove {
     my $c = shift;
 
     $c->app->dbi->db->query('DELETE FROM sessions WHERE token = ?', $c->token);
     my $h = $c->app->dbi->db->query('SELECT * FROM sessions WHERE token = ?', $c->token)->hashes;
     if ($h->size) {
-        # We found the session, it hasn't been deleted
+        # We found the session, it hasn't been removed
         return 0;
     } else {
         $c = Lstu::DB::Session->new(app => $c->app);
-        # We didn't found the session, it has been deleted
+        # We didn't found the session, it has been removed
         return 1;
     }
 }

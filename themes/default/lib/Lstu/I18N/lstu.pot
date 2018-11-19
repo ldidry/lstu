@@ -231,7 +231,7 @@ msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted 
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:223
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:223
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "You will have the statistics page with the admin stats if you're succesfully logged in, or your stats and a failure message otherwise"
 msgstr ""
 
-#: lib/Lstu/Controller/Admin.pm:145
+#: lib/Lstu/Controller/Admin.pm:142
 msgid "You're not authenticated as the admin"
 msgstr ""
 

@@ -62,7 +62,7 @@ sub login {
             Lstu::DB::Session->new(
                 app    => $c,
                 token  => $c->session('token')
-            )->delete;
+            )->remove;
             delete $c->session->{token};
             $c->respond_to(
                 json => sub {
@@ -119,10 +119,7 @@ sub delete {
             short  => $short
         );
         if ($db_url->url) {
-            my $deleted = $db_url->delete;
-            if (scalar(@{$c->config('memcached_servers')})) {
-                $c->chi('lstu_urls_cache')->remove($short);
-            }
+            my $deleted = $db_url->remove;
             $c->respond_to(
                 json => { json => { success => Mojo::JSON->true, deleted => $deleted } },
                 any  => sub {

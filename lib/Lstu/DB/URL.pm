@@ -148,15 +148,15 @@ sub write {
     return $c;
 }
 
-=head2 delete
+=head2 remove
 
 =over 1
 
-=item B<Usage>     : C<$c-E<gt>delete>
+=item B<Usage>     : C<$c-E<gt>remove>
 
 =item B<Arguments> : none
 
-=item B<Purpose>   : delete the URL record from the database
+=item B<Purpose>   : remove the URL record from the database
 
 =item B<Returns>   : 1 for success, 0 for failure
 
@@ -164,13 +164,13 @@ sub write {
 
 =cut
 
-sub delete {
+sub remove {
     my $c = shift;
 
     $c->app->dbi->db->query('DELETE FROM lstu WHERE short = ?', $c->short);
     my $h = $c->app->dbi->db->query('SELECT * FROM lstu WHERE short = ?', $c->short)->hashes;
     if ($h->size) {
-        # We found the URL, it hasn't been deleted
+        # We found the URL, it hasn't been removed
         return 0;
     } else {
         if (scalar(@{$c->app->config('memcached_servers')})) {
@@ -178,7 +178,7 @@ sub delete {
         }
         $c = Lstu::DB::URL->new(app => $c->app);
 
-        # We didn't found the URL, it has been deleted
+        # We didn't found the URL, it has been removed
         return 1;
     }
 }

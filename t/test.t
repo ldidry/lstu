@@ -11,6 +11,7 @@ use Test::Mojo;
 use Lstu::DB::URL;
 use Lstu::DB::Ban;
 use Lstu::DB::Session;
+use Lstu::DefaultConfig qw($default_config);
 use FindBin qw($Bin);
 use File::Spec::Functions;
 
@@ -29,11 +30,7 @@ BEGIN {
     my $config = $m->plugin('Config' =>
         {
             file    => $cfile->to_abs->to_string,
-            default => {
-                dbtype           => 'sqlite',
-                max_redir        => 2,
-                skip_spamhaus    => 0,
-            }
+            default => $default_config
         }
     );
     $m->plugin('Lstu::Plugin::Helpers');

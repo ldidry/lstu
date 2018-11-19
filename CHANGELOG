@@ -1,5 +1,10 @@
 Revision history for Perl application Lstu
 
+0.22-0 ????-??-??
+
+0.21-2 2018-11-19
+	- Fix URL removal in memcached from safebrowsingcheck and url commands
+
 0.21-1 2018-10-17
 	- Fix URL removal in memcached from safebrowsingcheck command
 

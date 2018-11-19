@@ -16,46 +16,6 @@ sub run {
     my $c = shift;
     my @args = @_;
 
-    my $cfile = Mojo::File->new($Bin, '..' , 'lstu.conf');
-    if (defined $ENV{MOJO_CONFIG}) {
-        $cfile = Mojo::File->new($ENV{MOJO_CONFIG});
-        unless (-e $cfile->to_abs) {
-            $cfile = Mojo::File->new($Bin, '..', $ENV{MOJO_CONFIG});
-        }
-    }
-    my $config = $c->app->plugin('Config', {
-        file    => $cfile,
-        default =>  {
-            prefix                 => '/',
-            provisioning           => 100,
-            provis_step            => 5,
-            length                 => 8,
-            secret                 => ['hfudsifdsih'],
-            page_offset            => 10,
-            theme                  => 'default',
-            ban_min_strike         => 3,
-            ban_whitelist          => [],
-            ban_blacklist          => [],
-            minion                 => {
-                enabled => 0,
-                db_path => 'minion.db'
-            },
-            session_duration       => 3600,
-            dbtype                 => 'sqlite',
-            db_path                => 'lstu.db',
-            max_redir              => 2,
-            skip_spamhaus          => 0,
-            safebrowsing_api_key   => '',
-            memcached_servers      => [],
-            x_frame_options        => 'DENY',
-            x_content_type_options => 'nosniff',
-            x_xss_protection       => '1; mode=block',
-            log_creator_ip         => 0,
-        }
-    });
-
-    $c->app->plugin('Lstu::Plugin::Helpers');
-
     getopt \@args,
       'u|url=s{1,}' => \my @urls_to_check,
       's|seconds=i' => \my $delay,
@@ -97,7 +57,7 @@ sub run {
                 $deleted += Lstu::DB::URL->new(
                     app => $c->app,
                     short => $e->{short}
-                )->delete if $remove;
+                )->remove if $remove;
             }
         });
 
@@ -119,7 +79,7 @@ sub run {
                 $deleted += Lstu::DB::URL->new(
                     app => $c->app,
                     short => $e->{short}
-                )->delete if ($remove && $all);
+                )->remove if ($remove && $all);
             });
         }
         my @ips = keys %bad_ips;
