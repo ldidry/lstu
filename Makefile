@@ -15,13 +15,13 @@ locales:
 	cd ./themes/milligram && make locales
 
 push-locales:
-	zanata-cli -q -B push
+	zanata-cli -q -B push --project-version `git branch | grep \* | cut -d ' ' -f2-`
 
 pull-locales:
-	zanata-cli -q -B pull --min-doc-percent 40
+	zanata-cli -q -B pull --min-doc-percent 50 --project-version `git branch | grep \* | cut -d ' ' -f2-`
 
 stats-locales:
-	zanata-cli -q stats
+	zanata-cli -q stats --project-version `git branch | grep \* | cut -d ' ' -f2-`
 
 podcheck:
 	podchecker lib/Lstu/DB/*pm lib/Lstu/Command/*pm
