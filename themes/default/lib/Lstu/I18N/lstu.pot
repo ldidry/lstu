@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ($url)
-#: lib/Lstu/Controller/URL.pm:115
+#: lib/Lstu/Controller/URL.pm:118
 msgid "%1 is not a valid URL."
 msgstr ""
 
@@ -154,7 +154,7 @@ msgid "Next"
 msgstr ""
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/URL.pm:109
+#: lib/Lstu/Controller/URL.pm:112
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
 
@@ -235,14 +235,9 @@ msgstr ""
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
-#. ($custom_url)
-#: lib/Lstu/Controller/URL.pm:63
-msgid "The shortened text (%1) is already used. Please choose another one."
-msgstr ""
-
 #. ($url)
-#: lib/Lstu/Controller/URL.pm:61
-msgid "The shortened text can contain only numbers, letters and the - and _ character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\". Your URL to shorten: %1"
+#: lib/Lstu/Controller/URL.pm:59
+msgid "The shortened text can't be \"a\", \"api\", \"d\", \"cookie\", \"stats\", \"fullstats\", \"login\" or \"logout\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
 
 #: themes/default/templates/api.html.ep:113
