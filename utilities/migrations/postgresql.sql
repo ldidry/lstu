@@ -26,3 +26,7 @@ DROP INDEX empty_short_idx;
 ALTER TABLE lstu ADD COLUMN created_by text;
 -- 3 down
 ALTER TABLE lstu DROP COLUMN created_by;
+-- 4 up
+ALTER TABLE lstu ADD disabled integer default 0;
+-- 4 down
+ALTER TABLE lstu DROP COLUMN disabled;
