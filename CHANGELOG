@@ -1,6 +1,8 @@
 Revision history for Perl application Lstu
 
 0.22-0 ????-??-??
+	- Disable URLs instead of removing them (prevents spammers to reuse a
+	  deleted shortened URL)
 
 0.21-3 2018-11-19
 	- Fix Pg sessions and urls delete fonctions
