@@ -34,3 +34,18 @@ BEGIN TRANSACTION;
     DROP TABLE lstu;
     ALTER TABLE lstu_backup RENAME TO lstu;
 COMMIT;
+-- 3 up
+ALTER TABLE lstu ADD COLUMN disabled INTEGER default 0;
+-- 3 down
+BEGIN TRANSACTION;
+    CREATE TABLE lstu_backup(
+        short      TEXT PRIMARY KEY,
+        url        TEXT,
+        counter    INTEGER,
+        timestamp  INTEGER,
+        created_by TEXT
+    );
+    INSERT INTO lstu_backup SELECT short, url, counter, timestamp, created_by FROM lstu;
+    DROP TABLE lstu;
+    ALTER TABLE lstu_backup RENAME TO lstu;
+COMMIT;

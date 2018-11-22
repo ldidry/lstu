@@ -24,18 +24,15 @@ sub increment_counter {
 sub remove {
     my $c = shift;
 
-    my $h = $c->app->dbi->db->query('DELETE FROM lstu WHERE short = ? RETURNING *', $c->short)->hashes;
-    # $h->size is the number of deleted rows
-    # 0 means failure
-    # 1 means success
-    if ($h->size) {
+    my $disabled = $c->app->dbi->db->query('UPDATE lstu SET disabled = 1 WHERE short = ? RETURNING disabled', $c->short)->hashes->first->{disabled};
+    if ($disabled) {
         if (scalar(@{$c->app->config('memcached_servers')})) {
             $c->app->chi('lstu_urls_cache')->remove($c->short);
         }
         $c = Lstu::DB::URL->new(app => $c->app);
     }
 
-    return $h->size;
+    return $disabled;
 }
 
 1;

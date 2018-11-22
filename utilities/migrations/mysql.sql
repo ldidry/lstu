@@ -22,3 +22,7 @@ DROP TABLE lstu;
 ALTER TABLE lstu ADD created_by text;
 -- 2 down
 ALTER TABLE lstu DROP COLUMN created_by;
+-- 3 up
+ALTER TABLE lstu ADD disabled integer DEFAULT 0;
+-- 3 down
+ALTER TABLE lstu DROP COLUMN disabled;

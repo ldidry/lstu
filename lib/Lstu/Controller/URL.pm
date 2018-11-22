@@ -184,10 +184,13 @@ sub get {
     my $url;
     if (scalar(@{$c->config('memcached_servers')})) {
         $url = $c->chi('lstu_urls_cache')->compute($short, undef, sub {
-            return Lstu::DB::URL->new(app => $c, short => $short)->url;
+            my $db_url = Lstu::DB::URL->new(app => $c, short => $short);
+            return $db_url->url unless $db_url->disabled;
+            return undef;
         });
     } else {
-        $url = Lstu::DB::URL->new(app => $c, short => $short)->url;
+        my $db_url = Lstu::DB::URL->new(app => $c, short => $short);
+        $url    = $db_url->url unless $db_url->disabled;
     }
 
     if ($url) {
