@@ -43,7 +43,7 @@ sub run {
         );
         my (@bad, %bad_ips, @bad_from_ips);
         my $gsb     = $c->app->gsb;
-        my $deleted = 0;
+        my $disabled = 0;
         $urls->each(sub {
             my ($e, $num) = @_;
 
@@ -54,7 +54,7 @@ sub run {
             if (@matches) {
                 push @bad, $e->{short};
                 $bad_ips{$e->{created_by}} = 1 if $e->{created_by};
-                $deleted += Lstu::DB::URL->new(
+                $disabled += Lstu::DB::URL->new(
                     app => $c->app,
                     short => $e->{short}
                 )->remove if $remove;
@@ -65,18 +65,18 @@ sub run {
         say sprintf('%d bad URLs detected.', scalar(@bad));
 
         if ($remove) {
-            say sprintf('%d bad URLs deleted.', $deleted) if $deleted;
+            say sprintf('%d bad URLs disabled.', $disabled) if $disabled;
         } else {
-            say sprintf("If you want to delete the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad)) if @bad;
+            say sprintf("If you want to disable the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad)) if @bad;
         }
 
-        $deleted = 0;
+        $disabled = 0;
         for my $ip (keys %bad_ips) {
             my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
             $u->each(sub {
                 my ($e, $num) = @_;
                 push @bad_from_ips, $e->{short};
-                $deleted += Lstu::DB::URL->new(
+                $disabled += Lstu::DB::URL->new(
                     app => $c->app,
                     short => $e->{short}
                 )->remove if ($remove && $all);
@@ -96,9 +96,9 @@ sub run {
         }
 
         if ($remove && $all) {
-            say sprintf('%d URLs from same IPs deleted.', $deleted) if $deleted;
+            say sprintf('%d URLs from same IPs disabled.', $disabled) if $disabled;
         } else {
-            say sprintf("If you want to delete the URLs created by the same IPs than the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad_from_ips)) if @bad_from_ips;
+            say sprintf("If you want to disable the URLs created by the same IPs than the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad_from_ips)) if @bad_from_ips;
         }
     } else {
         say 'It seems that safebrowsing_api_key isn\'t set. Please, check your configuration';
@@ -113,7 +113,7 @@ sub get_shorts {
 
     for my $short (@shorts) {
         my $u = Lstu::DB::URL->new(app => $c->app, short => $short);
-        if ($u->url) {
+        if ($u->url && !$u->disabled) {
             push @results, $u->to_hash;
         } else {
             say sprintf('Sorry, unable to find an URL with short = %s', $short);
