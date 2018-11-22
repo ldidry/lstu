@@ -14,7 +14,7 @@
         <fieldset class="result">
             <img class="qrcode-result" alt="QRCode" src="data:image/png;base64,<%= stash('qrcode') %>">
             <label><%= link_to stash('url') => begin %><h4><%= stash('url') %></h4><%= end %></label>
-            ⟹ <input id="input-short" value="<%== stash('short') %>" class="form-control">
+            ⟹ <input id="input-short" value="<%== stash('short') %>" class="form-control" size="<%= length(stash('short')) %>">
             <span id="js" class="hidden"><a href="#" id="clipboard" class="button button-clear" title="<%= l('Copy to clipboard') %>" data-short="<%== stash('short') %>"><h5><span class="icon icon-clipboard"></span></h5></a><span>
         </fieldset>
 % }
