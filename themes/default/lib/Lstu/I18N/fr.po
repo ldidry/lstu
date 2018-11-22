@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
-#: lib/Lstu/Controller/URL.pm:115
+#: lib/Lstu/Controller/URL.pm:118
 msgid "%1 is not a valid URL."
 msgstr "%1 n’est pas une URL valide."
 
@@ -182,7 +182,7 @@ msgid "Next"
 msgstr "Suivant"
 
 #. ($c->config('contact')
-#: lib/Lstu/Controller/URL.pm:109
+#: lib/Lstu/Controller/URL.pm:112
 msgid ""
 "No shortened URL available. Please retry or contact the administrator at %1. "
 "Your URL to shorten: %2"
@@ -281,26 +281,20 @@ msgstr ""
 "domaine)."
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:223
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:226
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL raccourcie %1 n’existe pas."
 
-#. ($custom_url)
-#: lib/Lstu/Controller/URL.pm:63
-msgid "The shortened text (%1) is already used. Please choose another one."
-msgstr ""
-"Le texte du raccourci (%1) est déjà utilisé. Veuillez en choisir un autre."
-
 #. ($url)
-#: lib/Lstu/Controller/URL.pm:61
+#: lib/Lstu/Controller/URL.pm:59
 msgid ""
-"The shortened text can contain only numbers, letters and the - and _ "
-"character, can't be \"a\", \"api\", \"d\" or \"stats\" or end with \".json\"."
-" Your URL to shorten: %1"
+"The shortened text can't be \"a\", \"api\", \"d\", \"cookie\", \"stats\", "
+"\"fullstats\", \"login\" or \"logout\" or end with \".json\". Your URL to "
+"shorten: %1"
 msgstr ""
-"Le texte du raccourci ne doit contenir que des chiffres, des lettres et les "
-"caractères - et _, ne peut être \"a\", \"api\", \"d\" ou \"stats\" ou se "
-"terminer par \".json\". Rappel de l’URL à raccourcir : %1"
+"Le texte du raccourci ne peut être \"a\", \"api\", \"d\", \"cookie\", "
+"\"stats\", \"fullstats\", \"login\" ou \"logout\" ou se terminer par \"."
+"json\". Rappel de l’URL à raccourcir : %1"
 
 #: themes/default/templates/api.html.ep:113
 msgid ""
@@ -406,7 +400,7 @@ msgstr ""
 "êtes connecté·e avec succès, ou sinon vos statistiques avec un message "
 "d’échec"
 
-#: lib/Lstu/Controller/Admin.pm:145
+#: lib/Lstu/Controller/Admin.pm:142
 msgid "You're not authenticated as the admin"
 msgstr "Vous n’êtes pas authentifié·e en tant qu’admin"
 
