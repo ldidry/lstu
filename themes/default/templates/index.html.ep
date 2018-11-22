@@ -17,7 +17,7 @@
         <img alt="QRCode" src="data:image/png;base64,<%= stash('qrcode') %>">
         <div class="form-group">
             <label><%= link_to stash('url') => begin %><%= stash('url') %><%= end %></a></label>
-            <br> =&gt; <input id="input-short" value="<%== stash('short') %>" class="form-control">
+            <br> =&gt; <input id="input-short" value="<%== stash('short') %>" class="form-control" size="<%= length(stash('short')) %>">
             <span id="js" class="hidden"><a href="#" id="clipboard" class="btn btn-default" title="<%= l('Copy to clipboard') %>" data-short="<%== stash('short') %>"><span class="icon icon-clipboard"></span></a><span>
         </div>
     </h3>
