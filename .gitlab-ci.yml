@@ -23,8 +23,8 @@ variables:
   retry: 2
   artifacts:
     paths:
-      - local/
-    expire_in: 1 week
+      - local.tar
+    expire_in: 3 hours
   dependencies:
     - carton
 .sqlite_template: &sqlite_definition
@@ -74,11 +74,12 @@ carton:
   stage: carton
   artifacts:
     paths:
-      - local/
-    expire_in: 1 week
+      - local.tar
+    expire_in: 3 hours
   dependencies: []
   script:
     - carton install --deployment --without=sqlite --without=postgresql --without=mysql
+    - tar cf local.tar local/
   when: always
   retry: 2
 
@@ -88,15 +89,21 @@ carton:
 carton_sqlite:
   <<: *carton_bdd_definition
   script:
+    - tar xf local.tar && rm local.tar
     - carton install --deployment --without=postgresql --without=mysql
+    - tar cf local.tar local/
 carton_postgresql:
   <<: *carton_bdd_definition
   script:
+    - tar xf local.tar && rm local.tar
     - carton install --deployment --without=sqlite --without=mysql
+    - tar cf local.tar local/
 carton_mysql:
   <<: *carton_bdd_definition
   script:
+    - tar xf local.tar && rm local.tar
     - carton install --deployment --without=sqlite --without=postgresql
+    - tar cf local.tar local/
 
 ### SQLite tests
 ##
@@ -105,6 +112,7 @@ sqlite:
   <<: *sqlite_definition
   parallel: 3
   script:
+    - tar xf local.tar && rm local.tar
     - echo "Database $CI_JOB_NAME test $CI_NODE_INDEX"
     - if [[ $CI_NODE_INDEX -eq 3 ]]; then MOJO_CONFIG=t/sqlite$CI_NODE_INDEX.conf make minion & sleep 5; fi
     - MOJO_CONFIG=t/sqlite$CI_NODE_INDEX.conf make test
@@ -117,6 +125,7 @@ postgresql:
   <<: *pg_definition
   parallel: 3
   script:
+    - tar xf local.tar && rm local.tar
     - echo "Database $CI_JOB_NAME test $CI_NODE_INDEX"
     - if [[ $CI_NODE_INDEX -eq 3 ]]; then export PGPASSWORD=lstu_pwd; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu lstu_db; fi
     - if [[ $CI_NODE_INDEX -eq 3 ]]; then MOJO_CONFIG=t/postgresql$CI_NODE_INDEX.conf make minion & sleep 5; fi
@@ -130,6 +139,7 @@ mysql:
   <<: *mysql_definition
   parallel: 3
   script:
+    - tar xf local.tar && rm local.tar
     - echo "Database $CI_JOB_NAME test $CI_NODE_INDEX"
     - if [[ $CI_NODE_INDEX -eq 3 ]]; then echo "CREATE DATABASE lstu_minion; GRANT ALL ON lstu_minion.* TO lstu@'%'; FLUSH PRIVILEGES;" | mysql -h mariadb -u root -proot; fi
     - if [[ $CI_NODE_INDEX -eq 3 ]]; then MOJO_CONFIG=t/mysql$CI_NODE_INDEX.conf make minion & sleep 5; fi
