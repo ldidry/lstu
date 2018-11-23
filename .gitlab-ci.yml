@@ -101,64 +101,37 @@ carton_mysql:
 ### SQLite tests
 ##
 #
-sqlite1:
+sqlite:
   <<: *sqlite_definition
+  parallel: 3
   script:
-    - MOJO_CONFIG=t/sqlite1.conf make test
-    - MOJO_CONFIG=t/sqlite1.conf make cover
-sqlite2:
-  <<: *sqlite_definition
-  script:
-    - MOJO_CONFIG=t/sqlite2.conf make test
-    - MOJO_CONFIG=t/sqlite2.conf make cover
-sqlite3:
-  <<: *sqlite_definition
-  script:
-    - MOJO_CONFIG=t/sqlite3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/sqlite3.conf make test
-    - MOJO_CONFIG=t/sqlite3.conf make cover
+    - echo "Database $CI_JOB_NAME test $CI_NODE_INDEX"
+    - if [[ $CI_NODE_INDEX -eq 3 ]]; then MOJO_CONFIG=t/sqlite$CI_NODE_INDEX.conf make minion & sleep 5; fi
+    - MOJO_CONFIG=t/sqlite$CI_NODE_INDEX.conf make test
+    - MOJO_CONFIG=t/sqlite$CI_NODE_INDEX.conf make cover
 
 ### PostgreSQL tests
 ##
 #
-postgresql1:
+postgresql:
   <<: *pg_definition
+  parallel: 3
   script:
-    - MOJO_CONFIG=t/postgresql1.conf make test
-    - MOJO_CONFIG=t/postgresql1.conf make cover
-postgresql2:
-  <<: *pg_definition
-  script:
-    - MOJO_CONFIG=t/postgresql2.conf make test
-    - MOJO_CONFIG=t/postgresql2.conf make cover
-postgresql3:
-  <<: *pg_definition
-  script:
-    - export PGPASSWORD=lstu_pwd; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu lstu_db
-    - MOJO_CONFIG=t/postgresql3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/postgresql3.conf make test
-    - MOJO_CONFIG=t/postgresql3.conf make cover
+    - echo "Database $CI_JOB_NAME test $CI_NODE_INDEX"
+    - if [[ $CI_NODE_INDEX -eq 3 ]]; then export PGPASSWORD=lstu_pwd; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu lstu_db; fi
+    - if [[ $CI_NODE_INDEX -eq 3 ]]; then MOJO_CONFIG=t/postgresql$CI_NODE_INDEX.conf make minion & sleep 5; fi
+    - MOJO_CONFIG=t/postgresql$CI_NODE_INDEX.conf make test
+    - MOJO_CONFIG=t/postgresql$CI_NODE_INDEX.conf make cover
 
 ### MySQL tests
 ##
 #
-mysql1:
+mysql:
   <<: *mysql_definition
+  parallel: 3
   script:
-    - MOJO_CONFIG=t/mysql1.conf make test
-    - MOJO_CONFIG=t/mysql1.conf make cover
-mysql2:
-  <<: *mysql_definition
-  script:
-    - MOJO_CONFIG=t/mysql2.conf make test
-    - MOJO_CONFIG=t/mysql2.conf make cover
-mysql3:
-  <<: *mysql_definition
-  script:
-    - echo "CREATE DATABASE lstu_minion; GRANT ALL ON lstu_minion.* TO lstu@'%'; FLUSH PRIVILEGES;" | mysql -h mariadb -u root -proot
-    - MOJO_CONFIG=t/mysql3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/mysql3.conf make test
-    - MOJO_CONFIG=t/mysql3.conf make cover
+    - echo "Database $CI_JOB_NAME test $CI_NODE_INDEX"
+    - if [[ $CI_NODE_INDEX -eq 3 ]]; then echo "CREATE DATABASE lstu_minion; GRANT ALL ON lstu_minion.* TO lstu@'%'; FLUSH PRIVILEGES;" | mysql -h mariadb -u root -proot; fi
+    - if [[ $CI_NODE_INDEX -eq 3 ]]; then MOJO_CONFIG=t/mysql$CI_NODE_INDEX.conf make minion & sleep 5; fi
+    - MOJO_CONFIG=t/mysql$CI_NODE_INDEX.conf make test
+    - MOJO_CONFIG=t/mysql$CI_NODE_INDEX.conf make cover
