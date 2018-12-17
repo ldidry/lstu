@@ -1,6 +1,6 @@
 image: hatsoftwares/lstu-test-ci:latest
 stages:
-  - publish_changelog
+  - tags
   - carton
   - carton_bdd
   - tests
@@ -85,13 +85,27 @@ before_script:
 #
 publish_changelog:
   image: hatsoftwares/curl-jq:latest
-  stage: publish_changelog
+  stage: tags
   script:
     - export PROJECT_API_URL="https://framagit.org/api/v4/projects/${CI_PROJECT_ID}"
     - export DESCRIPTION_URL="${PROJECT_API_URL}/repository/tags/${CI_COMMIT_TAG}/release"
     - 'export HEADER="Private-Token: ${GITLAB_API_TOKEN}"'
     - sed -n '/^'$CI_COMMIT_TAG'[[:space:]]/,/^[^\t]/p' CHANGELOG | sed -e 's/^[^\t].*//' -e 's/\t//g' | sed '/^[[:space:]]*$/d' > /tmp/text
     - if [[ ! -z $GITLAB_API_TOKEN ]]; then curl -s --request POST --data-urlencode "description@/tmp/text" --header "${HEADER}" "${DESCRIPTION_URL}"; fi
+  only:
+    - tags
+
+### Toot tag
+##
+#
+pouet-it:
+  image: hatsoftwares/pouet-it-from-ci:latest
+  stage: tags
+  script:
+    - cd /opt/pouet-it-from-ci
+    - export project="$(echo $CI_PROJECT_NAME | perl -p -e 's/(?:^(.)|-(.))/\U$1\U$2/g')"
+    - export MESSAGE=$(echo -e "Je viens de sortir "'#'"${project} en version ${CI_COMMIT_TAG} !""\n${CI_PROJECT_URL}/tags/${CI_COMMIT_TAG}")
+    - carton exec ./pouet-it-from-ci.pl
   only:
     - tags
 
