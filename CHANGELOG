@@ -2,6 +2,9 @@ Revision history for Perl application Lstu
 
 0.22-0 ????-??-??
 
+0.21-4 2018-12-17
+	- Add a lockfile to GSB database update to prevent concurrent updates
+
 0.21-3 2018-11-19
 	- Fix Pg sessions and urls delete fonctions
 

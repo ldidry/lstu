@@ -1,5 +1,5 @@
 requires 'inc::Module::Install::DSL';
-requires 'Mojolicious', '>= 7.33';
+requires 'Mojolicious', '>= 8.09';
 requires 'Data::Validate::URI';
 requires 'Net::Domain::TLD', '>= 1.74';
 requires 'Mojolicious::Plugin::I18N';

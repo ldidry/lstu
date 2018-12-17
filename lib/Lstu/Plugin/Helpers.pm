@@ -221,12 +221,19 @@ sub _gsb {
             storage => Net::Google::SafeBrowsing4::Storage::File->new(path => Mojo::File->new($Bin, '..' , 'safebrowsing_db')),
         );
 
+        my $lock_file = Mojo::File->new($Bin, '..', 'gsb.lock');
         if ($force_update) {
+            $lock_file->touch;
             $gsb->update();
+            $lock_file->remove_tree;
         } elsif ($check) {
-            my $update = Mojo::File->new($Bin, '..' , 'safebrowsing_db')->to_string;
-            my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($update);
-            $gsb->update() if $mtime < time - 86400;
+            if (! -e $lock_file->to_string) {
+                $lock_file->touch;
+                my $update = Mojo::File->new($Bin, '..' , 'safebrowsing_db')->to_string;
+                my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($update);
+                $gsb->update() if $mtime < time - 86400;
+                $lock_file->remove_tree;
+            }
         }
 
         return $gsb;
