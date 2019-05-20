@@ -1,6 +1,6 @@
 [Unit]
 Description=Shortened URLs service
-Documentation=https://framagit.org/luc/lstu
+Documentation=https://framagit.org/fiat-tux/hat-softwares/lstu
 Requires=network.target
 After=network.target
 
