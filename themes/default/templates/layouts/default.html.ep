@@ -24,7 +24,7 @@
         <link rel="apple-touch-icon" sizes="120x120" href="<%= url_for('/img/lstu120.png') %>">
         <link rel="apple-touch-icon" sizes="152x152" href="<%= url_for('/img/lstu152.png') %>">
         <link rel="apple-touch-icon" sizes="180x180" href="<%= url_for('/img/lstu180.png') %>">
-        <link rel="apple-touch-icon-precomposed" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<%= url_for('/img/lstu120p.png') %>">
         <meta name="msapplication-TileColor" content="#ffc40d">
         <meta name="msapplication-TileImage" content="<%= url_for('/img/mstile-lstu144.png') %>">
         <meta name="msapplication-config" content="<%= url_for('/browserconfig.xml') %>">
