@@ -10,9 +10,9 @@ Lstu is licensed under the terms of the WTFPL. See the LICENSE file.
 
 ## Installation
 
-Please, see the [wiki](https://framagit.org/luc/lstu/wikis/home).
+Please, see the [wiki](https://framagit.org/fiat-tux/hat-softwares/lstu/wikis/home).
 
-Or you can see [usage with Docker](https://framagit.org/luc/lstu/wikis/usage-with-docker).
+Or you can see [usage with Docker](https://framagit.org/fiat-tux/hat-softwares/lstu/wikis/usage-with-docker).
 
 ## How many URLs can it handle ?
 
