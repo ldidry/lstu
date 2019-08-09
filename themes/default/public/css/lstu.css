@@ -1,22 +1,48 @@
 body {
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #eee;
+    background-color: #B79FE6;
 }
 
 .container {
     padding: 15px;
     margin: 0 auto;
 }
+
 @font-face {
     font-family: 'Henny_Penny';
     font-style: normal;
     font-weight: 400;
     src: local('Henny Penny'), local('HennyPenny-Regular'), url('../font/hennypenny.woff2') format('woff2');
 }
+
+@font-face {
+    font-family: 'Oswald';
+    font-style: bold;
+    font-weight: 400;
+    src: local('Oswald'), url('../font/Oswald-Bold.ttf')
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    font-style: normal;
+    font-weight: 200;
+    src: local('OpenSans'), url('../font/OpenSans-Regular.ttf')
+}
+
+.oswald {
+    font-family: 'Oswald';
+    font-size: 100px;
+}
+
 .hennypenny {
     font-family: 'Henny_Penny', cursive;
     font-size: 42px;
+}
+
+.opensans {
+    font-family: 'OpenSans';
+    font-size: 25px;
 }
 .link_nocol, .link_nocol:hover {
     color: #000;
@@ -25,3 +51,26 @@ body {
 dd > strong {
     padding-left: 15px;
 }
+
+.logo {
+    height: auto!important;
+    padding-right: 20px;
+}
+
+.logo-img {
+    height: 200px;
+    width: 100%;
+}
+
+.allons-y {
+    border-style: none;
+    background-color: #B24B04;
+    border-radius: 0;
+    box-shadow: 5px 5px 1px 1px rgba(0,0,0,0.3);
+    padding: 8px;
+    margin-right: 9px;
+    color: white;
+    font-family: 'OpenSans';
+    font-size: 14px;
+}
+
