@@ -33,6 +33,8 @@ feature 'cache', 'URL cache system' => sub {
 };
 feature 'test' => sub {
     requires 'Devel::Cover';
+    requires 'Memory::Usage';
+    requires 'Plack';
 };
 feature 'sqlite', 'SQLite support' => sub {
     requires 'Mojo::SQLite', '>= 3.000';

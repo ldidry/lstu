@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious';
 use Mojo::JSON;
 use Lstu::DB::URL;
 use Lstu::DefaultConfig qw($default_config);
+use Memory::Usage;
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
 
@@ -11,9 +12,12 @@ $ENV{MOJO_REVERSE_PROXY} = 1;
 sub startup {
     my $self = shift;
 
+    my $mu = Memory::Usage->new();
+    $mu->record('starting startup');
     my $config = $self->plugin('Config' => {
         default => $default_config
     });
+    $mu->record('after config');
 
     $config->{provisioning} = $config->{provisionning} if (defined($config->{provisionning}));
 
@@ -29,20 +33,25 @@ sub startup {
     }
     push @{$self->renderer->paths}, $self->home->rel_file('themes/default/templates');
     push @{$self->static->paths}, $self->home->rel_file('themes/default/public');
+    $mu->record('after theme');
 
     # Internationalization
     my $lib = $self->home->rel_file('themes/'.$config->{theme}.'/lib');
     eval qq(use lib "$lib");
     $self->plugin('I18N');
+    $mu->record('after I18N');
 
     # Debug
     $self->plugin('DebugDumperHelper');
+    $mu->record('after DebugDumperHelper');
 
     # Piwik
     $self->plugin('Piwik');
+    $mu->record('after Piwik');
 
     # Static assets gzipping
     $self->plugin('GzipStatic');
+    $mu->record('after GzipStatic');
 
     # URL cache
     if (scalar(@{$config->{memcached_servers}})) {
@@ -56,11 +65,14 @@ sub startup {
         });
     }
 
+    $mu->record('before Headers');
     # Headers
     $self->plugin('Lstu::Plugin::Headers');
+    $mu->record('after Headers');
 
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');
+    $mu->record('after Helpers');
 
     # Authentication (if configured)
     if (defined($self->config('ldap')) || defined($self->config('htpasswd'))) {
@@ -210,6 +222,7 @@ sub startup {
             }
         }
     );
+    $mu->record('after Hooks');
 
     # Recurrent tasks
     Mojo::IOLoop->recurring(2 => sub {
@@ -217,6 +230,7 @@ sub startup {
 
         $self->provisioning();
     });
+    $mu->record('after IOLoop provisioning');
     if ($self->config('safebrowsing_api_key')) {
         $self->gsb(1);
         Mojo::IOLoop->recurring(86400 => sub {
@@ -225,6 +239,7 @@ sub startup {
             $self->gsb(1);
         });
     }
+    $mu->record('after IOLoop gsb');
 
     # Minion
     if ($config->{minion}->{enabled}) {
@@ -255,6 +270,8 @@ sub startup {
 
     # For the first launch (after, this isn't really useful)
     $self->provisioning();
+    $mu->record('after provisioning');
+    $mu->dump();
 
     # Default layout
     $self->defaults(layout => 'default');

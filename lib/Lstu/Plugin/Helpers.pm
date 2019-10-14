@@ -10,10 +10,14 @@ use FindBin qw($Bin);
 sub register {
     my ($self, $app) = @_;
 
+    use Memory::Usage;
+    my $mu = Memory::Usage->new();
+    $mu->record('starting work Helpers');
     # PgURL helper
     if ($app->config('dbtype') eq 'postgresql' || $app->config('dbtype') eq 'mysql') {
         $app->plugin('PgURLHelper');
     }
+    $mu->record('after dbtype');
 
     # DB migrations
     if ($app->config('dbtype') eq 'sqlite') {
@@ -31,15 +35,19 @@ sub register {
         }
     } elsif ($app->config('dbtype') eq 'postgresql') {
         require Mojo::Pg;
+        $mu->record('after Mojo::SQLite');
         $app->helper(dbi => \&_pg);
+        $mu->record('after dbi');
 
         # Database migration
         my $migrations = Mojo::Pg::Migrations->new(pg => $app->dbi);
+        $mu->record('after migrations');
         if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
             $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(0)->migrate(4);
         } else {
             $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(4);
         }
+        $mu->record('after migratefromfile');
     } elsif ($app->config('dbtype') eq 'mysql') {
         require Mojo::mysql;
         $app->helper(dbi => \&_mysql);
@@ -52,16 +60,26 @@ sub register {
             $migrations->from_file('utilities/migrations/mysql.sql')->migrate(3);
         }
     }
+    $mu->record('after DB migrations');
 
     # Helpers
     $app->helper(ip           => \&_ip);
+    $mu->record('after ip');
     $app->helper(provisioning => \&_provisioning);
+    $mu->record('after provisioning');
     $app->helper(prefix       => \&_prefix);
+    $mu->record('after prefix');
     $app->helper(shortener    => \&_shortener);
+    $mu->record('after shortener');
     $app->helper(is_spam      => \&_is_spam);
+    $mu->record('after is_spam');
     $app->helper(cleaning     => \&_cleaning);
+    $mu->record('after cleaning');
     $app->helper(gsb          => \&_gsb);
+    $mu->record('after gsb');
     $app->helper(gsb_update   => \&_gsb_update);
+    $mu->record('after gsb_update');
+    $mu->dump();
 }
 
 sub _sqlite {
@@ -152,10 +170,15 @@ sub _is_spam {
     my $url      = shift;
     my $nb_redir = shift;
 
+    use Memory::Usage;
+    my $mu = Memory::Usage->new();
+    $mu->record('starting work');
     my $ip = $c->ip;
     return { is_spam => 0 } if scalar(grep {/$ip/} @{$c->config('ban_whitelist')});
+    $mu->record('after ban_whitelist');
     my $wl = $c->config('spam_whitelist_regex');
     return { is_spam => 0 } if (defined($wl) && $url->host =~ m/$wl/);
+    $mu->record('after spam_whitelist_regex');
 
     my $bl      = $c->config('spam_blacklist_regex');
     my $path_bl = $c->config('spam_path_blacklist_regex');
@@ -163,9 +186,11 @@ sub _is_spam {
        is_spam => 1,
        msg     => $c->l('The URL you want to shorten comes from a domain (%1) that is blacklisted on this server (usually because of spammers that use this domain).', $url->host)
     } if ((defined($bl) && $url->host =~ m/$bl/) || (defined($path_bl) && $url->path =~ m/$path_bl/));
+    $mu->record('after spam_blacklist_regex');
 
     if ($nb_redir++ <= $c->config('max_redir')) {
         my $res = ($c->config('skip_spamhaus')) ? undef : check_fqdn($url->host);
+        $mu->record('after Spamhaus');
         if (defined $res) {
            return {
                is_spam => 1,

@@ -8,11 +8,15 @@ use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
 use Mojo::Util qw(b64_encode slugify);
 use Image::PNG::QRCode 'qrpng';
+use Memory::Usage;
 
 sub add {
     my $c = shift;
 
+    my $mu = Memory::Usage->new();
+    $mu->record('starting work');
     $c->cleaning;
+    $mu->record('after cleaning');
 
     # Is the user allowed to create a short URL?
     if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {
@@ -23,6 +27,7 @@ sub add {
             app    => $c,
             ip     => $ip
         )->is_banned($c->config('ban_min_strike'));
+        $mu->record('after is_banned');
 
         if (defined $banned) {
             # Increase ban delay if necessary
@@ -58,7 +63,10 @@ sub add {
                 ) {
                 $msg = $c->l('The shortened text can\'t be "a", "api", "d", "cookie", "stats", "fullstats", "login" or "logout" or end with ".json". Your URL to shorten: %1', $url);
             } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string) || (defined($url->host) && $url->host =~ m/\.onion$/)) {
+                $mu->record('after is_http_uri');
                 my $res = ($url->host =~ m/\.onion$/) ? {} : $c->is_spam($url, 0);
+                $mu->record('after is_spam');
+                $mu->dump();
 
                 # Check if spam
                 if ($res->{is_spam}) {
@@ -151,6 +159,9 @@ sub add {
                 my $prefix = $c->prefix;
 
                 my $qrcode = b64_encode(qrpng(text => $prefix.$short));
+
+                $mu->record('before response');
+                $c->debug($mu->dump());
 
                 $c->respond_to(
                     json => { json => { success => Mojo::JSON->true, url => $url, short => $prefix.$short, qrcode => $qrcode } },
