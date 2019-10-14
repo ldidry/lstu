@@ -20,15 +20,7 @@ sub startup {
     die "You need to provide a contact information in lstu.conf!" unless (defined($config->{contact}));
 
     # Themes handling
-    shift @{$self->renderer->paths};
-    shift @{$self->static->paths};
-    if ($config->{theme} ne 'default') {
-        my $theme = $self->home->rel_file('themes/'.$config->{theme});
-        push @{$self->renderer->paths}, $theme.'/templates' if -d $theme.'/templates';
-        push @{$self->static->paths}, $theme.'/public' if -d $theme.'/public';
-    }
-    push @{$self->renderer->paths}, $self->home->rel_file('themes/default/templates');
-    push @{$self->static->paths}, $self->home->rel_file('themes/default/public');
+    $self->plugin('FiatTux::Themes');
 
     # Internationalization
     my $lib = $self->home->rel_file('themes/'.$config->{theme}.'/lib');
@@ -59,108 +51,14 @@ sub startup {
     # Headers
     $self->plugin('Lstu::Plugin::Headers');
 
+    # Fiat Tux helpers
+    $self->plugin('FiatTux::Helpers');
+
     # Lstu Helpers
     $self->plugin('Lstu::Plugin::Helpers');
 
-    # Authentication (if configured)
-    if (defined($self->config('ldap')) || defined($self->config('htpasswd'))) {
-        if (defined($self->config('ldap'))) {
-            require Net::LDAP;
-        }
-        if (defined($self->config('htpasswd'))) {
-            require Apache::Htpasswd;
-        }
-        die 'Unable to read '.$self->config('htpasswd') if (defined($self->config('htpasswd')) && !-r $self->config('htpasswd'));
-        $self->plugin('Authentication' =>
-            {
-                autoload_user => 1,
-                session_key   => 'Lstu',
-                load_user     => sub {
-                    my ($c, $username) = @_;
-
-                    return $username;
-                },
-                validate_user => sub {
-                    my ($c, $username, $password, $extradata) = @_;
-
-                    if (defined($c->config('ldap'))) {
-                        my $ldap = Net::LDAP->new($c->config->{ldap}->{uri});
-
-                        my $mesg;
-                        if (defined($c->config->{ldap}->{bind_dn}) && defined($c->config->{ldap}->{bind_pwd})) {
-                            # connect to the ldap server using the bind credentials
-                            $mesg = $ldap->bind(
-                                $c->config->{ldap}->{bind_dn},
-                                password => $c->config->{ldap}->{bind_pwd}
-                            );
-                        } else {
-                            # anonymous bind
-                            $mesg = $ldap->bind
-                        }
-
-                        if ($mesg->code) {
-                            $c->app->log->info('[LDAP INFO] Authenticated bind failed - Login: '.$c->config->{ldap}->{bind_dn}) if defined($c->config->{ldap}->{bind_dn});
-                            $c->app->log->error('[LDAP ERROR] Error on bind: '.$mesg->error);
-                            return undef;
-                        }
-
-                        my $ldap_user_attr   = $c->config->{ldap}->{user_attr};
-                        my $ldap_user_filter = $c->config->{ldap}->{user_filter};
-
-                        # search the ldap database for the user who is trying to login
-                        $mesg = $ldap->search(
-                            base   => $c->config->{ldap}->{user_tree},
-                            filter => "(&($ldap_user_attr=$username)$ldap_user_filter)"
-                        );
-
-                        if ($mesg->code) {
-                            $c->app->log->error('[LDAP ERROR] Error on search: '.$mesg->error);
-                            return undef;
-                        }
-
-                        # check to make sure that the ldap search returned at least one entry
-                        my @entries = $mesg->entries;
-                        my $entry   = $entries[0];
-
-                        unless (defined $entry) {
-                            $c->app->log->info("[LDAP INFO] Authentication failed - User $username filtered out, IP: ".$c->ip);
-                            return undef;
-                        }
-
-                        # retrieve the first user returned by the search
-                        $c->app->log->debug("[LDAP DEBUG] Found user dn: ".$entry->dn);
-
-                        # Now we know that the user exists
-                        $mesg = $ldap->bind($entry->dn,
-                            password => $password
-                        );
-
-                        if ($mesg->code) {
-                            $c->app->log->info("[LDAP INFO] Authentication failed - Login: $username, IP: ".$c->ip);
-                            $c->app->log->error('[LDAP ERROR] Authentication failed '.$mesg->error);
-                            return undef;
-                        }
-
-                        $c->app->log->info("[LDAP INFO] Authentication successful - Login: $username, IP: ".$c->ip);
-                    } elsif (defined($c->config('htpasswd'))) {
-                        my $htpasswd = new Apache::Htpasswd(
-                            {
-                                passwdFile => $c->config('htpasswd'),
-                                ReadOnly   => 1
-                            }
-                        );
-                        if (!$htpasswd->htCheckPassword($username, $password)) {
-                            return undef;
-                        }
-                        $c->app->log->info("[Simple authentication successful] login: $username, IP: ".$c->ip);
-                    }
-
-                    return $username;
-                }
-            }
-        );
-        $self->app->sessions->default_expiration($self->config('session_duration'));
-    }
+    # Authentication
+    $self->plugin('FiatTux::GrantAccess');
 
     # Minion
     if ($config->{minion}->{enabled}) {

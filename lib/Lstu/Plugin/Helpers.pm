@@ -54,10 +54,8 @@ sub register {
     }
 
     # Helpers
-    $app->helper(ip           => \&_ip);
     $app->helper(provisioning => \&_provisioning);
     $app->helper(prefix       => \&_prefix);
-    $app->helper(shortener    => \&_shortener);
     $app->helper(is_spam      => \&_is_spam);
     $app->helper(cleaning     => \&_cleaning);
     $app->helper(gsb          => \&_gsb);
@@ -98,15 +96,6 @@ sub _mysql {
     return $mysql;
 }
 
-sub _ip {
-    my $c     = shift;
-
-    my $proxy = $c->req->headers->header('X-Forwarded-For');
-    my $ip    = ($proxy) ? $proxy : $c->tx->remote_address;
-
-    return $ip;
-}
-
 sub _provisioning {
      my $c = shift;
 
@@ -133,18 +122,6 @@ sub _prefix {
     # Hack for prefix (subdir) handling
     $prefix .= '/' unless ($prefix =~ m#/$#);
     return $prefix;
-}
-
-sub _shortener {
-    my $c      = shift;
-    my $length = shift;
-
-    my @chars  = ('a'..'h', 'j', 'k', 'm'..'z','A'..'H', 'J'..'N', 'P'..'Z','0'..'9', '-', '_');
-    my $result = '';
-    foreach (1..$length) {
-        $result .= $chars[rand scalar(@chars)];
-    }
-    return $result;
 }
 
 sub _is_spam {

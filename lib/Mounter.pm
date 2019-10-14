@@ -26,12 +26,7 @@ sub startup {
     );
 
     # Themes handling
-    shift @{$self->static->paths};
-    if ($config->{theme} ne 'default') {
-        my $theme = $self->home->rel_file('themes/'.$config->{theme});
-        push @{$self->static->paths}, $theme.'/public' if -d $theme.'/public';
-    }
-    push @{$self->static->paths}, $self->home->rel_file('themes/default/public');
+    $self->plugin('FiatTux::Themes');
 
     # Static assets gzipping
     $self->plugin('GzipStatic');

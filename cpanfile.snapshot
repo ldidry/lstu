@@ -215,10 +215,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       Math::BigInt 1.997
       Test::More 0.90
-  Cpanel-JSON-XS-4.08
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.08.tar.gz
+  Cpanel-JSON-XS-4.13
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.13.tar.gz
     provides:
-      Cpanel::JSON::XS 4.08
+      Cpanel::JSON::XS 4.13
       Cpanel::JSON::XS::Type undef
     requirements:
       ExtUtils::MakeMaker 0
@@ -625,15 +625,6 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
-  EV-4.22
-    pathname: M/ML/MLEHMANN/EV-4.22.tar.gz
-    provides:
-      EV 4.22
-      EV::MakeMaker undef
-    requirements:
-      Canary::Stability 0
-      ExtUtils::MakeMaker 6.52
-      common::sense 0
   Encode-Locale-1.05
     pathname: G/GA/GAAS/Encode-Locale-1.05.tar.gz
     provides:
@@ -892,45 +883,23 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.64
       File::Spec::Functions 0
       perl 5.008
-  IO-Socket-IP-0.39
-    pathname: P/PE/PEVANS/IO-Socket-IP-0.39.tar.gz
+  IO-Socket-SSL-2.066
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.066.tar.gz
     provides:
-      IO::Socket::IP 0.39
-    requirements:
-      IO::Socket 0
-      Socket 1.97
-      Test::More 0.88
-  IO-Socket-SSL-2.060
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.060.tar.gz
-    provides:
-      IO::Socket::SSL 2.060
+      IO::Socket::SSL 2.066
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.060
-      IO::Socket::SSL::OCSP_Resolver 2.060
+      IO::Socket::SSL::OCSP_Cache 2.066
+      IO::Socket::SSL::OCSP_Resolver 2.066
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.060
-      IO::Socket::SSL::SSL_HANDLE 2.060
-      IO::Socket::SSL::Session_Cache 2.060
+      IO::Socket::SSL::SSL_Context 2.066
+      IO::Socket::SSL::SSL_HANDLE 2.066
+      IO::Socket::SSL::Session_Cache 2.066
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
       Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  IO-Socket-Socks-0.74
-    pathname: O/OL/OLEG/IO-Socket-Socks-0.74.tar.gz
-    provides:
-      IO::Socket::Socks 0.74
-      IO::Socket::Socks::Debug 0.74
-      IO::Socket::Socks::Error 0.74
-      IO::Socket::Socks::ReadOnlyVar 0.74
-      IO::Socket::Socks::SocketClassVar 0.74
-    requirements:
-      ExtUtils::MakeMaker 6.52
-      IO::Select 0
-      Socket 1.94
-      Test::More 0.88
-      constant 1.03
   ISO-639_1-0.02
     pathname: L/LD/LDIDRY/ISO-639_1-0.02.tar.gz
     provides:
@@ -1091,13 +1060,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Minion-9.07
-    pathname: S/SR/SRI/Minion-9.07.tar.gz
+  Minion-9.13
+    pathname: S/SR/SRI/Minion-9.13.tar.gz
     provides:
       LinkCheck undef
       LinkCheck::Controller::Links undef
       LinkCheck::Task::CheckLinks undef
-      Minion 9.07
+      Minion 9.13
       Minion::Backend undef
       Minion::Backend::Pg undef
       Minion::Command::minion undef
@@ -1105,12 +1074,12 @@ DISTRIBUTIONS
       Minion::Command::minion::worker undef
       Minion::Job undef
       Minion::Worker undef
-      Minion::_Guard 9.07
+      Minion::_Guard 9.13
       Mojolicious::Plugin::Minion undef
       Mojolicious::Plugin::Minion::Admin undef
     requirements:
       ExtUtils::MakeMaker 0
-      Mojolicious 8.03
+      Mojolicious 8.12
       perl 5.010001
   Minion-Backend-SQLite-4.001
     pathname: D/DB/DBOOK/Minion-Backend-SQLite-4.001.tar.gz
@@ -1367,8 +1336,8 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 7.55
       SQL::Abstract 1.81
-  Mojolicious-8.09
-    pathname: S/SR/SRI/Mojolicious-8.09.tar.gz
+  Mojolicious-8.25
+    pathname: S/SR/SRI/Mojolicious-8.25.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1423,7 +1392,6 @@ DISTRIBUTIONS
       Mojo::Server::Morbo::Backend undef
       Mojo::Server::Morbo::Backend::Poll undef
       Mojo::Server::PSGI undef
-      Mojo::Server::PSGI::_IO undef
       Mojo::Server::Prefork undef
       Mojo::Template undef
       Mojo::Transaction undef
@@ -1438,7 +1406,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 8.09
+      Mojolicious 8.25
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
@@ -1466,7 +1434,6 @@ DISTRIBUTIONS
       Mojolicious::Plugin::HeaderCondition undef
       Mojolicious::Plugin::JSONConfig undef
       Mojolicious::Plugin::Mount undef
-      Mojolicious::Plugin::PODRenderer undef
       Mojolicious::Plugin::TagHelpers undef
       Mojolicious::Plugins undef
       Mojolicious::Renderer undef
@@ -1551,13 +1518,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Mojolicious 7.23
-  Mojolicious-Plugin-Piwik-0.24
-    pathname: A/AK/AKRON/Mojolicious-Plugin-Piwik-0.24.tar.gz
+  Mojolicious-Plugin-Piwik-0.26
+    pathname: A/AK/AKRON/Mojolicious-Plugin-Piwik-0.26.tar.gz
     provides:
-      Mojolicious::Plugin::Piwik 0.24
+      Mojolicious::Plugin::Piwik 0.26
     requirements:
       ExtUtils::MakeMaker 0
-      Mojolicious 5.27
+      Mojolicious 8.02
       Test::More 0
       perl 5.010001
   Mojolicious-Plugin-StaticCache-0.02
@@ -2008,11 +1975,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Net::DNS 0.74
       perl 5.008008
-  Net-DNS-1.19
-    pathname: N/NL/NLNETLABS/Net-DNS-1.19.tar.gz
+  Net-DNS-1.21
+    pathname: N/NL/NLNETLABS/Net-DNS-1.21.tar.gz
     provides:
-      Net::DNS 1.19
-      Net::DNS::Domain 1698
+      Net::DNS 1.21
+      Net::DNS::Domain 1726
       Net::DNS::DomainName 1605
       Net::DNS::DomainName1035 1605
       Net::DNS::DomainName2535 1605
@@ -2021,31 +1988,30 @@ DISTRIBUTIONS
       Net::DNS::Mailbox1035 1605
       Net::DNS::Mailbox2535 1605
       Net::DNS::Nameserver 1692
-      Net::DNS::Packet 1714
-      Net::DNS::Parameters 1714
-      Net::DNS::Question 1714
-      Net::DNS::RR 1718
+      Net::DNS::Packet 1747
+      Net::DNS::Parameters 1740
+      Net::DNS::Question 1726
+      Net::DNS::RR 1748
       Net::DNS::RR::A 1597
       Net::DNS::RR::AAAA 1597
       Net::DNS::RR::AFSDB 1597
-      Net::DNS::RR::APL 1597
-      Net::DNS::RR::APL::Item 1597
-      Net::DNS::RR::CAA 1597
+      Net::DNS::RR::APL 1741
+      Net::DNS::RR::APL::Item 1741
+      Net::DNS::RR::CAA 1741
       Net::DNS::RR::CDNSKEY 1586
       Net::DNS::RR::CDS 1586
-      Net::DNS::RR::CERT 1597
+      Net::DNS::RR::CERT 1729
       Net::DNS::RR::CNAME 1597
-      Net::DNS::RR::CSYNC 1597
+      Net::DNS::RR::CSYNC 1741
       Net::DNS::RR::DHCID 1597
-      Net::DNS::RR::DLV 1528
       Net::DNS::RR::DNAME 1597
-      Net::DNS::RR::DNSKEY 1597
-      Net::DNS::RR::DS 1597
+      Net::DNS::RR::DNSKEY 1741
+      Net::DNS::RR::DS 1741
       Net::DNS::RR::EUI48 1597
       Net::DNS::RR::EUI64 1597
       Net::DNS::RR::GPOS 1528
       Net::DNS::RR::HINFO 1597
-      Net::DNS::RR::HIP 1597
+      Net::DNS::RR::HIP 1749
       Net::DNS::RR::IPSECKEY 1718
       Net::DNS::RR::ISDN 1597
       Net::DNS::RR::KEY 1528
@@ -2062,53 +2028,54 @@ DISTRIBUTIONS
       Net::DNS::RR::NAPTR 1597
       Net::DNS::RR::NID 1597
       Net::DNS::RR::NS 1597
-      Net::DNS::RR::NSEC 1696
-      Net::DNS::RR::NSEC3 1694
-      Net::DNS::RR::NSEC3PARAM 1597
+      Net::DNS::RR::NSEC 1749
+      Net::DNS::RR::NSEC3 1749
+      Net::DNS::RR::NSEC3PARAM 1741
       Net::DNS::RR::NULL 1528
       Net::DNS::RR::OPENPGPKEY 1597
-      Net::DNS::RR::OPT 1717
-      Net::DNS::RR::OPT::CHAIN 1717
-      Net::DNS::RR::OPT::CLIENT_SUBNET 1717
-      Net::DNS::RR::OPT::COOKIE 1717
-      Net::DNS::RR::OPT::DAU 1717
-      Net::DNS::RR::OPT::DHU 1717
-      Net::DNS::RR::OPT::EXPIRE 1717
-      Net::DNS::RR::OPT::KEY_TAG 1717
-      Net::DNS::RR::OPT::N3U 1717
-      Net::DNS::RR::OPT::PADDING 1717
-      Net::DNS::RR::OPT::TCP_KEEPALIVE 1717
+      Net::DNS::RR::OPT 1754
+      Net::DNS::RR::OPT::CHAIN 1754
+      Net::DNS::RR::OPT::CLIENT_SUBNET 1754
+      Net::DNS::RR::OPT::COOKIE 1754
+      Net::DNS::RR::OPT::DAU 1754
+      Net::DNS::RR::OPT::DHU 1754
+      Net::DNS::RR::OPT::EXPIRE 1754
+      Net::DNS::RR::OPT::KEY_TAG 1754
+      Net::DNS::RR::OPT::N3U 1754
+      Net::DNS::RR::OPT::PADDING 1754
+      Net::DNS::RR::OPT::TCP_KEEPALIVE 1754
       Net::DNS::RR::PTR 1597
       Net::DNS::RR::PX 1597
       Net::DNS::RR::RP 1597
-      Net::DNS::RR::RRSIG 1709
+      Net::DNS::RR::RRSIG 1754
       Net::DNS::RR::RT 1597
-      Net::DNS::RR::SIG 1709
-      Net::DNS::RR::SMIMEA 1597
+      Net::DNS::RR::SIG 1754
+      Net::DNS::RR::SMIMEA 1741
       Net::DNS::RR::SOA 1597
       Net::DNS::RR::SPF 1593
       Net::DNS::RR::SRV 1597
-      Net::DNS::RR::SSHFP 1597
+      Net::DNS::RR::SSHFP 1741
       Net::DNS::RR::TKEY 1528
-      Net::DNS::RR::TLSA 1597
-      Net::DNS::RR::TSIG 1718
+      Net::DNS::RR::TLSA 1741
+      Net::DNS::RR::TSIG 1749
       Net::DNS::RR::TXT 1597
       Net::DNS::RR::URI 1597
       Net::DNS::RR::X25 1597
-      Net::DNS::Resolver 1717
-      Net::DNS::Resolver::Base 1719
+      Net::DNS::RR::ZONEMD 1740
+      Net::DNS::Resolver 1740
+      Net::DNS::Resolver::Base 1748
       Net::DNS::Resolver::MSWin32 1568
-      Net::DNS::Resolver::Recurse 1709
+      Net::DNS::Resolver::Recurse 1748
       Net::DNS::Resolver::UNIX 1573
       Net::DNS::Resolver::android 1568
       Net::DNS::Resolver::cygwin 1719
       Net::DNS::Resolver::os2 1568
       Net::DNS::Resolver::os390 1719
-      Net::DNS::Text 1698
-      Net::DNS::Update 1714
-      Net::DNS::ZoneFile 1709
-      Net::DNS::ZoneFile::Generator 1709
-      Net::DNS::ZoneFile::Text 1709
+      Net::DNS::Text 1748
+      Net::DNS::Update 1726
+      Net::DNS::ZoneFile 1748
+      Net::DNS::ZoneFile::Generator 1748
+      Net::DNS::ZoneFile::Text 1748
     requirements:
       Digest::HMAC 1.03
       Digest::MD5 2.13
@@ -2118,7 +2085,7 @@ DISTRIBUTIONS
       IO::File 1.08
       IO::Select 1.14
       IO::Socket::IP 0.38
-      MIME::Base64 2.11
+      MIME::Base64 2.13
       PerlIO 1.05
       Scalar::Util 1.25
       Test::More 0.52
@@ -2188,16 +2155,15 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::Exception 0
       Test::More 0
-  Net-SSLeay-1.85
-    pathname: M/MI/MIKEM/Net-SSLeay-1.85.tar.gz
+  Net-SSLeay-1.88
+    pathname: C/CH/CHRISN/Net-SSLeay-1.88.tar.gz
     provides:
-      Net::SSLeay 1.85
-      Net::SSLeay::Handle 0.61
+      Net::SSLeay 1.88
+      Net::SSLeay::Handle 1.88
     requirements:
-      ExtUtils::MakeMaker 6.36
+      ExtUtils::MakeMaker 0
       MIME::Base64 0
-      Test::More 0.60_01
-      perl 5.005
+      perl 5.008001
   NetAddr-IP-4.079
     pathname: M/MI/MIKER/NetAddr-IP-4.079.tar.gz
     provides:
@@ -2359,17 +2325,6 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       Scalar::Util 0
-      perl 5.006
-  Scalar-List-Utils-1.50
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.50.tar.gz
-    provides:
-      List::Util 1.50
-      List::Util::XS 1.50
-      Scalar::Util 1.50
-      Sub::Util 1.50
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
       perl 5.006
   String-CRC32-1.7
     pathname: L/LE/LEEJO/String-CRC32-1.7.tar.gz
@@ -3001,7 +2956,6 @@ DISTRIBUTIONS
     requirements:
       Authen::SASL 2.00
       Convert::ASN1 0.2
-      Digest::HMAC_MD5 0
       Digest::MD5 0
       ExtUtils::MakeMaker 6.42
       File::Basename 0

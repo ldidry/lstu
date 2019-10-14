@@ -13,7 +13,7 @@ sub login {
 
     $c->cleaning;
 
-    my $ip = $c->ip;
+    my $ip = $c->just_ip;
 
     my $banned = Lstu::DB::Ban->new(
         app    => $c,

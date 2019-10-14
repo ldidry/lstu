@@ -16,7 +16,7 @@ sub add {
 
     # Is the user allowed to create a short URL?
     if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {
-        my $ip = $c->ip;
+        my $ip = $c->just_ip;
 
         # Check banning
         my $banned = Lstu::DB::Ban->new(

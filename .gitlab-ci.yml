@@ -1,6 +1,7 @@
 image: hatsoftwares/lstu-test-ci:latest
 stages:
-  - tags
+  - publish_changelog
+  - pouet_it
   - carton
   - carton_bdd
   - tests
@@ -16,6 +17,7 @@ variables:
 before_script:
   - if [[ $CI_JOB_NAME == "postgresql 3/3" ]]; then export PGPASSWORD=lstu_pwd; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu lstu_db; fi
   - if [[ $CI_JOB_NAME == "mysql 3/3" ]]; then echo "CREATE DATABASE lstu_minion; GRANT ALL ON lstu_minion.* TO lstu@'%'; FLUSH PRIVILEGES;" | mysql -h mariadb -u root -proot; fi
+  - which mariadb_config && cd $(dirname $(which mariadb_config)) && ln -s mariadb_config mysql_config && cd -
 
 ### Jobs templates
 ##
@@ -32,6 +34,8 @@ before_script:
     paths:
       - local/
     policy: pull
+  needs:
+    - carton
   artifacts:
     paths:
       - local.tar
@@ -56,6 +60,8 @@ before_script:
   <<: *tests_definition
   dependencies:
     - carton_sqlite
+  needs:
+    - carton_sqlite
   services:
     - name: rroemhild/test-openldap
       alias: rroemhild-test-openldap
@@ -63,6 +69,8 @@ before_script:
 .pg_template: &pg_definition
   <<: *tests_definition
   dependencies:
+    - carton_postgresql
+  needs:
     - carton_postgresql
   services:
     - name: rroemhild/test-openldap
@@ -74,40 +82,20 @@ before_script:
   <<: *tests_definition
   dependencies:
     - carton_mysql
+  needs:
+    - carton_mysql
   services:
     - name: rroemhild/test-openldap
       alias: rroemhild-test-openldap
     - name: mariadb:10.1
       alias: mariadb
 
-### Publish tag changelog
+### Publish tag changelog and create a toot
 ##
 #
-publish_changelog:
-  image: hatsoftwares/curl-jq:latest
-  stage: tags
-  script:
-    - export PROJECT_API_URL="https://framagit.org/api/v4/projects/${CI_PROJECT_ID}"
-    - export DESCRIPTION_URL="${PROJECT_API_URL}/repository/tags/${CI_COMMIT_TAG}/release"
-    - 'export HEADER="Private-Token: ${GITLAB_API_TOKEN}"'
-    - sed -n '/^'$CI_COMMIT_TAG'[[:space:]]/,/^[^\t]/p' CHANGELOG | sed -e 's/^[^\t].*//' -e 's/\t//g' | sed '/^[[:space:]]*$/d' > /tmp/text
-    - if [[ ! -z $GITLAB_API_TOKEN ]]; then curl -s --request POST --data-urlencode "description@/tmp/text" --header "${HEADER}" "${DESCRIPTION_URL}"; fi
-  only:
-    - tags
-
-### Toot tag
-##
-#
-pouet-it:
-  image: hatsoftwares/pouet-it-from-ci:latest
-  stage: tags
-  script:
-    - cd /opt/pouet-it-from-ci
-    - export project="$(echo $CI_PROJECT_NAME | perl -p -e 's/(?:^(.)|-(.))/\U$1\U$2/g')"
-    - export MESSAGE=$(echo -e "Je viens de sortir "'#'"${project} en version ${CI_COMMIT_TAG} !""\n${CI_PROJECT_URL}/tags/${CI_COMMIT_TAG}")
-    - carton exec ./pouet-it-from-ci.pl
-  only:
-    - tags
+include:
+  - 'https://framagit.org/fiat-tux/gitlabci-snippets/raw/4e4e03322e95e9b0124c714456ebf1bdc02ad43f/publish_changelog.gitlab-ci.yml'
+  - 'https://framagit.org/fiat-tux/gitlabci-snippets/raw/4e4e03322e95e9b0124c714456ebf1bdc02ad43f/pouet-it-from-ci.gitlab-ci.yml'
 
 ### Podcheck
 ##
