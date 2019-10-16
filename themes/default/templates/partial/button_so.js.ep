@@ -3,9 +3,9 @@
 var go_button = document.querySelector(".allons-y");
 
 go_button.addEventListener('mousedown', function (event){
-  go_button.style.cssText = "box-shadow: none; transform: translate(5px, 5px); transition: all 0.3;"; 
+  go_button.style.cssText = "box-shadow: none; transform: translate(2px, 2px); transition: all 0.3;"; 
 });
 
 go_button.addEventListener('mouseup', function (event){
-    go_button.style.cssText = "box-shadow: 5px 5px 1px 1px rgba(0,0,0,0.3); transform: none; transition: all 0.8;"; 
+    go_button.style.cssText = "box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.3); transform: none; transition: all 0.8;"; 
 });

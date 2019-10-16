@@ -10,7 +10,7 @@
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="icon" type="image/png" href="<%= url_for('/img/favicon.png') %>">
+        <link rel="icon" type="image/png" href="<%= url_for('/img/favicon.ico') %>">
         <link rel="icon" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
         <link rel="icon" sizes="196x196" href="<%= url_for('/img/lstu196.png') %>">
         <link rel="apple-touch-icon" href="<%= url_for('/img/lstu60.png') %>">
@@ -29,11 +29,11 @@
     <body>
         <div class="container">
             <h1 class="hidden">Let's Shorten That URL</h1>
-            <%= link_to url_for('/') => (class => 'link_nocol') => begin %>
             <div class="hidden-xs logo">
+            <%= link_to url_for('/') => (class => 'link_nocol') => begin %>
                 <img class="logo-img" src="<%= url_for('/img/logo+type.svg') %>" alt="lstu logo" width="auto" height="200">
-            </div>
             <% end %>
+            </div>
             <p>
                 <small>&copy; 2013 — <%= $year %> <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> —
                     <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> —
