@@ -40,11 +40,11 @@
     <body>
         <div class="container">
             <h1 class="hidden">Let's Shorten That URL</h1>
-            <%= link_to url_for('/') => (class => 'link_nocol') => begin %>
             <div class="hidden-xs logo">
+            <%= link_to url_for('/') => (class => 'link_nocol') => begin %>
                 <img class="logo-img" src="<%= url_for('/img/logo+type.svg') %>" alt="lstu logo" width="auto" height="200">
-            </div>
             <% end %>
+            </div>
             <p>
                 <small>&copy; 2013 — <%= $year %> <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> —
                     <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> —

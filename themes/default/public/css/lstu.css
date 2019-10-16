@@ -1,7 +1,7 @@
 body {
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #B79FE6;
+    background-color: rgba(183, 159, 230, 0.753);
 }
 
 .container {
@@ -64,13 +64,19 @@ dd > strong {
 
 .allons-y {
     border-style: none;
-    background-color: #B24B04;
-    border-radius: 0;
-    box-shadow: 5px 5px 1px 1px rgba(0,0,0,0.3);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.3) 0%, rgba(255,255,255, 0.5) 100%, transparent 25px) no-repeat, #B24B04;
+    background-repeat: no-repeat, no-repeat;
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.3);
     padding: 8px;
     margin-right: 9px;
     color: white;
     font-family: 'OpenSans';
     font-size: 14px;
+    background-size: 0 100%, 100% 100%;
+    transition: background-size 0.3s; 
 }
 
+.allons-y:hover {
+    background-size: 100% 100%, 100% 100%;
+}
