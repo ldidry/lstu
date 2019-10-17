@@ -6,7 +6,7 @@
         <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%= l('URL to shorten') %>" required>
         <label class="sr-only" for="lsturl-custom"><%= l('Custom shortened text') %></label>
         <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%= l('Custom shortened text') %>">
-        <%= submit_button l('Go!'), class => 'button' %>
+        <%= submit_button l('Go!'), class => 'button allons-y' %>
     </fieldset>
 </form>
 

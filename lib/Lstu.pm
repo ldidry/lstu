@@ -300,14 +300,6 @@ sub startup {
         );
     })->name('lstu.js');
 
-    $r->get('/partial/button_so.js' => sub {
-        my $c = shift;
-        $c->render(
-            template => 'partial/button_so',
-            format   => 'js'
-        );
-    })->name('button_so.js');
-
     $r->get('/extensions' => sub {
         shift->render(template => 'extensions');
     })->name('extensions');
