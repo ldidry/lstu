@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-11-08 11:07+0000\n"
+"Last-Translator: Framasoft <tech-sys@framalistes.org>\n"
+"Language-Team: French <https://weblate.framasoft.org/projects/lstu/master/fr/"
+">\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-09-08 11:07+0000\n"
-"Last-Translator: Luc Didry <luc@framasoft.org>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/lstu/language/fr/"
-")\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Zanata 4.6.2\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-POOTLE-MTIME: 1441357092.000000\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -200,7 +200,7 @@ msgstr "Mot de passe"
 
 #: lib/Lstu/Controller/Authent.pm:35 themes/default/templates/api.html.ep:18
 msgid "Please, check your credentials: unable to authenticate."
-msgstr "Impossible de s’authentifier, veuillez vérifier vos identifiants"
+msgstr "Impossible de s’authentifier, veuillez vérifier vos identifiants."
 
 #: themes/default/templates/stats.html.ep:82
 msgid "Previous"
@@ -236,7 +236,7 @@ msgstr "Connexion"
 
 #: lib/Lstu/Controller/Stats.pm:45
 msgid "Sorry, unable to parse the provided file"
-msgstr "Désolé, impossible d’analyser le fichier fourni "
+msgstr "Désolé, impossible d’analyser le fichier fourni"
 
 #: themes/default/templates/layouts/default.html.ep:42 themes/default/templates/layouts/default.html.ep:48 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
@@ -283,13 +283,13 @@ msgstr ""
 #. ($c->url_for('/')
 #: lib/Lstu/Controller/Admin.pm:134 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:223
 msgid "The shortened URL %1 doesn't exist."
-msgstr "L’URL raccourcie %1 n’existe pas"
+msgstr "L’URL raccourcie %1 n’existe pas."
 
 #. ($custom_url)
 #: lib/Lstu/Controller/URL.pm:63
 msgid "The shortened text (%1) is already used. Please choose another one."
 msgstr ""
-"Le texte du raccourci (%1) est déjà utilisé. Veuillez en choisir un autre"
+"Le texte du raccourci (%1) est déjà utilisé. Veuillez en choisir un autre."
 
 #. ($url)
 #: lib/Lstu/Controller/URL.pm:61
@@ -355,7 +355,7 @@ msgstr ""
 
 #: themes/default/templates/api.html.ep:39 themes/default/templates/api.html.ep:77
 msgid "You must be logged in to use it."
-msgstr "Vous devez être connecté·e pour l’utiliser"
+msgstr "Vous devez être connecté·e pour l’utiliser."
 
 #: themes/default/templates/api.html.ep:130
 msgid "You will be redirected to Lstu statistics page"
