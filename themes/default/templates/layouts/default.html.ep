@@ -39,12 +39,16 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="hidden">Let's Shorten That URL</h1>
-            <%= link_to url_for('/') => (class => 'link_nocol') => begin %>
+            <h1 class="oswald hidden-sm hidden-md hidden-lg">
+                <a href="<%= url_for('/') %>">
+                    Let's Shorten That URL
+                </a>
+            </h1>
             <div class="hidden-xs logo">
-                <img class="logo-img" src="<%= url_for('/img/logo+type.svg') %>" alt="lstu logo" width="auto" height="200">
+                <%= link_to url_for('/') => (class => 'link_nocol') => begin %>
+                    <img class="logo-img" src="<%= url_for('/img/logo+type.svg') %>" alt="lstu logo" width="auto" height="200">
+                <% end %>
             </div>
-            <% end %>
             <p>
                 <small>&copy; 2013 — <%= $year %> <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> —
                     <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> —

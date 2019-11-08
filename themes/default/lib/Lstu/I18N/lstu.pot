@@ -24,7 +24,7 @@ msgstr ""
 msgid "A page with a table containing the same informations that the JSON response"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:49
+#: themes/default/templates/layouts/default.html.ep:55
 msgid "About"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr ""
 msgid "Bad password"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:61
+#: themes/default/templates/layouts/default.html.ep:67
 msgid "Browser extensions"
 msgstr ""
 
@@ -78,14 +78,6 @@ msgstr ""
 
 #: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
 msgid "Go!"
-msgstr ""
-
-#: themes/default/public/css/bootstrap-lstu.min.css:13 themes/default/public/css/lstu.css:15
-msgid "Henny Penny"
-msgstr ""
-
-#: themes/default/public/css/bootstrap-lstu.min.css:13 themes/default/public/css/lstu.css:15
-msgid "HennyPenny-Regular"
 msgstr ""
 
 #: themes/default/templates/partial/lstu.js.ep:30
@@ -133,7 +125,7 @@ msgstr ""
 msgid "JSON: success"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:48
+#: themes/default/templates/layouts/default.html.ep:54
 msgid "License:"
 msgstr ""
 
@@ -141,7 +133,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:54
+#: themes/default/templates/layouts/default.html.ep:60
 msgid "Logout"
 msgstr ""
 
@@ -198,7 +190,7 @@ msgstr ""
 msgid "Should always be successful"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:56 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
+#: themes/default/templates/layouts/default.html.ep:62 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
 msgstr ""
 
@@ -206,7 +198,7 @@ msgstr ""
 msgid "Sorry, unable to parse the provided file"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:53 themes/default/templates/layouts/default.html.ep:59 themes/default/templates/stats.html.ep:4
+#: themes/default/templates/layouts/default.html.ep:59 themes/default/templates/layouts/default.html.ep:65 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
 msgstr ""
 
