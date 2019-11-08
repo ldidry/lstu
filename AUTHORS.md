@@ -15,3 +15,4 @@
 * Ira W. Snyder
 * Arnaud de Mouhy (docker port)
 * Mathieu Aubin
+* frju365 (Julien Gomes Dias)

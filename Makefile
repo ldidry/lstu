@@ -1,4 +1,4 @@
-EXTRACTDIR=-D lib -D themes/default
+EXTRACTDIR=-D lib -D themes/default/templates
 POT=themes/default/lib/Lstu/I18N/lstu.pot
 XGETTEXT=carton exec local/bin/xgettext.pl
 CARTON=carton exec

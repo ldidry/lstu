@@ -18,7 +18,6 @@
         <link rel="icon" sizes="32x32" href="<%= url_for('/img/lstu32.png') %>">
         <link rel="icon" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
         <link rel="icon" sizes="192x192" href="<%= url_for('/img/lstu192.png') %>">
-        <link rel="icon" sizes="196x196" href="<%= url_for('/img/lstu196.png') %>">
         <link rel="apple-touch-icon" href="<%= url_for('/img/lstu60.png') %>">
         <link rel="apple-touch-icon" sizes="76x76" href="<%= url_for('/img/lstu76.png') %>">
         <link rel="apple-touch-icon" sizes="120x120" href="<%= url_for('/img/lstu120.png') %>">
@@ -39,10 +38,16 @@
     </head>
     <body>
         <div class="container">
-            <div class="pull-left hidden-xs logo">
-                <img src="<%= url_for('/img/lstu.png') %>" alt="lstu logo" width="100" height="83">
+            <h1 class="oswald hidden-sm hidden-md hidden-lg">
+                <a href="<%= url_for('/') %>">
+                    Let's Shorten That URL
+                </a>
+            </h1>
+            <div class="hidden-xs logo">
+                <%= link_to url_for('/') => (class => 'link_nocol') => begin %>
+                    <img class="logo-img" src="<%= url_for('/img/logo+type.svg') %>" alt="lstu logo" width="auto" height="200">
+                <% end %>
             </div>
-            <%= link_to url_for('/') => (class => 'link_nocol') => begin %><h1 class="hennypenny">Let's Shorten That Url</h1><% end %>
             <p>
                 <small>&copy; 2013 — <%= $year %> <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> —
                     <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> —

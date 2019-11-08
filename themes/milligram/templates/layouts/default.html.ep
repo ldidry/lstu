@@ -10,21 +10,38 @@
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="manifest" href="<%= url_for('/manifest.json') %>">
+        <link rel="shortcut icon" href="<%= url_for('/favicon.ico') %>">
+        <link rel="mask-icon" href="<%= url_for('/img/lstu-small.svg') %>" color="#9b4dca">
         <link rel="icon" type="image/png" href="<%= url_for('/img/favicon.png') %>">
+        <link rel="icon" sizes="16x16" href="<%= url_for('/img/lstu16.png') %>">
+        <link rel="icon" sizes="32x32" href="<%= url_for('/img/lstu32.png') %>">
         <link rel="icon" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
-        <link rel="icon" sizes="196x196" href="<%= url_for('/img/lstu196.png') %>">
+        <link rel="icon" sizes="192x192" href="<%= url_for('/img/lstu192.png') %>">
         <link rel="apple-touch-icon" href="<%= url_for('/img/lstu60.png') %>">
         <link rel="apple-touch-icon" sizes="76x76" href="<%= url_for('/img/lstu76.png') %>">
         <link rel="apple-touch-icon" sizes="120x120" href="<%= url_for('/img/lstu120.png') %>">
         <link rel="apple-touch-icon" sizes="152x152" href="<%= url_for('/img/lstu152.png') %>">
         <link rel="apple-touch-icon" sizes="128x128" href="<%= url_for('/img/lstu128.png') %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= url_for('/img/lstu152.png') %>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%= url_for('/img/lstu180.png') %>">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<%= url_for('/img/lstu120p.png') %>">
+        <meta name="msapplication-TileColor" content="#ffc40d">
+        <meta name="msapplication-TileImage" content="<%= url_for('/img/mstile-lstu144.png') %>">
+        <meta name="msapplication-config" content="<%= url_for('/browserconfig.xml') %>">
     </head>
     <body>
         <div class="container">
-            <div class="float-left hidden-xs logo">
-                <img src="<%= url_for('/img/lstu.png') %>" alt="lstu logo" width="100" height="83">
+            <h1 class="oswald hidden-sm hidden-md hidden-lg">
+                <a href="<%= url_for('/') %>">
+                    Let's Shorten That URL
+                </a>
+            </h1>
+            <div class="hidden-xs logo">
+                <%= link_to url_for('/') => (class => 'link_nocol') => begin %>
+                    <img class="logo-img" src="<%= url_for('/img/logo+type.svg') %>" alt="lstu logo" width="auto" height="200">
+                <% end %>
             </div>
-            <%= link_to url_for('/') => (class => 'link_nocol') => begin %><h1 class="hennypenny">Let's Shorten That Url</h1><% end %>
             <p>
                 <small>&copy; 2013 — <%= $year %> <%= link_to 'Luc Didry' => 'https://fiat-tux.fr' %> —
                     <%= l('License:') %> <%= link_to 'WTFPL' => 'http://www.wtfpl.net/' %> —
