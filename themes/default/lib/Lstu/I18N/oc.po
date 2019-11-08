@@ -96,14 +96,6 @@ msgstr ""
 msgid "Go!"
 msgstr "Zo !"
 
-#: themes/default/public/css/bootstrap-lstu.min.css:13 themes/default/public/css/lstu.css:15
-msgid "Henny Penny"
-msgstr "Henny Penny"
-
-#: themes/default/public/css/bootstrap-lstu.min.css:13 themes/default/public/css/lstu.css:15
-msgid "HennyPenny-Regular"
-msgstr "HennyPenny-Regular"
-
 #: themes/default/templates/partial/lstu.js.ep:30
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr "Picatz sus Entrada puèi fasètz Ctrl+C per copiar lo ligam"

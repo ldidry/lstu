@@ -14,15 +14,6 @@ locales:
 	$(XGETTEXT) $(EXTRACTDIR) -o $(POT) 2>/dev/null
 	cd ./themes/milligram && make locales
 
-push-locales:
-	zanata-cli -q -B push --project-version `git branch | grep \* | cut -d ' ' -f2-`
-
-pull-locales:
-	zanata-cli -q -B pull --min-doc-percent 50 --project-version `git branch | grep \* | cut -d ' ' -f2-`
-
-stats-locales:
-	zanata-cli -q stats --project-version `git branch | grep \* | cut -d ' ' -f2-`
-
 podcheck:
 	podchecker lib/Lstu/DB/*pm lib/Lstu/Command/*pm
 
