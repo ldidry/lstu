@@ -6,7 +6,7 @@
         <input type="url" name="lsturl" id="lsturl" class="form-control" placeholder="<%= l('URL to shorten') %>" required>
         <label class="sr-only" for="lsturl-custom"><%= l('Custom shortened text') %></label>
         <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%= l('Custom shortened text') %>">
-        <%= submit_button l('Go!'), class => 'button' %>
+        <%= submit_button l('Go!'), class => 'button allons-y' %>
     </fieldset>
 </form>
 
@@ -14,7 +14,7 @@
         <fieldset class="result">
             <img class="qrcode-result" alt="QRCode" src="data:image/png;base64,<%= stash('qrcode') %>">
             <label><%= link_to stash('url') => begin %><h4><%= stash('url') %></h4><%= end %></label>
-            ⟹ <input id="input-short" value="<%== stash('short') %>" class="form-control">
+            ⟹ <input id="input-short" value="<%== stash('short') %>" class="form-control" size="<%= length(stash('short')) %>">
             <span id="js" class="hidden"><a href="#" id="clipboard" class="button button-clear" title="<%= l('Copy to clipboard') %>" data-short="<%== stash('short') %>"><h5><span class="icon icon-clipboard"></span></h5></a><span>
         </fieldset>
 % }

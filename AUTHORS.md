@@ -14,3 +14,5 @@
 * Belvar (Gwenn M) (breton translation)
 * Ira W. Snyder
 * Arnaud de Mouhy (docker port)
+* Mathieu Aubin
+* frju365 (Julien Gomes Dias)

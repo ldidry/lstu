@@ -15,10 +15,10 @@ sub run {
     my @args = @_;
 
     getopt \@args,
-      'info=s{1,}'   => \my @info,
+      'info=s{1,}'     => \my @info,
       'r|remove=s{1,}' => \my @remove,
       's|search=s'     => \my $search,
-      'ip=s'           => \my $ip,
+      'ip=s{1,}'       => \my @ips,
       'y|yes'          => \my $yes;
 
     if (scalar @info) {
@@ -31,11 +31,13 @@ sub run {
         );
     }
     if (scalar @remove) {
+        my @r_ips;
         c(@remove)->each(
             sub {
                 my ($e, $num) = @_;
                 my $u = get_short($c, $e);
                 if ($u) {
+                    push @r_ips, $u->created_by if $u->created_by;
                     print_infos($u->to_hash);
                     my $confirm = ($yes) ? 'yes' : undef;
                     unless (defined $confirm) {
@@ -55,28 +57,41 @@ sub run {
                 }
             }
         );
+        say sprintf("If you want to ban the uploaders' IPs, please do:\n  carton exec script/lstu ban --ban %s", join(' ', @r_ips)) if @r_ips;
     }
     if ($search) {
         my $u = Lstu::DB::URL->new(app => $c->app)->search_url($search);
         my @shorts;
+        my @s_ips;
         $u->each(sub {
             my ($e, $num) = @_;
             push @shorts, $e->{short};
+            push @s_ips, $e->{created_by} if $e->{created_by};
             print_infos($e);
         });
         say sprintf('%d matching URLs', $u->size);
-        say sprintf("If you want to delete those URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @shorts)) if @shorts;
+        say sprintf("If you want to delete those URLs, please do:\n  carton exec script/lstu url --yes --remove %s", join(' ', @shorts)) if @shorts;
+        say sprintf("If you want to ban those IPs, please do:\n  carton exec script/lstu ban --ban %s", join(' ', @s_ips)) if @s_ips;
     }
-    if ($ip) {
-        my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
-        my @shorts;
-        $u->each(sub {
-            my ($e, $num) = @_;
-            push @shorts, $e->{short};
-            print_infos($e);
+    if (scalar(@ips)) {
+        my @recap;
+        c(@ips)->each(sub {
+            my ($ip, $num) = @_;
+            my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
+            my @shorts;
+            $u->each(sub {
+                my ($e, $num) = @_;
+                push @shorts, $e->{short};
+                print_infos($e);
+            });
+            say sprintf('[%s] %d matching URLs', $ip, $u->size);
+            if (@shorts) {
+                say sprintf("[%s] If you want to delete those URLs, please do:\n  carton exec script/lstu url --yes --remove %s", $ip, join(' ', @shorts));
+                push @recap, @shorts;
+            }
         });
-        say sprintf('%d matching URLs', $u->size);
-        say sprintf("If you want to delete those URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @shorts)) if @shorts;
+        say sprintf("If you want to delete all those URLs, please do:\n  carton exec script/lstu url --yes --remove %s", join(' ', @recap)) if @recap;
+        say sprintf("If you want to ban those IPs, please do:\n  carton exec script/lstu ban --ban %s", join(' ', @ips)) if @ips;
     }
 }
 
@@ -85,7 +100,7 @@ sub get_short {
     my $short = shift;
 
     my $u = Lstu::DB::URL->new(app => $c->app, short => $short);
-    if ($u->url) {
+    if ($u->url && !$u->disabled) {
         return $u;
     } else {
         say sprintf('Sorry, unable to find an URL with short = %s', $short);
@@ -128,7 +143,7 @@ Lstu::Command::url - Manage URL in Lstu's database
       carton exec script/lstu url --remove <short> <short> [--yes] Remove the space-separated URLs (ask for confirmation unless --yes is given)
                                                                    Will print infos about URL before confirmation
       carton exec script/lstu url --search <url>                   Search URLs by its true URL (LIKE match)
-      carton exec script/lstu url --ip <ip address>                Search URLs by the IP address of its creator (exact match)
+      carton exec script/lstu url --ip <ip address> <ip address>   Search URLs by the IP address of its creator (exact match)
 
 =cut
 

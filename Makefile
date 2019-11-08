@@ -1,4 +1,4 @@
-EXTRACTDIR=-D lib -D themes/default
+EXTRACTDIR=-D lib -D themes/default/templates
 POT=themes/default/lib/Lstu/I18N/lstu.pot
 XGETTEXT=carton exec local/bin/xgettext.pl
 CARTON=carton exec
@@ -13,15 +13,6 @@ minify:
 locales:
 	$(XGETTEXT) $(EXTRACTDIR) -o $(POT) 2>/dev/null
 	cd ./themes/milligram && make locales
-
-push-locales:
-	zanata-cli -q -B push
-
-pull-locales:
-	zanata-cli -q -B pull --min-doc-percent 40
-
-stats-locales:
-	zanata-cli -q stats
 
 podcheck:
 	podchecker lib/Lstu/DB/*pm lib/Lstu/Command/*pm

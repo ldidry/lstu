@@ -1,11 +1,9 @@
 image: hatsoftwares/lstu-test-ci:latest
 stages:
-  - podcheck
+  - tags
   - carton
   - carton_bdd
   - tests
-before_script:
-  - rm -f *db
 variables:
   POSTGRES_DB: lstu_db
   POSTGRES_USER: lstu
@@ -15,55 +13,108 @@ variables:
   MYSQL_PASSWORD: lstu_pwd
   MYSQL_ROOT_PASSWORD: root
 
+before_script:
+  - if [[ $CI_JOB_NAME == "postgresql 3/3" ]]; then export PGPASSWORD=lstu_pwd; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu lstu_db; fi
+  - if [[ $CI_JOB_NAME == "mysql 3/3" ]]; then echo "CREATE DATABASE lstu_minion; GRANT ALL ON lstu_minion.* TO lstu@'%'; FLUSH PRIVILEGES;" | mysql -h mariadb -u root -proot; fi
+
 ### Jobs templates
 ##
 #
-.carton_bdd_template: &carton_bdd_definition
-  stage: carton_bdd
+.retry: &retry
   retry: 2
-  artifacts:
+  except:
+    - tags
+.carton_bdd_template: &carton_bdd_definition
+  <<: *retry
+  stage: carton_bdd
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
     paths:
       - local/
-    expire_in: 1 week
-  dependencies:
-    - carton
-.sqlite_template: &sqlite_definition
+    policy: pull
+  artifacts:
+    paths:
+      - local.tar
+    expire_in: 3 hours
+  after_script:
+    - tar cf local.tar local/
+
+.tests_template: &tests_definition
+  <<: *retry
   stage: tests
-  retry: 2
+  parallel: 3
+  script:
+    - tar xf local.tar && rm local.tar
+    - export CI_JOB_NAME=$(echo $CI_JOB_NAME | sed -e 's@ .*@@')
+    - echo "Database $CI_JOB_NAME test $CI_NODE_INDEX on $CI_NODE_TOTAL"
+    - if [[ $CI_NODE_INDEX -eq 3 ]]; then MOJO_CONFIG="t/${CI_JOB_NAME}${CI_NODE_INDEX}.conf" make minion & sleep 5; fi
+    - MOJO_CONFIG="t/${CI_JOB_NAME}${CI_NODE_INDEX}.conf" make test
+    - MOJO_CONFIG="t/${CI_JOB_NAME}${CI_NODE_INDEX}.conf" make cover
+  coverage: '/Total.* (\d+\.\d+)$/'
+
+.sqlite_template: &sqlite_definition
+  <<: *tests_definition
   dependencies:
     - carton_sqlite
   services:
     - name: rroemhild/test-openldap
       alias: rroemhild-test-openldap
-  coverage: '/Total.* (\d+\.\d+)$/'
+
 .pg_template: &pg_definition
-  stage: tests
-  retry: 2
+  <<: *tests_definition
   dependencies:
     - carton_postgresql
   services:
-    - name: postgres:9.6
-      alias: postgres
     - name: rroemhild/test-openldap
       alias: rroemhild-test-openldap
-  coverage: '/Total .*(\d+\.\d+)$/'
+    - name: postgres:9.6
+      alias: postgres
+
 .mysql_template: &mysql_definition
-  stage: tests
-  retry: 2
+  <<: *tests_definition
   dependencies:
     - carton_mysql
   services:
-    - name: mariadb:10.1
-      alias: mariadb
     - name: rroemhild/test-openldap
       alias: rroemhild-test-openldap
-  coverage: '/Total .*(\d+\.\d+)$/'
+    - name: mariadb:10.1
+      alias: mariadb
+
+### Publish tag changelog
+##
+#
+publish_changelog:
+  image: hatsoftwares/curl-jq:latest
+  stage: tags
+  script:
+    - export PROJECT_API_URL="https://framagit.org/api/v4/projects/${CI_PROJECT_ID}"
+    - export DESCRIPTION_URL="${PROJECT_API_URL}/repository/tags/${CI_COMMIT_TAG}/release"
+    - 'export HEADER="Private-Token: ${GITLAB_API_TOKEN}"'
+    - sed -n '/^'$CI_COMMIT_TAG'[[:space:]]/,/^[^\t]/p' CHANGELOG | sed -e 's/^[^\t].*//' -e 's/\t//g' | sed '/^[[:space:]]*$/d' > /tmp/text
+    - if [[ ! -z $GITLAB_API_TOKEN ]]; then curl -s --request POST --data-urlencode "description@/tmp/text" --header "${HEADER}" "${DESCRIPTION_URL}"; fi
+  only:
+    - tags
+
+### Toot tag
+##
+#
+pouet-it:
+  image: hatsoftwares/pouet-it-from-ci:latest
+  stage: tags
+  script:
+    - cd /opt/pouet-it-from-ci
+    - export project="$(echo $CI_PROJECT_NAME | perl -p -e 's/(?:^(.)|-(.))/\U$1\U$2/g')"
+    - export MESSAGE=$(echo -e "Je viens de sortir "'#'"${project} en version ${CI_COMMIT_TAG} !""\n${CI_PROJECT_URL}/tags/${CI_COMMIT_TAG}")
+    - carton exec ./pouet-it-from-ci.pl
+  only:
+    - tags
 
 ### Podcheck
 ##
 #
 podcheck:
-  stage: podcheck
+  <<: *retry
+  stage: carton
   script:
     - make podcheck
 
@@ -71,16 +122,14 @@ podcheck:
 ##
 #
 carton:
+  <<: *retry
   stage: carton
-  artifacts:
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
     paths:
       - local/
-    expire_in: 1 week
-  dependencies: []
   script:
     - carton install --deployment --without=sqlite --without=postgresql --without=mysql
-  when: always
-  retry: 2
 
 ### Install DB related dependencies
 ##
@@ -98,67 +147,12 @@ carton_mysql:
   script:
     - carton install --deployment --without=sqlite --without=postgresql
 
-### SQLite tests
+### Tests
 ##
 #
-sqlite1:
+sqlite:
   <<: *sqlite_definition
-  script:
-    - MOJO_CONFIG=t/sqlite1.conf make test
-    - MOJO_CONFIG=t/sqlite1.conf make cover
-sqlite2:
-  <<: *sqlite_definition
-  script:
-    - MOJO_CONFIG=t/sqlite2.conf make test
-    - MOJO_CONFIG=t/sqlite2.conf make cover
-sqlite3:
-  <<: *sqlite_definition
-  script:
-    - MOJO_CONFIG=t/sqlite3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/sqlite3.conf make test
-    - MOJO_CONFIG=t/sqlite3.conf make cover
-
-### PostgreSQL tests
-##
-#
-postgresql1:
+postgresql:
   <<: *pg_definition
-  script:
-    - MOJO_CONFIG=t/postgresql1.conf make test
-    - MOJO_CONFIG=t/postgresql1.conf make cover
-postgresql2:
-  <<: *pg_definition
-  script:
-    - MOJO_CONFIG=t/postgresql2.conf make test
-    - MOJO_CONFIG=t/postgresql2.conf make cover
-postgresql3:
-  <<: *pg_definition
-  script:
-    - export PGPASSWORD=lstu_pwd; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu lstu_db
-    - MOJO_CONFIG=t/postgresql3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/postgresql3.conf make test
-    - MOJO_CONFIG=t/postgresql3.conf make cover
-
-### MySQL tests
-##
-#
-mysql1:
+mysql:
   <<: *mysql_definition
-  script:
-    - MOJO_CONFIG=t/mysql1.conf make test
-    - MOJO_CONFIG=t/mysql1.conf make cover
-mysql2:
-  <<: *mysql_definition
-  script:
-    - MOJO_CONFIG=t/mysql2.conf make test
-    - MOJO_CONFIG=t/mysql2.conf make cover
-mysql3:
-  <<: *mysql_definition
-  script:
-    - echo "CREATE DATABASE lstu_minion; GRANT ALL ON lstu_minion.* TO lstu@'%'; FLUSH PRIVILEGES;" | mysql -h mariadb -u root -proot
-    - MOJO_CONFIG=t/mysql3.conf make minion &
-    - sleep 5
-    - MOJO_CONFIG=t/mysql3.conf make test
-    - MOJO_CONFIG=t/mysql3.conf make cover

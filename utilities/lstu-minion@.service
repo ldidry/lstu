@@ -1,6 +1,6 @@
 [Unit]
 Description=Shortened URLs service job queue
-Documentation=https://framagit.org/luc/lstu
+Documentation=https://framagit.org/fiat-tux/hat-softwares/lstu
 
 [Service]
 Type=simple

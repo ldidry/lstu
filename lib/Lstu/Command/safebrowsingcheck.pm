@@ -17,11 +17,12 @@ sub run {
     my @args = @_;
 
     getopt \@args,
-      'u|url=s{1,}' => \my @urls_to_check,
-      's|seconds=i' => \my $delay,
-      'r|remove'    => \my $remove,
-      'a|all'       => \my $all,
-      'b|ban'       => \my $ban;
+      'u|url=s{1,}'  => \my @urls_to_check,
+      't|test=s{1,}' => \my @urls_to_test,
+      's|seconds=i'  => \my $delay,
+      'r|remove'     => \my $remove,
+      'a|all'        => \my $all,
+      'b|ban'        => \my $ban;
 
     if ($c->app->gsb) {
         my $urls;
@@ -29,6 +30,8 @@ sub run {
             $urls = c(get_shorts($c, @urls_to_check));
         } elsif ($delay) {
             $urls = Lstu::DB::URL->new(app => $c->app)->get_all_urls_created_ago($delay);
+        } elsif (@urls_to_test) {
+            $urls = c(@urls_to_test);
         } else {
             $urls = Lstu::DB::URL->new(app => $c->app)->get_all_urls;
         }
@@ -43,40 +46,52 @@ sub run {
         );
         my (@bad, %bad_ips, @bad_from_ips);
         my $gsb     = $c->app->gsb;
-        my $deleted = 0;
+        my $disabled = 0;
+        my @testing_results;
         $urls->each(sub {
             my ($e, $num) = @_;
+            my $u = (@urls_to_test) ? $e : $e->{url};
 
             $progress->update($num);
 
-            my @matches = $gsb->lookup(url => $e->{url});
+            my @matches = $gsb->lookup(url => $u);
 
             if (@matches) {
-                push @bad, $e->{short};
-                $bad_ips{$e->{created_by}} = 1 if $e->{created_by};
-                $deleted += Lstu::DB::URL->new(
-                    app => $c->app,
-                    short => $e->{short}
-                )->remove if $remove;
+                if (@urls_to_test) {
+                    push @testing_results, sprintf('%s is in GSB base!', $e);
+                } else {
+                    push @bad, $e->{short};
+                    $bad_ips{$e->{created_by}} = 1 if $e->{created_by};
+                    $disabled += Lstu::DB::URL->new(
+                        app => $c->app,
+                        short => $e->{short}
+                    )->remove if $remove;
+                }
+            } elsif (@urls_to_test) {
+                push @testing_results, sprintf('%s is safe.', $e);
             }
         });
+        if (@urls_to_test) {
+            map {say $_;} @testing_results;
+            exit;
+        }
 
         say sprintf('All URLs (%d) have been scanned.', $urls->size);
         say sprintf('%d bad URLs detected.', scalar(@bad));
 
         if ($remove) {
-            say sprintf('%d bad URLs deleted.', $deleted) if $deleted;
+            say sprintf('%d bad URLs disabled.', $disabled) if $disabled;
         } else {
-            say sprintf("If you want to delete the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad)) if @bad;
+            say sprintf("If you want to disable the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad)) if @bad;
         }
 
-        $deleted = 0;
+        $disabled = 0;
         for my $ip (keys %bad_ips) {
             my $u = Lstu::DB::URL->new(app => $c->app)->search_creator($ip);
             $u->each(sub {
                 my ($e, $num) = @_;
                 push @bad_from_ips, $e->{short};
-                $deleted += Lstu::DB::URL->new(
+                $disabled += Lstu::DB::URL->new(
                     app => $c->app,
                     short => $e->{short}
                 )->remove if ($remove && $all);
@@ -96,9 +111,9 @@ sub run {
         }
 
         if ($remove && $all) {
-            say sprintf('%d URLs from same IPs deleted.', $deleted) if $deleted;
+            say sprintf('%d URLs from same IPs disabled.', $disabled) if $disabled;
         } else {
-            say sprintf("If you want to delete the URLs created by the same IPs than the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad_from_ips)) if @bad_from_ips;
+            say sprintf("If you want to disable the URLs created by the same IPs than the detected bad URLs, please do:\n  carton exec script/lstu url --remove %s", join(' ', @bad_from_ips)) if @bad_from_ips;
         }
     } else {
         say 'It seems that safebrowsing_api_key isn\'t set. Please, check your configuration';
@@ -113,7 +128,7 @@ sub get_shorts {
 
     for my $short (@shorts) {
         my $u = Lstu::DB::URL->new(app => $c->app, short => $short);
-        if ($u->url) {
+        if ($u->url && !$u->disabled) {
             push @results, $u->to_hash;
         } else {
             say sprintf('Sorry, unable to find an URL with short = %s', $short);
@@ -131,11 +146,12 @@ Lstu::Command::safebrowsing - Checks all URLs in database against Google Safe Br
 =head1 SYNOPSIS
 
   Usage:
-      carton exec script/lstu safebrowsingcheck                           Checks all URLs in database against Google Safe Browsing database
-      carton exec script/lstu safebrowsingcheck -u|--url <short> <short>  Checks the space-separated URLs against Google Safe Browsing database
-      carton exec script/lstu safebrowsingcheck -s|--seconds <xxx>        Checks URLs created the last xxx seconds against Google Safe Browsing database
+      carton exec script/lstu safebrowsingcheck                          Checks all URLs in database against Google Safe Browsing database
+      carton exec script/lstu safebrowsingcheck -u|--url <short> <short> Checks the space-separated URLs against Google Safe Browsing database
+      carton exec script/lstu safebrowsingcheck -s|--seconds <xxx>       Checks URLs created the last xxx seconds against Google Safe Browsing database
+      carton exec script/lstu safebrowsingcheck -t|--test <url> <url>    Checks URLs against Google Safe Browsing database
 
-  Options (available with all commands):
+  Options (available with all commands except --test):
       -r|--remove  Remove bad URLs that have been found
       -a|--all     Remove all URLs created by the same IP addresses that created bad URLs (only in combination with the `-r|--remove` option)
       -b|--ban     Ban IP addresses that created bad URLs

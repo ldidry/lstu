@@ -6,7 +6,7 @@ use Lstu::DB::Ban;
 use Data::Validate::URI qw(is_http_uri is_https_uri);
 use Mojo::JSON qw(to_json decode_json);
 use Mojo::URL;
-use Mojo::Util qw(b64_encode);
+use Mojo::Util qw(b64_encode slugify);
 use Image::PNG::QRCode 'qrpng';
 
 sub add {
@@ -54,13 +54,9 @@ sub add {
 
             my ($msg, $short);
             if (defined($custom_url) &&
-                (
-                    $custom_url =~ m#^(a|d|cookie|stats|fullstats|login|logout|api)$# ||
-                    $custom_url =~ m/\.json$/ || $custom_url !~ m/^[-a-zA-Z0-9_]+$/
-                )) {
-                $msg = $c->l('The shortened text can contain only numbers, letters and the - and _ character, can\'t be "a", "api", "d" or "stats" or end with ".json". Your URL to shorten: %1', $url);
-            } elsif (defined($custom_url) && Lstu::DB::URL->new(app => $c)->exist($custom_url) > 0) {
-                $msg = $c->l('The shortened text (%1) is already used. Please choose another one.', $custom_url);
+                       ($custom_url =~ m#^(a|d|cookie|stats|fullstats|login|logout|api)$# || $custom_url =~ m/\.json$/)
+                ) {
+                $msg = $c->l('The shortened text can\'t be "a", "api", "d", "cookie", "stats", "fullstats", "login" or "logout" or end with ".json". Your URL to shorten: %1', $url);
             } elsif (is_http_uri($url->to_string) || is_https_uri($url->to_string) || (defined($url->host) && $url->host =~ m/\.onion$/)) {
                 my $res = ($url->host =~ m/\.onion$/) ? {} : $c->is_spam($url, 0);
 
@@ -85,6 +81,13 @@ sub add {
                         $short = $db_url->short;
                     } else {
                         if (defined($custom_url)) {
+                            $custom_url             = slugify $custom_url;
+                            my $suffix              = 2;
+                            my $original_custom_url = $custom_url;
+                            while (Lstu::DB::URL->new(app => $c)->exist($custom_url) > 0) {
+                                $custom_url = $original_custom_url.'-'.$suffix;
+                                $suffix++;
+                            }
                             Lstu::DB::URL->new(
                                 app        => $c,
                                 short      => $custom_url,
@@ -184,10 +187,13 @@ sub get {
     my $url;
     if (scalar(@{$c->config('memcached_servers')})) {
         $url = $c->chi('lstu_urls_cache')->compute($short, undef, sub {
-            return Lstu::DB::URL->new(app => $c, short => $short)->url;
+            my $db_url = Lstu::DB::URL->new(app => $c, short => $short);
+            return $db_url->url unless $db_url->disabled;
+            return undef;
         });
     } else {
-        $url = Lstu::DB::URL->new(app => $c, short => $short)->url;
+        my $db_url = Lstu::DB::URL->new(app => $c, short => $short);
+        $url    = $db_url->url unless $db_url->disabled;
     }
 
     if ($url) {
