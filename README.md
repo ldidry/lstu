@@ -28,7 +28,7 @@ Accordingly to the `lstu.conf` configuration file, it will create `provisioning`
 
 ## Official instance
 
-You can see it working and use it at <https://lstu.fr>.
+You can see it working and use it at <https://lstu.fr>. DOWN
 
 ## API
 
