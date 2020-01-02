@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2020-01-01 00:14+0000\n"
+"PO-Revision-Date: 2020-01-03 20:14+0000\n"
 "Last-Translator: Filip Bengtsson <filip@libreradio.org>\n"
 "Language-Team: Swedish <https://weblate.framasoft.org/projects/lstu/"
 "development/sv/>\n"
@@ -78,7 +78,7 @@ msgstr "Filen har importerats"
 #: themes/default/templates/api.html.ep:101
 msgid "Get the details (visit counter, creation date, etc.) of a shortened URL."
 msgstr ""
-"Visa information (som besöksräknare och datum för skapande) för en nerkortad "
+"Visa information (som besöksräknare och datum för skapande) för en förkortad "
 "länk."
 
 #: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
@@ -126,7 +126,7 @@ msgstr "Importera länkar"
 #: themes/default/templates/api.html.ep:79
 msgid "It will use Lstu's cookies to know which shortened URL it will return statistics for."
 msgstr ""
-"Detta kommer använda LSTUs kakor för att avgöra vilken nerkortad länks "
+"Detta kommer använda LSTUs kakor för att avgöra vilken förkortad länks "
 "statistik som ska skickas."
 
 #: themes/default/templates/api.html.ep:105 themes/default/templates/api.html.ep:122 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:71
@@ -161,8 +161,8 @@ msgstr "Nästa"
 #: lib/Lstu/Controller/URL.pm:112
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
-"Ingen nerkortad länk tillgänglig. Försök kontakta administratören på %1. Din "
-"länk som skulle förkortas: %2"
+"Ingen förkortad länk tillgänglig. Försök kontakta administratören på %1. Din "
+"länk som skulle kortas: %2"
 
 #: themes/default/templates/api.html.ep:111 themes/default/templates/api.html.ep:138 themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:41 themes/default/templates/api.html.ep:83 themes/default/templates/api.html.ep:9
 msgid "Parameters:"
@@ -198,7 +198,7 @@ msgstr "Svar:"
 
 #: themes/default/templates/stats.html.ep:45
 msgid "Shortened URL"
-msgstr "Nerkortad länk"
+msgstr "Förkortad länk"
 
 #: themes/default/templates/api.html.ep:127 themes/default/templates/api.html.ep:24
 msgid "Should always be successful"
@@ -234,7 +234,7 @@ msgstr ""
 #: lib/Lstu/Plugin/Helpers.pm:194
 msgid "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr ""
-"Länken omdirigeringar minst %1 gånger. Det är troligen en osäker länk (till "
+"Länken omdirigerar minst %1 gånger. Det är troligen en osäker länk (till "
 "exempel spam eller phishing). Jag vägrar förkorta den."
 
 #. ($url->host)
@@ -369,4 +369,4 @@ msgstr "frivilligt"
 
 #: themes/default/templates/api.html.ep:135 themes/default/templates/api.html.ep:57 themes/default/templates/api.html.ep:66 themes/default/templates/api.html.ep:92 themes/default/templates/api.html.ep:99
 msgid "shortened_url"
-msgstr "förkortad_lank"
+msgstr "forkortad_lank"
