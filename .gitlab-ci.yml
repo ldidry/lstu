@@ -4,6 +4,9 @@ stages:
   - carton
   - carton_bdd
   - tests
+  - accessibility
+  - pages
+
 variables:
   POSTGRES_DB: lstu_db
   POSTGRES_USER: lstu
@@ -12,6 +15,10 @@ variables:
   MYSQL_USER: lstu
   MYSQL_PASSWORD: lstu_pwd
   MYSQL_ROOT_PASSWORD: root
+  a11y_urls: 'https://lstu.fr'
+
+include:
+  - template: 'Verify/Accessibility.gitlab-ci.yml'
 
 before_script:
   - if [[ $CI_JOB_NAME == "postgresql 3/3" ]]; then export PGPASSWORD=lstu_pwd; echo 'CREATE DATABASE lstu_minion WITH OWNER lstu;' | psql -h postgres -U lstu lstu_db; fi
@@ -156,3 +163,19 @@ postgresql:
   <<: *pg_definition
 mysql:
   <<: *mysql_definition
+
+### Pages, to publish a11y reports
+pages:
+  stage: pages
+  dependencies:
+    - a11y
+  script:
+    - mv reports/ public/
+    - mv public/lstu.fr-accessibility.html public/index.html
+  artifacts:
+    paths:
+      - public
+    expire_in: '2 hours'
+  only:
+    - development
+
