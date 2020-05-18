@@ -15,7 +15,7 @@ variables:
   MYSQL_USER: lstu
   MYSQL_PASSWORD: lstu_pwd
   MYSQL_ROOT_PASSWORD: root
-  a11y_urls: 'https://lstu.fr'
+  a11y_urls: 'https://lstu.fr https://lstu.fr/api https://lstu.fr/stats'
 
 include:
   - template: 'Verify/Accessibility.gitlab-ci.yml'
@@ -178,4 +178,3 @@ pages:
     expire_in: '2 hours'
   only:
     - development
-
