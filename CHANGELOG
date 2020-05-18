@@ -1,6 +1,8 @@
 Revision history for Perl application Lstu
 
-0.22-0 ????-??-??
+0.23-0 ????-??-??
+
+0.22-0 2019-11-08
 	- Disable URLs instead of removing them (prevents spammers to reuse a
 	  deleted shortened URL)
 	- Slugify custom URLs and add a suffix (-2, -3…) if the custom URL is
