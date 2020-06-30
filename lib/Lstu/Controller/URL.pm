@@ -234,7 +234,7 @@ sub get {
                 my $c = shift;
 
                 $c->render(
-                    template => 'index',
+                    template => '404',
                     msg      => $msg
                 );
             }
