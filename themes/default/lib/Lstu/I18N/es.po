@@ -1,202 +1,188 @@
-# Lstu
-# Copyright (C) 2013 Luc Didry
-# This file is distributed under the same license as the Lstu package.
-# 
-# Translators:
-# Luc Didry <luc@didry.org>, 2015
-# Luc Didry <luc@framasoft.org>, 2018. #zanata
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2020-10-26 03:40+0000\n"
-"Last-Translator: Gerold Rupprecht <geroldr@bluewin.ch>\n"
-"Language-Team: French <https://weblate.framasoft.org/projects/lstu/"
-"development/fr/>\n"
-"Language: fr\n"
+"PO-Revision-Date: 2020-03-07 07:08+0000\n"
+"Last-Translator: Berto Te <ateira@3fpj.com>\n"
+"Language-Team: Spanish <https://weblate.framasoft.org/projects/lstu/"
+"development/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.1\n"
-"X-POOTLE-MTIME: 1441357092.000000\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.11.2\n"
 
 #. ($url)
 #: lib/Lstu/Controller/URL.pm:118
 msgid "%1 is not a valid URL."
-msgstr "%1 n’est pas une URL valide."
+msgstr "%1 no es una URL válida."
 
 #: themes/default/templates/api.html.ep:96
-msgid ""
-"A page with a table containing the same informations that the JSON response"
+msgid "A page with a table containing the same informations that the JSON response"
 msgstr ""
-"Une page avec un tableau contenant les mêmes informations que le message JSON"
+"Una página con una tabla que contiene la misma información que la respuesta "
+"JSON"
 
-#: themes/default/templates/layouts/default.html.ep:38
+#: themes/default/templates/layouts/default.html.ep:54
 msgid "About"
-msgstr "À propos"
+msgstr "Acerca de"
 
 #: themes/default/templates/stats.html.ep:13 themes/default/templates/stats.html.ep:14
 msgid "Admin password"
-msgstr "Mot de passe administrateur"
+msgstr "Contraseña de administrador"
 
 #: lib/Lstu/Controller/Admin.pm:87 themes/default/templates/api.html.ep:122
 msgid "Bad password"
-msgstr "Mot de passe incorrect"
+msgstr "Contraseña incorrecta"
 
-#: themes/default/templates/layouts/default.html.ep:50
+#: themes/default/templates/layouts/default.html.ep:66
 msgid "Browser extensions"
-msgstr "Extensions navigateur"
+msgstr "Extensiones de navegador"
 
 #: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
-msgstr "Copier dans le presse-papier"
+msgstr "Copiar al portapapeles"
 
 #: themes/default/templates/stats.html.ep:46
 msgid "Counter"
-msgstr "Compteur"
+msgstr "contador"
 
 #: themes/default/templates/stats.html.ep:47
 msgid "Created"
-msgstr "Créé le"
+msgstr "Creado en"
 
 #: themes/default/templates/api.html.ep:44 themes/default/templates/index.html.ep:10 themes/default/templates/index.html.ep:9
 msgid "Custom shortened text"
-msgstr "Texte du raccourci personnalisé"
+msgstr "xto de acceso directo personalizado"
 
 #: themes/default/templates/stats.html.ep:52
 msgid "Delete"
-msgstr "Supprimer"
+msgstr "Eliminar"
 
 #: themes/default/templates/stats.html.ep:36
 msgid "Export your URLs"
-msgstr "Exporter vos URL"
+msgstr "Exporta tus URL"
 
 #: themes/default/templates/api.html.ep:105 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:71
 msgid "Failure reason"
-msgstr "Raison de l’échec"
+msgstr "Motivo del fallo"
 
 #: lib/Lstu/Controller/Stats.pm:43
 msgid "File imported"
-msgstr "Fichier importé"
+msgstr "Archivo importado"
 
 #: themes/default/templates/api.html.ep:101
-msgid ""
-"Get the details (visit counter, creation date, etc.) of a shortened URL."
+msgid "Get the details (visit counter, creation date, etc.) of a shortened URL."
 msgstr ""
-"Obtenez les détails (compteur de visites, date de création, etc.) d’une URL "
-"raccourcie."
+"Obtenga los detalles (contador de visitas, fecha de creación, etc.) de una "
+"URL acortada."
 
 #: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
 msgid "Go!"
-msgstr "Allons-y !"
+msgstr "¡Vamos!"
 
 #: themes/default/templates/partial/lstu.js.ep:30
 msgid "Hit Enter, then Ctrl+C to copy the short link"
-msgstr "Appuyez sur Entrée puis faites Ctrl+C pour copier le lien"
+msgstr "Presiona Enter, luego Ctrl C para copiar el enlace corto"
 
 #: themes/default/templates/stats.html.ep:89
 msgid "Home"
-msgstr "Accueil"
+msgstr "Inicio"
 
 #: themes/default/templates/api.html.ep:126
 msgid "If \"action\" is defined to \"logout\":"
-msgstr "Si \"action\" est définie à \"logout\" :"
+msgstr "Si \"action\" se establece en \"logout\":"
 
 #: themes/default/templates/api.html.ep:119
 msgid "If \"adminpwd\" is defined:"
-msgstr "Si \"adminpwd\" est défini :"
+msgstr "Si se define \"adminpwd\":"
 
 #: themes/default/templates/api.html.ep:115 themes/default/templates/api.html.ep:13 themes/default/templates/api.html.ep:140 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:45 themes/default/templates/api.html.ep:88
-msgid ""
-"If equal to \"json\", response will be in JSON format, HTML format otherwise"
+msgid "If equal to \"json\", response will be in JSON format, HTML format otherwise"
 msgstr ""
-"Si égal à \"json\", la réponse sera au format JSON, sinon ce sera une "
-"réponse en HTML"
+"Si es igual a \"json\", la respuesta estará en formato JSON, formato HTML de "
+"lo contrario"
 
 #. (config('page_offset')
 #: themes/default/templates/api.html.ep:81
-msgid ""
-"If you are logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting), "
-"it will give you statistics for all URLs, sorted by the most visited first, "
-"paginated with pages containing %1 records."
+msgid "If you are logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting), it will give you statistics for all URLs, sorted by the most visited first, paginated with pages containing %1 records."
 msgstr ""
-"Si vous êtes connecté·e en tant qu’admin (paramètre \"adminpwd\" ou "
-"\"hashed_adminpwd\"), cela vous donnera les statistiques pour toutes les "
-"URL, triées selon le nombre de visites en ordre décroissant, de façon "
-"paginée avec des pages contenant %1 enregistrements."
+"Si ha iniciado sesión como administrador (configuración \"adminpwd\" o \""
+"hashed_adminpwd\"), le proporcionará estadísticas para todas las URL, "
+"ordenadas primero por las más visitadas, paginadas con páginas que contienen%"
+" 1 registros."
 
 #: themes/default/templates/api.html.ep:86
 msgid "If you are logged in as admin, you can provide a \"page\" parameter"
 msgstr ""
-"Si vous êtes connecté·e en tant qu’admin, vous pouvez fournir un paramètre "
+"Si ha iniciado sesión como administrador, puede proporcionar un parámetro de "
 "\"page\""
 
 #: themes/default/templates/stats.html.ep:32 themes/default/templates/stats.html.ep:35
 msgid "Import URLs"
-msgstr "Importer des URL"
+msgstr "Importar URL"
 
 #: themes/default/templates/api.html.ep:79
-msgid ""
-"It will use Lstu's cookies to know which shortened URL it will return "
-"statistics for."
+msgid "It will use Lstu's cookies to know which shortened URL it will return statistics for."
 msgstr ""
-"Cela utilisera les cookies de Lstu pour savoir quelles sont les URL dont il "
-"faut fournir les statistiques."
+"Utilizará las cookies de Lstu para saber para qué URL devolverá estadísticas."
 
 #: themes/default/templates/api.html.ep:105 themes/default/templates/api.html.ep:122 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:71
 msgid "JSON: failure"
-msgstr "JSON : échec"
+msgstr "JSON: fallo"
 
 #: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:144 themes/default/templates/api.html.ep:17 themes/default/templates/api.html.ep:31 themes/default/templates/api.html.ep:52 themes/default/templates/api.html.ep:70
 msgid "JSON: success"
-msgstr "JSON : succès"
+msgstr "JSON: éxito"
 
-#: themes/default/templates/layouts/default.html.ep:37
+#: themes/default/templates/layouts/default.html.ep:53
 msgid "License:"
-msgstr "Licence :"
+msgstr "Licencia:"
 
 #: themes/default/templates/login.html.ep:8
 msgid "Login"
-msgstr "Connexion"
+msgstr "Iniciar sesión"
 
-#: themes/default/templates/layouts/default.html.ep:43
+#: themes/default/templates/layouts/default.html.ep:59
 msgid "Logout"
-msgstr "Déconnexion"
+msgstr "Cerrar sesión"
 
 #: themes/default/templates/stats.html.ep:10
 msgid "Logout from admin stats"
-msgstr "Déconnexion des stats admin"
+msgstr "Cerrar sesión en las estadísticas de administrador"
 
 #: themes/default/templates/stats.html.ep:84
 msgid "Next"
-msgstr "Suivant"
+msgstr "Siguiente"
 
 #. ($c->config('contact')
 #: lib/Lstu/Controller/URL.pm:112
-msgid ""
-"No shortened URL available. Please retry or contact the administrator at %1. "
-"Your URL to shorten: %2"
+msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
-"Il n’y a plus d’URL raccourcie disponible. Veuillez réessayer ou contactez "
-"l’administrateur sur %1. Rappel de l’URL à raccourcir : %2"
+"No hay URL acortada disponible. Vuelva a intentarlo o póngase en contacto "
+"con el administrador en %1. Su URL para acortar: %2"
 
 #: themes/default/templates/api.html.ep:111 themes/default/templates/api.html.ep:138 themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:41 themes/default/templates/api.html.ep:83 themes/default/templates/api.html.ep:9
 msgid "Parameters:"
-msgstr "Paramètres :"
+msgstr "Parámetros:"
 
 #: themes/default/templates/login.html.ep:12
 msgid "Password"
-msgstr "Mot de passe"
+msgstr "Contraseña"
 
 #: lib/Lstu/Controller/Authent.pm:35 themes/default/templates/api.html.ep:18
 msgid "Please, check your credentials: unable to authenticate."
-msgstr "Impossible de s’authentifier, veuillez vérifier vos identifiants."
+msgstr "Por favor, verifique sus credenciales: no se puede autenticar."
 
 #: themes/default/templates/stats.html.ep:82
 msgid "Previous"
-msgstr "Précédent"
+msgstr "Anterior"
 
 #: themes/default/templates/stats.html.ep:50
 msgid "QRCode"
@@ -204,107 +190,93 @@ msgstr "QRCode"
 
 #: themes/default/templates/api.html.ep:123 themes/default/templates/api.html.ep:130 themes/default/templates/api.html.ep:146 themes/default/templates/api.html.ep:19 themes/default/templates/api.html.ep:32 themes/default/templates/api.html.ep:54 themes/default/templates/api.html.ep:96
 msgid "Response for HTML format"
-msgstr "Réponse pour le format HTML"
+msgstr "Respuesta para formato HTML"
 
 #: themes/default/templates/api.html.ep:95
 msgid "Response for JSON format"
-msgstr "Réponse pour le format JSON"
+msgstr "Respuesta para formato JSON"
 
 #: themes/default/templates/api.html.ep:102 themes/default/templates/api.html.ep:117 themes/default/templates/api.html.ep:142 themes/default/templates/api.html.ep:15 themes/default/templates/api.html.ep:29 themes/default/templates/api.html.ep:47 themes/default/templates/api.html.ep:59 themes/default/templates/api.html.ep:68 themes/default/templates/api.html.ep:90
 msgid "Response:"
-msgstr "Réponse :"
+msgstr "Respuesta:"
 
 #: themes/default/templates/stats.html.ep:45
 msgid "Shortened URL"
-msgstr "URL raccourcie"
+msgstr "Acceso directo a URL"
 
 #: themes/default/templates/api.html.ep:127 themes/default/templates/api.html.ep:24
 msgid "Should always be successful"
-msgstr "Devrait toujours retourner un succès"
+msgstr "Siempre debe ser exitoso"
 
-#: themes/default/templates/layouts/default.html.ep:45 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
+#: themes/default/templates/layouts/default.html.ep:61 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
-msgstr "Connexion"
+msgstr "Registrarse"
 
 #: lib/Lstu/Controller/Stats.pm:45
 msgid "Sorry, unable to parse the provided file"
-msgstr "Désolé, impossible d’analyser le fichier fourni"
+msgstr "Lo sentimos, no se puede analizar el archivo proporcionado"
 
-#: themes/default/templates/layouts/default.html.ep:42 themes/default/templates/layouts/default.html.ep:48 themes/default/templates/stats.html.ep:4
+#: themes/default/templates/layouts/default.html.ep:58 themes/default/templates/layouts/default.html.ep:64 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
-msgstr "Statistiques"
+msgstr "Estadísticas"
 
 #. ($url->host)
 #: lib/Lstu/Plugin/Helpers.pm:172
-msgid ""
-"The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I "
-"refuse to shorten it."
+msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
 msgstr ""
-"L'hôte de l'URL ou d'une de ses redirections (%1) est considéré comme nocif "
-"par Spamhaus. Je refuse de la raccourcir."
+"El host de URL o una de sus redirecciones (%1) está en la lista negra de "
+"Spamhaus. Me niego a acortarlo."
 
 #. ($url)
 #: lib/Lstu/Plugin/Helpers.pm:178
-msgid ""
-"The URL or one of its redirection(s) (%1) is blacklisted in Google Safe "
-"Browsing database. I refuse to shorten it."
+msgid "The URL or one of its redirection(s) (%1) is blacklisted in Google Safe Browsing database. I refuse to shorten it."
 msgstr ""
-"L’URL ou l’une de ses redirections (%1) est blacklistée dans la base de "
-"données Google Safe Browsing. Je refuse de la raccourcir."
+"La URL o una de sus redirecciones (%1) está en la lista negra de la base de "
+"datos de Navegación segura de Google. Me niego a acortarlo."
 
 #. ($c->config('max_redir')
 #: lib/Lstu/Plugin/Helpers.pm:194
-msgid ""
-"The URL redirects %1 times or most. It's most likely a dangerous URL (spam, "
-"phishing, etc.). I refuse to shorten it."
+msgid "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
 msgstr ""
-"L'URL redirige %1 fois ou plus vers un autre site. Il est probable qu'il "
-"s'agisse d'une URL dangereuse (pourriel, hameçonnage, etc.). Je refuse de la "
-"raccourcir."
+"La URL redirige %1 veces o la mayoría. Es muy probable que sea una URL "
+"peligrosa (spam, phishing, etc.). Me niego a acortarlo."
 
 #. ($url->host)
 #: lib/Lstu/Plugin/Helpers.pm:164
-msgid ""
-"The URL you want to shorten comes from a domain (%1) that is blacklisted on "
-"this server (usually because of spammers that use this domain)."
+msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted on this server (usually because of spammers that use this domain)."
 msgstr ""
-"L’URL que vous souhaitez raccourcir provient d’un domaine (%1) qui est "
-"interdit sur ce serveur (généralement à cause de spammeurs qui utilisent ce "
-"domaine)."
+"La URL que desea acortar proviene de un dominio (%1) que está en la lista "
+"negra de este servidor (generalmente debido a los spammers que usan este "
+"dominio)."
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:226
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:229
 msgid "The shortened URL %1 doesn't exist."
-msgstr "L’URL raccourcie %1 n’existe pas."
+msgstr "La URL acortada %1 no existe."
 
 #. ($url)
 #: lib/Lstu/Controller/URL.pm:59
-msgid ""
-"The shortened text can't be \"a\", \"api\", \"d\", \"cookie\", \"stats\", "
-"\"fullstats\", \"login\" or \"logout\" or end with \".json\". Your URL to "
-"shorten: %1"
+msgid "The shortened text can't be \"a\", \"api\", \"d\", \"cookie\", \"stats\", \"fullstats\", \"login\" or \"logout\" or end with \".json\". Your URL to shorten: %1"
 msgstr ""
-"Le texte du raccourci ne peut être \"a\", \"api\", \"d\", \"cookie\", "
-"\"stats\", \"fullstats\", \"login\" ou \"logout\" ou se terminer par \"."
-"json\". Rappel de l’URL à raccourcir : %1"
+"El texto abreviado no puede ser \"a\", \"api\", \"d\", \"cookie\", \"stats\""
+", \"fullstats\", \"login\" o \"logout\" o finalizar con \".json\". Su URL "
+"para acortar: %1"
 
 #: themes/default/templates/api.html.ep:113
-msgid ""
-"To do an admin login, set it to the password defined in the settings "
-"(\"adminpwd\" or \"hashed_adminpwd\")"
+msgid "To do an admin login, set it to the password defined in the settings (\"adminpwd\" or \"hashed_adminpwd\")"
 msgstr ""
-"Pour se connecter en tant qu’admin, mettez le mot de passe défini dans les "
-"paramètres de configuration (\"adminpwd\" ou \"hashed_adminpwd\")"
+"Para hacer un inicio de sesión de administrador, configúrelo con la "
+"contraseña definida en la configuración (\"adminpwd\" o \"hashed_adminpwd\")"
 
 #: themes/default/templates/api.html.ep:114
 msgid "To do an admin logout, set it to \"logout\"."
 msgstr ""
-"Pour se déconnecter de l’administration, définissez ce paramètre à "
-"\"logout\"."
+"Para hacer un cierre de sesión de administrador, configúrelo en \"cerrar "
+"sesión\"."
 
 #: lib/Lstu/Controller/Admin.pm:29
 msgid "Too many bad passwords. You're banned."
-msgstr "Trop de mauvais mots de passe. Vous êtes banni."
+msgstr "Demasiadas contraseñas malas. Estás prohibido."
 
 #: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:95 themes/default/templates/stats.html.ep:44
 msgid "URL"
@@ -312,110 +284,95 @@ msgstr "URL"
 
 #: themes/default/templates/api.html.ep:43 themes/default/templates/index.html.ep:5 themes/default/templates/index.html.ep:6
 msgid "URL to shorten"
-msgstr "URL à raccourcir"
+msgstr "URL para acortar"
 
 #. ($penalty/3600)
 #: lib/Lstu/Controller/URL.pm:35
-msgid ""
-"You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
-""
+msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
 msgstr ""
-"Vous avez demandé à réduire trop d’URLs en trop peu de temps. Vous êtes "
-"banni pour %1 heure(s)."
+"Solicitó acortar demasiadas URL demasiado rápido. Estás prohibido por %1 "
+"hora (s)."
 
 #: lib/Lstu/Controller/Admin.pm:52 lib/Lstu/Controller/Authent.pm:26 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:17
 msgid "You have been successfully logged in."
-msgstr "Vous avez été connecté·e avec succès."
+msgstr "Has ingresado exitosamente."
 
 #: lib/Lstu/Controller/Admin.pm:73 lib/Lstu/Controller/Authent.pm:65 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:31 themes/default/templates/logout.html.ep:3
 msgid "You have been successfully logged out."
-msgstr "Vous avez été déconnecté·e avec succès."
+msgstr "Ha sido desconectado exitosamente."
 
 #: themes/default/templates/api.html.ep:137
-msgid ""
-"You must be logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting) "
-"to use it."
+msgid "You must be logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting) to use it."
 msgstr ""
-"Vous devez être connecté·e en tant qu’admin (paramètre \"adminpwd\" ou "
-"\"hashed_adminpwd\") pour l'utiliser."
+"Debe iniciar sesión como administrador (configuración \"adminpwd\" o \""
+"hashed_adminpwd\") para usarlo."
 
 #: themes/default/templates/api.html.ep:39 themes/default/templates/api.html.ep:77
 msgid "You must be logged in to use it."
-msgstr "Vous devez être connecté·e pour l’utiliser."
+msgstr "Debe iniciar sesión para usarlo."
 
 #: themes/default/templates/api.html.ep:130
 msgid "You will be redirected to Lstu statistics page"
-msgstr "Vous serez redirigé·e vers la page de statistiques de Lstu"
+msgstr "Serás redirigido a la página de estadísticas de Lstu"
 
 #: themes/default/templates/api.html.ep:146
-msgid ""
-"You will be redirected to Lstu statistics page with a message in case of "
-"failure"
+msgid "You will be redirected to Lstu statistics page with a message in case of failure"
 msgstr ""
-"Vous serez redirigé·e vers la page de statistiques de Lstu avec un message "
-"en cas d’échec"
+"Será redirigido a la página de estadísticas de Lstu con un mensaje en caso "
+"de falla"
 
 #: themes/default/templates/api.html.ep:32
 msgid "You will be redirected to Lstu successfully logged out interface"
-msgstr "Vous serez redirigé vers l’interface de déconnexion réussie de Lstu"
+msgstr "Será redirigido a la interfaz de Lstu que cerró la sesión correctamente"
 
 #: themes/default/templates/api.html.ep:19
-msgid ""
-"You will be redirected to the Lstu classic interface where you will be able "
-"to shorten URLs"
+msgid "You will be redirected to the Lstu classic interface where you will be able to shorten URLs"
 msgstr ""
-"Vous serez redirigé vers l’interface normale de Lstu où vous pourrez "
-"raccourcirs des URL"
+"Será redirigido a la interfaz clásica de Lstu, donde podrá acortar las URL"
 
 #: themes/default/templates/api.html.ep:54
-msgid ""
-"You will be redirected to the Lstu classic interface with a message giving "
-"the shortened URL"
+msgid "You will be redirected to the Lstu classic interface with a message giving the shortened URL"
 msgstr ""
-"Vous aurez l’interface normale de Lstu avec un message indiquant l’URL "
-"raccourcie"
+"Será redirigido a la interfaz clásica de Lstu con un mensaje con la URL "
+"acortada"
 
 #: themes/default/templates/api.html.ep:62
-msgid ""
-"You will be redirected to the targeted URL or to the Lstu interface with a "
-"message giving the failure reason"
+msgid "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
 msgstr ""
-"Vous serez redirigé vers l’URL cible ou vers la page d’accueil de Lstu avec "
-"un message indiquant la raison de l’échec"
+"Será redirigido a la URL de destino o a la interfaz Lstu con un mensaje que "
+"indique el motivo del erro"
 
 #: themes/default/templates/api.html.ep:123
-msgid ""
-"You will have the statistics page with the admin stats if you're succesfully "
-"logged in, or your stats and a failure message otherwise"
+msgid "You will have the statistics page with the admin stats if you're succesfully logged in, or your stats and a failure message otherwise"
 msgstr ""
-"Vous aurez la page de statistiques avec les statistiques admin si vous vous "
-"êtes connecté·e avec succès, ou sinon vos statistiques avec un message "
-"d’échec"
+"Tendrá la página de estadísticas con las estadísticas de administrador si ha "
+"iniciado sesión correctamente, o sus estadísticas y un mensaje de error de "
+"lo contrario"
 
 #: lib/Lstu/Controller/Admin.pm:142
 msgid "You're not authenticated as the admin"
-msgstr "Vous n’êtes pas authentifié·e en tant qu’admin"
+msgstr "No estás autenticado como administrado"
 
 #: themes/default/templates/api.html.ep:11
 msgid "Your login"
-msgstr "Votre identifiant"
+msgstr "Tu nombre de usuario"
 
 #: themes/default/templates/api.html.ep:12
 msgid "Your password"
-msgstr "Votre mot de passe"
+msgstr "Tu contraseña"
 
 #: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:95
 msgid "integer, how many unique visits of the shortened URL"
-msgstr "entier, combien de visites uniques a reçu l'URL raccourcie"
+msgstr "entero, cuántas visitas únicas de la URL acortada"
 
 #: themes/default/templates/api.html.ep:11 themes/default/templates/api.html.ep:12 themes/default/templates/api.html.ep:43
 msgid "mandatory"
-msgstr "obligatoire"
+msgstr "obligatorio"
 
 #: themes/default/templates/api.html.ep:113 themes/default/templates/api.html.ep:114 themes/default/templates/api.html.ep:115 themes/default/templates/api.html.ep:13 themes/default/templates/api.html.ep:140 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:44 themes/default/templates/api.html.ep:45 themes/default/templates/api.html.ep:86 themes/default/templates/api.html.ep:88
 msgid "optional"
-msgstr "facultatif"
+msgstr "Opcional"
 
 #: themes/default/templates/api.html.ep:135 themes/default/templates/api.html.ep:57 themes/default/templates/api.html.ep:66 themes/default/templates/api.html.ep:92 themes/default/templates/api.html.ep:99
 msgid "shortened_url"
-msgstr "url_raccourcie"
+msgstr "URL_acceso-directo"

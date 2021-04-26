@@ -32,7 +32,7 @@ feature 'cache', 'URL cache system' => sub {
     requires 'Cache::Memcached';
 };
 feature 'test' => sub {
-    requires 'Devel::Cover';
+    requires 'Devel::Cover', '>= 1.36';
 };
 feature 'sqlite', 'SQLite support' => sub {
     requires 'Mojo::SQLite', '>= 3.000';
@@ -43,7 +43,7 @@ feature 'postgresql', 'PostgreSQL support' => sub {
     requires 'Mojolicious::Plugin::PgURLHelper';
 };
 feature 'mysql', 'MySQL support' => sub {
-    requires 'Mojo::mysql';
+    requires 'Mojo::mysql', '>= 1.22';
     requires 'Minion::Backend::mysql';
     requires 'Mojolicious::Plugin::PgURLHelper';
 };

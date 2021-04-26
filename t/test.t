@@ -140,7 +140,7 @@ $t->get_ok('/fullstats')
     ->json_like('/empty' => qr#\d+#, '/timestamp' => qr#[0-9]{10}#);
 
 # Needed if we use Minion for increasing counters
-sleep 4;
+$t->app->minion->perform_jobs if ($t->app->config('minion') && $t->app->config('minion')->{enabled});
 
 # Get stats in JSON format
 $t->get_ok('/stats.json')

@@ -24,7 +24,7 @@ msgstr ""
 msgid "A page with a table containing the same informations that the JSON response"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:54
+#: themes/default/templates/layouts/default.html.ep:56
 msgid "About"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr ""
 msgid "Bad password"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:66
+#: themes/default/templates/layouts/default.html.ep:68
 msgid "Browser extensions"
 msgstr ""
 
@@ -125,7 +125,7 @@ msgstr ""
 msgid "JSON: success"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:53
+#: themes/default/templates/layouts/default.html.ep:55
 msgid "License:"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:59
+#: themes/default/templates/layouts/default.html.ep:61
 msgid "Logout"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgstr ""
 msgid "Should always be successful"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:61 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
+#: themes/default/templates/layouts/default.html.ep:63 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Sorry, unable to parse the provided file"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:58 themes/default/templates/layouts/default.html.ep:64 themes/default/templates/stats.html.ep:4
+#: themes/default/templates/layouts/default.html.ep:60 themes/default/templates/layouts/default.html.ep:66 themes/default/templates/stats.html.ep:4
 msgid "Statistics"
 msgstr ""
 
