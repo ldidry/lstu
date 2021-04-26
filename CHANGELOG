@@ -1,6 +1,12 @@
 Revision history for Perl application Lstu
 
-0.23-0 ????-??-??
+0.24-0 ????-??-??
+
+0.23-0 2021-04-26
+	- Update translations
+	- Improve tests
+	- Improve CI
+	- Upgrade some dependencies
 
 0.22-0 2019-11-08
 	- Disable URLs instead of removing them (prevents spammers to reuse a
