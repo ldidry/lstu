@@ -30,6 +30,15 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.42
       Test::More 0
       perl 5.005
+  B-Debug-1.26
+    pathname: R/RU/RURBAN/B-Debug-1.26.tar.gz
+    provides:
+      B::Debug 1.26
+    requirements:
+      B 0
+      ExtUtils::MakeMaker 0
+      Test::More 0
+      deprecate 0.03
   B-Hooks-EndOfScope-0.24
     pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.24.tar.gz
     provides:
@@ -233,13 +242,6 @@ DISTRIBUTIONS
       Test::More 0.94
       strict 0
       warnings 0
-  Crypt-Rijndael-1.13
-    pathname: L/LE/LEONT/Crypt-Rijndael-1.13.tar.gz
-    provides:
-      Crypt::Rijndael 1.13
-    requirements:
-      ExtUtils::MakeMaker 0
-      perl 5.006
   DBD-Pg-3.7.4
     pathname: T/TU/TURNSTEP/DBD-Pg-3.7.4.tar.gz
     provides:
@@ -270,22 +272,23 @@ DISTRIBUTIONS
       Test::More 0.47
       Tie::Hash 0
       perl 5.006
-  DBD-mysql-4.046
-    pathname: C/CA/CAPTTOFU/DBD-mysql-4.046.tar.gz
+  DBD-mysql-4.050
+    pathname: D/DV/DVEEDEN/DBD-mysql-4.050.tar.gz
     provides:
-      Bundle::DBD::mysql 4.046
-      DBD::mysql 4.046
+      Bundle::DBD::mysql 4.050
+      DBD::mysql 4.050
       DBD::mysql::GetInfo undef
-      DBD::mysql::db 4.046
-      DBD::mysql::dr 4.046
-      DBD::mysql::st 4.046
+      DBD::mysql::db 4.050
+      DBD::mysql::dr 4.050
+      DBD::mysql::st 4.050
     requirements:
       DBI 1.609
       Data::Dumper 0
+      Devel::CheckLib 1.09
       ExtUtils::MakeMaker 0
       perl 5.008001
-  DBI-1.641
-    pathname: T/TI/TIMB/DBI-1.641.tar.gz
+  DBI-1.643
+    pathname: T/TI/TIMB/DBI-1.643.tar.gz
     provides:
       Bundle::DBI 12.008696
       DBD::DBM 0.08
@@ -341,7 +344,7 @@ DISTRIBUTIONS
       DBD::Sponge::dr 12.010003
       DBD::Sponge::st 12.010003
       DBDI 12.015129
-      DBI 1.641
+      DBI 1.643
       DBI::Const::GetInfo::ANSI 2.008697
       DBI::Const::GetInfo::ODBC 2.011374
       DBI::Const::GetInfoReturn 2.008697
@@ -381,53 +384,11 @@ DISTRIBUTIONS
       DBI::SQL::Nano::Table_ 1.015544
       DBI::Util::CacheMemory 0.010315
       DBI::Util::_accessor 0.009479
-      DBI::common 1.641
+      DBI::common 1.643
     requirements:
       ExtUtils::MakeMaker 6.48
       Test::Simple 0.90
-      perl 5.008
-  Data-Entropy-0.007
-    pathname: Z/ZE/ZEFRAM/Data-Entropy-0.007.tar.gz
-    provides:
-      Data::Entropy 0.007
-      Data::Entropy::Algorithms 0.007
-      Data::Entropy::RawSource::CryptCounter 0.007
-      Data::Entropy::RawSource::Local 0.007
-      Data::Entropy::RawSource::RandomOrg 0.007
-      Data::Entropy::RawSource::RandomnumbersInfo 0.007
-      Data::Entropy::Source 0.007
-    requirements:
-      Carp 0
-      Crypt::Rijndael 0
-      Data::Float 0.008
-      Errno 1.00
-      Exporter 0
-      HTTP::Lite 2.2
-      IO::File 1.03
-      Module::Build 0
-      Params::Classify 0
-      Test::More 0
-      constant 0
-      integer 0
-      parent 0
-      perl 5.006
-      strict 0
-      warnings 0
-  Data-Float-0.013
-    pathname: Z/ZE/ZEFRAM/Data-Float-0.013.tar.gz
-    provides:
-      Data::Float 0.013
-    requirements:
-      Carp 0
-      Exporter 0
-      Module::Build 0
-      Test::More 0
-      constant 0
-      integer 0
-      parent 0
-      perl 5.006
-      strict 0
-      warnings 0
+      perl 5.008001
   Data-OptList-0.110
     pathname: R/RJ/RJBS/Data-OptList-0.110.tar.gz
     provides:
@@ -477,58 +438,68 @@ DISTRIBUTIONS
       Data::Validate::Domain 0
       Data::Validate::IP 0
       ExtUtils::MakeMaker 0
-  Devel-Cover-1.31
-    pathname: P/PJ/PJCJ/Devel-Cover-1.31.tar.gz
+  Devel-CheckLib-1.14
+    pathname: M/MA/MATTN/Devel-CheckLib-1.14.tar.gz
     provides:
-      Devel::Cover 1.31
-      Devel::Cover::Annotation::Git 1.31
-      Devel::Cover::Annotation::Random 1.31
-      Devel::Cover::Annotation::Svk 1.31
-      Devel::Cover::Branch 1.31
-      Devel::Cover::Collection 1.31
-      Devel::Cover::Collection::Template::Provider 1.31
-      Devel::Cover::Condition 1.31
-      Devel::Cover::Condition_and_2 1.31
-      Devel::Cover::Condition_and_3 1.31
-      Devel::Cover::Condition_or_2 1.31
-      Devel::Cover::Condition_or_3 1.31
-      Devel::Cover::Condition_xor_4 1.31
-      Devel::Cover::Criterion 1.31
-      Devel::Cover::DB 1.31
-      Devel::Cover::DB::Criterion 1.31
-      Devel::Cover::DB::Digests 1.31
-      Devel::Cover::DB::File 1.31
-      Devel::Cover::DB::IO 1.31
-      Devel::Cover::DB::IO::Base 1.31
-      Devel::Cover::DB::IO::JSON 1.31
-      Devel::Cover::DB::IO::Sereal 1.31
-      Devel::Cover::DB::IO::Storable 1.31
-      Devel::Cover::DB::Run 1.31
-      Devel::Cover::DB::Structure 1.31
-      Devel::Cover::Html_Common 1.31
-      Devel::Cover::Op 1.31
-      Devel::Cover::Pod 1.31
-      Devel::Cover::Report::Compilation 1.31
-      Devel::Cover::Report::Html 1.31
-      Devel::Cover::Report::Html_basic 1.31
-      Devel::Cover::Report::Html_basic::Template::Provider 1.31
-      Devel::Cover::Report::Html_minimal 1.31
-      Devel::Cover::Report::Html_subtle 1.31
-      Devel::Cover::Report::Html_subtle::Template::Provider 1.31
-      Devel::Cover::Report::Json 1.31
-      Devel::Cover::Report::Sort 1.31
-      Devel::Cover::Report::Text 1.31
-      Devel::Cover::Report::Text2 1.31
-      Devel::Cover::Report::Vim 1.31
-      Devel::Cover::Report::Vim::Template::Provider 1.31
-      Devel::Cover::Statement 1.31
-      Devel::Cover::Subroutine 1.31
-      Devel::Cover::Test 1.31
-      Devel::Cover::Time 1.31
-      Devel::Cover::Truth_Table 1.31
-      Devel::Cover::Truth_Table::Row 1.31
-      Devel::Cover::Util 1.31
-      Devel::Cover::Web 1.31
+      Devel::CheckLib 1.14
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      File::Temp 0.16
+      perl 5.00405
+  Devel-Cover-1.36
+    pathname: P/PJ/PJCJ/Devel-Cover-1.36.tar.gz
+    provides:
+      Devel::Cover 1.36
+      Devel::Cover::Annotation::Git 1.36
+      Devel::Cover::Annotation::Random 1.36
+      Devel::Cover::Annotation::Svk 1.36
+      Devel::Cover::Branch 1.36
+      Devel::Cover::Collection 1.36
+      Devel::Cover::Collection::Template::Provider 1.36
+      Devel::Cover::Condition 1.36
+      Devel::Cover::Condition_and_2 1.36
+      Devel::Cover::Condition_and_3 1.36
+      Devel::Cover::Condition_or_2 1.36
+      Devel::Cover::Condition_or_3 1.36
+      Devel::Cover::Condition_xor_4 1.36
+      Devel::Cover::Criterion 1.36
+      Devel::Cover::DB 1.36
+      Devel::Cover::DB::Criterion 1.36
+      Devel::Cover::DB::Digests 1.36
+      Devel::Cover::DB::File 1.36
+      Devel::Cover::DB::IO 1.36
+      Devel::Cover::DB::IO::Base 1.36
+      Devel::Cover::DB::IO::JSON 1.36
+      Devel::Cover::DB::IO::Sereal 1.36
+      Devel::Cover::DB::IO::Storable 1.36
+      Devel::Cover::DB::Run 1.36
+      Devel::Cover::DB::Structure 1.36
+      Devel::Cover::Html_Common 1.36
+      Devel::Cover::Op 1.36
+      Devel::Cover::Pod 1.36
+      Devel::Cover::Report::Compilation 1.36
+      Devel::Cover::Report::Html 1.36
+      Devel::Cover::Report::Html_basic 1.36
+      Devel::Cover::Report::Html_basic::Template::Provider 1.36
+      Devel::Cover::Report::Html_minimal 1.36
+      Devel::Cover::Report::Html_subtle 1.36
+      Devel::Cover::Report::Html_subtle::Template::Provider 1.36
+      Devel::Cover::Report::Json 1.36
+      Devel::Cover::Report::Sort 1.36
+      Devel::Cover::Report::Text 1.36
+      Devel::Cover::Report::Text2 1.36
+      Devel::Cover::Report::Vim 1.36
+      Devel::Cover::Report::Vim::Template::Provider 1.36
+      Devel::Cover::Statement 1.36
+      Devel::Cover::Subroutine 1.36
+      Devel::Cover::Test 1.36
+      Devel::Cover::Time 1.36
+      Devel::Cover::Truth_Table 1.36
+      Devel::Cover::Truth_Table::Row 1.36
+      Devel::Cover::Util 1.36
+      Devel::Cover::Web 1.36
     requirements:
       B::Debug 0
       Digest::MD5 0
@@ -625,15 +596,6 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
-  EV-4.22
-    pathname: M/ML/MLEHMANN/EV-4.22.tar.gz
-    provides:
-      EV 4.22
-      EV::MakeMaker undef
-    requirements:
-      Canary::Stability 0
-      ExtUtils::MakeMaker 6.52
-      common::sense 0
   Encode-Locale-1.05
     pathname: G/GA/GAAS/Encode-Locale-1.05.tar.gz
     provides:
@@ -802,17 +764,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Time::Local 0
       perl 5.006002
-  HTTP-Lite-2.44
-    pathname: N/NE/NEILB/HTTP-Lite-2.44.tar.gz
-    provides:
-      HTTP::Lite 2.44
-    requirements:
-      ExtUtils::MakeMaker 0
-      Fcntl 0
-      Socket 1.3
-      perl 5.005
-      strict 0
-      warnings 0
   HTTP-Message-6.18
     pathname: O/OA/OALDERS/HTTP-Message-6.18.tar.gz
     provides:
@@ -892,14 +843,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.64
       File::Spec::Functions 0
       perl 5.008
-  IO-Socket-IP-0.39
-    pathname: P/PE/PEVANS/IO-Socket-IP-0.39.tar.gz
-    provides:
-      IO::Socket::IP 0.39
-    requirements:
-      IO::Socket 0
-      Socket 1.97
-      Test::More 0.88
   IO-Socket-SSL-2.060
     pathname: S/SU/SULLR/IO-Socket-SSL-2.060.tar.gz
     provides:
@@ -917,27 +860,6 @@ DISTRIBUTIONS
       Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  IO-Socket-Socks-0.74
-    pathname: O/OL/OLEG/IO-Socket-Socks-0.74.tar.gz
-    provides:
-      IO::Socket::Socks 0.74
-      IO::Socket::Socks::Debug 0.74
-      IO::Socket::Socks::Error 0.74
-      IO::Socket::Socks::ReadOnlyVar 0.74
-      IO::Socket::Socks::SocketClassVar 0.74
-    requirements:
-      ExtUtils::MakeMaker 6.52
-      IO::Select 0
-      Socket 1.94
-      Test::More 0.88
-      constant 1.03
-  ISO-639_1-0.02
-    pathname: L/LD/LDIDRY/ISO-639_1-0.02.tar.gz
-    provides:
-      ISO::639_1 0.02
-    requirements:
-      Module::Build::Tiny 0.035
-      perl 5.008001
   Image-PNG-QRCode-0.10
     pathname: B/BK/BKB/Image-PNG-QRCode-0.10.tar.gz
     provides:
@@ -1350,23 +1272,25 @@ DISTRIBUTIONS
       URI::db 0.15
       URI::file 4.21
       perl 5.010001
-  Mojo-mysql-1.07
-    pathname: J/JH/JHTHORSEN/Mojo-mysql-1.07.tar.gz
+  Mojo-mysql-1.22
+    pathname: J/JH/JHTHORSEN/Mojo-mysql-1.22.tar.gz
     provides:
       Blog undef
       Blog::Controller::Posts undef
       Blog::Model::Posts undef
-      Mojo::mysql 1.07
+      Mojo::mysql 1.22
       Mojo::mysql::Database undef
       Mojo::mysql::Migrations undef
       Mojo::mysql::PubSub undef
       Mojo::mysql::Results undef
       Mojo::mysql::Transaction undef
+      SQL::Abstract::mysql undef
     requirements:
-      DBD::mysql 4.042
+      DBD::mysql 4.050
+      DBI 1.643
       ExtUtils::MakeMaker 0
-      Mojolicious 7.55
-      SQL::Abstract 1.81
+      Mojolicious 8.03
+      SQL::Abstract 1.86
   Mojolicious-8.09
     pathname: S/SR/SRI/Mojolicious-8.09.tar.gz
     provides:
@@ -2262,19 +2186,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  Params-Classify-0.015
-    pathname: Z/ZE/ZEFRAM/Params-Classify-0.015.tar.gz
-    provides:
-      Params::Classify 0.015
-    requirements:
-      Exporter 0
-      Module::Build 0
-      Scalar::Util 1.01
-      Test::More 0
-      parent 0
-      perl 5.006001
-      strict 0
-      warnings 0
   Params-Util-1.07
     pathname: A/AD/ADAMK/Params-Util-1.07.tar.gz
     provides:
@@ -2359,17 +2270,6 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       Scalar::Util 0
-      perl 5.006
-  Scalar-List-Utils-1.50
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.50.tar.gz
-    provides:
-      List::Util 1.50
-      List::Util::XS 1.50
-      Scalar::Util 1.50
-      Sub::Util 1.50
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
       perl 5.006
   String-CRC32-1.7
     pathname: L/LE/LEEJO/String-CRC32-1.7.tar.gz
@@ -3001,7 +2901,6 @@ DISTRIBUTIONS
     requirements:
       Authen::SASL 2.00
       Convert::ASN1 0.2
-      Digest::HMAC_MD5 0
       Digest::MD5 0
       ExtUtils::MakeMaker 6.42
       File::Basename 0
