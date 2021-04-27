@@ -3,15 +3,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-04-28 09:40+0000\n"
+"Last-Translator: Luc Didry <luc@framasoft.org>\n"
+"Language-Team: German <https://weblate.framasoft.org/projects/lstu/"
+"development/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-03-26 02:19+0000\n"
-"Last-Translator: Nico Domino <yo@iamnico.xyz>\n"
-"Language-Team: German\n"
-"Language: de\n"
-"X-Generator: Zanata 4.6.2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.6\n"
 
 #. ($url)
 #: lib/Lstu/Controller/URL.pm:118
@@ -21,8 +22,7 @@ msgstr "%1 ist keine gültige URL."
 #: themes/default/templates/api.html.ep:96
 msgid ""
 "A page with a table containing the same informations that the JSON response"
-msgstr ""
-"Eine Seite mit einer Tabelle mit derselben Info als in der JSON Antwort."
+msgstr "Eine Seite mit einer Tabelle mit derselben Info als in der JSON Antwort"
 
 #: themes/default/templates/layouts/default.html.ep:38
 msgid "About"
