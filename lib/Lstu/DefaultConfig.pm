@@ -9,6 +9,7 @@ our $default_config = {
     provis_step            => 5,
     length                 => 8,
     secret                 => ['hfudsifdsih'],
+    really_delete_urls     => 0,
     page_offset            => 10,
     theme                  => 'default',
     ban_min_strike         => 3,

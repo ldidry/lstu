@@ -31,6 +31,11 @@
     # optional, but you won't have access to admin /stats if not set and if adminpwd is not set either
     #hashed_adminpwd => '94b2feede6ea5e2eec62f457ecb7d3f719b24d19c29d4e5466246a31908fc23b',
 
+    # indicates if you want to really delete URLs from admin page (/stats)
+    # or just want to deactivate the shorten URL (won’t redirect anymore, can’t be used anymore)
+    # optional, default to 0 (false)
+    #really_delete_urls => 0,
+
     # choose a theme. See the available themes in `themes` directory
     # optional, default is 'default'
     #theme         => 'default',
