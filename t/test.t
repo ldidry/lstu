@@ -174,7 +174,7 @@ $t->get_ok('/d'.$b)
 # Verify that short URL does not exists anymore
 $t->get_ok($a.'.json')
     ->status_is(404)
-    ->json_is({success => false, msg => 'The shortened URL '.$a.' doesn\'t exist.'});
+    ->json_is({success => false, msg => 'The shortened URL '.$a.' no longer exists.'});
 
 # Create short URL
 $a = $t->ua->post('/a' => form => { lsturl => 'https://lstu.fr', format => 'json' })->res->json('/short');

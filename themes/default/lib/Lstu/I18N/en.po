@@ -261,6 +261,11 @@ msgstr ""
 msgid "The shortened URL %1 doesn't exist."
 msgstr "The shortened URL %1 doesn't exist."
 
+#. ($c->url_for('/')
+#: lib/Lstu/Controller/URL.pm:240
+msgid "The shortened URL %1 no longer exists."
+msgstr "The shortened URL %1 no longer exists."
+
 #. ($url)
 #: lib/Lstu/Controller/URL.pm:59
 msgid ""
