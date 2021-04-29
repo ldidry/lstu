@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-04-28 09:40+0000\n"
+"PO-Revision-Date: 2021-05-01 10:42+0000\n"
 "Last-Translator: Berto Te <ateira@3fpj.com>\n"
 "Language-Team: Spanish <https://weblate.framasoft.org/projects/lstu/"
 "development/es/>\n"
@@ -165,7 +165,7 @@ msgstr "Siguiente"
 #: lib/Lstu/Controller/URL.pm:112
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
-"No hay URL acortada disponible. Vuelva a intentarlo o póngase en contacto "
+"No hay URL abreviada disponible. Vuelva a intentarlo o póngase en contacto "
 "con el administrador en %1. Su URL para acortar: %2"
 
 #: themes/default/templates/api.html.ep:111 themes/default/templates/api.html.ep:138 themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:41 themes/default/templates/api.html.ep:83 themes/default/templates/api.html.ep:9
