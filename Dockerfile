@@ -15,7 +15,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN adduser -D lstu
 COPY --chown=lstu:lstu . /home/lstu
 WORKDIR /home/lstu
-RUN apk --update add ca-certificates perl perl-netaddr-ip perl-io-socket-ssl perl-dbd-pg mariadb-client libpng zlib \
+RUN apk --update add ca-certificates perl perl-netaddr-ip perl-io-socket-ssl perl-dbd-pg mariadb-connector-c-dev libpng zlib \
  && apk add --virtual .build-deps build-base perl-utils perl-dev make sudo zlib-dev libpng-dev postgresql-dev mariadb-dev \
  && cpan Carton \
  && sudo -u lstu carton install --deployment --without=test \
