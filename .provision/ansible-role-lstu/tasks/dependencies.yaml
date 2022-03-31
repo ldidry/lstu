@@ -1,0 +1,19 @@
+#dependencies.yaml
+---
+- name: Lstu | Update apt cache
+  ansible.builtin.apt: update_cache=yes 
+  changed_when: no
+
+- name: Install Dependencies
+  ansible.builtin.apt:
+   name:
+     - nginx
+     - carton
+     - build-essential
+     - libpng-dev
+     - libssl-dev 
+     - libpq-dev 
+     - zlib1g-dev
+     - libmojo-sqlite-perl  
+   state: present
+   
