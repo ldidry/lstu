@@ -1,0 +1,16 @@
+---
+# vars file for ansible-role-lstu
+
+lstu_owner: "www-data"
+
+lstu_group: "www-data"
+
+app_dir: "/var/www/lstu"
+
+_contact: ""
+
+_secret: ""
+
+_project_version: ""
+
+_server_name: ""
