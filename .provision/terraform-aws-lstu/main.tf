@@ -1,5 +1,5 @@
 #Create the VPC 
-resource "aws_vpc" "MAIN" {
+resource "aws_vpc" "vpc" {
   cidr_block           = "${var.vpc_cidr}"
   enable_dns_hostnames = true 
   enable_dns_support   = true
@@ -12,7 +12,7 @@ resource "aws_vpc" "MAIN" {
 # Create InternetGateWay and attach to VPC
 
 resource "aws_internet_gateway" "IGW" {
-  vpc_id           = "${aws_vpc.MAIN.id}"
+  vpc_id           = "${aws_vpc.vpc.id}"
   tags = {
     "Name"         = "lstu-master-igw"
   } 
@@ -21,7 +21,7 @@ resource "aws_internet_gateway" "IGW" {
 # Create a public subnet
 
 resource "aws_subnet" "publicsubnet" {
-  vpc_id                  = "${aws_vpc.MAIN.id}" 
+  vpc_id                  = "${aws_vpc.vpc.id}" 
   cidr_block              = "${var.public_subnet_cidr}"
   map_public_ip_on_launch = true
   tags                    = {
@@ -31,7 +31,7 @@ resource "aws_subnet" "publicsubnet" {
 
 # Create routeTable
 resource "aws_route_table" "publicroute" {
-    vpc_id         = "${aws_vpc.MAIN.id}"
+    vpc_id         = "${aws_vpc.vpc.id}"
     route {
         cidr_block = "0.0.0.0/0"
         gateway_id = "${aws_internet_gateway.IGW.id}"
@@ -43,7 +43,7 @@ resource "aws_route_table" "publicroute" {
 }
 
 resource "aws_main_route_table_association" "mainRTB" {
-  vpc_id         = "${aws_vpc.MAIN.id}"
+  vpc_id         = "${aws_vpc.vpc.id}"
   route_table_id = "${aws_route_table.publicroute.id}"
 }
 
@@ -51,7 +51,7 @@ resource "aws_main_route_table_association" "mainRTB" {
 resource "aws_security_group" "security" {
   name             = "lstu-master-sg"  
   description      = "allow all traffic"
-  vpc_id           = "${aws_vpc.MAIN.id}"
+  vpc_id           = "${aws_vpc.vpc.id}"
 
   ingress  {
     description    =  "allow all traffic"
