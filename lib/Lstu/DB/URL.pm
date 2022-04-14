@@ -300,8 +300,10 @@ sub paginate {
     my $c           = shift;
     my $page        = shift;
     my $page_offset = shift;
+    my $order       = shift // 'counter';
+    my $dir         = shift // '-desc';
 
-    return @{$c->app->dbi->db->query('SELECT * FROM lstu WHERE url IS NOT NULL AND disabled = 0 ORDER BY counter DESC LIMIT ? offset ?', $page_offset, $page * $page_offset)->hashes->to_array};
+    return @{$c->app->dbi->db->select('lstu', undef, { url => { '!=', undef }, disabled => 0 }, { order_by => { $dir => $order }, limit => $page_offset, offset => $page * $page_offset })->hashes->to_array};
 }
 
 =head2 get_a_lot
@@ -353,7 +355,7 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 sub total {
     my $c = shift;
 
-    return $c->app->dbi->db->query('SELECT count(short) AS count FROM lstu WHERE url IS NOT NULL')->hashes->first->{count};
+    return $c->app->dbi->db->query('SELECT count(short) AS count FROM lstu WHERE url IS NOT NULL AND disabled = 0')->hashes->first->{count};
 }
 
 =head2 delete_all

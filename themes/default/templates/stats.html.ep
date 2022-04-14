@@ -1,6 +1,11 @@
 % # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
 % title 'Lstu stats';
 % use Mojo::Date;
+% my $order = $self->param('order') // 'counter';
+% my $dir   = $self->param('dir') // '-desc';
+% my $arrow = ($dir eq '-desc') ? '↓' : '↑';
+% my $adir  = sprintf('&dir=%s', ($dir eq '-desc') ? '-asc' : '-desc');
+% $dir      = sprintf('&dir=%s', $dir);
 <h2><%= l('Statistics') %></h2>
 % if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
 %     if (!flash('banned')) {
@@ -41,10 +46,41 @@
 <table class="table table-striped">
     <tr>
         <th>#</th>
-        <th><%= l('URL') %></th>
-        <th><%= l('Shortened URL') %></th>
-        <th><%= l('Counter') %></th>
-        <th><%= l('Created') %></th>
+% if ((defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) && defined(stash('admin'))) {
+        <th>
+            <a href="<%= url_for('stats') %>?order=url<%= ($order eq 'url') ? $adir : $dir %>">
+                <%= l('URL') %><%= $arrow if ($order eq 'url') %>
+            </a>
+        </th>
+        <th>
+            <a href="<%= url_for('stats') %>?order=short<%= ($order eq 'short') ? $adir : $dir %>">
+                <%= l('Shortened URL') %><%= $arrow if ($order eq 'short') %>
+            </a>
+        </th>
+        <th>
+            <a href="<%= url_for('stats') %>?order=counter<%= ($order eq 'counter') ? $adir : $dir %>">
+                <%= l('Counter') %><%= $arrow if ($order eq 'counter') %>
+            </a>
+        </th>
+        <th>
+            <a href="<%= url_for('stats') %>?order=created_by<%= ($order eq 'created_by') ? $adir : $dir %>">
+                <%= l('Created') %><%= $arrow if ($order eq 'created_by') %>
+            </a>
+        </th>
+% } else {
+        <th>
+            <%= l('URL') %>
+        </th>
+        <th>
+            <%= l('Shortened URL') %>
+        </th>
+        <th>
+            <%= l('Counter') %>
+        </th>
+        <th>
+            <%= l('Created') %>
+        </th>
+% }
 % if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
 %     unless (defined(stash('admin'))) {
         <th><%= l('QRCode') %></th>

@@ -61,7 +61,22 @@ sub fullstats {
 }
 
 sub stats {
-    my $c = shift;
+    my $c     = shift;
+    my $order = $c->param('order') // 'counter';
+    my $dir   = $c->param('dir')   // '-desc';
+
+    my %orders = (
+        'short'      => 1,
+        'url'        => 1,
+        'counter'    => 1,
+        'created_by' => 1,
+    );
+    my %dirs = (-desc => 1, -asc => 1);
+
+    $order = 'counter' unless $orders{$order};
+    $dir   = '-desc'   unless $dirs{$dir};
+
+
     if ((!defined($c->config('ldap')) && !defined($c->config('htpasswd'))) || $c->is_user_authenticated) {
         my $db_session = Lstu::DB::Session->new(
             app    => $c,
@@ -77,7 +92,8 @@ sub stats {
 
             my @urls  = Lstu::DB::URL->new(
                 app    => $c,
-            )->paginate($page, $c->config('page_offset'));
+            )->paginate($page, $c->config('page_offset'), $order, $dir);
+
             $c->respond_to(
                 json => sub {
                     my $c = shift;
