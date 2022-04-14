@@ -12,4 +12,15 @@ sub new {
     return $c;
 }
 
+sub paginate {
+    my $c           = shift;
+    my $page        = shift;
+    my $page_offset = shift;
+    my $order       = shift // 'counter';
+    my $dir         = shift // '-desc';
+    $dir =~ s/^-//;
+
+    return @{$c->app->dbi->db->query("SELECT * FROM lstu WHERE url IS NOT NULL AND disabled = 0 ORDER BY $order $dir LIMIT ? OFFSET ?", $page_offset, $page * $page_offset)->hashes->to_array};
+}
+
 1;

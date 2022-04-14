@@ -28,7 +28,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:13 themes/default/templates/stats.html.ep:14
+#: themes/default/templates/stats.html.ep:18 themes/default/templates/stats.html.ep:19
 msgid "Admin password"
 msgstr ""
 
@@ -44,11 +44,11 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:46
+#: themes/default/templates/stats.html.ep:61
 msgid "Counter"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:47
+#: themes/default/templates/stats.html.ep:66
 msgid "Created"
 msgstr ""
 
@@ -56,11 +56,11 @@ msgstr ""
 msgid "Custom shortened text"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:52
+#: themes/default/templates/stats.html.ep:73
 msgid "Delete"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:36
+#: themes/default/templates/stats.html.ep:41
 msgid "Export your URLs"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Get the details (visit counter, creation date, etc.) of a shortened URL."
 msgstr ""
 
-#: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
+#: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:22
 msgid "Go!"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Hit Enter, then Ctrl+C to copy the short link"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:89
+#: themes/default/templates/stats.html.ep:110
 msgid "Home"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgstr ""
 msgid "If you are logged in as admin, you can provide a \"page\" parameter"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:32 themes/default/templates/stats.html.ep:35
+#: themes/default/templates/stats.html.ep:37 themes/default/templates/stats.html.ep:40
 msgid "Import URLs"
 msgstr ""
 
@@ -137,11 +137,11 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:10
+#: themes/default/templates/stats.html.ep:15
 msgid "Logout from admin stats"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:84
+#: themes/default/templates/stats.html.ep:105
 msgid "Next"
 msgstr ""
 
@@ -162,11 +162,11 @@ msgstr ""
 msgid "Please, check your credentials: unable to authenticate."
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:82
+#: themes/default/templates/stats.html.ep:103
 msgid "Previous"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:50
+#: themes/default/templates/stats.html.ep:71
 msgid "QRCode"
 msgstr ""
 
@@ -182,7 +182,7 @@ msgstr ""
 msgid "Response:"
 msgstr ""
 
-#: themes/default/templates/stats.html.ep:45
+#: themes/default/templates/stats.html.ep:56
 msgid "Shortened URL"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Sorry, unable to parse the provided file"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:60 themes/default/templates/layouts/default.html.ep:66 themes/default/templates/stats.html.ep:4
+#: themes/default/templates/layouts/default.html.ep:60 themes/default/templates/layouts/default.html.ep:66 themes/default/templates/stats.html.ep:9
 msgid "Statistics"
 msgstr ""
 
@@ -223,7 +223,7 @@ msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted 
 msgstr ""
 
 #. ($c->url_for('/')
-#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:242
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Stats.pm:200 lib/Lstu/Controller/URL.pm:242
 msgid "The shortened URL %1 doesn't exist."
 msgstr ""
 
@@ -249,7 +249,7 @@ msgstr ""
 msgid "Too many bad passwords. You're banned."
 msgstr ""
 
-#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:95 themes/default/templates/stats.html.ep:44
+#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:95 themes/default/templates/stats.html.ep:51
 msgid "URL"
 msgstr ""
 
