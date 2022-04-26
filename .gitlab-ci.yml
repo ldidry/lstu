@@ -28,6 +28,8 @@ before_script:
 .carton_bdd_template: &carton_bdd_definition
   <<: *retry
   stage: carton_bdd
+  needs:
+    - carton
   cache:
     key: "$CI_COMMIT_REF_NAME"
     paths:
@@ -58,7 +60,7 @@ before_script:
 
 .sqlite_template: &sqlite_definition
   <<: *tests_definition
-  dependencies:
+  needs:
     - carton_sqlite
   services:
     - name: rroemhild/test-openldap
@@ -66,7 +68,7 @@ before_script:
 
 .pg_template: &pg_definition
   <<: *tests_definition
-  dependencies:
+  needs:
     - carton_postgresql
   services:
     - name: rroemhild/test-openldap
@@ -76,7 +78,7 @@ before_script:
 
 .mysql_template: &mysql_definition
   <<: *tests_definition
-  dependencies:
+  needs:
     - carton_mysql
   services:
     - name: rroemhild/test-openldap
