@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2020-03-07 07:08+0000\n"
+"PO-Revision-Date: 2021-05-01 10:42+0000\n"
 "Last-Translator: Berto Te <ateira@3fpj.com>\n"
 "Language-Team: Spanish <https://weblate.framasoft.org/projects/lstu/"
 "development/es/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.11.2\n"
+"X-Generator: Weblate 4.6\n"
 
 #. ($url)
 #: lib/Lstu/Controller/URL.pm:118
@@ -165,7 +165,7 @@ msgstr "Siguiente"
 #: lib/Lstu/Controller/URL.pm:112
 msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
 msgstr ""
-"No hay URL acortada disponible. Vuelva a intentarlo o póngase en contacto "
+"No hay URL abreviada disponible. Vuelva a intentarlo o póngase en contacto "
 "con el administrador en %1. Su URL para acortar: %2"
 
 #: themes/default/templates/api.html.ep:111 themes/default/templates/api.html.ep:138 themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:41 themes/default/templates/api.html.ep:83 themes/default/templates/api.html.ep:9
@@ -186,7 +186,7 @@ msgstr "Anterior"
 
 #: themes/default/templates/stats.html.ep:50
 msgid "QRCode"
-msgstr "QRCode"
+msgstr "Código QR"
 
 #: themes/default/templates/api.html.ep:123 themes/default/templates/api.html.ep:130 themes/default/templates/api.html.ep:146 themes/default/templates/api.html.ep:19 themes/default/templates/api.html.ep:32 themes/default/templates/api.html.ep:54 themes/default/templates/api.html.ep:96
 msgid "Response for HTML format"
@@ -376,3 +376,8 @@ msgstr "Opcional"
 #: themes/default/templates/api.html.ep:135 themes/default/templates/api.html.ep:57 themes/default/templates/api.html.ep:66 themes/default/templates/api.html.ep:92 themes/default/templates/api.html.ep:99
 msgid "shortened_url"
 msgstr "URL_acceso-directo"
+
+#. ($c->url_for('/')
+#: lib/Lstu/Controller/URL.pm:240
+msgid "The shortened URL %1 no longer exists."
+msgstr "La URL abreviada %1 ya no existe."

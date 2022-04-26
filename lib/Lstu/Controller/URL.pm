@@ -185,15 +185,24 @@ sub get {
     }
 
     my $url;
+    my $disabled_url = 0;
     if (scalar(@{$c->config('memcached_servers')})) {
         $url = $c->chi('lstu_urls_cache')->compute($short, undef, sub {
             my $db_url = Lstu::DB::URL->new(app => $c, short => $short);
-            return $db_url->url unless $db_url->disabled;
-            return undef;
+            if ($db_url->disabled) {
+                $disabled_url++;
+                return undef
+            } else {
+                return $db_url->url;
+            }
         });
     } else {
         my $db_url = Lstu::DB::URL->new(app => $c, short => $short);
-        $url    = $db_url->url unless $db_url->disabled;
+        if ($db_url->disabled) {
+            $disabled_url++;
+        } else {
+            $url = $db_url->url;
+        }
     }
 
     if ($url) {
@@ -226,7 +235,12 @@ sub get {
             }
         });
     } else {
-        my $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);
+        my $msg;
+        if ($disabled_url) {
+            $msg = $c->l('The shortened URL %1 no longer exists.', $c->url_for('/')->to_abs.$short);
+        } else {
+            $msg = $c->l('The shortened URL %1 doesn\'t exist.', $c->url_for('/')->to_abs.$short);
+        }
         $c->res->code(404);
         $c->respond_to(
             json => { json => { success => Mojo::JSON->false, msg => $msg } },

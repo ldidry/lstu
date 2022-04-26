@@ -1,0 +1,4 @@
+---
+# handlers file for ansible-role-lstu
+- name: restart nginx
+  service: name=nginx state=restarted

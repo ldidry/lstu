@@ -170,15 +170,23 @@ sub write {
 sub remove {
     my $c = shift;
 
-    $c->app->dbi->db->query('UPDATE lstu SET disabled = 1 WHERE short = ?', $c->short);
-    my $disabled = $c->app->dbi->db->query('SELECT disabled FROM lstu WHERE short = ?', $c->short)->hashes->first->{disabled};
-    if ($disabled) {
+    my $removed = 0;
+
+    if ($c->app->config('really_delete_urls')) {
+        $c->app->dbi->db->query('DELETE FROM lstu WHERE short = ?', $c->short);
+        my $count = $c->app->dbi->db->query('SELECT count(*) FROM lstu WHERE short = ?', $c->short)->hashes->first->{count};
+        $removed = ($count == 0) ? 1 : 0;
+    } else {
+        $c->app->dbi->db->query('UPDATE lstu SET disabled = 1 WHERE short = ?', $c->short);
+        $removed = $c->app->dbi->db->query('SELECT disabled FROM lstu WHERE short = ?', $c->short)->hashes->first->{disabled};
+    }
+    if ($removed) {
         if (scalar(@{$c->app->config('memcached_servers')})) {
             $c->app->chi('lstu_urls_cache')->remove($c->short);
         }
         $c = Lstu::DB::URL->new(app => $c->app);
     }
-    return $disabled;
+    return $removed;
 }
 
 =head2 exist
@@ -292,15 +300,17 @@ sub paginate {
     my $c           = shift;
     my $page        = shift;
     my $page_offset = shift;
+    my $order       = shift // 'counter';
+    my $dir         = shift // '-desc';
 
-    return @{$c->app->dbi->db->query('SELECT * FROM lstu WHERE url IS NOT NULL ORDER BY counter DESC LIMIT ? offset ?', $page_offset, $page * $page_offset)->hashes->to_array};
+    return @{$c->app->dbi->db->select('lstu', undef, { url => { '!=', undef }, disabled => 0 }, { order_by => { $dir => $order }, limit => $page_offset, offset => $page * $page_offset })->hashes->to_array};
 }
 
 =head2 get_a_lot
 
 =over 1
 
-=item B<Usage>     : C<$c-E<gt>paginate(['short1', 'short2'])>
+=item B<Usage>     : C<$c-E<gt>get_a_lot(['short1', 'short2'])>
 
 =item B<Arguments> : an array reference of strings, which are C<short> attributes
 
@@ -345,7 +355,7 @@ eg: C<COUNT(short) WHERE url IS NOT NULL>
 sub total {
     my $c = shift;
 
-    return $c->app->dbi->db->query('SELECT count(short) AS count FROM lstu WHERE url IS NOT NULL')->hashes->first->{count};
+    return $c->app->dbi->db->query('SELECT count(short) AS count FROM lstu WHERE url IS NOT NULL AND disabled = 0')->hashes->first->{count};
 }
 
 =head2 delete_all

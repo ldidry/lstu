@@ -31,7 +31,7 @@ msgstr "%1 n’est pas une URL valide."
 msgid ""
 "A page with a table containing the same informations that the JSON response"
 msgstr ""
-"Une page avec un tableau contenant les mêmes information que le message JSON"
+"Une page avec un tableau contenant les mêmes informations que le message JSON"
 
 #: themes/default/templates/layouts/default.html.ep:38
 msgid "About"
@@ -276,6 +276,11 @@ msgstr ""
 #: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Stats.pm:184 lib/Lstu/Controller/URL.pm:226
 msgid "The shortened URL %1 doesn't exist."
 msgstr "L’URL raccourcie %1 n’existe pas."
+
+#. ($c->url_for('/')
+#: lib/Lstu/Controller/URL.pm:240
+msgid "The shortened URL %1 no longer exists."
+msgstr "L’URL raccourcie %1 n’existe plus."
 
 #. ($url)
 #: lib/Lstu/Controller/URL.pm:59

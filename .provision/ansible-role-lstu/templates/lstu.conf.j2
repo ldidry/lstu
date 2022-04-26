@@ -6,7 +6,7 @@
     # see http://mojolicio.us/perldoc/Mojo/Server/Hypnotoad for a full list of settings
     hypnotoad => {
         # array of IP addresses and ports you want to listen to
-        listen => ['http://127.0.0.1:8080'],
+        listen => ['http://0.0.0.0:8080'],
         # if you use Lstu behind a reverse proxy like Nginx, you want to set proxy to 1
         # if you use Lstu directly, let it commented
         #proxy  => 1,
@@ -14,11 +14,11 @@
 
     # put a way to contact you here and uncomment it
     # MANDATORY
-    #contact       => 'admin[at]example.com',
+    contact       => '{{ _contact }}',
 
     # array of random strings used to encrypt cookies
     # optional, default is ['fdjsofjoihrei'], PLEASE, CHANGE IT
-    #secret        => ['fdjsofjoihrei'],
+    secret        => ['{{ _secret }}'],
 
     # secret passphrase to access some admin features
     # If you don't want to have a plain text password in configuration,
@@ -30,11 +30,6 @@
     # Hash your password by issuing `echo -n s3cr3T | sha256sum` on your terminal
     # optional, but you won't have access to admin /stats if not set and if adminpwd is not set either
     #hashed_adminpwd => '94b2feede6ea5e2eec62f457ecb7d3f719b24d19c29d4e5466246a31908fc23b',
-
-    # indicates if you want to really delete URLs from admin page (/stats)
-    # or just want to deactivate the shorten URL (won’t redirect anymore, can’t be used anymore)
-    # optional, default to 0 (false)
-    #really_delete_urls => 0,
 
     # choose a theme. See the available themes in `themes` directory
     # optional, default is 'default'
@@ -86,16 +81,16 @@
     # PostgreSQL ONLY - only used if dbtype is set to postgresql
     # these are the credentials to access the PostgreSQL database
     # mandatory if you choosed postgresql as dbtype
-    #pgdb => {
-    #    database => 'lstu',
-    #    host     => 'localhost',
-    #    # optional, default is 5432
-    #    #port     => 5432,
-    #    user     => 'DBUSER',
-    #    pwd      => 'DBPASSWORD',
-    #    # optional, default is 1
-    #    #max_connections => 1,
-    #},
+    pgdb => {
+        database => 'lstu',
+        host     => 'localhost',
+        # optional, default is 5432
+        port     => 5432,
+        user     => 'DBUSER',
+        pwd      => 'DBPASSWORD',
+        # optional, default is 1
+        #max_connections => 1,
+    },
 
     # MySQL ONLY - only used if dbtype is set to mysql
     # these are the credentials to access the MySQL database
@@ -163,7 +158,7 @@
     #        database => 'lstu_minion',
     #        host     => 'localhost',
     #        # optional, default is 5432
-    #        #port     => 5432,
+    #        port     => 5432,
     #        user     => 'DBUSER',
     #        pwd      => 'DBPASSWORD'
     #    },

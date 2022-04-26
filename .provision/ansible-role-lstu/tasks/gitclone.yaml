@@ -1,0 +1,25 @@
+#gitclone
+---
+- name: Clone the repository
+  ansible.builtin.git:
+    repo: 'https://framagit.org/luc/lstu.git'
+    dest: "{{ app_dir }}"
+    clone: yes
+    update: yes
+    version: "{{ _project_version }}"
+    
+- name: Change the owner 
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    owner: "{{ lstu_owner }}"
+    group: "{{ lstu_group }}"
+    state: directory
+    recurse: yes
+
+
+
+
+
+      
+
+
