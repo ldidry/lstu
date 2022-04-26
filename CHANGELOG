@@ -1,9 +1,9 @@
 Revision history for Perl application Lstu
 
-0.24-0 ????-??-??
-	- ✨ Allow to sort results in admin stats page (#91)
+0.25-0 ????-??-??
 
-0.23-1 2021-04-??
+0.24-0 2022-04-26
+	- ✨ Allow to sort results in admin stats page (#91)
 	- Fix disabled URLs still showing in admin interface (#79)
 	- Make a distinction between inexistant and disabled URLs
 
