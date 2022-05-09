@@ -178,7 +178,7 @@ sub _is_spam {
                     msg     => $c->l('The URL or one of its redirection(s) (%1) is blacklisted in Google Safe Browsing database. I refuse to shorten it.', $url)
                 }
             }
-            my $res = $c->ua->get($url)->res;
+            my $res = $c->ua->head($url)->res;
             if (defined($res->code) && $res->code >= 300 && $res->code < 400) {
                 my $new_url = Mojo::URL->new($res->headers->location);
                 $new_url->host($url->host)     unless $new_url->host;

@@ -2,6 +2,7 @@ Revision history for Perl application Lstu
 
 0.25-0 ????-??-??
 	- ✨ Add a config flag to disable API
+	- ⚡ Use a HEAD request instead of a GET when checking for redirections
 
 0.24-0 2022-04-26
 	- ✨ Allow to sort results in admin stats page (#91)
