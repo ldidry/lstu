@@ -24,6 +24,12 @@ sub add {
             ip     => $ip
         )->is_banned($c->config('ban_min_strike'));
 
+        my $disabled_api = 0;
+        if ($c->config('disable_api')) {
+            $disabled_api = 1 if $c->validation->csrf_protect->has_error('csrf_token');
+            $disabled_api = 1 if (!defined($c->req->headers->referrer) || Mojo::URL->new($c->req->headers->referrer)->host ne Mojo::URL->new('https://'.$c->req->headers->host)->host)
+        }
+
         if (defined $banned) {
             # Increase ban delay if necessary
             my $penalty = 3600;
@@ -40,6 +46,18 @@ sub add {
                         template => 'index',
                         msg      => $msg,
                         banned   => 1
+                    );
+                }
+            );
+        } elsif ($disabled_api) {
+            my $msg = $c->l('Sorry, the API is disabled.');
+            $c->app->log->info('Blocked API call for '.$ip);
+            $c->respond_to(
+                json => { json => { success => Mojo::JSON->false, msg => $msg } },
+                any  => sub {
+                    shift->render(
+                        template => 'index',
+                        msg      => $msg,
                     );
                 }
             );

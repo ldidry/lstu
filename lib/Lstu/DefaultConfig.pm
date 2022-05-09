@@ -20,6 +20,7 @@ our $default_config = {
         db_path => 'minion.db'
     },
     session_duration       => 3600,
+    disable_api            => 0,
     dbtype                 => 'sqlite',
     db_path                => 'lstu.db',
     max_redir              => 2,

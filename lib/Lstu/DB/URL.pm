@@ -90,6 +90,7 @@ sub to_hash {
     return {
         short      => $c->short,
         url        => $c->url,
+        disabled   => $c->disabled,
         counter    => $c->counter,
         timestamp  => $c->timestamp,
         created_by => $c->created_by
