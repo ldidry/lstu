@@ -15,17 +15,18 @@ sub run {
     my @args = @_;
 
     getopt \@args,
-      'info=s{1,}'     => \my @info,
-      'r|remove=s{1,}' => \my @remove,
-      's|search=s'     => \my $search,
-      'ip=s{1,}'       => \my @ips,
-      'y|yes'          => \my $yes;
+      'info=s{1,}'         => \my @info,
+      'r|remove=s{1,}'     => \my @remove,
+      's|search=s'         => \my $search,
+      'ip=s{1,}'           => \my @ips,
+      'y|yes'              => \my $yes,
+      'e|even-if-disabled' => \my $even_disabled;
 
     if (scalar @info) {
         c(@info)->each(
             sub {
                 my ($e, $num) = @_;
-                my $u = get_short($c, $e);
+                my $u = get_short($c, $e, $even_disabled);
                 print_infos($u->to_hash) if $u;
             }
         );
@@ -35,24 +36,28 @@ sub run {
         c(@remove)->each(
             sub {
                 my ($e, $num) = @_;
-                my $u = get_short($c, $e);
+                my $u = get_short($c, $e, 1);
                 if ($u) {
                     push @r_ips, $u->created_by if $u->created_by;
                     print_infos($u->to_hash);
-                    my $confirm = ($yes) ? 'yes' : undef;
-                    unless (defined $confirm) {
-                        printf('Are you sure you want to remove this URL (%s)? [N/y] ', $e);
-                        $confirm = <STDIN>;
-                        chomp $confirm;
-                    }
-                    if ($confirm =~ m/^y(es)?$/i) {
-                        if ($u->remove) {
-                            say sprintf('Success: %s URL has been removed', $e);
-                        } else {
-                            say sprintf('Failure: %s URL has not been removed', $e);
-                        }
+                    if ($u->disabled) {
+                        say sprintf('%s URL is already disabled', $e);
                     } else {
-                        say 'Answer was not "y" or "yes". Aborting deletion.';
+                        my $confirm = ($yes) ? 'yes' : undef;
+                        unless (defined $confirm) {
+                            printf('Are you sure you want to remove this URL (%s)? [N/y] ', $e);
+                            $confirm = <STDIN>;
+                            chomp $confirm;
+                        }
+                        if ($confirm =~ m/^y(es)?$/i) {
+                            if ($u->remove) {
+                                say sprintf('Success: %s URL has been removed', $e);
+                            } else {
+                                say sprintf('Failure: %s URL has not been removed', $e);
+                            }
+                        } else {
+                            say 'Answer was not "y" or "yes". Aborting deletion.';
+                        }
                     }
                 }
             }
@@ -96,16 +101,17 @@ sub run {
 }
 
 sub get_short {
-    my $c     = shift;
-    my $short = shift;
+    my $c                = shift;
+    my $short            = shift;
+    my $even_if_disabled = shift;
 
     my $u = Lstu::DB::URL->new(app => $c->app, short => $short);
-    if ($u->url && !$u->disabled) {
-        return $u;
-    } else {
-        say sprintf('Sorry, unable to find an URL with short = %s', $short);
-        return undef;
+    if ($u->url) {
+        return $u if !$u->disabled;
+        return $u if $even_if_disabled;
     }
+    say sprintf('Sorry, unable to find an URL with short = %s', $short);
+    return undef;
 }
 
 sub print_infos {
@@ -115,6 +121,7 @@ sub print_infos {
         my $msg = <<EOF;
 %s
     url        : %s
+    disabled   : %d
     counter    : %d
     created at : %s
     timestamp  : %d
@@ -123,9 +130,9 @@ EOF
         my $timestamp = sprintf('%d-%d-%d %d:%d:%d GMT', $year + 1900, ++$mon, $mday, $hour, $min, $sec);
         if ($u->{created_by}) {
             $msg .= '    created_by : %s';
-            say sprintf($msg, $u->{short}, $u->{url}, $u->{counter}, $timestamp, $u->{timestamp}, $u->{created_by});
+            say sprintf($msg, $u->{short}, $u->{url}, $u->{disabled}, $u->{counter}, $timestamp, $u->{timestamp}, $u->{created_by});
         } else {
-            say sprintf($msg, $u->{short}, $u->{url}, $u->{counter}, $timestamp, $u->{timestamp});
+            say sprintf($msg, $u->{short}, $u->{url}, $u->{disabled}, $u->{counter}, $timestamp, $u->{timestamp});
         }
     }
 }
