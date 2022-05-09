@@ -1,6 +1,8 @@
 Revision history for Perl application Lstu
 
-0.25-0 ????-??-??
+0.26-0 ????-??-??
+
+0.25-0 2022-05-09
 	- ✨ Add a config flag to disable API
 	- ⚡ Use a HEAD request instead of a GET when checking for redirections
 	- 🐛 Handle disabled URLs in `url` CLI command
