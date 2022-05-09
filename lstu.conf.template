@@ -71,6 +71,10 @@
     # optional
     #fixed_domain => 'example.org',
 
+    # if set to 1, Lstu will try to prevent its use without using the web interface
+    # optional, default is 0
+    #disable_api => 0,
+
     # choose what database you want to use
     # valid choices are sqlite, postgresql and mysql (all lowercase)
     # optional, default is sqlite

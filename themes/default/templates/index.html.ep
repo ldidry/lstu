@@ -9,6 +9,7 @@
         <label class="sr-only" for="lsturl-custom"><%= l('Custom shortened text') %></label>
         <input type="text" name="lsturl-custom" id="lsturl-custom" class="form-control" placeholder="<%= l('Custom shortened text') %>">
     </div>
+    %= csrf_field
     <%= submit_button l('Go!'), class => 'allons-y' %>
 </form>
 

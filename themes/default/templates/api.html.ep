@@ -2,6 +2,14 @@
 % title 'Lstu API';
 % use Mojo::JSON qw(to_json);
 <h2>Lstu API</h2>
+% if ($self->config('disable_api')) {
+<p>
+    <strong>
+        %= l('Sorry, the API is disabled.')
+        %= l('This page is informational only.')
+    </strong>
+</p>
+% }
 <dl>
 % if (defined $self->config('ldap') || defined $self->config('htpasswd')) {
     <dt>POST <%= url_for('login')->to_abs %></dt>
