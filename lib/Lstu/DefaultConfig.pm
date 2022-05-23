@@ -31,6 +31,7 @@ our $default_config = {
     x_content_type_options => 'nosniff',
     x_xss_protection       => '1; mode=block',
     log_creator_ip         => 0,
+    qrcode_size            => 3,
 };
 
 1;
