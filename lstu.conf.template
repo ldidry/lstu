@@ -273,4 +273,9 @@
     # Set to 1 if you want to register the IP addresses of URL creators
     # optional, default is 0
     #log_creator_ip => 0,
+
+    # Positive integer which specifies how many pixels one "module" (one block of the QR code) occupies.
+    # You can't use fractional values. An arbitrary upper limit of 100 is imposed by Image::PNG::QRCode module.
+    # optional, default is 3
+    #qrcode_size => 3,
 };

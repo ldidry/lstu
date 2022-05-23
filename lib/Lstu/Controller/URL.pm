@@ -168,7 +168,7 @@ sub add {
 
                 my $prefix = $c->prefix;
 
-                my $qrcode = b64_encode(qrpng(text => $prefix.$short));
+                my $qrcode = b64_encode(qrpng(text => $prefix.$short, scale => $c->config('qrcode_size')));
 
                 $c->respond_to(
                     json => { json => { success => Mojo::JSON->true, url => $url, short => $prefix.$short, qrcode => $qrcode } },
