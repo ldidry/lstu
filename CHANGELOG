@@ -1,6 +1,8 @@
 Revision history for Perl application Lstu
 
-0.26-0 ????-??-??
+0.27-0 ????-??-??
+
+0.26-0 2022-05-23
 	- ✨ Add a config setting to change QR code size
 
 0.25-0 2022-05-09
