@@ -19,6 +19,11 @@ sub startup {
 
     die "You need to provide a contact information in lstu.conf!" unless (defined($config->{contact}));
 
+    # qrcode_size correction if needed;
+    $self->config('qrcode_size', 100) if $self->config('qrcode_size') > 100;
+    $self->config('qrcode_size', 1  ) if $self->config('qrcode_size') < 1;
+    $self->config('qrcode_size', sprintf('%d', $self->config('qrcode_size')));
+
     # Themes handling
     shift @{$self->renderer->paths};
     shift @{$self->static->paths};

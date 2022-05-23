@@ -1,6 +1,7 @@
 Revision history for Perl application Lstu
 
 0.26-0 ????-??-??
+	- ✨ Add a config setting to change QR code size
 
 0.25-0 2022-05-09
 	- ✨ Add a config flag to disable API
