@@ -33,4 +33,28 @@ variable "instance_name" {
     default = "lstu"  
 }
 
+variable "lstu_owner" {
+    default = ""  
+}
+
+variable "lstu_group" {
+    default = ""  
+}
+
+variable "app_dir" {
+    default = ""  
+}
+
+variable "project_version" {
+    default = ""  
+}
+
+variable "contact" {
+    default = ""  
+}
+
+variable "secret" {
+    default = ""  
+}
+
 
