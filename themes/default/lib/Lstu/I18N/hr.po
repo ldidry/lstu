@@ -1,0 +1,380 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2022-07-26 23:36+0000\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: Croatian <https://weblate.framasoft.org/projects/lstu/"
+"development/hr/>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13.1\n"
+
+#. ($url)
+#: lib/Lstu/Controller/URL.pm:136
+msgid "%1 is not a valid URL."
+msgstr "%1 nije valjani URL."
+
+#: themes/default/templates/api.html.ep:104
+msgid "A page with a table containing the same informations that the JSON response"
+msgstr "Stranica s tablicom koja sadrži iste informacije kao JSON odgovor"
+
+#: themes/default/templates/layouts/default.html.ep:56
+msgid "About"
+msgstr "Podaci"
+
+#: themes/default/templates/stats.html.ep:18 themes/default/templates/stats.html.ep:19
+msgid "Admin password"
+msgstr "Administratorska lozinka"
+
+#: lib/Lstu/Controller/Admin.pm:87 themes/default/templates/api.html.ep:130
+msgid "Bad password"
+msgstr "Kriva lozinka"
+
+#: themes/default/templates/layouts/default.html.ep:68
+msgid "Browser extensions"
+msgstr "Proširenja preglednika"
+
+#: themes/default/templates/index.html.ep:22
+msgid "Copy to clipboard"
+msgstr "Kopiraj u međuspremnik"
+
+#: themes/default/templates/stats.html.ep:62 themes/default/templates/stats.html.ep:78
+msgid "Counter"
+msgstr "Brojač"
+
+#: themes/default/templates/stats.html.ep:67 themes/default/templates/stats.html.ep:81
+msgid "Created"
+msgstr "Izrađeno"
+
+#: themes/default/templates/api.html.ep:52 themes/default/templates/index.html.ep:10 themes/default/templates/index.html.ep:9
+msgid "Custom shortened text"
+msgstr "Prilagođen skraćeni tekst"
+
+#: themes/default/templates/stats.html.ep:88
+msgid "Delete"
+msgstr "Brisanje"
+
+#: themes/default/templates/stats.html.ep:41
+msgid "Export your URLs"
+msgstr "Izvezi svoje URL-ove"
+
+#: themes/default/templates/api.html.ep:113 themes/default/templates/api.html.ep:153 themes/default/templates/api.html.ep:61 themes/default/templates/api.html.ep:79
+msgid "Failure reason"
+msgstr "Razlog neuspjeha"
+
+#: lib/Lstu/Controller/Stats.pm:43
+msgid "File imported"
+msgstr "Datoteka je uvezena"
+
+#: themes/default/templates/api.html.ep:109
+msgid "Get the details (visit counter, creation date, etc.) of a shortened URL."
+msgstr "Dobij detalje (brojač posjeta, datum stvaranja itd.) skraćenog URL-a."
+
+#: themes/default/templates/index.html.ep:13 themes/default/templates/stats.html.ep:22
+msgid "Go!"
+msgstr "Kreni!"
+
+#: themes/default/templates/partial/lstu.js.ep:30
+msgid "Hit Enter, then Ctrl+C to copy the short link"
+msgstr "Pritisni Enter, zatim Ctrl+C za kopiranje kratke poveznice"
+
+#: themes/default/templates/stats.html.ep:125
+msgid "Home"
+msgstr "Doma"
+
+#: themes/default/templates/api.html.ep:134
+msgid "If \"action\" is defined to \"logout\":"
+msgstr "Ako je „action” (radnja) definirana kao „logout” (odjava):"
+
+#: themes/default/templates/api.html.ep:127
+msgid "If \"adminpwd\" is defined:"
+msgstr "Ako je „adminpwd” (administratorska lozinka) definirana:"
+
+#: themes/default/templates/api.html.ep:123 themes/default/templates/api.html.ep:148 themes/default/templates/api.html.ep:21 themes/default/templates/api.html.ep:35 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:96
+msgid "If equal to \"json\", response will be in JSON format, HTML format otherwise"
+msgstr ""
+"Ako je jednako „json”, odgovor će biti u JSON formatu, inače u HTML formatu"
+
+#. (config('page_offset')
+#: themes/default/templates/api.html.ep:89
+msgid "If you are logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting), it will give you statistics for all URLs, sorted by the most visited first, paginated with pages containing %1 records."
+msgstr ""
+"Ako si prijavljen/a kao administrator (postavka „adminpwd” ili "
+"„hashed_adminpwd”), dobit ćeš statistiku za sve URL-ove, razvrstane po "
+"najposjećenijima, paginirane sa stranicama koje sadrže %1 zapisa."
+
+#: themes/default/templates/api.html.ep:94
+msgid "If you are logged in as admin, you can provide a \"page\" parameter"
+msgstr ""
+"Ako si prijavljen/a kao administrator, možeš zadati parametar „page” "
+"(stranica)"
+
+#: themes/default/templates/stats.html.ep:37 themes/default/templates/stats.html.ep:40
+msgid "Import URLs"
+msgstr "Uvezi URL-ove"
+
+#: themes/default/templates/api.html.ep:87
+msgid "It will use Lstu's cookies to know which shortened URL it will return statistics for."
+msgstr ""
+"Koristit će Lstu-ove kolačiće za određivanje statisktike skraćenih URL-ova."
+
+#: themes/default/templates/api.html.ep:113 themes/default/templates/api.html.ep:130 themes/default/templates/api.html.ep:153 themes/default/templates/api.html.ep:26 themes/default/templates/api.html.ep:61 themes/default/templates/api.html.ep:79
+msgid "JSON: failure"
+msgstr "JSON: neuspjeh"
+
+#: themes/default/templates/api.html.ep:112 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:137 themes/default/templates/api.html.ep:152 themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:39 themes/default/templates/api.html.ep:60 themes/default/templates/api.html.ep:78
+msgid "JSON: success"
+msgstr "JSON: uspjeh"
+
+#: themes/default/templates/layouts/default.html.ep:55
+msgid "License:"
+msgstr "Licenca:"
+
+#: themes/default/templates/login.html.ep:8
+msgid "Login"
+msgstr "Prijava"
+
+#: themes/default/templates/layouts/default.html.ep:61
+msgid "Logout"
+msgstr "Odjava"
+
+#: themes/default/templates/stats.html.ep:15
+msgid "Logout from admin stats"
+msgstr "Odjavi se iz statistike administratora"
+
+#: themes/default/templates/stats.html.ep:120
+msgid "Next"
+msgstr "Pored"
+
+#. ($c->config('contact')
+#: lib/Lstu/Controller/URL.pm:130
+msgid "No shortened URL available. Please retry or contact the administrator at %1. Your URL to shorten: %2"
+msgstr ""
+"Skraćeni URL nije dostupan. Pokušaj ponovo ili kontaktiraj administratora na "
+"%1. Tvoj URL za skraćivanje: %2"
+
+#: themes/default/templates/api.html.ep:119 themes/default/templates/api.html.ep:146 themes/default/templates/api.html.ep:17 themes/default/templates/api.html.ep:33 themes/default/templates/api.html.ep:49 themes/default/templates/api.html.ep:91
+msgid "Parameters:"
+msgstr "Parametri:"
+
+#: themes/default/templates/login.html.ep:12
+msgid "Password"
+msgstr "Lozinka"
+
+#: lib/Lstu/Controller/Authent.pm:35 themes/default/templates/api.html.ep:26
+msgid "Please, check your credentials: unable to authenticate."
+msgstr "Provjeri svoje podatke autentifikacije: autentifikacija je neuspjela."
+
+#: themes/default/templates/stats.html.ep:118
+msgid "Previous"
+msgstr "Prijašnja"
+
+#: themes/default/templates/stats.html.ep:86
+msgid "QRCode"
+msgstr "QR kod"
+
+#: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:131 themes/default/templates/api.html.ep:138 themes/default/templates/api.html.ep:154 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:40 themes/default/templates/api.html.ep:62
+msgid "Response for HTML format"
+msgstr "Odgovor za HTML format"
+
+#: themes/default/templates/api.html.ep:103
+msgid "Response for JSON format"
+msgstr "Odgovor za JSON format"
+
+#: themes/default/templates/api.html.ep:110 themes/default/templates/api.html.ep:125 themes/default/templates/api.html.ep:150 themes/default/templates/api.html.ep:23 themes/default/templates/api.html.ep:37 themes/default/templates/api.html.ep:55 themes/default/templates/api.html.ep:67 themes/default/templates/api.html.ep:76 themes/default/templates/api.html.ep:98
+msgid "Response:"
+msgstr "Odgovor:"
+
+#: themes/default/templates/stats.html.ep:57 themes/default/templates/stats.html.ep:75
+msgid "Shortened URL"
+msgstr "Skraćeni URL"
+
+#: themes/default/templates/api.html.ep:135 themes/default/templates/api.html.ep:32
+msgid "Should always be successful"
+msgstr "Trebalo bi uvijek uspjeti"
+
+#: themes/default/templates/layouts/default.html.ep:63 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
+msgid "Signin"
+msgstr "Registracija"
+
+#: lib/Lstu/Controller/URL.pm:53 themes/default/templates/api.html.ep:8
+msgid "Sorry, the API is disabled."
+msgstr ""
+
+#: lib/Lstu/Controller/Stats.pm:45
+msgid "Sorry, unable to parse the provided file"
+msgstr "Žao nam je, obrada zadane datoteke nije uspjela"
+
+#: themes/default/templates/layouts/default.html.ep:60 themes/default/templates/layouts/default.html.ep:66 themes/default/templates/stats.html.ep:9
+msgid "Statistics"
+msgstr "Statistika"
+
+#. ($url->host)
+#: lib/Lstu/Plugin/Helpers.pm:172
+msgid "The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it."
+msgstr ""
+"URL host ili jedno od njegovih preusmjeravanja (%1) je na popisu nepoželjnih "
+"u Spamhausu. Odbijam ga skratiti."
+
+#. ($url)
+#: lib/Lstu/Plugin/Helpers.pm:178
+msgid "The URL or one of its redirection(s) (%1) is blacklisted in Google Safe Browsing database. I refuse to shorten it."
+msgstr ""
+"URL ili jedno od njegovih preusmjeravanja (%1) nalazi se na popisu "
+"nepoželjnih u bazi podataka Googleovog sigurnog pregledavanja. Odbijam ga "
+"skratiti."
+
+#. ($c->config('max_redir')
+#: lib/Lstu/Plugin/Helpers.pm:194
+msgid "The URL redirects %1 times or most. It's most likely a dangerous URL (spam, phishing, etc.). I refuse to shorten it."
+msgstr ""
+"URL preusmjerava barem %1 puta. Najvjerojatnije se radi o opasnom URL-u ("
+"neželjena pošta, krađa podataka itd.). Odbijam ga skratiti."
+
+#. ($url->host)
+#: lib/Lstu/Plugin/Helpers.pm:164
+msgid "The URL you want to shorten comes from a domain (%1) that is blacklisted on this server (usually because of spammers that use this domain)."
+msgstr ""
+"URL koji želiš skratiti dolazi s domene (%1) koja je na popisu nepoželjnih "
+"na ovom poslužitelju (obično zbog pošiljatelja neželjene pošte koji koriste "
+"ovu domenu)."
+
+#. ($c->url_for('/')
+#: lib/Lstu/Controller/Admin.pm:131 lib/Lstu/Controller/Stats.pm:200 lib/Lstu/Controller/URL.pm:260
+msgid "The shortened URL %1 doesn't exist."
+msgstr "Skraćeni URL %1 ne postoji."
+
+#. ($c->url_for('/')
+#: lib/Lstu/Controller/URL.pm:258
+msgid "The shortened URL %1 no longer exists."
+msgstr "Skraćeni URL %1 više ne postoji."
+
+#. ($url)
+#: lib/Lstu/Controller/URL.pm:77
+msgid "The shortened text can't be \"a\", \"api\", \"d\", \"cookie\", \"stats\", \"fullstats\", \"login\" or \"logout\" or end with \".json\". Your URL to shorten: %1"
+msgstr ""
+"Skraćeni tekst ne može biti „a”, „api”, „d”, „cookie”, „stats”, „fullstats”, "
+"„login” ili „logout” niti završiti s „.json”. Tvoj URL za skraćivanje: %1"
+
+#: themes/default/templates/api.html.ep:9
+msgid "This page is informational only."
+msgstr ""
+
+#: themes/default/templates/api.html.ep:121
+msgid "To do an admin login, set it to the password defined in the settings (\"adminpwd\" or \"hashed_adminpwd\")"
+msgstr ""
+"Za administratorsku prijavu, postavi je na lozinku definiranu u postavkama "
+"(„adminpwd” ili „hashed_adminpwd”)"
+
+#: themes/default/templates/api.html.ep:122
+msgid "To do an admin logout, set it to \"logout\"."
+msgstr "Za administratorsku odjavu postavi je na „logout” (odjava)."
+
+#: lib/Lstu/Controller/Admin.pm:29
+msgid "Too many bad passwords. You're banned."
+msgstr "Previše neispravnih lozinki. Isključen/a si."
+
+#: themes/default/templates/api.html.ep:103 themes/default/templates/api.html.ep:112 themes/default/templates/stats.html.ep:52 themes/default/templates/stats.html.ep:72
+msgid "URL"
+msgstr "URL"
+
+#: themes/default/templates/api.html.ep:51 themes/default/templates/index.html.ep:5 themes/default/templates/index.html.ep:6
+msgid "URL to shorten"
+msgstr "URL za skraćivanje"
+
+#. ($penalty/3600)
+#: lib/Lstu/Controller/URL.pm:41
+msgid "You asked to shorten too many URLs too quickly. You're banned for %1 hour(s)."
+msgstr ""
+"Prebrzo si zatražio/la skraćivanje previše URL-ova. Isključen/a si za %1 h."
+
+#: lib/Lstu/Controller/Admin.pm:52 lib/Lstu/Controller/Authent.pm:26 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:25
+msgid "You have been successfully logged in."
+msgstr "Uspješno si prijavljan/a."
+
+#: lib/Lstu/Controller/Admin.pm:73 lib/Lstu/Controller/Authent.pm:65 themes/default/templates/api.html.ep:137 themes/default/templates/api.html.ep:39 themes/default/templates/logout.html.ep:3
+msgid "You have been successfully logged out."
+msgstr "Uspješno si odjevljen/a."
+
+#: themes/default/templates/api.html.ep:145
+msgid "You must be logged in as admin (\"adminpwd\" or \"hashed_adminpwd\" setting) to use it."
+msgstr ""
+"Za korištnje moraš biti prijavljen kao administrator (postavka „adminpwd” "
+"ili „hashed_adminpwd”)."
+
+#: themes/default/templates/api.html.ep:47 themes/default/templates/api.html.ep:85
+msgid "You must be logged in to use it."
+msgstr "Za korištenje se moraš prijaviti."
+
+#: themes/default/templates/api.html.ep:138
+msgid "You will be redirected to Lstu statistics page"
+msgstr "Preusmjerit ćemo te na Lstu stranicu statistike"
+
+#: themes/default/templates/api.html.ep:154
+msgid "You will be redirected to Lstu statistics page with a message in case of failure"
+msgstr ""
+"Preusmjerit ćemo te na Lstu stranicu statistike s porukom u slučaju neuspjeha"
+
+#: themes/default/templates/api.html.ep:40
+msgid "You will be redirected to Lstu successfully logged out interface"
+msgstr "Preusmjerit ćemo te na uspješno odjavljeno Lstu sučelje"
+
+#: themes/default/templates/api.html.ep:27
+msgid "You will be redirected to the Lstu classic interface where you will be able to shorten URLs"
+msgstr ""
+"Preusmjerit ćemo te na klasično Lstu sučelje gdje ćeš moći skratiti URL-ove"
+
+#: themes/default/templates/api.html.ep:62
+msgid "You will be redirected to the Lstu classic interface with a message giving the shortened URL"
+msgstr ""
+"Preusmjerit ćemo te na klasično Lstu sučelje s porukom o skraćenim URL-om"
+
+#: themes/default/templates/api.html.ep:70
+msgid "You will be redirected to the targeted URL or to the Lstu interface with a message giving the failure reason"
+msgstr ""
+"Preusmjerit ćemo te na ciljani URL ili na klasično Lstu sučelje s porukom "
+"razloga neuspjeha"
+
+#: themes/default/templates/api.html.ep:131
+msgid "You will have the statistics page with the admin stats if you're succesfully logged in, or your stats and a failure message otherwise"
+msgstr ""
+"Dobit ćeš stranicu statistike sa statistikom administratora ako si uspješno "
+"prijavljen/a. U suprotnom ćeš dobiti svoju statistiku i poruku o neuspjehu"
+
+#: lib/Lstu/Controller/Admin.pm:142
+msgid "You're not authenticated as the admin"
+msgstr "Nisi autentificiran/a kao administrator"
+
+#: themes/default/templates/api.html.ep:19
+msgid "Your login"
+msgstr "Tvoja prijava"
+
+#: themes/default/templates/api.html.ep:20
+msgid "Your password"
+msgstr "Tvoja lozinka"
+
+#: themes/default/templates/api.html.ep:103 themes/default/templates/api.html.ep:112
+msgid "integer, how many unique visits of the shortened URL"
+msgstr "cijeli broj, broj jedinstvenih posjeta skraćenog URL-a"
+
+#: themes/default/templates/api.html.ep:19 themes/default/templates/api.html.ep:20 themes/default/templates/api.html.ep:51
+msgid "mandatory"
+msgstr "obavezno"
+
+#: themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:122 themes/default/templates/api.html.ep:123 themes/default/templates/api.html.ep:148 themes/default/templates/api.html.ep:21 themes/default/templates/api.html.ep:35 themes/default/templates/api.html.ep:52 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:94 themes/default/templates/api.html.ep:96
+msgid "optional"
+msgstr "opcionalno"
+
+#: themes/default/templates/api.html.ep:100 themes/default/templates/api.html.ep:107 themes/default/templates/api.html.ep:143 themes/default/templates/api.html.ep:65 themes/default/templates/api.html.ep:74
+msgid "shortened_url"
+msgstr "skraćeni_url"
