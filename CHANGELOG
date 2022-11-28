@@ -1,6 +1,7 @@
 Revision history for Perl application Lstu
 
 0.27-0 ????-??-??
+	- 🐛 Fix length of ip column for MySQL (#64)
 
 0.26-0 2022-05-23
 	- ✨ Add a config setting to change QR code size

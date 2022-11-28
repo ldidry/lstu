@@ -26,3 +26,7 @@ ALTER TABLE lstu DROP COLUMN created_by;
 ALTER TABLE lstu ADD disabled integer DEFAULT 0;
 -- 3 down
 ALTER TABLE lstu DROP COLUMN disabled;
+-- 4 up
+ALTER TABLE ban MODIFY ip varbinary(39);
+-- 4 down
+ALTER TABLE ban MODIFY ip varbinary(16);

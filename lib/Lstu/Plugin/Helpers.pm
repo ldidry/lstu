@@ -25,9 +25,9 @@ sub register {
         my $sql        = Mojo::SQLite->new('sqlite:'.$app->config('db_path'));
         my $migrations = $sql->migrations;
         if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
-            $migrations->from_file('utilities/migrations/sqlite.sql')->migrate(0)->migrate(3);
+            $migrations->from_file('utilities/migrations/sqlite.sql')->migrate(0)->migrate($migrations->latest);
         } else {
-            $migrations->from_file('utilities/migrations/sqlite.sql')->migrate(3);
+            $migrations->from_file('utilities/migrations/sqlite.sql')->migrate($migrations->latest);
         }
     } elsif ($app->config('dbtype') eq 'postgresql') {
         require Mojo::Pg;
@@ -36,9 +36,9 @@ sub register {
         # Database migration
         my $migrations = Mojo::Pg::Migrations->new(pg => $app->dbi);
         if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
-            $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(0)->migrate(4);
+            $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(0)->migrate($migrations->latest);
         } else {
-            $migrations->from_file('utilities/migrations/postgresql.sql')->migrate(4);
+            $migrations->from_file('utilities/migrations/postgresql.sql')->migrate($migrations->latest);
         }
     } elsif ($app->config('dbtype') eq 'mysql') {
         require Mojo::mysql;
@@ -47,9 +47,9 @@ sub register {
         # Database migration
         my $migrations = Mojo::mysql::Migrations->new(mysql => $app->dbi);
         if ($app->mode eq 'development' && $ENV{LSTU_DEBUG}) {
-            $migrations->from_file('utilities/migrations/mysql.sql')->migrate(0)->migrate(3);
+            $migrations->from_file('utilities/migrations/mysql.sql')->migrate(0)->migrate($migrations->latest);
         } else {
-            $migrations->from_file('utilities/migrations/mysql.sql')->migrate(3);
+            $migrations->from_file('utilities/migrations/mysql.sql')->migrate($migrations->latest);
         }
     }
 
