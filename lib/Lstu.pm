@@ -305,10 +305,6 @@ sub startup {
         );
     })->name('lstu.js');
 
-    $r->get('/extensions' => sub {
-        shift->render(template => 'extensions');
-    })->name('extensions');
-
     $r->post('/stats')
         ->to('Admin#login');
 

@@ -36,10 +36,6 @@ msgstr "Admin Passwort"
 msgid "Bad password"
 msgstr "Falsches Passwort"
 
-#: themes/default/templates/layouts/default.html.ep:50
-msgid "Browser extensions"
-msgstr "Browser Erweiterung"
-
 #: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
 msgstr "Zu Zwischenablage Speichern"

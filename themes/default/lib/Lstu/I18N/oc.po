@@ -49,10 +49,6 @@ msgstr "Senhal administrator"
 msgid "Bad password"
 msgstr "Senhal incorrècte"
 
-#: themes/default/templates/layouts/default.html.ep:50
-msgid "Browser extensions"
-msgstr "Extensions navigator"
-
 #: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
 msgstr "Copiar al quichapapièrs"

@@ -43,10 +43,6 @@ msgstr "Ger-tremen an ardoer"
 msgid "Bad password"
 msgstr "Ger-tremen didalvoudek"
 
-#: themes/default/templates/layouts/default.html.ep:50
-msgid "Browser extensions"
-msgstr ""
-
 #: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
 msgstr "Eilañ"

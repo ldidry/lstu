@@ -45,10 +45,6 @@ msgstr "Mot de passe administrateur"
 msgid "Bad password"
 msgstr "Mot de passe incorrect"
 
-#: themes/default/templates/layouts/default.html.ep:50
-msgid "Browser extensions"
-msgstr "Extensions navigateur"
-
 #: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papier"
