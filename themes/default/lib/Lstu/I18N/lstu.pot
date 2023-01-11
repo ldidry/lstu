@@ -36,10 +36,6 @@ msgstr ""
 msgid "Bad password"
 msgstr ""
 
-#: themes/default/templates/layouts/default.html.ep:68
-msgid "Browser extensions"
-msgstr ""
-
 #: themes/default/templates/index.html.ep:22
 msgid "Copy to clipboard"
 msgstr ""

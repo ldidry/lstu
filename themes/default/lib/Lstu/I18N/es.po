@@ -41,10 +41,6 @@ msgstr "Contraseña de administrador"
 msgid "Bad password"
 msgstr "Contraseña incorrecta"
 
-#: themes/default/templates/layouts/default.html.ep:66
-msgid "Browser extensions"
-msgstr "Extensiones de navegador"
-
 #: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"

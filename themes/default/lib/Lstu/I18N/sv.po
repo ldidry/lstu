@@ -39,10 +39,6 @@ msgstr "Administratörslösenord"
 msgid "Bad password"
 msgstr "Ogiltigt lösenord"
 
-#: themes/default/templates/layouts/default.html.ep:66
-msgid "Browser extensions"
-msgstr "Webbläsartillägg"
-
 #: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
 msgstr "Kopiera till urklipp"

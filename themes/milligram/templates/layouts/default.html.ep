@@ -59,7 +59,6 @@
             % } else {
                     <%= link_to l('Statistics') => url_for('stats') %>
             % }
-                    — <%= link_to l('Browser extensions') => url_for('extensions') %>
                 </small>
             </p>
             <%= content %>
