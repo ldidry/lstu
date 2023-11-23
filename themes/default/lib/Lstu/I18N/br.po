@@ -10,15 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2023-11-23 10:03+0000\n"
+"Last-Translator: Florent Grouin <florent.grouin@gmail.com>\n"
+"Language-Team: Breton <https://weblate.framasoft.org/projects/lstu/"
+"development/br/>\n"
+"Language: br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-01-30 12:27+0000\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Breton (http://www.transifex.com/fiat-tux/lstu/language/br/)\n"
-"Language: br\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Zanata 4.6.2\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
@@ -37,7 +38,7 @@ msgstr "A-zivout"
 
 #: themes/default/templates/stats.html.ep:13 themes/default/templates/stats.html.ep:14
 msgid "Admin password"
-msgstr "Ger-tremen an ardoer"
+msgstr "Ger-tremen ar merour"
 
 #: lib/Lstu/Controller/Admin.pm:87 themes/default/templates/api.html.ep:122
 msgid "Bad password"
@@ -45,7 +46,7 @@ msgstr "Ger-tremen didalvoudek"
 
 #: themes/default/templates/index.html.ep:21
 msgid "Copy to clipboard"
-msgstr "Eilañ"
+msgstr "Eilañ er golver"
 
 #: themes/default/templates/stats.html.ep:46
 msgid "Counter"
@@ -65,7 +66,7 @@ msgstr "Dilemel"
 
 #: themes/default/templates/stats.html.ep:36
 msgid "Export your URLs"
-msgstr ""
+msgstr "Ezporzhiañ hoc’h URLoù"
 
 #: themes/default/templates/api.html.ep:105 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:71
 msgid "Failure reason"
@@ -73,7 +74,7 @@ msgstr "Abeg ar c'hwitadenn"
 
 #: lib/Lstu/Controller/Stats.pm:43
 msgid "File imported"
-msgstr ""
+msgstr "Restr bet emporzhiet"
 
 #: themes/default/templates/api.html.ep:101
 msgid ""
@@ -82,7 +83,7 @@ msgstr ""
 
 #: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
 msgid "Go!"
-msgstr "Deomp!"
+msgstr "Deomp !"
 
 #: themes/default/templates/partial/lstu.js.ep:30
 msgid "Hit Enter, then Ctrl+C to copy the short link"
@@ -90,7 +91,7 @@ msgstr "Pouezit war Enankañ, ha Reol+C evit eilañ an ere berr"
 
 #: themes/default/templates/stats.html.ep:89
 msgid "Home"
-msgstr ""
+msgstr "Degemer"
 
 #: themes/default/templates/api.html.ep:126
 msgid "If \"action\" is defined to \"logout\":"
@@ -98,7 +99,7 @@ msgstr ""
 
 #: themes/default/templates/api.html.ep:119
 msgid "If \"adminpwd\" is defined:"
-msgstr ""
+msgstr "Ma 'z eo termenet \"adminpwd\" :"
 
 #: themes/default/templates/api.html.ep:115 themes/default/templates/api.html.ep:13 themes/default/templates/api.html.ep:140 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:45 themes/default/templates/api.html.ep:88
 msgid ""
@@ -121,7 +122,7 @@ msgstr ""
 
 #: themes/default/templates/stats.html.ep:32 themes/default/templates/stats.html.ep:35
 msgid "Import URLs"
-msgstr ""
+msgstr "Enporzhiañ URLoù"
 
 #: themes/default/templates/api.html.ep:79
 msgid ""
@@ -131,23 +132,23 @@ msgstr ""
 
 #: themes/default/templates/api.html.ep:105 themes/default/templates/api.html.ep:122 themes/default/templates/api.html.ep:145 themes/default/templates/api.html.ep:18 themes/default/templates/api.html.ep:53 themes/default/templates/api.html.ep:71
 msgid "JSON: failure"
-msgstr "JSON: c'hwitadenn"
+msgstr "JSON : c'hwitadenn"
 
 #: themes/default/templates/api.html.ep:104 themes/default/templates/api.html.ep:121 themes/default/templates/api.html.ep:129 themes/default/templates/api.html.ep:144 themes/default/templates/api.html.ep:17 themes/default/templates/api.html.ep:31 themes/default/templates/api.html.ep:52 themes/default/templates/api.html.ep:70
 msgid "JSON: success"
-msgstr "JSON: berzh"
+msgstr "JSON : berzh"
 
 #: themes/default/templates/layouts/default.html.ep:37
 msgid "License:"
-msgstr "Lañvaz:"
+msgstr "Lañvaz :"
 
 #: themes/default/templates/login.html.ep:8
 msgid "Login"
-msgstr ""
+msgstr "Kevreañ"
 
 #: themes/default/templates/layouts/default.html.ep:43
 msgid "Logout"
-msgstr ""
+msgstr "Digevreañ"
 
 #: themes/default/templates/stats.html.ep:10
 msgid "Logout from admin stats"
@@ -164,15 +165,15 @@ msgid ""
 "Your URL to shorten: %2"
 msgstr ""
 "N'eus URL berr ebet hegerz. Klaskit en-dro pe kit e darempred gant an ardoer "
-"e %1. Hoc'h URL da verraat: %2"
+"e %1. Hoc'h URL da verraat : %2"
 
 #: themes/default/templates/api.html.ep:111 themes/default/templates/api.html.ep:138 themes/default/templates/api.html.ep:25 themes/default/templates/api.html.ep:41 themes/default/templates/api.html.ep:83 themes/default/templates/api.html.ep:9
 msgid "Parameters:"
-msgstr "Arventennoù:"
+msgstr "Arventennoù :"
 
 #: themes/default/templates/login.html.ep:12
 msgid "Password"
-msgstr ""
+msgstr "Ger-tremen"
 
 #: lib/Lstu/Controller/Authent.pm:35 themes/default/templates/api.html.ep:18
 msgid "Please, check your credentials: unable to authenticate."
@@ -184,7 +185,7 @@ msgstr "Kent"
 
 #: themes/default/templates/stats.html.ep:50
 msgid "QRCode"
-msgstr ""
+msgstr "Kod QR"
 
 #: themes/default/templates/api.html.ep:123 themes/default/templates/api.html.ep:130 themes/default/templates/api.html.ep:146 themes/default/templates/api.html.ep:19 themes/default/templates/api.html.ep:32 themes/default/templates/api.html.ep:54 themes/default/templates/api.html.ep:96
 msgid "Response for HTML format"
@@ -192,11 +193,11 @@ msgstr "Respont evit ar mentrezh HTML"
 
 #: themes/default/templates/api.html.ep:95
 msgid "Response for JSON format"
-msgstr ""
+msgstr "Respont evit ar furmad JSON"
 
 #: themes/default/templates/api.html.ep:102 themes/default/templates/api.html.ep:117 themes/default/templates/api.html.ep:142 themes/default/templates/api.html.ep:15 themes/default/templates/api.html.ep:29 themes/default/templates/api.html.ep:47 themes/default/templates/api.html.ep:59 themes/default/templates/api.html.ep:68 themes/default/templates/api.html.ep:90
 msgid "Response:"
-msgstr "Respont:"
+msgstr "Respont :"
 
 #: themes/default/templates/stats.html.ep:45
 msgid "Shortened URL"
@@ -204,11 +205,11 @@ msgstr "URL berraet"
 
 #: themes/default/templates/api.html.ep:127 themes/default/templates/api.html.ep:24
 msgid "Should always be successful"
-msgstr ""
+msgstr "Rankout a rafe kas en-dro un disoc'h gant berzh"
 
 #: themes/default/templates/layouts/default.html.ep:45 themes/default/templates/login.html.ep:16 themes/default/templates/logout.html.ep:5
 msgid "Signin"
-msgstr ""
+msgstr "Lugañ"
 
 #: lib/Lstu/Controller/Stats.pm:45
 msgid "Sorry, unable to parse the provided file"
@@ -344,7 +345,7 @@ msgid ""
 "message giving the failure reason"
 msgstr ""
 "Adheñchet e viot davet an URL bukenn pe ketal Ltsu gant ur gemennadenn a "
-"roio abeg ar c'hwitadenn."
+"roio abeg ar c'hwitadenn"
 
 #: themes/default/templates/api.html.ep:123
 msgid ""
