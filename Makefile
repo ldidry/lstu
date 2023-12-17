@@ -37,6 +37,9 @@ test-sqlite:
 	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='$(HARNESS_PERL_SWITCHES)' MOJO_CONFIG=t/sqlite1.conf $(CARTON) prove --comments --failures
 	@PERL5OPT='-Ilib/' HARNESS_PERL_SWITCHES='$(HARNESS_PERL_SWITCHES)' $(CARTON) cover --ignore_re '^local'
 
+run-ldap-container:
+	podman run -d --name rroemhild-test-openldap -p 127.0.0.1:10389:10389 docker.io/rroemhild/test-openldap
+
 dev: minify
 	$(CARTON) morbo $(LSTU) --listen http://0.0.0.0:3000 --watch lib/ --watch script/ --watch themes/ --watch lstu.conf
 

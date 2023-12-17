@@ -18,7 +18,7 @@
         <ul>
             <li><strong>login</strong> <em><%= l('mandatory') %></em><br><%= l('Your login') %></li>
             <li><strong>password</strong> <em><%= l('mandatory') %></em><br><%= l('Your password') %></li>
-            <li><strong>format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
+            <li><strong>_format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
         </ul>
         <strong><%= l('Response:') %></strong>
         <ul>
@@ -32,7 +32,7 @@
         <p><%= l('Should always be successful') %></p>
         <strong><%= l('Parameters:') %></strong>
         <ul>
-            <li><strong>format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
+            <li><strong>_format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
         </ul>
         <strong><%= l('Response:') %></strong>
         <ul>
@@ -50,7 +50,7 @@
         <ul>
             <li><strong>lsturl</strong> <em><%= l('mandatory') %></em><br><%= l('URL to shorten') %></li>
             <li><strong>lsturl-custom</strong> <em><%= l('optional') %></em><br><%= l('Custom shortened text')%></li>
-            <li><strong>format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
+            <li><strong>_format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
         </ul>
         <strong><%= l('Response:') %></strong>
         <ul>
@@ -71,7 +71,7 @@
             </li>
         </ul>
     </dd>
-    <dt>GET <%= url_for('short', short => l('shortened_url'))->to_abs %>.json</dt>
+    <dt>GET <%= url_for('short', short => l('shortened_url'))->to_abs %>?_format=json</dt>
     <dd>
         <strong><%= l('Response:') %></strong>
         <ul>
@@ -93,7 +93,7 @@
     % if (defined(config('adminpwd')) || defined(config('hashed_adminpwd'))) {
             <li><strong>page</strong> <em><%= l('optional') %></em><br><%= l('If you are logged in as admin, you can provide a "page" parameter') %>
     % }
-            <li><strong>format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
+            <li><strong>_format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
         </ul>
         <strong><%= l('Response:') %></strong><br>
         <ul>
@@ -120,7 +120,7 @@
         <ul>
             <li><strong>adminpwd</strong></li> <em><%= l('optional') %></em><br><%= l('To do an admin login, set it to the password defined in the settings ("adminpwd" or "hashed_adminpwd")') %></li>
             <li><strong>action</strong></li> <em><%= l('optional') %></em><br><%= l('To do an admin logout, set it to "logout".') %></li>
-            <li><strong>format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
+            <li><strong>_format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
         </ul>
         <strong><%= l('Response:') %></strong>
         <ul>
@@ -145,7 +145,7 @@
         <p><%= l('You must be logged in as admin ("adminpwd" or "hashed_adminpwd" setting) to use it.') %></p>
         <strong><%= l('Parameters:') %></strong>
         <ul>
-            <li><strong>format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
+            <li><strong>_format</strong> <em><%= l('optional') %></em><br><%= l('If equal to "json", response will be in JSON format, HTML format otherwise') %></li>
         </ul>
         <strong><%= l('Response:') %></strong>
         <ul>

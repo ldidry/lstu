@@ -1,6 +1,9 @@
 Revision history for Perl application Lstu
 
 0.28-0 ????-??-??
+	- ⬆️ Update dependencies
+	- 💥 BREAKING CHANGE: Use `?_format=json` instead of `?format=json`
+	- 💥 BREAKING CHANGE: Use `?_format=json` instead of terminating the URL with `.json`
 
 0.27-0 2023-01-11
 	- 🐛 Fix length of ip column for MySQL (#64)
