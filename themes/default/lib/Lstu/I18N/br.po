@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-11-23 10:03+0000\n"
-"Last-Translator: Florent Grouin <florent.grouin@gmail.com>\n"
+"PO-Revision-Date: 2025-03-17 23:23+0000\n"
+"Last-Translator: AP <apiau@protonmail.com>\n"
 "Language-Team: Breton <https://weblate.framasoft.org/projects/lstu/"
 "development/br/>\n"
 "Language: br\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2\n"
+"X-Generator: Weblate 5.10.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. ($url)
@@ -31,6 +31,7 @@ msgstr "%1 n'eo ket un URL talvoudek."
 msgid ""
 "A page with a table containing the same informations that the JSON response"
 msgstr ""
+"Ur bajenn gant un daolenn a endalc'h ar memes titouroù hag ar respont JSON"
 
 #: themes/default/templates/layouts/default.html.ep:38
 msgid "About"
@@ -80,6 +81,7 @@ msgstr "Restr bet emporzhiet"
 msgid ""
 "Get the details (visit counter, creation date, etc.) of a shortened URL."
 msgstr ""
+"Kaout munudoù (konter gweladennoù, deiziad krouiñ, h.a.) un URL berraet."
 
 #: themes/default/templates/index.html.ep:12 themes/default/templates/stats.html.ep:17
 msgid "Go!"
@@ -95,11 +97,11 @@ msgstr "Degemer"
 
 #: themes/default/templates/api.html.ep:126
 msgid "If \"action\" is defined to \"logout\":"
-msgstr ""
+msgstr "Ma 'z eo despizet \"action\" da \"logout\" :"
 
 #: themes/default/templates/api.html.ep:119
 msgid "If \"adminpwd\" is defined:"
-msgstr "Ma 'z eo termenet \"adminpwd\" :"
+msgstr "Ma 'z eo despizet \"adminpwd\" :"
 
 #: themes/default/templates/api.html.ep:115 themes/default/templates/api.html.ep:13 themes/default/templates/api.html.ep:140 themes/default/templates/api.html.ep:27 themes/default/templates/api.html.ep:45 themes/default/templates/api.html.ep:88
 msgid ""
