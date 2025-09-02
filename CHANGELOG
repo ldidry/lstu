@@ -1,6 +1,7 @@
 Revision history for Perl application Lstu
 
 0.29-0 ????-??-??
+	- 💥 BREAKING CHANGE: Remove Spamhaus support as its module is outdated
 
 0.28-0 2023-12-17
 	- ⬆️ Update dependencies

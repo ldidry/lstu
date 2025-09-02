@@ -11,8 +11,6 @@ requires 'Mojolicious::Plugin::CSPHeader', '>= 0.03';
 requires 'Minion';
 requires 'Locale::Maketext';
 requires 'Locale::Maketext::Extract';
-requires 'Net::Abuse::Utils::Spamhaus';
-requires 'Net::DNS', '>= 1.12';
 requires 'Net::SSLeay', '>= 1.81';
 requires 'IO::Socket::SSL';
 requires 'Image::PNG::QRCode';

@@ -1,7 +1,6 @@
 package Lstu::Plugin::Helpers;
 use Mojo::Base 'Mojolicious::Plugin';
 use Mojo::URL;
-use Net::Abuse::Utils::Spamhaus qw(check_fqdn);
 use Lstu::DB::URL;
 use Lstu::DB::Ban;
 use Lstu::DB::Session;
@@ -165,28 +164,20 @@ sub _is_spam {
     } if ((defined($bl) && $url->host =~ m/$bl/) || (defined($path_bl) && $url->path =~ m/$path_bl/));
 
     if ($nb_redir++ <= $c->config('max_redir')) {
-        my $res = ($c->config('skip_spamhaus')) ? undef : check_fqdn($url->host);
-        if (defined $res) {
-           return {
-               is_spam => 1,
-               msg     => $c->l('The URL host or one of its redirection(s) (%1) is blacklisted at Spamhaus. I refuse to shorten it.', $url->host)
-           }
+        if ($c->config('safebrowsing_api_key') && scalar($c->gsb->lookup(url => $url->to_string))) {
+            return {
+                is_spam => 1,
+                msg     => $c->l('The URL or one of its redirection(s) (%1) is blacklisted in Google Safe Browsing database. I refuse to shorten it.', $url)
+            }
+        }
+        my $res = $c->ua->head($url)->res;
+        if (defined($res->code) && $res->code >= 300 && $res->code < 400) {
+            my $new_url = Mojo::URL->new($res->headers->location);
+            $new_url->host($url->host)     unless $new_url->host;
+            $new_url->scheme($url->scheme) unless $new_url->scheme;
+            return $c->is_spam($new_url, $nb_redir);
         } else {
-            if ($c->config('safebrowsing_api_key') && scalar($c->gsb->lookup(url => $url->to_string))) {
-                return {
-                    is_spam => 1,
-                    msg     => $c->l('The URL or one of its redirection(s) (%1) is blacklisted in Google Safe Browsing database. I refuse to shorten it.', $url)
-                }
-            }
-            my $res = $c->ua->head($url)->res;
-            if (defined($res->code) && $res->code >= 300 && $res->code < 400) {
-                my $new_url = Mojo::URL->new($res->headers->location);
-                $new_url->host($url->host)     unless $new_url->host;
-                $new_url->scheme($url->scheme) unless $new_url->scheme;
-                return $c->is_spam($new_url, $nb_redir);
-            } else {
-                return { is_spam => 0 };
-            }
+            return { is_spam => 0 };
         }
     } else {
        return {
